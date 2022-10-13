@@ -1,0 +1,37 @@
+@import '~/styles/variables';
+
+.Services {
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 2rem;
+  text-align: center;
+  @media screen and (max-width: 650px) {
+    padding: 0;
+  }
+
+  .title {
+    font-size: 3rem;
+    text-transform: uppercase;
+    text-rendering: optimizeLegibility;
+    margin-bottom: 2rem;
+    text-shadow: $title-text-shadow;
+
+      @media screen and (max-width:450px) {
+        font-size: 2.5rem;
+      }
+  }
+
+  .cardWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 0.8rem;
+  
+  }
+}
+

@@ -1,0 +1,49 @@
+@import '~/styles/variables';
+
+.WhoWeAre {
+  padding: 2rem;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+
+  .title {
+    font-size: 3rem;
+    text-transform: uppercase;
+    text-rendering: optimizeLegibility;
+    margin-bottom: 2rem;
+    text-shadow: $title-text-shadow;
+
+    @media screen and (max-width: 450px) {
+      font-size: 2.5rem;
+    }
+  }
+  p {
+    width: 60%;
+    text-align: center;
+    font-size: 1.3rem;
+    @media screen and (max-width: 450px) {
+      width: 80%;
+      font-size: 1.2rem;
+    }
+  }
+  .dots {
+    width: 100vw;
+    height: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-top: 2rem;
+    span {
+      width: 0.8rem;
+      height: 0.8rem;
+      background-color: $blue;
+      display: block;
+      border-radius: 100%;
+      box-shadow: 0 0 5px $blue, 0 0 10px $blue;
+    }
+  }
+}
