@@ -19,7 +19,6 @@
     @media screen and (max-width: 750px) {
       width: 100%;
     }
-  
 
     .title {
       font-size: 3rem;
@@ -38,16 +37,19 @@
       margin: 1rem 0;
       font-size: 1.2rem;
       @media screen and (max-width: 450px) {
-      font-size: 1rem;
-      display: block;
-      text-align: center;
+        font-size: 1rem;
+        display: block;
+        text-align: center;
       }
       .icon {
         color: $blue;
         margin-right: 2rem;
         @media screen and (max-width: 450px) {
-        margin-right: 0;
-          }
+          margin-right: 0;
+        }
+      }
+      a:hover {
+        color: $blue;
       }
     }
   }
