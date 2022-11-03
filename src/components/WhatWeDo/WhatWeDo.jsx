@@ -6,10 +6,10 @@ import { cards } from '../../data/wwdcards';
 const WhatWeDo = () => {
   return (
     <section className={styles.WhatWeDo}>
-      <h1 className={styles.title} data-aos="fade-up" data-aos-once="true">
+      <h1 className={styles.title}>
         co my robimy
       </h1>
-      <div className={styles.wrapper} data-aos="fade-up" data-aos-once="true">
+      <div className={styles.wrapper}>
         {cards.map((card, index) => (
           <WhatWeDoCard key={index} card={card} />
         ))}

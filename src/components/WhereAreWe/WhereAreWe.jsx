@@ -8,8 +8,6 @@ const WhereAreWe = () => {
     <section
       id="contacts"
       className={styles.WhereAreWe}
-      data-aos="fade-up"
-      data-aos-once="true"
     >
       <div className={styles.contact}>
         <h1 className={styles.title}>nasze kontakty</h1>

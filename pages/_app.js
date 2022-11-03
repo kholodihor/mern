@@ -1,15 +1,27 @@
 import React, { useState, useEffect } from 'react';
-// import Script from 'next/script';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 import Aos from 'aos';
 import 'aos/dist/aos.css';
 import Header from '../src/components/Header/Header';
 import '../styles/globals.scss';
 import Footer from '../src/components/Footer/Footer';
+import * as ga from '../lib/google-analytics';
 
 function MyApp({ Component, pageProps }) {
+  const router = useRouter();
   const [show, setShow] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
+
+  useEffect(() => {
+    const handleRouteChange = (url) => {
+      ga.pageview(url);
+    };
+    router.events.on('routeChangeComplete', handleRouteChange);
+    return () => {
+      router.events.off('routeChangeComplete', handleRouteChange);
+    };
+  }, [router.events]);
 
   useEffect(() => {
     Aos.init({ duration: 1500 });
@@ -59,22 +71,6 @@ function MyApp({ Component, pageProps }) {
         <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
         <meta name="msapplication-TileColor" content="#da532c" />
         <meta name="theme-color" content="#ffffff" />
-
-        {/* Global site tag (gtag.js) - Google Analytics */}
-        {/* <Script
-          strategy="lazyOnload"
-          src={`https://www.googletagmanager.com/gtag/js?id=G-MJ7BYHRN8T`}
-        />
-        <Script>
-        {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-MJ7BYHRN8T', {
-              page_path: window.location.pathname,
-            });
-                `}
-        </Script> */}
       </Head>
       {show && <Header />}
       <Component {...pageProps} />

@@ -4,10 +4,10 @@ import styles from './WhoWeAre.module.scss';
 const WhoWeAre = () => {
   return (
     <section id="whoweare" className={styles.WhoWeAre}>
-      <h1 className={styles.title} data-aos="zoom-in" data-aos-once="true">
-        kim jesteśmy
+      <h1 className={styles.title}>
+        kim my jesteśmy
       </h1>
-      <p data-aos="zoom-in" data-aos-once="true">
+      <p>
         Firma Mern sp. Z o.o. powstała z zamiłowania do marki BMW. W chwili
         obecnej zajmujemy się głównie mechaniką i diagnostyką takich samochodów
         jak BMW, Mini i Rolls Royce. Nasze doświadczenie zarówno jak i
