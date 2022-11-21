@@ -15,10 +15,10 @@ const IntroSlider = () => {
         loop={true}
         modules={[EffectFade, Autoplay]}
         className={styles.swiper}
-        autoplay={{
-          delay: 2500,
-          disableOnInteraction: false,
-        }}
+        // autoplay={{
+        //   delay: 2500,
+        //   disableOnInteraction: false,
+        // }}
       >
         <SwiperSlide
           className={styles.swiperSlide}

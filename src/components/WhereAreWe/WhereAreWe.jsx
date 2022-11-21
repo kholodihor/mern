@@ -5,10 +5,7 @@ import MernMap from '../Map/MernMap';
 
 const WhereAreWe = () => {
   return (
-    <section
-      id="contacts"
-      className={styles.WhereAreWe}
-    >
+    <section id="contacts" className={styles.WhereAreWe}>
       <div className={styles.contact}>
         <h1 className={styles.title}>nasze kontakty</h1>
         <ul>
@@ -20,7 +17,9 @@ const WhereAreWe = () => {
           </li>
           <li>
             <span>
-              <FaPhone className={styles.icon} />
+              <FaPhone
+                className={styles.icon}
+              />
             </span>
             <span>
               <a href="tel:+48 509 158 159">+48 509 158 159</a>

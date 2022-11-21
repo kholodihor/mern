@@ -10,7 +10,7 @@ import * as ga from '../lib/google-analytics';
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
-  const [show, setShow] = useState(true);
+  const [show, setShow] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
 
   useEffect(() => {

@@ -23,10 +23,10 @@ export const cards = [
     image: '/icons/snowflake.png',
     link: '#',
   },
-  {
-    title: 'Wulkanizacja',
-    text: 'Naprawiamy silnik dobrze',
-    image: '/icons/car.png',
-    link: '#',
-  },
+  // {
+  //   title: 'Wulkanizacja',
+  //   text: 'Naprawiamy silnik dobrze',
+  //   image: '/icons/car.png',
+  //   link: '#',
+  // },
 ];

@@ -5,7 +5,7 @@ const WhoWeAre = () => {
   return (
     <section id="whoweare" className={styles.WhoWeAre}>
       <h1 className={styles.title}>
-        kim my jesteśmy
+        kim jesteśmy
       </h1>
       <p>
         Firma Mern sp. Z o.o. powstała z zamiłowania do marki BMW. W chwili
