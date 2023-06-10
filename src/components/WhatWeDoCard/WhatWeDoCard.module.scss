@@ -8,13 +8,13 @@
   align-items: center;
   flex-direction: column;
   gap: 2rem;
-  padding: 4rem 2rem;
+  padding: 2rem;
   text-align: center;
   border-radius: 0.5rem;
   transition: all 0.3s ease-in-out;
-  cursor: pointer;
+  cursor: #fff;
   &:hover {
-   color: $blue;
+    color: $purple;
   }
 
   .inner {
@@ -30,5 +30,8 @@
         font-size: 1.5rem;
       }
     }
+    .icon {
+      width: 10rem;
     }
   }
+}

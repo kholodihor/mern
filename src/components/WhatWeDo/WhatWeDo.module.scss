@@ -1,30 +1,31 @@
 @import '~/styles/variables';
 
-.WhatWeDo{
-    width: 100vw;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    text-align: center;
-    padding: 2rem 1rem ;
-    background-color: #111;
-  
-    .title {
-      font-size: 3rem;
-      text-transform: uppercase;
-      text-rendering: optimizeLegibility;
-      margin-bottom: 2rem;
-      text-shadow: $title-text-shadow;
+.WhatWeDo {
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  padding: 2rem 1rem;
+  background-color: #000;
 
-        @media screen and (max-width:450px) {
-            font-size: 2.5rem;
-          }
+
+  .title {
+    font-size: 3rem;
+    text-transform: uppercase;
+    text-rendering: optimizeLegibility;
+    margin-bottom: 2rem;
+    text-shadow: $title-text-shadow;
+
+    @media screen and (max-width: 450px) {
+      font-size: 2.5rem;
     }
-    .wrapper{
-        width: 100%;
-        display: flex;
-        gap: 0.5rem;
-        flex-wrap: wrap;
-    }
+  }
+  .wrapper {
+    width: 100%;
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
 }

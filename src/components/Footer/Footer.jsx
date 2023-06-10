@@ -2,9 +2,10 @@ import React from 'react';
 import styles from './Footer.module.scss';
 
 const Footer = () => {
+  const getCurrentYear = new Date().getFullYear().toString();
   return (
     <div className={styles.Footer}>
-      <p>Copyright &copy; 2022 byMERN</p>
+      <p>Copyright &copy;{getCurrentYear} byCold</p>
     </div>
   );
 };

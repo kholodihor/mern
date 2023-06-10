@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import Aos from 'aos';
 import 'aos/dist/aos.css';
 import Header from '../src/components/Header/Header';
-import '../styles/globals.scss';
+import '../styles/_globals.scss';
 import Footer from '../src/components/Footer/Footer';
 import * as ga from '../lib/google-analytics';
 

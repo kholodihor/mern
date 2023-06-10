@@ -1,26 +1,32 @@
+import car from '../data/animations/carservice.json';
+import carservices from '../data/animations/car-services.json';
+import engine from '../data/animations/car-engine.json';
+import laptop from '../data/animations/laptop.json';
+import fan from '../data/animations/fan.json';
+
 export const cards = [
   {
     title: 'Kompleksowa mechanika pojazdów',
     text: 'Naprawiamy silnik dobrze',
-    image: '/icons/machine.png',
+    image: engine,
     link: '#',
   },
   {
     title: 'Diagnostyka',
     text: 'Naprawiamy silnik dobrze',
-    image: '/icons/stethoscope.png',
+    image: carservices,
     link: '#',
   },
   {
     title: 'Kodowanie, Programowanie, Retrofit',
     text: 'Naprawiamy silnik dobrze',
-    image: '/icons/laptop.png',
+    image: laptop,
     link: 'https://hartige.pl',
   },
   {
     title: 'Serwis klimatyzacji',
     text: 'Naprawiamy silnik dobrze',
-    image: '/icons/snowflake.png',
+    image: fan,
     link: '#',
   },
   // {

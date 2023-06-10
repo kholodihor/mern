@@ -7,8 +7,12 @@ const Intro = () => {
     <div className={styles.Intro}>
       <IntroSlider />
       <div className={styles.title}>
-        <h1 data-aos="zoom-in" data-aos-once="true">MERN </h1>
-        <p data-aos="fade-in" data-aos-once="true">Idealny serwis dla idealnych aut</p>
+        <h1 data-aos="zoom-in" data-aos-once="true">
+          MERN
+        </h1>
+        <p data-aos="fade-up" data-aos-once="true">
+          Idealny serwis dla idealnych aut
+        </p>
       </div>
     </div>
   );
