@@ -1,31 +1,36 @@
 'use client';
-import React, { useState, useLayoutEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css';
-import 'swiper/css/effect-fade';
 import SwiperCore from 'swiper';
 import { EffectFade, Autoplay } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/effect-fade';
 
 SwiperCore.use([EffectFade, Autoplay]);
 
 const IntroSlider = () => {
   const [isMobileView, setIsMobileView] = useState(false);
 
-  useLayoutEffect(() => {
-    const controlSize = () => {
-      if (typeof window !== 'undefined') {
-        if (window.innerWidth < 650) {
-          setIsMobileView(true);
-        } else {
-          setIsMobileView(false);
-        }
-      }
-    };
+  const handleResize = () => {
     if (typeof window !== 'undefined') {
-      window.addEventListener('resize', controlSize);
+      if (window.innerWidth < 550) {
+        setIsMobileView(true);
+      } else {
+        setIsMobileView(false);
+      }
+    }
+  };
+
+  useEffect(() => {
+    if (typeof window !== 'undefined' && window.innerWidth < 550) {
+      setIsMobileView(true);
+    }
+
+    if (typeof window !== 'undefined') {
+      window.addEventListener('resize', handleResize);
       return () => {
-        window.removeEventListener('resize', controlSize);
+        window.removeEventListener('resize', handleResize);
       };
     }
   }, []);
@@ -75,7 +80,6 @@ const IntroSlider = () => {
           />
         </div>
       </SwiperSlide>
-      {/* Add more slides as needed */}
     </Swiper>
   );
 };

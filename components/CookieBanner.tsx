@@ -38,8 +38,7 @@ export default function CookieBanner() {
       <div className="text-center">
         <Link href="/info/cookies">
           <p>
-            We use <span className="font-bold text-sky-400">cookies</span> on
-            our site.
+            Używamy <span className="font-bold text-sky-400">plików cookie</span> na naszej stronie.
           </p>
         </Link>
       </div>
@@ -49,13 +48,13 @@ export default function CookieBanner() {
           onClick={() => setCookieConsent(false)}
           className="px-5 py-2 text-gray-300 rounded-md border-gray-900"
         >
-          Decline
+          Odrzuć 
         </button>
         <button
           onClick={() => setCookieConsent(true)}
           className="bg-gray-900 px-5 py-2 text-white rounded-lg"
         >
-          Allow Cookies
+          Zezwalaj
         </button>
       </div>
     </div>
