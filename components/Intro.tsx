@@ -1,8 +1,10 @@
 'use client';
 import React from 'react';
 import IntroSlider from './IntroSlider';
+import { useTranslations } from 'next-intl';
 
 const Intro = () => {
+  const t = useTranslations('Menu');
   return (
     <div className="relative top-0 left-0 w-full min-h-screen ">
       <IntroSlider />
@@ -19,7 +21,7 @@ const Intro = () => {
           data-aos="fade-up"
           data-aos-once="true"
         >
-          Idealny serwis dla idealnych aut
+          {t('motto')}
         </p>
       </div>
     </div>

@@ -30,7 +30,7 @@ export default function CookieBanner() {
     <div
       className={`my-10 mx-auto max-w-max md:max-w-screen-sm
                         fixed bottom-0 left-0 right-0 
-                       px-3 md:px-4 py-3 justify-between items-center flex-col sm:flex-row gap-4  
+                       px-3 md:px-4 py-3 z-50 justify-between items-center flex-col sm:flex-row gap-4  
                          bg-gray-700 rounded-lg shadow  ${
                            cookieConsent != null ? 'hidden' : 'flex'
                          } `}
@@ -38,7 +38,9 @@ export default function CookieBanner() {
       <div className="text-center">
         <Link href="/info/cookies">
           <p>
-            Używamy <span className="font-bold text-sky-400">plików cookie</span> na naszej stronie.
+            Używamy{' '}
+            <span className="font-bold text-sky-400">plików cookie</span> na
+            naszej stronie.
           </p>
         </Link>
       </div>
@@ -48,7 +50,7 @@ export default function CookieBanner() {
           onClick={() => setCookieConsent(false)}
           className="px-5 py-2 text-gray-300 rounded-md border-gray-900"
         >
-          Odrzuć 
+          Odrzuć
         </button>
         <button
           onClick={() => setCookieConsent(true)}

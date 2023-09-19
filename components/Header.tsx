@@ -5,9 +5,13 @@ import { FaBars, FaTimes } from 'react-icons/fa';
 import Image from 'next/image';
 import { links } from '@/constants';
 import MobileMenu from './MobileMenu';
+import { useTranslations } from 'next-intl';
+
+const langs = ['pl', 'en', 'ua'];
 
 const Header = () => {
   const [showMobileMenu, setShowMobileMenu] = useState(false);
+  const t = useTranslations('Menu');
 
   const toggleMobileMenu = () => {
     setShowMobileMenu(!showMobileMenu);
@@ -21,7 +25,7 @@ const Header = () => {
       id="header"
     >
       <Link href="/">
-        <Image src="/logo.png" alt="MERN logo" width={150} height={150} />
+        <Image src="/logo.png" alt="MERN logo" width={130} height={150} />
       </Link>
       <button
         type="button"
@@ -36,17 +40,35 @@ const Header = () => {
       </button>
       {showMobileMenu && <MobileMenu links={links} />}
       <nav className="hidden sm:block">
-        <ul className="m-0 flex justify-around gap-4 p-2" id="links">
+        <ul
+          className="m-0 flex justify-around items-center gap-4 p-2"
+          id="links"
+        >
           {links.map((link, index) => (
             <Link href={link.href} key={index}>
               <li
                 className="uppercase relative text-white hover:text-blue-400 transition-all"
                 id="link"
               >
-                {link.name}
+                {t(`${link.name}`)}
               </li>
             </Link>
           ))}
+          <div className="flex gap-[0.5rem]">
+            {langs.map((lang, i) => (
+              <Link key={i} href={`/${lang}`}>
+                <button>
+                  <Image
+                    src={`/icons/${lang}.svg`}
+                    alt={lang}
+                    width={25}
+                    height={10}
+                    className="hover:scale-125 transition-all"
+                  />
+                </button>
+              </Link>
+            ))}
+          </div>
         </ul>
       </nav>
     </header>

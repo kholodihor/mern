@@ -1,0 +1,35 @@
+{
+  "Menu": {
+    "strona_glowna": "STRONA GŁÓWNA",
+    "o_nas": "O NAS",
+    "uslugi": "USŁUGI",
+    "kontakt": "kontakt",
+    "motto": "IDEALNY SERWIS DLA IDEALNYCH AUT"
+  },
+  "About": {
+    "title": "Who we are",
+    "content": "Firma Mern sp. Z o.o. powstała z zamiłowania do marki BMW. W chwili obecnej zajmujemy się głównie mechaniką i diagnostyką takich samochodów jak BMW, Mini i Rolls Royce. Nasze doświadczenie zarówno jak i doświadczenie naszych pracowników pozwala nam świadczyć usługi na najwyższym poziomie. Dysponujemy profesjonalnym sprzętem co pozwala nam zrobić swoją pracę sprawnie i precyzyjnie. Do naprawy pojazdów używamy oryginalnych części oraz części zamiennych wysokiej jakości. Do każdego klienta podchodzimy indywidualnie.",
+    "call": "Zapraszamy do kontaktu!"
+  },
+  "Services": {
+    "title": "co my robimy",
+    "complex_mechanics": "KOMPLEKSOWA MECHANIKA POJAZDÓw",
+    "diagnostics": "DIAGNOSTYKA",
+    "coding": "KODOWANIE, PROGRAMOWANIE, RETROFIT",
+    "climat": "SERWIS KLIMATYZACJI"
+  },
+  "Steps": {
+    "title": "JAK TO ZROBIĆ",
+    "content1": "Niezależnie, czy chcesz skontrolować stan swojego samochodu, czy potrzebujesz naprawy, skontakuj się z nami dzwoniąc pod numer +48 509 158 159 i wybierz dogodny dla siebie termin. ",
+    "title1": "Umów się",
+    "content2": "Przyprowadź samochód do naszego warsztatu i o nic się nie martw - zadbamy o niego w najlepszy sposób. ",
+    "title2": "Przyprowadź samochód ",
+    "content3": "Zweryfikujemy co wymaga naprawy i skontaktujemy się z Tobą. W tym celu będziemy musieli przeprowadzić jazdę próbną, bądź podnieść samochód na podnośniku.",
+    "title3": "Diagnostyka i wycena",
+    "content4": "To do Ciebie należy decyzja o naprawie pojazdu i bez akceptacji kosztów sami nic nie wymienimy.",
+    "title4": "Naprawa"
+  },
+  "Contacts":{
+    "title":"NASZE KONTAKTY"
+  }
+}

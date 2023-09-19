@@ -5,71 +5,70 @@ import fan from './animations/fan.json';
 
 export const cards = [
   {
-    title: 'Kompleksowa mechanika pojazdów',
+    title: 'complex_mechanics',
     text: 'Naprawiamy silnik dobrze',
     image: engine,
     link: '#',
   },
   {
-    title: 'Diagnostyka',
+    title: 'diagnostics',
     text: 'Naprawiamy silnik dobrze',
     image: carservices,
     link: '#',
   },
   {
-    title: 'Kodowanie, Programowanie, Retrofit',
+    title: 'coding',
     text: 'Naprawiamy silnik dobrze',
     image: laptop,
     link: 'https://hartige.pl',
   },
   {
-    title: 'Serwis klimatyzacji',
+    title: 'climate',
     text: 'Naprawiamy silnik dobrze',
     image: fan,
     link: '#',
   },
 ];
 
- export const links = [
-    {
-      name: 'Strona główna',
-      href: '/',
-    },
-    {
-      name: 'O nas',
-      href: '#about',
-    },
-    {
-      name: 'Usługi',
-      href: '#services',
-    },
-  
-    {
-      name: 'Kontakt',
-      href: '#contacts',
-    },
-  ];
+export const links = [
+  {
+    name: 'strona_glowna',
+    href: '/',
+  },
+  {
+    name: 'o_nas',
+    href: '#about',
+  },
+  {
+    name: 'uslugi',
+    href: '#services',
+  },
 
-  export const steps = [
-    {
-      title: 'Umów się',
-      text: 'Niezależnie, czy chcesz skontrolować stan swojego samochodu, czy potrzebujesz naprawy, skontakuj się z nami dzwoniąc pod numer +48 509 158 159 i wybierz dogodny dla siebie termin. ',
-      image: '/services/service-card1.webp'
-    },
-    {
-      title: 'Przyprowadź samochód ',
-      text: 'Przyprowadź samochód do naszego warsztatu i o nic się nie martw - zadbamy o niego w najlepszy sposób. ',
-      image: '/services/service-card2.webp'
-    },
-    {
-      title: 'Diagnostyka i wycena',
-      text: 'Zweryfikujemy co wymaga naprawy i skontaktujemy się z Tobą. W tym celu będziemy musieli przeprowadzić jazdę próbną, bądź podnieść samochód na podnośniku.',
-      image: '/services/service-card3.webp'
-    },
-    {
-      title: 'Naprawa',
-      text: 'To do Ciebie należy decyzja o naprawie pojazdu i bez akceptacji kosztów sami nic nie wymienimy.',
-      image: '/services/service-card4.webp'
-    },
-  ];
-  
+  {
+    name: 'kontakt',
+    href: '#contacts',
+  },
+];
+
+export const steps = [
+  {
+    title: 'title1',
+    text: 'content1',
+    image: '/services/service-card1.webp',
+  },
+  {
+    title: 'title2',
+    text: 'content2',
+    image: '/services/service-card2.webp',
+  },
+  {
+    title: 'title3',
+    text: 'content3',
+    image: '/services/service-card3.webp',
+  },
+  {
+    title: 'title4',
+    text: 'content4',
+    image: '/services/service-card4.webp',
+  },
+];
