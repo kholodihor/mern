@@ -16,15 +16,15 @@
     "complex_mechanics":"COMPREHENSIVE VEHICLE MECHANICS",
     "diagnostics":"Diagnostics",
     "coding":"CODING, PROGRAMMING, RETROFIT",
-    "climat":"AIR CONDITIONING SERVICE"
+    "climate":"AIR CONDITIONING SERVICE"
   },
   "Steps": {
     "title": "how to do it",
     "content1": "Regardless of whether you want to check the condition of your car or need repairs, contact us by calling +48 509 158 159 and choose a date convenient for you.",
     "title1": "Make an appointment",
-    "content2": "Przyprowadź samochód do naszego warsztatu i o nic się nie martw - zadbamy o niego w najlepszy sposób. ",
-    "title2": "Иring the Сar",
-    "content3": "Bring your car to our workshop and don't worry about anything - we will take care of it in the best possible way.",
+    "content2": "Bring your car to our workshop and don't worry about anything - we will take care of it in the best possible way. ",
+    "title2": "Bring the Сar",
+    "content3": "We will verify what needs repair and contact you. To do this, we will have to conduct a test drive or raise the car on a lift.",
     "title3": "Diagnostics and valuation",
     "content4": "It is up to you to decide whether to repair the vehicle and we will not replace anything without accepting the costs.",
     "title4": "Repair"

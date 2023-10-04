@@ -7,7 +7,7 @@
     "motto": "IDEALNY SERWIS DLA IDEALNYCH AUT"
   },
   "About": {
-    "title": "Who we are",
+    "title": "kym jestesmy",
     "content": "Firma Mern sp. Z o.o. powstała z zamiłowania do marki BMW. W chwili obecnej zajmujemy się głównie mechaniką i diagnostyką takich samochodów jak BMW, Mini i Rolls Royce. Nasze doświadczenie zarówno jak i doświadczenie naszych pracowników pozwala nam świadczyć usługi na najwyższym poziomie. Dysponujemy profesjonalnym sprzętem co pozwala nam zrobić swoją pracę sprawnie i precyzyjnie. Do naprawy pojazdów używamy oryginalnych części oraz części zamiennych wysokiej jakości. Do każdego klienta podchodzimy indywidualnie.",
     "call": "Zapraszamy do kontaktu!"
   },
@@ -16,7 +16,7 @@
     "complex_mechanics": "KOMPLEKSOWA MECHANIKA POJAZDÓw",
     "diagnostics": "DIAGNOSTYKA",
     "coding": "KODOWANIE, PROGRAMOWANIE, RETROFIT",
-    "climat": "SERWIS KLIMATYZACJI"
+    "climate": "SERWIS KLIMATYZACJI"
   },
   "Steps": {
     "title": "JAK TO ZROBIĆ",
