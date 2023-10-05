@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { useEffect } from 'react';
 import IntroSlider from './IntroSlider';
 import { useTranslations } from 'next-intl';
 
@@ -8,7 +8,7 @@ const Intro = () => {
   return (
     <div className="relative top-0 left-0 w-full min-h-screen ">
       <IntroSlider />
-      <div className="absolute w-full sm:w-2/3 text-center sm:text-left top-[30%] sm:left-[10%] z-10">
+      <div className="absolute w-full sm:w-2/3 text-center sm:text-left top-[40%] sm:top-[35%] sm:left-[10%] z-10">
         <h1
           className="uppercase text-[13vh] sm:text-[20vh] font-bold bg-clip-text text-transparent drop-shadow-[5px_5px_0_#000] bg-gradient-to-r from-sky-500 to-indigo-500 "
           data-aos="zoom-in"

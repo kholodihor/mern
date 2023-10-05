@@ -8,8 +8,6 @@ const ServiceCard = ({ card }: { card: TServiceCard }) => {
   return (
     <div
       className="flex flex-1 justify-center items-center flex-col gap-8 p-8 text-center rounded-lg min-w-[15rem]  cursor-pointer hover:text-purple-600 shadow-xl shadow-[#666]"
-      data-aos="flip-left"
-      data-aos-duration="1500"
     >
       <div className="h-full flex justify-center items-start w-full">
         <a href={card.link} target="_blank" rel="noreferrer">

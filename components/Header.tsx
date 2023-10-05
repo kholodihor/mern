@@ -25,7 +25,7 @@ const Header = () => {
       id="header"
     >
       <Link href="/">
-        <Image src="/logo.png" alt="MERN logo" width={130} height={150} />
+        <Image src="/logo.png" alt="MERN logo" width={150} height={150} />
       </Link>
       <button
         type="button"

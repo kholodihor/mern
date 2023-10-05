@@ -15,7 +15,6 @@ const About = () => {
       <div className="sm:flex justify-center items-center gap-4 ">
         <div
           className="w-full sm:w-3/5 flex justify-center items-center"
-          data-aos="fade-right"
         >
           <p className="text-center text-[1.1rem]">
             {t('content')}
@@ -24,7 +23,7 @@ const About = () => {
             <strong>{t('call')}</strong>
           </p>
         </div>
-        <div className="w-full sm:w-2/5" data-aos="fade-left">
+        <div className="w-full sm:w-2/5 mt-6 sm:mt-0">
           <Lottie animationData={carservice} className="w-full invert" />
         </div>
       </div>

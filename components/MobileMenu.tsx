@@ -18,7 +18,7 @@ const MobileMenu = ({ links }: { links: TLink[] }) => {
                   <Image
                     src={`/icons/${lang}.svg`}
                     alt={lang}
-                    width={25}
+                    width={35}
                     height={10}
                   />
                 </button>
