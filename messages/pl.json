@@ -29,7 +29,37 @@
     "content4": "To do Ciebie należy decyzja o naprawie pojazdu i bez akceptacji kosztów sami nic nie wymienimy.",
     "title4": "Naprawa"
   },
-  "Contacts":{
-    "title":"NASZE KONTAKTY"
+  "Contacts": {
+    "title": "NASZE KONTAKTY"
+  },
+  "Form": {
+    "title": "Napisz do nas",
+    "paragraph_1": "Potrzebujesz porady dotyczącej Twojego BMW lub chcesz umówić się na wizytę serwisową?",
+    "paragraph_2": "Proszę wypełnij nasz formularz kontaktowy, podając swoje dane oraz opis problemu lub pytania.😇 Nasz doświadczony personel serwisowy odpowie na Twoje zapytania tak szybko, jak to będzie możliwe. Gwarantujemy uczciwą i dokładną diagnozę oraz konkurencyjne ceny.👌",
+    "paragraph_3": " Jesteśmy tutaj, aby pomóc Ci cieszyć się swoim BMW bez żadnych kłopotów.😉",
+    "name": "Imię",
+    "email": "Adres email do kontaktu",
+    "phone": "Numer telefonu",
+    "vin": "Vin numer pojazdu",
+    "message": "Wiadomość",
+    "send": "Wysłać",
+    "processing": "Przetwarzanie żądania...",
+    "errors": {
+      "name": "Proszę wpisać prawidłowe imię",
+      "name_min": "Minimalna długość nazwy to 2 litery",
+      "email": "Proszę wpisać prawidłowy adres e-mail",
+      "email_min": "To pole jest obowiązkowe",
+      "phone_required": "To pole jest obowiązkowe",
+      "phone": "Wpisz prawidłowy numer telefonu",
+      "vin": "Vin numer musi składać się z wielkich liter łacińskich i cyfr",
+      "vin_min": "Minimalna długość numeru vin to 17 znaków",
+      "vin_max": "Maxymalna długość numeru vin to 17 znaków",
+      "message": "Wpisz poprawny tekst wiadomości",
+      "message_required": "To pole jest obowiązkowe"
+    },
+    "modal": {
+      "title": "Twoja wiadomość została wysłana poprawnie",
+      "subtitle": "Nasz menadżer wkrótce się z Tobą skontaktuje"
+    }
   }
 }

@@ -1,17 +1,17 @@
-'use client';
-import React, { useState } from 'react';
-import Link from 'next/link';
-import { FaBars, FaTimes } from 'react-icons/fa';
-import Image from 'next/image';
-import { links } from '@/constants';
-import MobileMenu from './MobileMenu';
-import { useTranslations } from 'next-intl';
+"use client";
+import React, { useState } from "react";
+import Link from "next/link";
+import { FaBars, FaTimes } from "react-icons/fa";
+import Image from "next/image";
+import { links } from "@/constants";
+import MobileMenu from "./MobileMenu";
+import { useTranslations } from "next-intl";
 
-const langs = ['pl', 'en', 'ua'];
+const langs = ["pl", "en", "ua"];
 
 const Header = () => {
   const [showMobileMenu, setShowMobileMenu] = useState(false);
-  const t = useTranslations('Menu');
+  const t = useTranslations("Menu");
 
   const toggleMobileMenu = () => {
     setShowMobileMenu(!showMobileMenu);
@@ -19,8 +19,8 @@ const Header = () => {
 
   return (
     <header
-      className={`absolute top-0 left-0 w-full h-[15vh] py-2 px-6  flex justify-between items-center z-50 ${
-        showMobileMenu ? 'bg-black' : 'bg-black/50'
+      className={`absolute top-0 left-0 w-full h-[16vh] py-4 px-6  flex justify-between items-center z-50 ${
+        showMobileMenu ? "bg-black" : "bg-black/50"
       }`}
       id="header"
     >

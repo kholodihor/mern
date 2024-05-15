@@ -1,5 +1,5 @@
 User-Agent: *
 Allow: /
-Disallow: /private/
+Disallow: /admin
 
 Sitemap: https://mernserwis.pl/sitemap.xml

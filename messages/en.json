@@ -4,19 +4,19 @@
     "o_nas": "About Us",
     "uslugi": "Services",
     "kontakt": "Contact",
-    "motto":"Perfect service for perfect cars"
+    "motto": "Perfect service for perfect cars"
   },
-  "About":{
-    "title":"Who we are",
-    "content":"The company Mern sp. Z o. o. was created out of passion for the BMW brand. Currently, we mainly deal with mechanics and diagnostics of cars such as BMW, Mini and Rolls Royce. Our experience and the experience of our employees allow us to provide services at the highest level. We have professional equipment that allows us to do our work efficiently and precisely. We use original parts and high-quality spare parts to repair vehicles. We approach each customer individually.",
-    "call":"Please contact us!"
+  "About": {
+    "title": "Who we are",
+    "content": "The company Mern sp. Z o. o. was created out of passion for the BMW brand. Currently, we mainly deal with mechanics and diagnostics of cars such as BMW, Mini and Rolls Royce. Our experience and the experience of our employees allow us to provide services at the highest level. We have professional equipment that allows us to do our work efficiently and precisely. We use original parts and high-quality spare parts to repair vehicles. We approach each customer individually.",
+    "call": "Please contact us!"
   },
-  "Services":{
-    "title":"What We do",
-    "complex_mechanics":"COMPREHENSIVE VEHICLE MECHANICS",
-    "diagnostics":"Diagnostics",
-    "coding":"CODING, PROGRAMMING, RETROFIT",
-    "climate":"AIR CONDITIONING SERVICE"
+  "Services": {
+    "title": "What We do",
+    "complex_mechanics": "COMPREHENSIVE VEHICLE MECHANICS",
+    "diagnostics": "Diagnostics",
+    "coding": "CODING, PROGRAMMING, RETROFIT",
+    "climate": "AIR CONDITIONING SERVICE"
   },
   "Steps": {
     "title": "how to do it",
@@ -29,7 +29,37 @@
     "content4": "It is up to you to decide whether to repair the vehicle and we will not replace anything without accepting the costs.",
     "title4": "Repair"
   },
-  "Contacts":{
-    "title":"Our Contacts"
+  "Contacts": {
+    "title": "Our Contacts"
+  },
+  "Form": {
+    "title": "Write to us",
+    "paragraph_1": "Do you need advice about your BMW or want to make an appointment for a service visit?",
+    "paragraph_2": "Please complete our contact form with your details and a description of your problem or question.😇 Our experienced service staff will respond to your inquiries as quickly as possible. We guarantee honest and accurate diagnosis and competitive prices.👌",
+    "paragraph_3": "We are here to help you enjoy your BMW without any hassle.😉",
+    "name": "Name",
+    "email": "Email",
+    "phone": "Phone number",
+    "vin": "Vin number of the car",
+    "message": "Message",
+    "send": "Submit",
+    "processing": "Обробка запиту...",
+    "errors": {
+      "name": "Please enter a valid name",
+      "name_min": "The minimum name length is 2 letters",
+      "email": "Please enter a valid email address",
+      "email_min": "This field is mandatory",
+      "phone_required": "This field is mandatory",
+      "phone": "Enter a valid phone number",
+      "vin": "Vin number must consist of uppercase Latin letters and numbers",
+      "vin_min": "The minimum length of the vin number is 17 characters",
+      "vin_max": "The maximum length of the vin number is 17 characters",
+      "message": "Enter the correct message text",
+      "message_required": "This field is mandatory"
+    },
+    "modal": {
+      "title": "Your message has been sent successfully",
+      "subtitle": "Our manager will contact you shortly"
+    }
   }
 }
