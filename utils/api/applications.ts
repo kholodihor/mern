@@ -21,3 +21,19 @@ export const createApplication = async (application: IApplication) => {
     console.log(error);
   }
 };
+
+export const updateApplication = async (id: string, status: string) => {
+  console.log(id, status);
+  try {
+    const response = await axios.patch<IApplicationResponse>(
+      `/applications/${id}`,
+      status,
+      {
+        headers: { "Content-Type": "application/json" },
+      }
+    );
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+};

@@ -47,7 +47,10 @@ const ApplicationForm = () => {
   };
 
   return (
-    <div className="relative min-h-[100vh] gap-[2rem] w-full flex flex-col justify-center items-center">
+    <section
+      id="send-application"
+      className="relative min-h-[100vh] gap-[2rem] w-full flex flex-col justify-center items-center"
+    >
       <h1 className="mainTitle">{t("title")}</h1>
       <div className="p-2">
         <p className="max-w-[700px] text-center">{t("paragraph_1")}</p>
@@ -135,7 +138,7 @@ const ApplicationForm = () => {
           isModalOpen={isModalOpen}
         />
       )}
-    </div>
+    </section>
   );
 };
 
