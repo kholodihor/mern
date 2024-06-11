@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link";
+import Image from "next/image";
 import { signOut } from "next-auth/react";
 import { TiMessages } from "react-icons/ti";
 import { CiLogout } from "react-icons/ci";
@@ -7,7 +9,12 @@ import { SideBarItem } from "./SideBarItem";
 
 const SideBar = () => {
   return (
-    <aside className="relative min-h-[80vh] w-[250px] overflow-auto border-r border-gray-800 bg-black pt-[2rem] flex flex-col">
+    <aside className="relative min-h-[95vh] w-[250px] overflow-auto border-r border-gray-800 bg-black flex flex-col">
+      <div className="flex justify-center items-center p-2 mb-[2rem]">
+        <Link href="/">
+          <Image src="/logo.png" alt="MERN logo" width={150} height={150} />
+        </Link>
+      </div>
       <div className="mb-[5rem]">
         <SideBarItem
           className=""

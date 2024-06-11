@@ -6,6 +6,7 @@ import Image from "next/image";
 import { links } from "@/constants";
 import MobileMenu from "./MobileMenu";
 import { useTranslations } from "next-intl";
+import { usePathname } from "next/navigation";
 
 const langs = ["pl", "en", "ua"];
 
@@ -16,6 +17,14 @@ const Header = () => {
   const toggleMobileMenu = () => {
     setShowMobileMenu(!showMobileMenu);
   };
+
+  const pathname = usePathname();
+
+  if (
+    pathname.split("/").includes("admin") ||
+    pathname.split("/").includes("login")
+  )
+    return null;
 
   return (
     <header

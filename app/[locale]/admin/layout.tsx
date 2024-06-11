@@ -34,9 +34,9 @@ export default function AdminLayout({
   if (loading) return <Loader />;
 
   return (
-    <div className="flex bg-black text-white pt-[17vh]">
+    <div className="flex bg-black text-white pt-[5vh]">
       <SideBar />
-      <div className="flex-1">{children}</div>
+      <div className="flex-1 max-h-[95vh] overflow-auto">{children}</div>
     </div>
   );
 }
