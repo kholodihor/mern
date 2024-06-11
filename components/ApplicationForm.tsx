@@ -61,7 +61,8 @@ const ApplicationForm = () => {
       </div>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="flex flex-col gap-[1rem] w-[90vw] sm:w-[70vw] md:w-[50vw] bg-transparent justify-center items-center mt-[2rem]"
+        className="flex flex-col gap-[1rem] w-[90vw] sm:w-[70vw] xl:w-[60vw] bg-transparent justify-center 
+        items-center mt-[2rem]"
       >
         <Controller
           name="name"
@@ -120,6 +121,42 @@ const ApplicationForm = () => {
             />
           )}
         />
+        <div className="rules w-[90vw] sm:w-[50vw] xl:w-[35vw] mx-auto text-gray-400">
+          <h5 className="text-[13px] mb-[1rem] underline">
+            {t("policies.title")}
+          </h5>
+          <p className="text-[10px] mb-[0.5rem]">
+            {t("policies.paragraph_1")}{" "}
+            <a
+              href="/Polityka Prywatności.pdf"
+              target="_blank"
+              rel="noreferrer"
+              className="text-blue-700 hover:underline"
+            >
+              {t("policies.policy")}
+            </a>
+            .
+          </p>
+          <p className="text-[10px]">
+            {t("policies.paragraph_2")}{" "}
+            <a
+              href="mailto:mern.serwis@gmail.com"
+              rel="noopener noreferrer"
+              className="text-blue-700 hover:underline"
+            >
+              mern.serwis@gmail.com
+            </a>{" "}
+            {t("policies.paragraph_3")}{" "}
+            <a
+              href="tel:+48509159158."
+              rel="noopener noreferrer"
+              className="hover:underline sm:hidden"
+            >
+              +48 509 159 158.
+            </a>
+            <span className="hidden sm:block">+48 509 159 158.</span>
+          </p>
+        </div>
         <button
           className={`rounded-md border border-blue-700 shadow-sm shadow-blue-700 py-2 px-4 w-[250px] disabled:border-gray-200 disabled:shadow-none disabled:cursor-not-allowed ${
             !isValid

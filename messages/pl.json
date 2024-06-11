@@ -60,6 +60,13 @@
     "modal": {
       "title": "Twoja wiadomość została wysłana poprawnie",
       "subtitle": "Nasz menadżer wkrótce się z Tobą skontaktuje"
+    },
+    "policies": {
+      "title": "Informacja o Ochronie Danych Osobowych",
+      "paragraph_1": "Wypełniając niniejszy formularz, wyrażasz zgodę na przetwarzanie swoich danych osobowych przez Mern sp. z o.o. z siedzibą ul. Plac Bankowy 2, 00-095 Warszawa w celu przygotowania wyceny oraz kontaktu w sprawie usług oferowanych przez nasz warsztat. Twoje dane będą przetwarzane zgodnie z naszą",
+      "paragraph_2": "Masz prawo dostępu do swoich danych, ich poprawiania, usunięcia oraz ograniczenia przetwarzania. W celu skorzystania z tych praw prosimy o kontakt na adres email:",
+      "paragraph_3": "lub telefonicznie pod numerem",
+      "policy": "Polityką Prywatności"
     }
   }
 }

@@ -60,6 +60,13 @@
     "modal": {
       "title": "Your message has been sent successfully",
       "subtitle": "Our manager will contact you shortly"
+    },
+    "policies": {
+      "title": "Information on Personal Data Protection",
+      "paragraph_1": "By completing this form, you consent to the processing of your personal data by Mern sp. z o.o. with headquarters at ul. Plac Bankowy 2, 00-095 Warszawa in order to prepare a quote and contact us regarding the services offered by our workshop. Your data will be processed in accordance with our",
+      "paragraph_2": "You have the right to access your data, correct it, delete it and limit its processing. To exercise these rights, please contact us at the following e-mail address:",
+      "paragraph_3": "or by phone at",
+      "policy": "Privacy Policy"
     }
   }
 }
