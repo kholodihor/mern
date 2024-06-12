@@ -68,5 +68,9 @@
       "paragraph_3": "lub telefonicznie pod numerem",
       "policy": "Polityką Prywatności"
     }
+  },
+  "error": {
+    "error": "Ups... coś poszło nie tak, spróbuj ponownie później",
+    "tryagain": "Spróbuj ponownie"
   }
 }

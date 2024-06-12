@@ -121,7 +121,7 @@ const ApplicationForm = () => {
             />
           )}
         />
-        <div className="rules w-[90vw] sm:w-[50vw] xl:w-[35vw] mx-auto text-gray-400">
+        <div className="rules w-[90vw] sm:w-[50vw] xl:w-[36vw] mx-auto text-gray-400">
           <h5 className="text-[13px] mb-[1rem] underline">
             {t("policies.title")}
           </h5>
