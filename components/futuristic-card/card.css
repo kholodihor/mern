@@ -20,6 +20,12 @@
   z-index: 10;
 }
 
+@media screen and (max-width: 450px) {
+  .screen {
+    width: 350px;
+  }
+}
+
 .screen:after,
 .screen:before {
   content: "";
