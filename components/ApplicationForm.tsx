@@ -52,7 +52,7 @@ const ApplicationForm = () => {
       className="md:flex justify-center items-center"
       id="send-application"
     >
-      <div className="w-full md:w-1/2 flex flex-col justify-center items-center h-full min-h-[50vh] md:min-h-[100vh]">
+      <div className="w-full md:w-1/2 flex flex-col justify-center items-center min-h-[50vh] md:min-h-[150vh]">
         <FuturisticCard />
       </div>
       <div className="w-full md:w-1/2 relative min-h-[100vh] gap-[2rem] flex flex-col justify-center items-center">

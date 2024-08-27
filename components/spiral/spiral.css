@@ -1,0 +1,61 @@
+.circle {
+  position: absolute;
+  width: 0.5em;
+  height: 0.5em;
+  border-radius: 50%;
+  background: white;
+  opacity: 0;
+  animation: move-to-center 1s ease-in-out infinite;
+}
+
+@keyframes move-to-center {
+  to {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+}
+
+.circle:nth-child(1) {
+  transform: rotate(calc(1 / 9 * 720deg)) translateX(4em);
+  animation-delay: calc(1 / 9 * 3s);
+}
+
+.circle:nth-child(2) {
+  transform: rotate(calc(2 / 9 * 720deg)) translateX(4em);
+  animation-delay: calc(2 / 9 * 3s);
+}
+
+.circle:nth-child(3) {
+  transform: rotate(calc(3 / 9 * 720deg)) translateX(4em);
+  animation-delay: calc(3 / 9 * 3s);
+}
+
+.circle:nth-child(4) {
+  transform: rotate(calc(4 / 9 * 720deg)) translateX(4em);
+  animation-delay: calc(4 / 9 * 3s);
+}
+
+.circle:nth-child(5) {
+  transform: rotate(calc(5 / 9 * 720deg)) translateX(4em);
+  animation-delay: calc(5 / 9 * 3s);
+}
+
+.circle:nth-child(6) {
+  transform: rotate(calc(6 / 9 * 720deg)) translateX(4em);
+  animation-delay: calc(6 / 9 * 3s);
+}
+
+.circle:nth-child(7) {
+  transform: rotate(calc(7 / 9 * 720deg)) translateX(4em);
+  animation-delay: calc(7 / 9 * 3s);
+}
+
+.circle:nth-child(8) {
+  transform: rotate(calc(8 / 9 * 720deg)) translateX(4em);
+  animation-delay: calc(8 / 9 * 3s);
+}
+
+.circle:nth-child(9) {
+  transform: rotate(calc(9 / 9 * 720deg)) translateX(4em);
+  animation-delay: calc(9 / 9 * 3s);
+}
