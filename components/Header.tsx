@@ -28,7 +28,7 @@ const Header = () => {
 
   return (
     <header
-      className={`absolute top-0 left-0 w-full h-[16vh] py-4 px-6  flex justify-between items-center z-50 ${
+      className={`absolute top-0 lg:top-[8vh] left-0 w-full h-[18vh] md:h-[16vh] py-4 px-6  flex justify-between items-center z-50 ${
         showMobileMenu ? "bg-black" : "bg-black/50"
       }`}
       id="header"
@@ -39,7 +39,7 @@ const Header = () => {
       <button
         type="button"
         onClick={toggleMobileMenu}
-        className="block sm:hidden border-none bg-none text-white mr-[1.5rem]"
+        className="block md:hidden border-none bg-none text-white mr-[1.5rem]"
       >
         {showMobileMenu ? (
           <FaTimes className=" text-[2rem] transition-all" />
@@ -48,7 +48,7 @@ const Header = () => {
         )}
       </button>
       {showMobileMenu && <MobileMenu links={links} />}
-      <nav className="hidden sm:block">
+      <nav className="hidden md:block">
         <ul
           className="m-0 flex justify-around items-center gap-4 p-2"
           id="links"

@@ -10,6 +10,7 @@ import GoogleAnalytics from "@/components/GoogleAnalytics";
 import CookieBanner from "@/components/CookieBanner";
 import SessionWrapper from "../session-provider";
 import "../globals.css";
+import SubHeader from "@/components/SubHeader";
 
 export function generateStaticParams() {
   return [{ locale: "pl" }, { locale: "en" }, { locale: "ua" }];
@@ -53,6 +54,7 @@ export default async function RootLayout({
             />
             <div>
               <NextIntlClientProvider locale={locale} messages={messages}>
+                <SubHeader />
                 <Header />
                 {children}
                 <CookieBanner />

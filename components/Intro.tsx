@@ -2,6 +2,7 @@
 import React, { useEffect } from "react";
 import IntroSlider from "./IntroSlider";
 import { useTranslations } from "next-intl";
+import ContactsBubble from "./ContactsBubble";
 
 const Intro = () => {
   const t = useTranslations("Menu");
@@ -25,6 +26,7 @@ const Intro = () => {
           {t("motto")}
         </p>
       </div>
+      <ContactsBubble />
     </div>
   );
 };

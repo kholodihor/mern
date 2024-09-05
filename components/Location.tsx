@@ -2,6 +2,7 @@
 import { FaPhone, FaMapMarkerAlt, FaEnvelope } from "react-icons/fa";
 import MyMap from "./MyMap";
 import { useTranslations } from "next-intl";
+import Socials from "./Socials";
 
 const Location = () => {
   const t = useTranslations("Contacts");
@@ -10,7 +11,7 @@ const Location = () => {
       id="contacts"
       className="flex-wrap lg:flex-nowrap w-full min-h-[100vh] flex  p-4 mt-[10vh]"
     >
-      <div className="w-full lg:w-1/2 flex justify-center items-center flex-col text-center sm:text-left">
+      <div className="w-full lg:w-1/2 flex justify-center items-center flex-col text-center sm:text-left pb-6">
         <h1 className="mainTitle">{t("title")}</h1>
         <ul>
           <li className="my-4 text-center sm:flex items-center justify-start gap-4 text-[1.2rem]">
@@ -35,6 +36,10 @@ const Location = () => {
               <a href="mailto: mern.serwis@gmail.com">mern.serwis@gmail.com</a>
             </span>
           </li>
+          <h2 className="mb-4 text-xl underline text-blue-400">
+            Poznaj nas bliżej
+          </h2>
+          <Socials />
         </ul>
       </div>
       <div className="w-full lg:w-1/2">
