@@ -20,9 +20,9 @@ const Services = () => {
           grabCursor={true}
           centeredSlides={true}
           slidesPerView={1}
-          speed={2000}
+          speed={1500}
           autoplay={{
-            delay: 3000,
+            delay: 2500,
             disableOnInteraction: false,
             pauseOnMouseEnter: true,
           }}
@@ -44,7 +44,7 @@ const Services = () => {
               slidesPerView: 3,
             },
           }}
-          className="w-full md:w-3/4"
+          className="w-[90vw] md:w-3/4"
         >
           {cards.map((card, index) => (
             <SwiperSlide key={index}>
