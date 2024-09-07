@@ -1,17 +1,18 @@
 .cardbody {
-  height: 100%;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: transparent;
+  background-color: red;
+  border: 2px solid red;
   margin: 0rem;
   overflow: hidden;
 }
 
 .screen {
-  width: 400px;
+  width: 450px;
   display: flex;
-  border: 3px solid rgba(33, 150, 243, 0.8);
+  border: 3px solid rgba(33, 150, 213, 0.8);
   aspect-ratio: 10 / 14;
   border-radius: 1rem;
   background-color: transparent;
@@ -20,11 +21,11 @@
   z-index: 10;
 }
 
-/* @media screen and (max-width: 450px) {
+@media screen and (min-width: 650px) {
   .screen {
     width: 400px;
   }
-} */
+}
 
 .screen:after,
 .screen:before {

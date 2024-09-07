@@ -49,7 +49,7 @@ const ApplicationForm = () => {
 
   return (
     <section
-      className="md:flex justify-center items-center"
+      className="md:flex justify-center items-center px-2"
       id="send-application"
     >
       <div className="w-full md:w-1/2 flex flex-col justify-center items-center min-h-[50vh] md:min-h-[150vh]">

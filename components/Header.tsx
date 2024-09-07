@@ -28,7 +28,7 @@ const Header = () => {
 
   return (
     <header
-      className={`absolute top-0 lg:top-[8vh] left-0 w-full h-[18vh] md:h-[16vh] py-4 px-6  flex justify-between items-center z-50 ${
+      className={`absolute top-0 lg:top-[7vh] left-0 w-full h-[18vh] md:h-[16vh] py-4 px-6  flex justify-between items-center z-50 ${
         showMobileMenu ? "bg-black" : "bg-black/50"
       }`}
       id="header"
