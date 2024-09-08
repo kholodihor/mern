@@ -6,19 +6,24 @@ import Image from "next/image";
 import { links } from "@/constants";
 import MobileMenu from "./MobileMenu";
 import { useTranslations } from "next-intl";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "@/navigation";
 
 const langs = ["pl", "en", "ua"];
 
 const Header = () => {
+  const router = useRouter();
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const t = useTranslations("Menu");
+
+  const pathname = usePathname();
 
   const toggleMobileMenu = () => {
     setShowMobileMenu(!showMobileMenu);
   };
 
-  const pathname = usePathname();
+  const handleCheckLocale = (item: string) => {
+    router.replace(pathname, { locale: item });
+  };
 
   if (
     pathname.split("/").includes("admin") ||
@@ -65,17 +70,15 @@ const Header = () => {
           ))}
           <div className="flex gap-[0.5rem]">
             {langs.map((lang, i) => (
-              <Link key={i} href={`/${lang}`}>
-                <button>
-                  <Image
-                    src={`/icons/${lang}.svg`}
-                    alt={lang}
-                    width={25}
-                    height={10}
-                    className="hover:scale-125 transition-all"
-                  />
-                </button>
-              </Link>
+              <button key={i} onClick={() => handleCheckLocale(lang)}>
+                <Image
+                  src={`/icons/${lang}.svg`}
+                  alt={lang}
+                  width={25}
+                  height={10}
+                  className="hover:scale-125 transition-all"
+                />
+              </button>
             ))}
           </div>
         </ul>
