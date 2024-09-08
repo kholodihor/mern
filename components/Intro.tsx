@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect } from "react";
+
 import IntroSlider from "./IntroSlider";
 import { useTranslations } from "next-intl";
 import ContactsBubble from "./ContactsBubble";

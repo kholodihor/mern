@@ -46,13 +46,14 @@
     "title4": "Naprawa"
   },
   "Contacts": {
-    "title": "NASZE KONTAKTY"
+    "title": "NASZE KONTAKTY",
+    "social": "Poznaj nas bliżej"
   },
   "Form": {
     "title": "Napisz do nas",
     "paragraph_1": "Potrzebujesz porady dotyczącej Twojego BMW lub chcesz umówić się na wizytę serwisową?",
     "paragraph_2": "Proszę wypełnij nasz formularz kontaktowy, podając swoje dane oraz opis problemu lub pytania.😇 Nasz doświadczony personel serwisowy odpowie na Twoje zapytania tak szybko, jak to będzie możliwe. Gwarantujemy uczciwą i dokładną diagnozę oraz konkurencyjne ceny.👌",
-    "paragraph_3": " Jesteśmy tutaj, aby pomóc Ci cieszyć się swoim BMW bez żadnych kłopotów.😉",
+    "paragraph_3": " Jesteśmy tutaj, aby pomóc Ci cieszyć się swoim auto bez żadnych kłopotów.😉",
     "name": "Imię",
     "email": "Adres email do kontaktu",
     "phone": "Numer telefonu",

@@ -66,7 +66,7 @@ const ApplicationForm = () => {
         </div>
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="flex flex-col gap-[1rem] w-[90%] sm:w-[70%] xl:w-[60%] bg-transparent justify-center 
+          className="flex flex-col gap-[1rem] w-[90%] bg-transparent justify-center 
         items-center mt-[2rem]"
         >
           <Controller
@@ -130,7 +130,7 @@ const ApplicationForm = () => {
               />
             )}
           />
-          <div className="rules w-[90vw] sm:w-[50vw] xl:w-[36vw] mx-auto text-gray-400">
+          <div className="rules w-[90vw] sm:w-[50vw] xl:w-full mx-auto text-gray-400">
             <h5 className="text-[13px] mb-[1rem] underline">
               {t("policies.title")}
             </h5>

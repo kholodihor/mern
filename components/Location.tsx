@@ -37,7 +37,7 @@ const Location = () => {
             </span>
           </li>
           <h2 className="mb-4 text-xl underline text-blue-400">
-            Poznaj nas bliżej
+            {t("social")}
           </h2>
           <Socials />
         </ul>

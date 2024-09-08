@@ -8,6 +8,7 @@ import paint from "./animations/paint.json";
 import gears from "./animations/gears.json";
 import price from "./animations/price.json";
 import accesoires from "./animations/accesoires.json";
+import audio from "./animations/audio.json";
 
 export const cards = [
   {
@@ -61,7 +62,7 @@ export const cards = [
   {
     title: "accesoires",
     text: "accesoires_text",
-    image: accesoires,
+    image: audio,
     link: "#",
   },
   {
