@@ -17,12 +17,25 @@ export function generateStaticParams() {
 }
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://mernserwis.pl"),
   title: {
     default: "MERN Serwis Samochodowy",
     template: `%s | MERN Serwis Samochodowy `,
   },
   description:
     "MERN Serwis to najlepszy serwis dla naprawy twojego BMW ,Rolls Royce, Mini Cooper",
+  alternates: {
+    canonical: "/",
+    languages: {
+      "en-US": "/en",
+      "pl-PL": "/pl",
+      "uk-UK": "/ua",
+    },
+  },
+  openGraph: {
+    images: "/og-image.png",
+  },
+  keywords: ["MERN", "BMW", "Serwis", "Rolls Royce", "Mini Cooper", "Warszawa"],
 };
 
 const locales = ["pl", "en", "ua"];

@@ -33,3 +33,9 @@ export interface IApplicationResponse extends IApplication {
 export interface IUser {
   email: string;
 }
+
+export interface PageProps {
+  params: {
+    locale: "ua" | "en" | "pl";
+  };
+}
