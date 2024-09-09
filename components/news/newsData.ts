@@ -2,12 +2,12 @@ import { INewsItem } from "@/types";
 
 export const newsData: INewsItem[] = [
   {
-    car: "📌BMW I I3 Rex ⬇️",
+    car: "📌BMW I I3 Rex⬇️",
     services: [
-      "Naprawa wiązki fotela ➡️",
-      "Diagnostyka komputerowa ➡️",
-      "Wymiana klocków hamulcowych przód ➡️",
-      "Wpis do książki elektronicznej BMW ➡️",
+      "➡️ Naprawa wiązki fotela",
+      "➡️ Diagnostyka komputerowa",
+      "➡️ Wymiana klocków hamulcowych przód",
+      "➡️ Wpis do książki elektronicznej BMW",
     ],
     contact: {
       serviceCenter:
@@ -35,11 +35,11 @@ export const newsData: INewsItem[] = [
   {
     car: "📌BMW 2' F44 Gran Coupé⬇️",
     services: [
-      "Przegląd samochodu ➡️",
-      "Wymiana płynu hamulcowego ➡️",
-      "Wyiana klocków hamulcowych przód ➡️",
-      "Wymiana klocków hamulcowych tył ➡️",
-      "Usługa Door To Door ➡️",
+      "➡️ Przegląd samochodu",
+      "➡️ Wymiana płynu hamulcowego",
+      "➡️ Wyiana klocków hamulcowych przód",
+      "➡️ Wymiana klocków hamulcowych tył",
+      "➡️ Usługa Door To Door",
     ],
     contact: {
       serviceCenter:
@@ -65,13 +65,13 @@ export const newsData: INewsItem[] = [
     ],
   },
   {
-    car: "📌BMW 5' G30 540iX  ⬇️",
+    car: "📌BMW 5' G30 540iX⬇️",
     services: [
-      "Serwis olejowy➡️",
-      "Wymiana tarcz i klocków hamulcowych tył➡️",
-      "Odgrzybianie klimatyzacji ➡️",
-      "Usługa door to door ➡️",
-      "Wpis do książki elektronicznej BMW ➡️",
+      "➡️ Serwis olejowy",
+      "➡️ Wymiana tarcz i klocków hamulcowych tył",
+      "➡️ Odgrzybianie klimatyzacji",
+      "➡️ Usługa door to door",
+      "➡️ Wpis do książki elektronicznej BMW",
     ],
     contact: {
       serviceCenter:

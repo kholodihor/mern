@@ -17,7 +17,7 @@ const NewsItem = ({ item, index }: INewsItemProps) => {
         index % 2 !== 0 ? "justify-end" : "justify-start"
       }`}
     >
-      <div className="slide-col relative w-[80vw] h-[400px]">
+      <div className="slide-col relative w-[80vw] xl:w-[70vw] 2xl:w-[65vw] h-[400px]">
         {/* Thumbnail images on the side */}
         <div
           className={`flex gap-2 flex-col absolute top-[50%] -translate-y-[50%] ${

@@ -44,12 +44,12 @@ const Header = () => {
   return (
     <header
       className={`fixed top-0 lg:top-[7vh] left-0 w-full h-[17vh] md:h-[16vh] py-4 px-6 flex justify-between items-center z-50 backdrop-blur-sm backdrop-brightness-10 ${
-        showMobileMenu ? "bg-black" : "bg-black/50"
+        showMobileMenu ? "bg-black" : "bg-black"
       }`}
       id="header"
     >
       <Link href="/">
-        <Image src="/logo.png" alt="MERN logo" width={150} height={150} />
+        <Image src="/logo_black.png" alt="MERN logo" width={150} height={150} />
       </Link>
       <button
         type="button"

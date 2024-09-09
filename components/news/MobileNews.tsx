@@ -38,7 +38,7 @@ const MobileNews = ({ item, index }: INewsItemProps) => {
 
         {/* Text content */}
         <div
-          className={`absolute bottom-0 sm:top-[50%] sm:-translate-y-[50%] w-full sm:w-[350px] md:w-[530px] h-[270px] bg-[rgba(255,255,255,0.5)] backdrop-blur-sm backdrop-brightness-10 p-4 rounded-md z-[5] overflow-hidden text-black ${
+          className={`absolute bottom-0 sm:top-[50%] sm:-translate-y-[50%] w-full sm:w-[350px] md:w-[530px] min-h-[270px] bg-[rgba(255,255,255,0.5)] backdrop-blur-sm backdrop-brightness-10 p-4 rounded-md z-[5] overflow-hidden text-black ${
             index % 2 !== 0
               ? "left-0 sm:left-[150px]"
               : "right-0 sm:right-[150px]"
