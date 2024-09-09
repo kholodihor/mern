@@ -36,11 +36,11 @@ export default function Home() {
   return (
     <>
       <Intro />
-      <About />
-      <Services />
-      <Steps />
-      <ApplicationForm />
-      <Location />
+      {/* <About /> */}
+      {/* <Services /> */}
+      {/* <Steps /> */}
+      {/* <ApplicationForm /> */}
+      {/* <Location /> */}
     </>
   );
 }

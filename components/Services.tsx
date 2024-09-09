@@ -12,7 +12,7 @@ const Services = () => {
   const t = useTranslations("Services");
 
   return (
-    <section className="w-full flex justify-center items-center flex-col text-center py-8 px-2">
+    <section className="w-full flex justify-center items-center flex-col text-center py-8 px-2 min-h-[100vh] pt-[18vh] md:pt-[25vh]">
       <h1 className="mainTitle">{t("title")}</h1>
       <div className="w-full flex gap-2 flex-wrap relative p-2 min-h-[80vh]">
         <Swiper

@@ -1,22 +1,99 @@
-export const newsData = [
+import { INewsItem } from "@/types";
+
+export const newsData: INewsItem[] = [
   {
-    title: "Test Title",
-    text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit beatae ullam quasi in est expedita voluptatem nam, iste dolore quibusdam dolorum voluptatibus temporibus ea. Ipsum aperiam assumenda blanditiis cum totam cumque at accusamus sunt aliquid,praesentium autem odit nam eligendi, quis dolorum illum tenetur!Magnam iure perferendis impedit laudantium voluptate?",
+    car: "📌BMW I I3 Rex ⬇️",
+    services: [
+      "Naprawa wiązki fotela ➡️",
+      "Diagnostyka komputerowa ➡️",
+      "Wymiana klocków hamulcowych przód ➡️",
+      "Wpis do książki elektronicznej BMW ➡️",
+    ],
+    contact: {
+      serviceCenter:
+        " 📌 Mern Serwis - Twoje zaufane centrum obsługi samochodów marki BMW!",
+      address: " 📍 Przyszłość 2A, Stanisławów Pierwszy",
+      phone: " ☎️ 509 158 159",
+      email: "📨 mern.serwis@gmail.com",
+    },
+    hashtags: [
+      "#bmwii3",
+      "#naprawawiazki",
+      "#naprawafotela",
+      "#wymianapłynuhamulcowego",
+      "#bmwserwis",
+      "#bmwwarszwa",
+    ],
     images: [
-      "https://www.bmw.ua/content/dam/bmw/common/topics/fascination-bmw/bmw-m-individual/bmw-m-individual-relaunch-gallery-heritage-wallpaper-07.jpg.asset.1679903183082.jpg",
-      "https://cdn.drivek.com/configurator-imgs/cars/es/800/BMW/5-SERIES/42714_SALOON-4-DOORS/bmw-serie-5-front-view.jpg",
-      "https://img.remediosdigitales.com/875387/1366_2000/450_1000.jpeg",
-      "https://static.motor.es/fotos-jato/bmw/uploads/bmw-i5-646e81fa480b9.jpg",
+      "/news/rex_1.jpg",
+      "/news/rex_2.jpg",
+      "/news/rex_3.jpg",
+      "/news/rex_4.jpg",
+      "/news/rex_5.jpg",
     ],
   },
   {
-    title: "Test Title",
-    text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit beatae ullam quasi in est expedita voluptatem nam, iste dolore quibusdam dolorum voluptatibus temporibus ea. Ipsum aperiam assumenda blanditiis cum totam cumque at accusamus sunt aliquid,praesentium autem odit nam eligendi, quis dolorum illum tenetur!Magnam iure perferendis impedit laudantium voluptate?",
+    car: "📌BMW 2' F44 Gran Coupé⬇️",
+    services: [
+      "Przegląd samochodu ➡️",
+      "Wymiana płynu hamulcowego ➡️",
+      "Wyiana klocków hamulcowych przód ➡️",
+      "Wymiana klocków hamulcowych tył ➡️",
+      "Usługa Door To Door ➡️",
+    ],
+    contact: {
+      serviceCenter:
+        " 📌 Mern Serwis - Twoje zaufane centrum obsługi samochodów marki BMW!",
+      address: " 📍 Przyszłość 2A, Stanisławów Pierwszy",
+      phone: " ☎️ 509 158 159",
+      email: "📨 mern.serwis@gmail.com",
+    },
+    hashtags: [
+      "#bmwf44",
+      "#naprawawiazki",
+      "#naprawafotela",
+      "#wymianaklocków",
+      "#bmwserwis",
+      "#bmwwarszwa",
+    ],
     images: [
-      "https://www.bmw.ua/content/dam/bmw/common/topics/fascination-bmw/bmw-m-individual/bmw-m-individual-relaunch-gallery-heritage-wallpaper-07.jpg.asset.1679903183082.jpg",
-      "https://cdn.drivek.com/configurator-imgs/cars/es/800/BMW/5-SERIES/42714_SALOON-4-DOORS/bmw-serie-5-front-view.jpg",
-      "https://img.remediosdigitales.com/875387/1366_2000/450_1000.jpeg",
-      "https://static.motor.es/fotos-jato/bmw/uploads/bmw-i5-646e81fa480b9.jpg",
+      "/news/f44_1.jpg",
+      "/news/f44_2.jpg",
+      "/news/f44_3.jpg",
+      "/news/f44_5.jpg",
+      "/news/f44_6.jpg",
+    ],
+  },
+  {
+    car: "📌BMW 5' G30 540iX  ⬇️",
+    services: [
+      "Serwis olejowy➡️",
+      "Wymiana tarcz i klocków hamulcowych tył➡️",
+      "Odgrzybianie klimatyzacji ➡️",
+      "Usługa door to door ➡️",
+      "Wpis do książki elektronicznej BMW ➡️",
+    ],
+    contact: {
+      serviceCenter:
+        " 📌 Mern Serwis - Twoje zaufane centrum obsługi samochodów marki BMW!",
+      address: " 📍 Przyszłość 2A, Stanisławów Pierwszy",
+      phone: " ☎️ 509 158 159",
+      email: "📨 mern.serwis@gmail.com",
+    },
+    hashtags: [
+      "#bmwlove",
+      "#serwisolejowy",
+      "#naprawafotela",
+      "#bmwg30",
+      "#bmwserwis",
+      "#bmwwarszwa",
+    ],
+    images: [
+      "/news/g30_1.jpg",
+      "/news/g30_2.jpg",
+      "/news/g30_3.jpg",
+      "/news/g30_4.jpg",
+      "/news/g30_5.jpg",
     ],
   },
 ];

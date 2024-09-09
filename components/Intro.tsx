@@ -8,7 +8,7 @@ const Intro = () => {
   const t = useTranslations("Menu");
 
   return (
-    <div className="relative top-0 left-0 w-full min-h-screen ">
+    <div className="relative top-0 left-0 w-full min-h-[100vh]">
       <IntroSlider />
       <div className="absolute w-full sm:w-2/3 text-center sm:text-left top-[40%] sm:top-[35%] sm:left-[10%] z-10">
         <h1

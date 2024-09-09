@@ -39,3 +39,18 @@ export interface PageProps {
     locale: "ua" | "en" | "pl";
   };
 }
+
+export interface ContactInfo {
+  serviceCenter: string;
+  address: string;
+  phone: string;
+  email: string;
+}
+
+export interface INewsItem {
+  car: string;
+  services: string[];
+  contact: ContactInfo;
+  hashtags: string[];
+  images: string[];
+}

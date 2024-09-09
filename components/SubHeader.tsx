@@ -13,7 +13,7 @@ const SubHeader = () => {
 
   return (
     <ul
-      className={`absolute top-0 left-0 w-full hidden h-[7vh] py-4 px-6 lg:flex justify-around items-center z-50 bg-black text-xs md:text-sm border-b border-b-white`}
+      className={`fixed top-0 left-0 w-full hidden h-[7vh] py-4 px-6 lg:flex justify-around items-center z-50 bg-black text-xs md:text-sm border-b border-b-white`}
     >
       <li>Niezależny serwis BMW, Rolls-Royce i MINI</li>
       <li>ul.Przyszłość 2A Stanisławów Pierwszy</li>

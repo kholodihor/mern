@@ -80,15 +80,15 @@ export const links = [
   },
   {
     name: "o_nas",
-    href: "#about",
+    href: "/about",
   },
   {
     name: "uslugi",
-    href: "#services",
+    href: "/services",
   },
   {
     name: "kontakt",
-    href: "#contacts",
+    href: "/contacts",
   },
   {
     name: "news",

@@ -9,7 +9,7 @@ const About = () => {
   return (
     <section
       id="about"
-      className="p-8 w-full flex justify-center items-center flex-col text-center"
+      className="p-8 w-full flex justify-center items-center flex-col text-center min-h-[100vh] pt-[18vh] md:pt-[25vh]"
     >
       <h1 className="mainTitle">{t("title")}</h1>
       <div className="sm:flex justify-center items-center gap-4 ">
