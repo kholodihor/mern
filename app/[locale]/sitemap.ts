@@ -14,5 +14,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
         },
       },
     },
+    {
+      url: `${baseUrl}/news`,
+      lastModified: new Date(),
+      alternates: {
+        languages: {
+          uk: `${baseUrl}/ua/news`,
+          en: `${baseUrl}/en/news`,
+          pl: `${baseUrl}/pl/news`,
+        },
+      },
+    },
   ];
 }

@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { FaBars, FaTimes } from "react-icons/fa";
 import Image from "next/image";
@@ -16,6 +16,16 @@ const Header = () => {
   const t = useTranslations("Menu");
 
   const pathname = usePathname();
+
+  const [previousPathname, setPreviousPathname] = useState(pathname);
+
+  useEffect(() => {
+    const currentPathname = pathname;
+    if (currentPathname !== previousPathname) {
+      setShowMobileMenu(false);
+      setPreviousPathname(currentPathname);
+    }
+  }, [pathname, previousPathname]);
 
   const toggleMobileMenu = () => {
     setShowMobileMenu(!showMobileMenu);
