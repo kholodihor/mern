@@ -4,6 +4,7 @@
     "o_nas": "About Us",
     "uslugi": "Services",
     "kontakt": "Contact",
+    "news": "News",
     "motto": "Perfect service for perfect cars"
   },
   "About": {
@@ -89,5 +90,8 @@
   "error": {
     "error": "Oops... something went wrong, try again later",
     "tryagain": "Try again"
+  },
+  "News": {
+    "title": "Our News"
   }
 }

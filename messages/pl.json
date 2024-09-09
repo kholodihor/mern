@@ -4,6 +4,7 @@
     "o_nas": "O NAS",
     "uslugi": "USŁUGI",
     "kontakt": "kontakt",
+    "news": "Aktualności",
     "motto": "IDEALNY SERWIS DLA IDEALNYCH AUT"
   },
   "About": {
@@ -89,5 +90,8 @@
   "error": {
     "error": "Ups... coś poszło nie tak, spróbuj ponownie później",
     "tryagain": "Spróbuj ponownie"
+  },
+  "News": {
+    "title": "Nasze Aktualności"
   }
 }

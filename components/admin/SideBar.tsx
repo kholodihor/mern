@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { signOut } from "next-auth/react";
 import { TiMessages } from "react-icons/ti";
+import { FaRegNewspaper } from "react-icons/fa6";
 import { CiLogout } from "react-icons/ci";
 import { SideBarItem } from "./SideBarItem";
 
@@ -23,6 +24,14 @@ const SideBar = () => {
           href="/admin/applications"
         >
           Заявки на сервіс
+        </SideBarItem>
+        <SideBarItem
+          className=""
+          icon={<FaRegNewspaper />}
+          iconClassName="text-xl"
+          href="/admin/news"
+        >
+          Новини
         </SideBarItem>
       </div>
       <button

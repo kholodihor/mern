@@ -2,8 +2,8 @@
 
 import { IApplicationResponse } from "@/types";
 import { useApplications } from "@/hooks/swr/useApplications";
-import Loader from "../loader/Loader";
 import ApplicationItem from "./ApplicationItem";
+import Spiral from "@/components/spiral/Spiral";
 
 const Applications = () => {
   const { applications, isLoading, deleteApplication } = useApplications();
@@ -18,7 +18,7 @@ const Applications = () => {
     <section className="px-[24px] relative">
       <h1 className="text-3xl font-bold mb-[24px]">Заявки на сервіс</h1>
       {isLoading ? (
-        <Loader />
+        <Spiral />
       ) : (
         <ul className="w-full flex flex-col gap-[1rem] text-white">
           {applications &&

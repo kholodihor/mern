@@ -12,8 +12,6 @@ import { useUsers } from "@/hooks/swr/useUsers";
 import TextInput from "../ui/TextInput";
 import PasswordInput from "../ui/PasswordInput";
 
-import styles from "./Login.module.css";
-
 const Login = () => {
   const router = useRouter();
   const session = useSession();
@@ -45,7 +43,6 @@ const Login = () => {
   const onSubmit: SubmitHandler<z.infer<typeof loginScheme>> = async (
     values: z.infer<typeof loginScheme>
   ) => {
-    console.log(values);
     try {
       setIsProcessing(true);
       const callback = await signIn("credentials", {
@@ -58,18 +55,9 @@ const Login = () => {
         router.refresh();
       }
     } catch (error: any) {
-      const errors = error.response.data;
-
-      if (errors.login) {
-        setError("email", {
-          message: "Неіснуючий логін",
-        });
-      }
-      if (errors.password) {
-        setError("password", {
-          message: "Невірний пароль",
-        });
-      }
+      setError("password", {
+        message: "Невірний логін або пароль",
+      });
     }
   };
 

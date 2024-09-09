@@ -86,10 +86,13 @@ export const links = [
     name: "uslugi",
     href: "#services",
   },
-
   {
     name: "kontakt",
     href: "#contacts",
+  },
+  {
+    name: "news",
+    href: "/news",
   },
 ];
 

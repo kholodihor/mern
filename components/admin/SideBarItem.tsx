@@ -29,7 +29,7 @@ export const SideBarItem: React.FC<SideBarItemProps> = ({
   return (
     <Link className="flex w-full" href={href}>
       <li
-        className={`flex h-16 w-full flex-1 cursor-pointer items-center font-bold gap-3 border-t border-gray pl-[32px] ${
+        className={`flex h-16 w-full flex-1 cursor-pointer items-center font-bold gap-3 border-t border-b border-gray pl-[32px] ${
           isHovered || isActive ? "border-white bg-white text-black" : ""
         } ${className} `}
         onMouseEnter={() => setIsHovered(true)}

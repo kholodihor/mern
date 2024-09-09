@@ -1,8 +1,6 @@
 "use client";
 
-import React from "react";
 import { useApplications } from "@/hooks/swr/useApplications";
-
 import { FaRegUser } from "react-icons/fa";
 import { FaPhoneAlt } from "react-icons/fa";
 import { IoMdMail } from "react-icons/io";
