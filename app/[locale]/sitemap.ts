@@ -15,6 +15,39 @@ export default function sitemap(): MetadataRoute.Sitemap {
       },
     },
     {
+      url: `${baseUrl}/about`,
+      lastModified: new Date(),
+      alternates: {
+        languages: {
+          uk: `${baseUrl}/ua/about`,
+          en: `${baseUrl}/en/about`,
+          pl: `${baseUrl}/pl/about`,
+        },
+      },
+    },
+    {
+      url: `${baseUrl}/services`,
+      lastModified: new Date(),
+      alternates: {
+        languages: {
+          uk: `${baseUrl}/ua/services`,
+          en: `${baseUrl}/en/services`,
+          pl: `${baseUrl}/pl/services`,
+        },
+      },
+    },
+    {
+      url: `${baseUrl}/contacts`,
+      lastModified: new Date(),
+      alternates: {
+        languages: {
+          uk: `${baseUrl}/ua/contacts`,
+          en: `${baseUrl}/en/contacts`,
+          pl: `${baseUrl}/pl/contacts`,
+        },
+      },
+    },
+    {
       url: `${baseUrl}/news`,
       lastModified: new Date(),
       alternates: {
