@@ -69,14 +69,18 @@ const Header = () => {
           id="links"
         >
           {links.map((link, index) => (
-            <Link href={link.href} key={index}>
-              <li
-                className="uppercase relative text-white hover:text-blue-400 transition-all"
-                id="link"
-              >
-                {t(`${link.name}`)}
-              </li>
-            </Link>
+            <li
+              key={index}
+              className={`uppercase relative hover:text-blue-400 transition-all ${
+                link.href !== "/" &&
+                pathname.split("/").includes(link.href.replace(/\//g, ""))
+                  ? "text-blue-400 underline"
+                  : "text-white"
+              }`}
+              id="link"
+            >
+              <Link href={link.href}>{t(`${link.name}`)}</Link>
+            </li>
           ))}
           <div className="flex gap-[0.5rem]">
             {langs.map((lang, i) => (

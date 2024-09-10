@@ -21,7 +21,6 @@ const News = () => {
             ) : (
               <NewsItem item={item} index={index} />
             )}
-            {/* <NewsItem item={item} index={index} /> */}
           </div>
         ))}
       </div>

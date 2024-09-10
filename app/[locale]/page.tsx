@@ -37,7 +37,7 @@ export default function Home() {
     <>
       <Intro />
       {/* <About /> */}
-      {/* <Services /> */}
+      <Services />
       {/* <Steps /> */}
       {/* <ApplicationForm /> */}
       {/* <Location /> */}

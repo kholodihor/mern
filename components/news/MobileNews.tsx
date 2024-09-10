@@ -64,10 +64,8 @@ const MobileNews = ({ item, index }: INewsItemProps) => {
             ))}
           </ul>
         </div>
-
-        {/* Active image */}
         <div
-          className={`absolute top-0 z-[2] h-[220px] w-full sm:w-auto sm:h-full ${
+          className={`absolute top-0 z-[2] w-full sm:w-auto h-full ${
             index % 2 !== 0 ? "right-0" : "left-0"
           }`}
         >

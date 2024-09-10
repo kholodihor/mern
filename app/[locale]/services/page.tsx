@@ -1,7 +1,7 @@
-import Services from "@/components/Services";
+import ServicesList from "@/components/ServicesList";
 
 const ServicesPage = () => {
-  return <Services />;
+  return <ServicesList />;
 };
 
 export default ServicesPage;
