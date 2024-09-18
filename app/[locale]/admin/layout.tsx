@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { useUsers } from "@/hooks/swr/useUsers";
 import SideBar from "@/components/admin/SideBar";
-import Loader from "@/components/admin/loader/Loader";
+import Spiral from "@/components/spiral/Spiral";
 
 export default function AdminLayout({
   children,
@@ -31,7 +31,7 @@ export default function AdminLayout({
     }
   }, [session, router, users]);
 
-  if (loading) return <Loader />;
+  if (loading) return <Spiral />;
 
   return (
     <div className="flex bg-black text-white pt-[5vh]">

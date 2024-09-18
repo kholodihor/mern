@@ -1,33 +1,28 @@
 "use client";
 
 import * as z from "zod";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { defaultValues } from "./defaultValues";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { loginScheme } from "./validationSchema";
 import { useRouter } from "next/navigation";
 import { signIn, useSession } from "next-auth/react";
-import { useUsers } from "@/hooks/swr/useUsers";
 import TextInput from "../ui/TextInput";
 import PasswordInput from "../ui/PasswordInput";
 
 const Login = () => {
   const router = useRouter();
   const session = useSession();
-  const users = useUsers().users;
   const [isProcessing, setIsProcessing] = useState(false);
 
+  console.log(session);
+
   useEffect(() => {
-    if (
-      session.data &&
-      users &&
-      session?.status === "authenticated" &&
-      users?.[0].email === session.data.user?.email
-    ) {
+    if (session.data && session?.status === "authenticated") {
       router.replace("/admin/applications");
     }
-  }, [session, router, users]);
+  }, [session, router]);
 
   const {
     handleSubmit,

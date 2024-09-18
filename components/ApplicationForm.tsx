@@ -5,7 +5,7 @@ import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { formValidation, TFormScheme } from "../schemes/formScheme";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslations } from "next-intl";
-import { createApplication } from "@/utils/api/applications";
+import { sendApplication } from "@/utils/actions/applications";
 import TextArea from "./ui/TextArea";
 import TextInput from "./ui/TextInput";
 import SuccessModal from "./modals/SuccessModal";
@@ -36,7 +36,7 @@ const ApplicationForm = () => {
   const onSubmit: SubmitHandler<TFormScheme> = async (values) => {
     try {
       setIsProcessing(true);
-      const response = await createApplication(values);
+      const response = await sendApplication(values);
       if (response && response.status === 200) {
         setIsModalOpen(true);
         reset();

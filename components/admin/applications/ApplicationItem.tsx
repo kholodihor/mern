@@ -4,7 +4,6 @@ import { isWithin48Hours } from "@/helpers/isWithin48Hours";
 import { isWithin96Hours } from "@/helpers/isWithin96Hours";
 import { IApplicationResponse } from "@/types";
 import { FaRegTrashAlt } from "react-icons/fa";
-import Loader from "../loader/Loader";
 import { updateApplication } from "@/utils/api/applications";
 
 type ApplicationItemProps = {
@@ -41,7 +40,7 @@ const ApplicationItem = ({ item, onDelete }: ApplicationItemProps) => {
           id="status"
           defaultValue={item.status}
           onChange={(e) => handleStatus(e.target.value)}
-          className={`border text-center rounded-xl px-2 flex justify-center 
+          className={`border text-center rounded-xl px-2 uppercase flex justify-center 
           items-center bg-black ${
             item.status === "new"
               ? "border-green-500 text-green-500"
@@ -50,9 +49,15 @@ const ApplicationItem = ({ item, onDelete }: ApplicationItemProps) => {
               : "border-gray-300 text-gray-300"
           }`}
         >
-          <option value="new">new</option>
-          <option value="inprocess">in process</option>
-          <option value="done">done</option>
+          <option value="new" className="uppercase">
+            new
+          </option>
+          <option value="inprocess" className="uppercase">
+            in process
+          </option>
+          <option value="done" className="uppercase">
+            done
+          </option>
         </select>
       </span>
 
