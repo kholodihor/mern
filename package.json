@@ -14,13 +14,13 @@
     "@hookform/resolvers": "^3.3.4",
     "@prisma/client": "^5.20.0",
     "@types/node": "20.4.4",
-    "aos": "^2.3.4",
     "autoprefixer": "10.4.14",
     "axios": "^1.6.8",
     "bcrypt": "^5.1.1",
     "client-only": "^0.0.1",
     "eslint": "8.45.0",
     "eslint-config-next": "13.4.12",
+    "framer-motion": "^11.11.8",
     "lottie-react": "^2.4.0",
     "mapbox-gl": "^2.15.0",
     "next": "^14.2.9",
@@ -42,7 +42,6 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
-    "@types/aos": "^3.0.4",
     "@types/bcrypt": "^5.0.2",
     "@types/gtag.js": "^0.0.12",
     "@types/react": "^18.3.5",

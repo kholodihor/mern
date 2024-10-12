@@ -1,14 +1,3 @@
-.cardbody {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: red;
-  border: 2px solid red;
-  margin: 0rem;
-  overflow: hidden;
-}
-
 .screen {
   width: 450px;
   display: flex;
@@ -19,12 +8,6 @@
   overflow: hidden;
   position: relative;
   z-index: 10;
-}
-
-@media screen and (min-width: 650px) {
-  .screen {
-    width: 400px;
-  }
 }
 
 .screen:after,
@@ -52,17 +35,7 @@
   border-top-right-radius: 1rem;
 }
 
-@keyframes pan-overlay {
-  from {
-    background-position: 0% 0%;
-  }
-
-  to {
-    background-position: 0% -100%;
-  }
-}
-
-.screen-overlay {
+.screenOverlay {
   background: linear-gradient(
     rgba(33, 150, 243, 0.15),
     rgba(33, 150, 243, 0.15) 3px,
@@ -72,70 +45,13 @@
   background-size: 100% 9px;
   height: 100%;
   width: 100%;
-  animation: pan-overlay 22s infinite linear;
   position: absolute;
   z-index: 2;
   left: 0px;
   top: 0px;
 }
 
-@keyframes pan-image {
-  0% {
-    background-position: 36% 42%;
-    background-size: 200%;
-  }
-
-  20% {
-    background-position: 30% 35%;
-    background-size: 200%;
-  }
-
-  20.0001% {
-    /* -- View 2 -- */
-    background-position: 60% 85%;
-    background-size: 500%;
-  }
-
-  40% {
-    background-position: 49% 81%;
-    background-size: 500%;
-  }
-
-  40.0001% {
-    /* -- View 3 -- */
-    background-position: 80% 42%;
-    background-size: 300%;
-  }
-
-  60% {
-    background-position: 84% 33%;
-    background-size: 300%;
-  }
-
-  60.0001% {
-    /* -- View 4 -- */
-    background-position: 0% 0%;
-    background-size: 300%;
-  }
-
-  80% {
-    background-position: 15% 4%;
-    background-size: 300%;
-  }
-
-  80.0001% {
-    /* -- View 5 -- */
-    background-position: 80% 10%;
-    background-size: 300%;
-  }
-
-  100% {
-    background-position: 72% 14%;
-    background-size: 300%;
-  }
-}
-
-.screen > .screen-image {
+.screenImage {
   background-image: url("/bmw2.webp");
   height: 100%;
   width: 100%;
@@ -147,10 +63,23 @@
   background-position: 0% 0%;
   filter: sepia(100%) hue-rotate(160deg);
   opacity: 0.6;
-  animation: pan-image 15s linear infinite;
+  animation: panImage 15s linear infinite;
 }
 
-.screen > .screen-content {
+@keyframes panImage {
+  0% { background-position: 36% 42%; background-size: 200%; }
+  20% { background-position: 30% 35%; background-size: 200%; }
+  20.0001% { background-position: 60% 85%; background-size: 500%; }
+  40% { background-position: 49% 81%; background-size: 500%; }
+  40.0001% { background-position: 80% 42%; background-size: 300%; }
+  60% { background-position: 84% 33%; background-size: 300%; }
+  60.0001% { background-position: 0% 0%; background-size: 300%; }
+  80% { background-position: 15% 4%; background-size: 300%; }
+  80.0001% { background-position: 80% 10%; background-size: 300%; }
+  100% { background-position: 72% 14%; background-size: 300%; }
+}
+
+.screenContent {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -165,13 +94,13 @@
   border-radius: 0.6rem;
 }
 
-.screen > .screen-content > .screen-icon {
+.screenIcon {
   color: white;
   font-size: 4rem;
   text-shadow: 0px 0px 0.5rem white;
 }
 
-.screen > .screen-content > .screen-user {
+.screenUser {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -179,8 +108,8 @@
   position: relative;
 }
 
-.screen > .screen-content > .screen-user:before,
-.screen > .screen-content > .screen-user:after {
+.screenUser:before,
+.screenUser:after {
   content: "";
   position: absolute;
   top: 0px;
@@ -189,43 +118,27 @@
   box-shadow: 0px 0px 8px 3px rgba(33, 150, 243, 0.6);
 }
 
-.screen > .screen-content > .screen-user:before {
+.screenUser:before {
   height: 2px;
   width: 50px;
   translate: -20px -1rem;
   opacity: 0.75;
 }
 
-.screen > .screen-content > .screen-user:after {
+.screenUser:after {
   height: 3px;
   width: 30px;
   translate: 26px calc(-1rem - 0.5px);
 }
 
-.screen > .screen-content > .screen-user > :is(.name, .link) {
+.name {
   font-family: "Source Code Pro", monospace;
   color: white;
   text-align: center;
   text-transform: uppercase;
-}
-
-.screen > .screen-content > .screen-user > .name {
   position: relative;
   font-size: 4.25rem;
   font-weight: 400;
-}
-
-.screen > .screen-content > .screen-user > .link {
-  opacity: 0.8;
-  font-size: 1.5rem;
-  text-shadow: 0px 0px 0.5rem white;
-  font-weight: 400;
-  letter-spacing: 0.3rem;
-  text-decoration: none;
-}
-
-.screen > .screen-content > .screen-user > .link:is(:hover, :focus) {
-  text-decoration: underline;
 }
 
 @media (max-width: 700px) {

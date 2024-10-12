@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Script from "next/script";
-import { AOSInit } from "../aos";
 import { NextIntlClientProvider } from "next-intl";
 import { notFound } from "next/navigation";
 import { SWRProvider } from "../swr-provider";
@@ -71,7 +70,6 @@ export default async function RootLayout({
       <SessionWrapper session={session}>
         <SWRProvider>
           <body className="min-w-[320px]">
-            <AOSInit />
             <GoogleAnalytics
               GA_MEASUREMENT_ID={process.env.GA_MEASUREMENT_ID!}
             />

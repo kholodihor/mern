@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { motion } from 'framer-motion'
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { formValidation, TFormScheme } from "../schemes/formScheme";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -33,6 +34,30 @@ const ApplicationForm = () => {
     },
   });
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
+  }
+
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        type: 'spring',
+        stiffness: 100,
+        damping: 10
+      }
+    }
+  }
+
+
   const onSubmit: SubmitHandler<TFormScheme> = async (values) => {
     try {
       setIsProcessing(true);
@@ -48,28 +73,37 @@ const ApplicationForm = () => {
   };
 
   return (
-    <section
-      className="flex flex-col justify-center items-center"
-      id="send-application"
-    >
-      <h1 className="mainTitle">{t("title")}</h1>
-      <div className="md:flex justify-center items-center px-2">
-        <div className="w-full md:w-1/2 flex flex-col justify-center items-center min-h-[50vh] md:min-h-[150vh]">
-          <FuturisticCard />
-        </div>
-        <div className="w-full md:w-1/2 relative min-h-[100vh] gap-[2rem] flex flex-col justify-center items-center">
-          <div className="p-2">
-            <p className="max-w-[700px] text-center">{t("paragraph_1")}</p>
-            <br />
-            <p className="max-w-[700px] text-center">{t("paragraph_2")}</p>
-            <br />
-            <p className="max-w-[700px] text-center">{t("paragraph_3")}</p>
-          </div>
-          <form
-            onSubmit={handleSubmit(onSubmit)}
-            className="flex flex-col gap-[1rem] w-[90%] bg-transparent justify-center 
-        items-center mt-[2rem]"
-          >
+    <motion.section
+    className="flex flex-col justify-center items-center"
+    id="send-application"
+    initial="hidden"
+    animate="visible"
+    variants={containerVariants}
+  >
+    <motion.h1 className="mainTitle" variants={itemVariants}>{t("title")}</motion.h1>
+    <div className="md:flex justify-center items-center px-2">
+      <motion.div 
+        className="w-full md:w-1/2 flex flex-col justify-center items-center min-h-[50vh] md:min-h-[150vh]"
+        variants={itemVariants}
+      >
+        <FuturisticCard />
+      </motion.div>
+      <motion.div 
+        className="w-full md:w-1/2 relative min-h-[100vh] gap-[2rem] flex flex-col justify-center items-center"
+        variants={containerVariants}
+      >
+        <motion.div className="p-2" variants={containerVariants}>
+          <motion.p className="max-w-[700px] text-center" variants={itemVariants}>{t("paragraph_1")}</motion.p>
+          <br />
+          <motion.p className="max-w-[700px] text-center" variants={itemVariants}>{t("paragraph_2")}</motion.p>
+          <br />
+          <motion.p className="max-w-[700px] text-center" variants={itemVariants}>{t("paragraph_3")}</motion.p>
+        </motion.div>
+        <motion.form
+          onSubmit={handleSubmit(onSubmit)}
+          className="flex flex-col gap-[1rem] w-[90%] bg-transparent justify-center items-center mt-[2rem]"
+          variants={containerVariants}
+        >
             <Controller
               name="name"
               control={control}
@@ -180,16 +214,16 @@ const ApplicationForm = () => {
             >
               {isProcessing ? t("processing") : t("send")}
             </button>
-          </form>
-          {isModalOpen && (
-            <SuccessModal
-              handleClose={() => setIsModalOpen(false)}
-              isModalOpen={isModalOpen}
-            />
-          )}
-        </div>
-      </div>
-    </section>
+        </motion.form>
+        {isModalOpen && (
+          <SuccessModal
+            handleClose={() => setIsModalOpen(false)}
+            isModalOpen={isModalOpen}
+          />
+        )}
+      </motion.div>
+    </div>
+  </motion.section>
   );
 };
 
