@@ -18,4 +18,8 @@ export const localePrefix = undefined;
 
 export const pathnames = {
   "/": "/",
+  "/about": "/about",
+  "/news": "/news",
+  "/contacts": "/contacts",
+  "/services": "/services",
 };

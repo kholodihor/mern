@@ -1,16 +1,16 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import Link from "next/link";
-import { FaBars, FaTimes } from "react-icons/fa";
+import { pathnames ,locales} from "@/i18n";
 import Image from "next/image";
+import { FaBars, FaTimes } from "react-icons/fa";
+import { useTranslations,useLocale } from "next-intl";
+import { usePathname, useRouter,Link } from "@/navigation";
 import { links } from "@/constants";
 import MobileMenu from "./MobileMenu";
-import { useTranslations } from "next-intl";
-import { usePathname, useRouter } from "@/navigation";
 
-const langs = ["pl", "en", "ua"];
 
 const Header = () => {
+  const locale = useLocale()
   const router = useRouter();
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const t = useTranslations("Menu");
@@ -79,11 +79,11 @@ const Header = () => {
               }`}
               id="link"
             >
-              <Link href={link.href}>{t(`${link.name}`)}</Link>
+              <Link  href={{ pathname: link.href as keyof typeof pathnames }}>{t(`${link.name}`)}</Link>
             </li>
           ))}
           <div className="flex gap-[0.5rem]">
-            {langs.map((lang, i) => (
+            {locales.map((lang, i) => (
               <button key={i} onClick={() => handleCheckLocale(lang)}>
                 <Image
                   src={`/icons/${lang}.svg`}

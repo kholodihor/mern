@@ -1,9 +1,8 @@
 import Link from "next/link";
 import { TLink } from "@/types";
 import Image from "next/image";
+import { locales } from "@/i18n";
 import { useTranslations } from "next-intl";
-
-const langs = ["pl", "en", "ua"];
 
 const MobileMenu = ({ links }: { links: TLink[] }) => {
   const t = useTranslations("Menu");
@@ -11,7 +10,7 @@ const MobileMenu = ({ links }: { links: TLink[] }) => {
     <nav className="w-full h-[85vh] absolute top-[15vh] left-0 bg-black mt-4">
       <ul className="w-full h-full m-0 p-4 flex flex-col justify-center items-center gap-4">
         <li className="flex gap-[0.5rem]">
-          {langs.map((lang, i) => (
+          {locales.map((lang, i) => (
             <Link key={i} href={`/${lang}`}>
               <button>
                 <Image

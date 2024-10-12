@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.4",
-    "@prisma/client": "^5.13.0",
+    "@prisma/client": "^5.20.0",
     "@types/node": "20.4.4",
     "aos": "^2.3.4",
     "autoprefixer": "10.4.14",
@@ -24,7 +24,7 @@
     "lottie-react": "^2.4.0",
     "mapbox-gl": "^2.15.0",
     "next": "^14.2.9",
-    "next-auth": "^4.24.7",
+    "next-auth": "^4.24.8",
     "next-intl": "^3.5.2",
     "next-themes": "^0.2.1",
     "postcss": "^8.4.38",
@@ -47,6 +47,6 @@
     "@types/gtag.js": "^0.0.12",
     "@types/react": "^18.3.5",
     "@types/react-dom": "^18.3.0",
-    "prisma": "^5.13.0"
+    "prisma": "^5.20.0"
   }
 }
