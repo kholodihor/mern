@@ -79,7 +79,7 @@ export const cards = [
     text: "pricing_text",
     image: price,
     link: "#",
-    emoji: `🥯`,
+    emoji: `💲`,
   },
 ];
 

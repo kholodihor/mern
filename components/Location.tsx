@@ -9,12 +9,12 @@ const Location = () => {
   return (
     <section
       id="contacts"
-      className="flex-wrap lg:flex-nowrap w-full min-h-[100vh] flex  p-4 mt-[10vh]"
+      className="flex-wrap lg:flex-nowrap w-full min-h-[100vh] flex mt-[10vh]"
     >
       <div className="w-full lg:w-1/2 flex justify-center items-center flex-col text-center sm:text-left pb-6">
         <h1 className="mainTitle">{t("title")}</h1>
-        <ul>
-          <li className="my-4 text-center sm:flex items-center justify-start gap-4 text-[1.2rem]">
+        <ul className="w-full sm:w-3/5">
+          <li className="my-4 sm:flex items-center justify-start gap-4 text-[1.2rem]">
             <span className="flex justify-center w-full sm:w-[2rem]">
               <FaMapMarkerAlt className="text-blue-400 sm:mr-2" />
             </span>

@@ -4,10 +4,10 @@ import React from "react";
 
 const ContactsPage = () => {
   return (
-    <div className="pt-[18vh] md:pt-[25vh]">
+    <>
       <ApplicationForm />
       <Location />
-    </div>
+    </>
   );
 };
 

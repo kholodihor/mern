@@ -8,7 +8,6 @@ export const deleteApplicationFetcher = (id: string) =>
   axios.delete(`/applications/${id}`).then((res) => res.data);
 
 export const updateApplication = async (id: string, status: string) => {
-  console.log(id, status);
   try {
     const response = await axios.patch<IApplicationResponse>(
       `/applications/${id}`,

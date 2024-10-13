@@ -72,8 +72,7 @@ export default async function RootLayout({
           <body className="min-w-[320px]">
             <GoogleAnalytics
               GA_MEASUREMENT_ID={process.env.GA_MEASUREMENT_ID!}
-            />
-            <div>
+            />         
               <NextIntlClientProvider locale={locale} messages={messages}>
                 <SubHeader />
                 <Header />
@@ -81,7 +80,6 @@ export default async function RootLayout({
                 <CookieBanner />
                 <Footer />
               </NextIntlClientProvider>
-            </div>
           </body>
         </SWRProvider>
       </SessionWrapper>

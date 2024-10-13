@@ -25,14 +25,14 @@ const SideBar = () => {
         >
           Заявки на сервіс
         </SideBarItem>
-        <SideBarItem
+        {/* <SideBarItem
           className=""
           icon={<FaRegNewspaper />}
           iconClassName="text-xl"
           href="/admin/news"
         >
           Новини
-        </SideBarItem>
+        </SideBarItem> */}
       </div>
       <button
         onClick={() => signOut({ callbackUrl: "/" })}

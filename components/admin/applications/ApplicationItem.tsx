@@ -4,7 +4,8 @@ import { isWithin48Hours } from "@/helpers/isWithin48Hours";
 import { isWithin96Hours } from "@/helpers/isWithin96Hours";
 import { IApplicationResponse } from "@/types";
 import { FaRegTrashAlt } from "react-icons/fa";
-import { updateApplication } from "@/utils/api/applications";
+import { updateApplication } from "@/app/actions/applications"
+import { useState } from "react";
 
 type ApplicationItemProps = {
   item: IApplicationResponse;
@@ -12,11 +13,16 @@ type ApplicationItemProps = {
 };
 
 const ApplicationItem = ({ item, onDelete }: ApplicationItemProps) => {
+  const [status, setStatus] = useState(item.status);
   const handleStatus = async (value: string) => {
+    setStatus(value);
     if (value !== item.status) {
+  
       await updateApplication(item.id, value);
     }
   };
+
+  console.log(status)
 
   return (
     <li
@@ -42,11 +48,11 @@ const ApplicationItem = ({ item, onDelete }: ApplicationItemProps) => {
           onChange={(e) => handleStatus(e.target.value)}
           className={`border text-center rounded-xl px-2 uppercase flex justify-center 
           items-center bg-black ${
-            item.status === "new"
-              ? "border-green-500 text-green-500"
-              : item.status === "inprocess"
-              ? "border-yellow-500 text-yellow-500"
-              : "border-gray-300 text-gray-300"
+            status === "new"
+              ? "text-green-700 bg-green-200"
+              : status === "inprocess"
+              ? "text-yellow-700 bg-yellow-200"
+              : "text-gray-700 bg-gray-200"
           }`}
         >
           <option value="new" className="uppercase">

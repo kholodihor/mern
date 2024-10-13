@@ -1,21 +1,22 @@
-"use client";
+"use client"
 
-import React, { useState } from "react";
-import { motion } from 'framer-motion'
-import { Controller, SubmitHandler, useForm } from "react-hook-form";
-import { formValidation, TFormScheme } from "../schemes/formScheme";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useTranslations } from "next-intl";
-import { sendApplication } from "@/utils/actions/applications";
-import TextArea from "./ui/TextArea";
-import TextInput from "./ui/TextInput";
-import SuccessModal from "./modals/SuccessModal";
-import FuturisticCard from "./futuristic-card/FuturisticCard";
+import React, { useState } from "react"
+import { motion } from "framer-motion"
 
-const ApplicationForm = () => {
-  const t = useTranslations("Form");
-  const [isProcessing, setIsProcessing] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+import { Controller, SubmitHandler, useForm } from "react-hook-form"
+import { formValidation, TFormScheme } from "../schemes/formScheme"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { useTranslations } from "next-intl"
+import { sendApplication } from "@/app/actions/applications"
+import TextArea from "./ui/TextArea"
+import TextInput from "./ui/TextInput"
+import SuccessModal from "./modals/SuccessModal"
+import FuturisticCard from "./futuristic-card/FuturisticCard"
+
+export default function ApplicationForm() {
+  const t = useTranslations("Form")
+  const [isProcessing, setIsProcessing] = useState(false)
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
   const {
     handleSubmit,
@@ -32,7 +33,7 @@ const ApplicationForm = () => {
       vin: "",
       message: "",
     },
-  });
+  })
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -50,69 +51,53 @@ const ApplicationForm = () => {
       y: 0,
       opacity: 1,
       transition: {
-        type: 'spring',
-        stiffness: 100,
-        damping: 10
+        type: "spring",
+        stiffness: 100
       }
     }
   }
 
-
   const onSubmit: SubmitHandler<TFormScheme> = async (values) => {
     try {
-      setIsProcessing(true);
-      const response = await sendApplication(values);
+      setIsProcessing(true)
+      const response = await sendApplication(values)
       if (response && response.status === 200) {
-        setIsModalOpen(true);
-        reset();
-        setIsProcessing(false);
+        setIsModalOpen(true)
+        reset()
+        setIsProcessing(false)
       }
     } catch (error) {
-      alert(error);
+      alert(error)
     }
-  };
+  }
 
   return (
-    <motion.section
-    className="flex flex-col justify-center items-center"
-    id="send-application"
-    initial="hidden"
-    animate="visible"
-    variants={containerVariants}
-  >
-    <motion.h1 className="mainTitle" variants={itemVariants}>{t("title")}</motion.h1>
-    <div className="md:flex justify-center items-center px-2">
-      <motion.div 
-        className="w-full md:w-1/2 flex flex-col justify-center items-center min-h-[50vh] md:min-h-[150vh]"
-        variants={itemVariants}
-      >
-        <FuturisticCard />
-      </motion.div>
-      <motion.div 
-        className="w-full md:w-1/2 relative min-h-[100vh] gap-[2rem] flex flex-col justify-center items-center"
-        variants={containerVariants}
-      >
-        <motion.div className="p-2" variants={containerVariants}>
-          <motion.p className="max-w-[700px] text-center" variants={itemVariants}>{t("paragraph_1")}</motion.p>
-          <br />
-          <motion.p className="max-w-[700px] text-center" variants={itemVariants}>{t("paragraph_2")}</motion.p>
-          <br />
-          <motion.p className="max-w-[700px] text-center" variants={itemVariants}>{t("paragraph_3")}</motion.p>
-        </motion.div>
-        <motion.form
-          onSubmit={handleSubmit(onSubmit)}
-          className="flex flex-col gap-[1rem] w-[90%] bg-transparent justify-center items-center mt-[2rem]"
-          variants={containerVariants}
-        >
+       <motion.section
+       className="container mx-auto px-4 pt-[18vh] md:pt-[25vh]"
+       id="send-application"
+       initial="hidden"
+       animate="visible"
+       variants={containerVariants}
+     >
+       <motion.h1 className="mainTitle" variants={itemVariants}>{t("title")}</motion.h1>
+       <div className="flex flex-col-reverse lg:flex-row gap-8">
+         <motion.div className="w-full lg:w-1/2" variants={itemVariants}>
+           <FuturisticCard />
+         </motion.div>
+         <motion.div className="w-full lg:w-1/2 space-y-8" variants={containerVariants}>
+           <motion.div className="space-y-4" variants={itemVariants}>
+             <p className="text-center">{t("paragraph_1")}</p>
+             <p className="text-center">{t("paragraph_2")}</p>
+             <p className="text-center">{t("paragraph_3")}</p>
+           </motion.div>
+           <form onSubmit={handleSubmit(onSubmit)} className="space-y-2 gap-4 flex flex-col justify-center items-center">
             <Controller
               name="name"
               control={control}
               render={({ field }) => (
                 <TextInput
                   {...field}
-                  errorText={
-                    errors.name?.message && t(`${errors.name?.message}`)
-                  }
+                  errorText={errors.name?.message && t(`${errors.name?.message}`)}
                   placeholder={t("name")}
                 />
               )}
@@ -123,9 +108,7 @@ const ApplicationForm = () => {
               render={({ field }) => (
                 <TextInput
                   {...field}
-                  errorText={
-                    errors.phone?.message && t(`${errors.phone?.message}`)
-                  }
+                  errorText={errors.phone?.message && t(`${errors.phone?.message}`)}
                   placeholder={t("phone")}
                 />
               )}
@@ -136,9 +119,7 @@ const ApplicationForm = () => {
               render={({ field }) => (
                 <TextInput
                   {...field}
-                  errorText={
-                    errors.email?.message && t(`${errors.email?.message}`)
-                  }
+                  errorText={errors.email?.message && t(`${errors.email?.message}`)}
                   placeholder={t("email")}
                 />
               )}
@@ -160,18 +141,14 @@ const ApplicationForm = () => {
               render={({ field }) => (
                 <TextArea
                   {...field}
-                  errorText={
-                    errors.message?.message && t(`${errors.message?.message}`)
-                  }
+                  errorText={errors.message?.message && t(`${errors.message?.message}`)}
                   placeholder={t("message")}
                 />
               )}
             />
-            <div className="rules w-[90vw] sm:w-[50vw] xl:w-full mx-auto text-gray-400">
-              <h5 className="text-[13px] mb-[1rem] underline">
-                {t("policies.title")}
-              </h5>
-              <p className="text-[10px] mb-[0.5rem]">
+            <div className="text-sm text-gray-400 space-y-2 ">
+              <h5 className="font-semibold underline">{t("policies.title")}</h5>
+              <p>
                 {t("policies.paragraph_1")}{" "}
                 <a
                   href="/Polityka Prywatności.pdf"
@@ -183,7 +160,7 @@ const ApplicationForm = () => {
                 </a>
                 .
               </p>
-              <p className="text-[10px]">
+              <p>
                 {t("policies.paragraph_2")}{" "}
                 <a
                   href="mailto:mern.serwis@gmail.com"
@@ -194,37 +171,32 @@ const ApplicationForm = () => {
                 </a>{" "}
                 {t("policies.paragraph_3")}{" "}
                 <a
-                  href="tel:+48509159158."
+                  href="tel:+48509159158"
                   rel="noopener noreferrer"
-                  className="hover:underline sm:hidden"
+                  className="text-blue-700 hover:underline"
                 >
-                  +48 509 159 158.
+                  +48 509 159 158
                 </a>
-                <span className="hidden sm:block">+48 509 159 158.</span>
+                .
               </p>
             </div>
             <button
-              className={`rounded-md border border-blue-700 shadow-sm shadow-blue-700 py-2 px-4 w-[250px] disabled:border-gray-200 disabled:shadow-none disabled:cursor-not-allowed ${
-                !isValid
-                  ? "border-blue-700 shadow-sm shadow-blue-700"
-                  : "border-green-700 shadow-md hover:shadow-md shadow-green-700 hover:shadow-green-700"
-              }`}
+              className={`w-full md:w-[200px] rounded-md border py-2 px-4 transition-all ${
+                isValid
+                  ? "border-green-700 shadow-md hover:shadow-lg shadow-green-700 hover:shadow-green-700"
+                  : "border-blue-700 shadow-sm shadow-blue-700"
+              } disabled:border-gray-200 disabled:shadow-none disabled:cursor-not-allowed`}
               type="submit"
               disabled={!isValid}
             >
               {isProcessing ? t("processing") : t("send")}
             </button>
-        </motion.form>
-        {isModalOpen && (
-          <SuccessModal
-            handleClose={() => setIsModalOpen(false)}
-            isModalOpen={isModalOpen}
-          />
-        )}
-      </motion.div>
-    </div>
-  </motion.section>
-  );
-};
-
-export default ApplicationForm;
+          </form>
+         </motion.div>
+       </div>
+       {isModalOpen && (
+         <SuccessModal handleClose={() => setIsModalOpen(false)} isModalOpen={isModalOpen} />
+       )}
+     </motion.section>
+  )
+}
