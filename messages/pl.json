@@ -5,7 +5,8 @@
     "uslugi": "USŁUGI",
     "kontakt": "kontakt",
     "news": "Aktualności",
-    "motto": "IDEALNY SERWIS DLA IDEALNYCH AUT"
+    "motto": "IDEALNY SERWIS DLA IDEALNYCH AUT",
+      "button":"Zostaw prośbę o obsługę 👉"
   },
   "About": {
     "title": "kim jesteśmy",
@@ -92,6 +93,32 @@
     "tryagain": "Spróbuj ponownie"
   },
   "News": {
-    "title": "Nasze Aktualności"
+    "title": "Nasze Aktualności",
+    "services":{
+      "seat":"➡️ Naprawa wiązki fotela",
+      "diagnostics":"➡️ Diagnostyka komputerowa",
+      "front_break":"➡️ Wymiana klocków hamulcowych przód",
+      "back_break":"➡️ Wymiana klocków hamulcowych tylą",
+      "electronic_book":"➡️ Wpis do książki elektronicznej BMW",
+      "inspection":"➡️ Przegląd samochodu",
+      "brake_fluid":"➡️ Wymiana płynu hamulcowego",
+      "door_to_door":"➡️ Usługa Door To Door",
+      "oil_service":"➡️ Serwis olejowy",
+      "brake_disks":"➡️ Wymiana tarcz i klocków hamulcowych tył",
+      "contidioning_desinfection":"➡️ Odgrzybianie klimatyzacji"
+    },
+    "hashtags": {
+      "0":"#bmwii3",
+      "1":"#naprawawiazki",
+      "2":"#naprawafotela",
+      "3":"#wymianapłynuhamulcowego",
+      "4":"#bmwserwis",
+      "5":"#bmwwarszwa",
+      "6":"#wymianaklocków",
+      "7":"#bmwf44",
+      "8":"#bmwg30",
+      "9":"#bmwlove",
+      "10":"#serwisolejowy"
+    }
   }
 }

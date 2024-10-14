@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 
+import { useTranslations } from "next-intl";
 import { INewsItem } from "@/types";
 import React, { useState } from "react";
 
@@ -9,6 +10,7 @@ interface INewsItemProps {
 }
 
 const NewsItem = ({ item, index }: INewsItemProps) => {
+  const t = useTranslations("News");
   const [activeImage, setActiveImage] = useState(item.images[0]);
 
   return (
@@ -47,7 +49,7 @@ const NewsItem = ({ item, index }: INewsItemProps) => {
           {/* Displaying services instead of a single 'text' field */}
           <ul className="text-sm leading-[1.3] mb-4">
             {item.services.map((service, idx) => (
-              <li key={idx}>{service}</li>
+              <li key={idx}>{t(service)}</li>
             ))}
           </ul>
           <ul className="text-sm leading-[1.3]">
@@ -59,7 +61,7 @@ const NewsItem = ({ item, index }: INewsItemProps) => {
           <ul className="text-sm leading-[1.3] mt-4 flex flex-wrap text-blue-400">
             {item.hashtags.map((hashtag, idx) => (
               <li key={idx} className="mr-2">
-                {hashtag}
+                {t(hashtag)}
               </li>
             ))}
           </ul>

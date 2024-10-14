@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { TLink } from "@/types";
 import Image from "next/image";
-import { locales } from "@/i18n";
+import { pathnames ,locales} from "@/i18n";
+import { Link as LocalizedLink } from "@/navigation";
 import { useTranslations } from "next-intl";
 
 const MobileMenu = ({ links }: { links: TLink[] }) => {
@@ -24,11 +25,11 @@ const MobileMenu = ({ links }: { links: TLink[] }) => {
           ))}
         </li>
         {links.map((link, index) => (
-          <Link href={link.href} key={index}>
+        <LocalizedLink key={index}  href={{ pathname: link.href as keyof typeof pathnames }}>
             <li className="relative uppercase text-xl" id="link">
               {t(link.name)}
             </li>
-          </Link>
+          </LocalizedLink>
         ))}
       </ul>
     </nav>

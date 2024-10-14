@@ -5,7 +5,8 @@
     "uslugi": "Services",
     "kontakt": "Contact",
     "news": "News",
-    "motto": "Perfect service for perfect cars"
+    "motto": "Perfect service for perfect cars",
+    "button":"Leave a request for service 👉 "
   },
   "About": {
     "title": "Who we are",
@@ -92,6 +93,33 @@
     "tryagain": "Try again"
   },
   "News": {
-    "title": "Our News"
+    "title": "Our News",
+    "services":{
+      "seat":"➡️ Seat harness repair",
+      "diagnostics":"➡️ Computer diagnostics",
+      "front_break":"➡️ Front brake pad replacement",
+      "back_break":"➡️ Replacing rear brake pads",
+      "electronic_book":"➡️ BMW eBook Entry",
+      "inspection":"➡️ Car inspection",
+      "brake_fluid":"➡️ Brake fluid replacement",
+      "door_to_door":"➡️ Door To Door Service",
+      "oil_service":"➡️ Oil service",
+      "brake_disks":"➡️ Replacing rear brake discs and pads",
+      "contidioning_desinfection":"➡️ Air conditioning fumigation"
+    },
+    "hashtags": {
+      "0":"#bmwii3",
+      "1":"#harnessrepair",
+      "2":"#armchairrepair",
+      "3":"#brakefluidreplacement",
+      "4":"#bmwserwis",
+      "5":"#bmwwarszwa",
+      "6":"#padreplacement",
+      "7":"#bmwf44",
+      "8":"#bmwg30",
+      "9":"#bmwlove",
+      "10":"#oilservice"
+    }
+    }
   }
-}
+

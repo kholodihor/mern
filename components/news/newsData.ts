@@ -2,12 +2,12 @@ import { INewsItem } from "@/types";
 
 export const newsData: INewsItem[] = [
   {
-    car: "📌BMW I I3 Rex⬇️",
+    car: "📌BMW I I3 Rex ⬇️",
     services: [
-      "➡️ Naprawa wiązki fotela",
-      "➡️ Diagnostyka komputerowa",
-      "➡️ Wymiana klocków hamulcowych przód",
-      "➡️ Wpis do książki elektronicznej BMW",
+      "services.seat",
+      "services.diagnostics",
+      "services.front_break",
+      "services.electronic_book",
     ],
     contact: {
       serviceCenter:
@@ -17,12 +17,13 @@ export const newsData: INewsItem[] = [
       email: "📨 mern.serwis@gmail.com",
     },
     hashtags: [
-      "#bmwii3",
-      "#naprawawiazki",
-      "#naprawafotela",
-      "#wymianapłynuhamulcowego",
-      "#bmwserwis",
-      "#bmwwarszwa",
+      "hashtags.0",
+      "hashtags.1",
+      "hashtags.2",
+      "hashtags.3",
+      "hashtags.4",
+      "hashtags.5",
+      "hashtags.6",
     ],
     images: [
       "/news/rex_1.jpg",
@@ -33,13 +34,13 @@ export const newsData: INewsItem[] = [
     ],
   },
   {
-    car: "📌BMW 2' F44 Gran Coupé⬇️",
+    car: "📌BMW 2' F44 Gran Coupé ⬇️",
     services: [
-      "➡️ Przegląd samochodu",
-      "➡️ Wymiana płynu hamulcowego",
-      "➡️ Wyiana klocków hamulcowych przód",
-      "➡️ Wymiana klocków hamulcowych tył",
-      "➡️ Usługa Door To Door",
+      "services.inspetion",
+      "services.brake_fluid",
+      "services.front_break",
+      "serviices.back_break",
+      "services.door_to_door",
     ],
     contact: {
       serviceCenter:
@@ -49,12 +50,12 @@ export const newsData: INewsItem[] = [
       email: "📨 mern.serwis@gmail.com",
     },
     hashtags: [
-      "#bmwf44",
-      "#naprawawiazki",
-      "#naprawafotela",
-      "#wymianaklocków",
-      "#bmwserwis",
-      "#bmwwarszwa",
+      "hashtags.7",
+      "hashtags.1",
+      "hashtags.2",
+      "hashtags.3",
+      "hashtags.5",
+      "hashtags.6",
     ],
     images: [
       "/news/f44_1.jpg",
@@ -65,13 +66,13 @@ export const newsData: INewsItem[] = [
     ],
   },
   {
-    car: "📌BMW 5' G30 540iX⬇️",
+    car: "📌BMW 5' G30 540iX ⬇️",
     services: [
-      "➡️ Serwis olejowy",
-      "➡️ Wymiana tarcz i klocków hamulcowych tył",
-      "➡️ Odgrzybianie klimatyzacji",
-      "➡️ Usługa door to door",
-      "➡️ Wpis do książki elektronicznej BMW",
+      "services.oil_service",
+      "services.break_disks",
+      "services.conditioning_desinfection",
+      "services.door_to_door",
+      "services.electronic_book",
     ],
     contact: {
       serviceCenter:
@@ -81,12 +82,12 @@ export const newsData: INewsItem[] = [
       email: "📨 mern.serwis@gmail.com",
     },
     hashtags: [
-      "#bmwlove",
-      "#serwisolejowy",
-      "#naprawafotela",
-      "#bmwg30",
-      "#bmwserwis",
-      "#bmwwarszwa",
+      "hashtags.8",
+      "hashtags.9",
+      "hashtags.10",
+      "hashtags.2",
+      "hashtags.5",
+      "hashtags.6",
     ],
     images: [
       "/news/g30_1.jpg",
