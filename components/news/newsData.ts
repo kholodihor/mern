@@ -26,11 +26,11 @@ export const newsData: INewsItem[] = [
       "hashtags.6",
     ],
     images: [
-      "/news/rex_1.jpg",
-      "/news/rex_2.jpg",
-      "/news/rex_3.jpg",
-      "/news/rex_4.jpg",
-      "/news/rex_5.jpg",
+      "/news/rex_1.webp",
+      "/news/rex_2.webp",
+      "/news/rex_3.webp",
+      "/news/rex_4.webp",
+      "/news/rex_5.webp",
     ],
   },
   {
@@ -58,11 +58,11 @@ export const newsData: INewsItem[] = [
       "hashtags.6",
     ],
     images: [
-      "/news/f44_1.jpg",
-      "/news/f44_2.jpg",
-      "/news/f44_3.jpg",
-      "/news/f44_5.jpg",
-      "/news/f44_6.jpg",
+      "/news/f44_1.webp",
+      "/news/f44_2.webp",
+      "/news/f44_3.webp",
+      "/news/f44_5.webp",
+      "/news/f44_6.webp",
     ],
   },
   {
