@@ -6,7 +6,8 @@
     "kontakt": "kontakt",
     "news": "Aktualności",
     "motto": "IDEALNY SERWIS DLA IDEALNYCH AUT",
-      "button":"Zostaw prośbę o obsługę 👉"
+    "button":"Zostaw prośbę o obsługę 👉",
+    "independent":"Niezależny serwis BMW, Rolls-Royce i MINI"
   },
   "About": {
     "title": "kim jesteśmy",
@@ -94,6 +95,7 @@
   },
   "News": {
     "title": "Nasze Aktualności",
+    "motto":" 📌 Mern Serwis - Twoje zaufane centrum obsługi samochodów marki BMW!",
     "services":{
       "seat":"➡️ Naprawa wiązki fotela",
       "diagnostics":"➡️ Diagnostyka komputerowa",
@@ -105,7 +107,9 @@
       "door_to_door":"➡️ Usługa Door To Door",
       "oil_service":"➡️ Serwis olejowy",
       "brake_disks":"➡️ Wymiana tarcz i klocków hamulcowych tył",
-      "contidioning_desinfection":"➡️ Odgrzybianie klimatyzacji"
+      "contidioning_desinfection":"➡️ Odgrzybianie klimatyzacji",
+      "upgrade":"➡️ Aktualizacja oprogramowania wszystkich sterowników",
+      "engine_mount":"➡️ Wymiana poduszki silnika"
     },
     "hashtags": {
       "0":"#bmwii3",
@@ -118,7 +122,14 @@
       "7":"#bmwf44",
       "8":"#bmwg30",
       "9":"#bmwlove",
-      "10":"#serwisolejowy"
+      "10":"#serwisolejowy",
+      "11":"#bmwx2",
+      "12":"#bmwaktualizacjaoprogramowania",
+      "13":"#niezależnyserwisbmw",
+      "14":"#mernserwis",
+      "15":"bmw1f40",
+      "16":"bmw",
+      "17":"#dbamyodetale"
     }
   }
 }

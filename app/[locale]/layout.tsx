@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Script from "next/script";
+import { PageProps } from "@/types";
 import { NextIntlClientProvider } from "next-intl";
 import { notFound } from "next/navigation";
 import { SWRProvider } from "../swr-provider";
@@ -16,27 +17,30 @@ export function generateStaticParams() {
   return [{ locale: "pl" }, { locale: "en" }, { locale: "ua" }];
 }
 
-export const metadata: Metadata = {
-  metadataBase: new URL("https://mernserwis.pl"),
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
+  return {
+      metadataBase: new URL("https://mernserwis.pl"),
   title: {
-    default: "MERN Serwis Samochodowy",
+    default: `${params.locale==='ua'? 'Автосервіс MERN': params.locale === 'en' ? 'MERN Car Service' : 'MERN Serwis Samochodowy'}`,
     template: `%s | MERN Serwis Samochodowy `,
   },
-  description:
-    "MERN Serwis to najlepszy serwis dla naprawy twojego BMW ,Rolls Royce, Mini Cooper",
-  alternates: {
-    canonical: "/",
-    languages: {
-      "en-US": "/en",
-      "pl-PL": "/pl",
-      "uk-UK": "/ua",
+    description: `https://mernserwis.pl | +48 509 158 159 | Przyszłość 2A, 05-126 Stanisławów Pierwszy | ${params.locale === 'pl' ? 'MERN Serwis to najlepszy serwis dla naprawy twojego BMW ,Rolls Royce, Mini Cooper' : params.locale === 'en' ? 'MERN Serwis is the best service for repairing your BMW, Rolls Royce, Mini Cooper' : 'Автосервіс MERN це найкращий сервіс для ремонту ваших BMW, Rolls Royce, Mini Cooper'} `,
+    alternates: {
+      canonical: "/",
+      languages: {
+        "en-US": "/en",
+        "pl-PL": "/pl",
+        "uk-UK": "/ua",
+      },
     },
-  },
-  openGraph: {
-    images: "/og-image.png",
-  },
-  keywords: ["MERN", "BMW", "Serwis", "Rolls Royce", "Mini Cooper", "Warszawa"],
-};
+    openGraph: {
+      images: "/og-image.png",
+    },
+    keywords: ["MERN", "BMW", "Serwis Samochodowy", "Автосервіс", "Варшава", "Rolls Royce", "Mini Cooper", "Warszawa"],
+  };
+}
 
 const locales = ["pl", "en", "ua"];
 
@@ -47,6 +51,7 @@ export default async function RootLayout({
   children: React.ReactNode;
   params: { locale: string };
 }) {
+
   const session = await getServerSession();
   let messages;
   try {
@@ -75,9 +80,9 @@ export default async function RootLayout({
       <SessionWrapper session={session}>
         <SWRProvider>
           <body className="min-w-[320px]">
-            <GoogleAnalytics
+          <GoogleAnalytics
               GA_MEASUREMENT_ID={`G-MJ7BYHRN8T`}
-            />         
+            />               
               <NextIntlClientProvider locale={locale} messages={messages}>
                 <SubHeader />
                 <Header />

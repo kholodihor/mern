@@ -55,8 +55,8 @@ const News = () => {
           <motion.div 
             key={index}
             variants={itemVariants}
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
+            // whileHover={{ scale: 1.02 }}
+            // whileTap={{ scale: 0.98 }}
           >
             {isTabletOrMobile ? (
               <MobileNews item={item} index={index} />

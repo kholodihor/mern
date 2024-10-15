@@ -48,9 +48,11 @@ export interface ContactInfo {
 }
 
 export interface INewsItem {
+  id:number,
   car: string;
   services: string[];
   contact: ContactInfo;
   hashtags: string[];
   images: string[];
+  createdAt: string;
 }

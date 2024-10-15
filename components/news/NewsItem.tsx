@@ -45,7 +45,10 @@ const NewsItem = ({ item, index }: INewsItemProps) => {
             index % 2 !== 0 ? "left-[250px]" : "right-[250px]"
           }`}
         >
-          <h2 className="mb-[24px] font-bold text-lg">{item.car}</h2>
+       <div className="flex items-center justify-between mb-[24px]">
+       <h2 className="font-bold text-lg">{item.car}</h2>
+       <span className="text-gray-500">{item.createdAt}</span>
+       </div>
           {/* Displaying services instead of a single 'text' field */}
           <ul className="text-sm leading-[1.3] mb-4">
             {item.services.map((service, idx) => (
@@ -53,7 +56,7 @@ const NewsItem = ({ item, index }: INewsItemProps) => {
             ))}
           </ul>
           <ul className="text-sm leading-[1.3]">
-            <li>{item.contact.serviceCenter}</li>
+            <li>{t(item.contact.serviceCenter)}</li>
             <li>{item.contact.address}</li>
             <li>{item.contact.phone}</li>
             <li>{item.contact.email}</li>
