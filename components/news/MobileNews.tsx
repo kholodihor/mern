@@ -2,6 +2,7 @@
 
 import { INewsItem } from "@/types";
 import React, { useState } from "react";
+import { useTranslations } from "next-intl";
 
 interface INewsItemProps {
   item: INewsItem;
@@ -9,7 +10,9 @@ interface INewsItemProps {
 }
 
 const MobileNews = ({ item, index }: INewsItemProps) => {
+  const t = useTranslations("News");
   const [activeImage, setActiveImage] = useState(item.images[0]);
+
   return (
     <div
       className={`slide-row flex w-full mx-auto transition-all relative px-4 mb-[2rem] ${
@@ -47,19 +50,19 @@ const MobileNews = ({ item, index }: INewsItemProps) => {
           <h2 className="mb-[12px] font-bold text-lg">{item.car}</h2>
           <ul className="text-sm leading-[1.3] mb-4">
             {item.services.map((service, idx) => (
-              <li key={idx}>{service}</li>
+                <li key={idx}>{t(service)}</li>
             ))}
           </ul>
           <ul className="text-sm leading-[1.3]">
-            <li>{item.contact.serviceCenter}</li>
+            <li>{t(item.contact.serviceCenter)}</li>
             <li>{item.contact.address}</li>
             <li>{item.contact.phone}</li>
             <li>{item.contact.email}</li>
           </ul>
-          <ul className="text-sm leading-[1.3] mt-4 flex flex-wrap text-blue-400">
+          <ul className="text-sm leading-[1.3] mt-4 flex flex-wrap text-blue-900">
             {item.hashtags.map((hashtag, idx) => (
               <li key={idx} className="mr-2">
-                {hashtag}
+                {t(hashtag)}
               </li>
             ))}
           </ul>

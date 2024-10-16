@@ -99,15 +99,15 @@
     "services":{
       "seat":"➡️ Seat harness repair",
       "diagnostics":"➡️ Computer diagnostics",
-      "front_break":"➡️ Front brake pad replacement",
-      "back_break":"➡️ Replacing rear brake pads",
+      "front_brake":"➡️ Front brake pad replacement",
+      "back_brake":"➡️ Replacing rear brake pads",
       "electronic_book":"➡️ BMW eBook Entry",
       "inspection":"➡️ Car inspection",
       "brake_fluid":"➡️ Brake fluid replacement",
       "door_to_door":"➡️ Door To Door Service",
       "oil_service":"➡️ Oil service",
       "brake_disks":"➡️ Replacing rear brake discs and pads",
-      "contidioning_desinfection":"➡️ Air conditioning fumigation",
+      "contidioning_disinfection":"➡️ Air conditioning fumigation",
       "upgrade":"➡️ Software update for all drivers",
       "engine_mount":"➡️ Replacing the engine mount"
     },

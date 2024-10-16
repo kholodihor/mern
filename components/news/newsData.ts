@@ -7,7 +7,7 @@ export const newsData: INewsItem[] = [
     services: [
       "services.engine_mount",
       "services.brake_fluid",
-      "services.back_break",
+      "services.back_brake",
       "services.electronic_book",
     ],
     contact: {
@@ -70,7 +70,7 @@ export const newsData: INewsItem[] = [
     services: [
       "services.seat",
       "services.diagnostics",
-      "services.front_break",
+      "services.front_brake",
       "services.electronic_book",
     ],
     contact: {
@@ -104,8 +104,8 @@ export const newsData: INewsItem[] = [
     services: [
       "services.inspetion",
       "services.brake_fluid",
-      "services.front_break",
-      "serviices.back_break",
+      "services.front_brake",
+      "services.back_brake",
       "services.door_to_door",
     ],
     contact: {
@@ -137,8 +137,8 @@ export const newsData: INewsItem[] = [
     car: "📌BMW 5' G30 540iX ⬇️",
     services: [
       "services.oil_service",
-      "services.break_disks",
-      "services.conditioning_desinfection",
+      "services.brake_disks",
+      "services.contidioning_disinfection",
       "services.door_to_door",
       "services.electronic_book",
     ],

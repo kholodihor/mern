@@ -61,7 +61,7 @@ const NewsItem = ({ item, index }: INewsItemProps) => {
             <li>{item.contact.phone}</li>
             <li>{item.contact.email}</li>
           </ul>
-          <ul className="text-sm leading-[1.3] mt-4 flex flex-wrap text-blue-400">
+          <ul className="text-sm leading-[1.3] mt-4 flex flex-wrap text-blue-500">
             {item.hashtags.map((hashtag, idx) => (
               <li key={idx} className="mr-2">
                 {t(hashtag)}
