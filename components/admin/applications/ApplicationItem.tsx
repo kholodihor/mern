@@ -17,12 +17,10 @@ const ApplicationItem = ({ item, onDelete }: ApplicationItemProps) => {
   const handleStatus = async (value: string) => {
     setStatus(value);
     if (value !== item.status) {
-  
       await updateApplication(item.id, value);
     }
   };
 
-  console.log(status)
 
   return (
     <li
@@ -31,20 +29,20 @@ const ApplicationItem = ({ item, onDelete }: ApplicationItemProps) => {
       } ${isWithin96Hours(item.createdAt) && "text-red-400"}`}
     >
       <span className="w-1/5 flex justify-center hover:text-blue-300">
-        <Link href={`/admin/applications/${item.id}`}>{item.name}</Link>
+        <Link href={`/admin/applications/${item.id}`}>{item?.name}</Link>
       </span>
 
-      <span className="w-1/5 flex justify-center">{item.phone}</span>
+      <span className="w-1/5 flex justify-center">{item?.phone}</span>
 
       <span className={`w-1/5 flex justify-center `}>
-        {formatDate(item.createdAt)}
+        {formatDate(item?.createdAt)}
       </span>
 
       <span className={`w-1/5 flex justify-center`}>
         <select
           name="status"
           id="status"
-          defaultValue={item.status}
+          defaultValue={item?.status}
           onChange={(e) => handleStatus(e.target.value)}
           className={`border text-center rounded-xl px-2 uppercase flex justify-center 
           items-center bg-black ${
@@ -68,7 +66,7 @@ const ApplicationItem = ({ item, onDelete }: ApplicationItemProps) => {
       </span>
 
       <span className="w-1/5 flex justify-center">
-        <button className="text-red-500" onClick={() => onDelete(item.id)}>
+        <button className="text-red-500" onClick={() => onDelete(item?.id)}>
           <FaRegTrashAlt />
         </button>
       </span>
