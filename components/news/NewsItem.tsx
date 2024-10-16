@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 
+import Image from 'next/image';
 import { useTranslations } from "next-intl";
 import { INewsItem } from "@/types";
 import React, { useState } from "react";
@@ -27,15 +28,15 @@ const NewsItem = ({ item, index }: INewsItemProps) => {
           }`}
         >
           {item.images.map((image, i) => (
-            <img
-              src={image}
-              key={i}
-              alt="thumbnail"
-              onClick={() => setActiveImage(image)}
-              className={`w-[60px] h-[60px] rounded-full object-cover cursor-pointer ${
-                image === activeImage ? "border-2 border-white" : ""
-              }`}
-            />
+           <Image
+           src={image}
+           key={i}
+           alt="thumbnail"
+           width={60}
+           height={60}
+           onClick={() => setActiveImage(image)}
+           className={`rounded-full object-cover cursor-pointer ${image === activeImage ? "border-2 border-white" : ""}`}
+         />
           ))}
         </div>
 
@@ -49,7 +50,6 @@ const NewsItem = ({ item, index }: INewsItemProps) => {
        <h2 className="font-bold text-lg">{item.car}</h2>
        <span className="text-gray-500">{item.createdAt}</span>
        </div>
-          {/* Displaying services instead of a single 'text' field */}
           <ul className="text-sm leading-[1.3] mb-4">
             {item.services.map((service, idx) => (
               <li key={idx}>{t(service)}</li>
@@ -76,11 +76,13 @@ const NewsItem = ({ item, index }: INewsItemProps) => {
             index % 2 !== 0 ? "right-0" : "left-0"
           }`}
         >
-          <img
-            className="h-full w-[350px] object-cover rounded-md"
-            src={activeImage}
-            alt={item.car}
-          />
+         <Image
+           src={activeImage}
+           alt={item.car}
+           width={350}
+           height={0}
+           className="h-full object-cover rounded-md"
+/>
         </div>
       </div>
       <div className="w-[30vw] h-[2px] bg-blue-300 mx-auto mt-[4rem]"></div>

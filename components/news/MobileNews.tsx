@@ -1,8 +1,7 @@
-/* eslint-disable @next/next/no-img-element */
-
 import { INewsItem } from "@/types";
 import React, { useState } from "react";
 import { useTranslations } from "next-intl";
+import Image from "next/image";
 
 interface INewsItemProps {
   item: INewsItem;
@@ -14,69 +13,62 @@ const MobileNews = ({ item, index }: INewsItemProps) => {
   const [activeImage, setActiveImage] = useState(item.images[0]);
 
   return (
-    <div
-      className={`slide-row flex w-full mx-auto transition-all relative px-4 mb-[2rem] ${
-        index % 2 !== 0 ? "justify-end" : "justify-start"
-      }`}
-    >
-      <div className="slide-col relative w-[80vw] sm:w-[90vw] h-[90vh] sm:h-[400px] mb-[1rem]">
-        {/* Thumbnail images on the side */}
-        <div
-          className={`hidden sm:flex gap-2 flex-col absolute top-[50%] -translate-y-[50%] z-[10] ${
-            index % 2 !== 0 ? "left-0" : "right-0"
-          }`}
-        >
+    <div className="w-full mx-auto px-4 mb-8">
+      <div className="relative w-full max-w-md mx-auto">
+        {/* Main image */}
+        <div className="relative w-full h-64 mb-4">
+          <Image
+            src={activeImage}
+            alt={item.car}
+            fill
+            sizes="(max-width: 768px) 100vw, 384px"
+            className="object-cover rounded-lg"
+            priority
+          />
+        </div>
+
+        {/* Thumbnail images */}
+        <div className="flex justify-center gap-2 mb-4 overflow-x-auto pb-2">
           {item.images.map((image, i) => (
-            <img
-              src={image}
+            <button
               key={i}
-              alt="thumbnail"
               onClick={() => setActiveImage(image)}
-              className={`w-[60px] h-[60px] rounded-full object-cover cursor-pointer ${
-                image === activeImage ? "border-2 border-white" : ""
+              className={`flex-shrink-0 w-16 h-16 rounded-full overflow-hidden border-2 ${
+                image === activeImage ? "border-blue-500" : "border-transparent"
               }`}
-            />
+            >
+              <Image
+                src={image}
+                alt={`${item.car} thumbnail ${i + 1}`}
+                width={64}
+                height={64}
+                className="object-cover w-full h-full"
+              />
+            </button>
           ))}
         </div>
 
         {/* Text content */}
-        <div
-          className={`absolute bottom-0 sm:top-[50%] sm:-translate-y-[50%] w-full sm:w-[350px] md:w-[530px] min-h-[270px] bg-[rgba(255,255,255,0.5)] backdrop-blur-sm backdrop-brightness-10 p-4 rounded-md z-[5] overflow-hidden text-black ${
-            index % 2 !== 0
-              ? "left-0 sm:left-[150px]"
-              : "right-0 sm:right-[150px]"
-          }`}
-        >
-          <h2 className="mb-[12px] font-bold text-lg">{item.car}</h2>
-          <ul className="text-sm leading-[1.3] mb-4">
+        <div className="bg-white/30 bg-opacity-90 backdrop-blur-sm p-4 rounded-lg">
+          <h2 className="mb-3 font-bold text-xl">{item.car}</h2>
+          <ul className="text-sm mb-4 space-y-1">
             {item.services.map((service, idx) => (
-                <li key={idx}>{t(service)}</li>
+              <li key={idx}>{t(service)}</li>
             ))}
           </ul>
-          <ul className="text-sm leading-[1.3]">
+          <ul className="text-sm mb-4 space-y-1">
             <li>{t(item.contact.serviceCenter)}</li>
             <li>{item.contact.address}</li>
             <li>{item.contact.phone}</li>
             <li>{item.contact.email}</li>
           </ul>
-          <ul className="text-sm leading-[1.3] mt-4 flex flex-wrap text-blue-900">
+          <ul className="text-sm flex flex-wrap gap-2">
             {item.hashtags.map((hashtag, idx) => (
-              <li key={idx} className="mr-2">
-                {t(hashtag)}
+              <li key={idx} className="text-blue-600">
+                #{t(hashtag)}
               </li>
             ))}
           </ul>
-        </div>
-        <div
-          className={`absolute top-0 z-[2] w-full sm:w-auto h-full ${
-            index % 2 !== 0 ? "right-0" : "left-0"
-          }`}
-        >
-          <img
-            className="h-full w-full sm:w-[350px] object-cover rounded-md"
-            src={activeImage}
-            alt={item.car}
-          />
         </div>
       </div>
     </div>
