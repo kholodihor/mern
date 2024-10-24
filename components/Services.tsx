@@ -12,8 +12,12 @@ const Services = () => {
   const t = useTranslations("Services");
 
   return (
-    <section className="w-full flex justify-center items-center flex-col text-center py-8 px-2 min-h-[100vh] pt-[18vh] md:pt-[25vh]">
-      <h1 className="mainTitle">{t("title")}</h1>
+    <section
+      className="w-full flex justify-center items-center flex-col text-center py-8 px-2 min-h-[100vh] pt-[18vh] md:pt-[25vh]"
+      aria-labelledby="services-title"
+    >
+      <h1 id="services-title" className="mainTitle">{t("title")}</h1>
+
       <div className="w-full flex gap-2 flex-wrap relative p-2 min-h-[80vh]">
         <Swiper
           effect={"coverflow"}
@@ -45,9 +49,11 @@ const Services = () => {
             },
           }}
           className="w-[90vw] md:w-full"
+          aria-roledescription="carousel"
+          aria-live="polite"
         >
           {cards.map((card, index) => (
-            <SwiperSlide key={index}>
+            <SwiperSlide key={index} aria-label={`Slide ${index + 1} of ${cards.length}`}>
               <ServiceCard card={card} index={index} />
             </SwiperSlide>
           ))}

@@ -20,13 +20,31 @@ export function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
+  const baseUrl = new URL("https://mernserwis.pl");
+  const contactInfo = "+48 509 158 159 | Przyszłość 2A, 05-126 Stanisławów Pierwszy";
+
+  const titles = {
+    ua: 'Автосервіс MERN',
+    en: 'MERN Car Service',
+    pl: 'MERN Serwis Samochodowy',
+  };
+
+  const descriptions = {
+    pl: `MERN Serwis to najlepszy serwis dla naprawy twojego BMW, Rolls Royce, Mini Cooper`,
+    en: `MERN Serwis is the best service for repairing your BMW, Rolls Royce, Mini Cooper`,
+    ua: `Автосервіс MERN це найкращий сервіс для ремонту ваших BMW, Rolls Royce, Mini Cooper`,
+  };
+
+  const defaultTitle = titles[params.locale] || titles.pl;
+  const defaultDescription = descriptions[params.locale] || descriptions.pl;
+
   return {
-      metadataBase: new URL("https://mernserwis.pl"),
-  title: {
-    default: `${params.locale==='ua'? 'Автосервіс MERN': params.locale === 'en' ? 'MERN Car Service' : 'MERN Serwis Samochodowy'}`,
-    template: `%s | MERN Serwis Samochodowy `,
-  },
-    description: `https://mernserwis.pl | +48 509 158 159 | Przyszłość 2A, 05-126 Stanisławów Pierwszy | ${params.locale === 'pl' ? 'MERN Serwis to najlepszy serwis dla naprawy twojego BMW ,Rolls Royce, Mini Cooper' : params.locale === 'en' ? 'MERN Serwis is the best service for repairing your BMW, Rolls Royce, Mini Cooper' : 'Автосервіс MERN це найкращий сервіс для ремонту ваших BMW, Rolls Royce, Mini Cooper'} `,
+    metadataBase: baseUrl,
+    title: {
+      default: defaultTitle,
+      template: `%s | MERN Serwis Samochodowy`,
+    },
+    description: `${baseUrl} | ${contactInfo} | ${defaultDescription}`,
     alternates: {
       canonical: "/",
       languages: {
@@ -36,7 +54,9 @@ export async function generateMetadata({
       },
     },
     openGraph: {
-      images: "/og-image.png",
+      title: defaultTitle,
+      description: defaultDescription,
+      images: ["/og-image.png"],
     },
     keywords: ["MERN", "BMW", "Serwis Samochodowy", "Автосервіс", "Варшава", "Rolls Royce", "Mini Cooper", "Warszawa"],
   };
@@ -64,32 +84,32 @@ export default async function RootLayout({
   return (
     <html lang={locale}>
       <head>
-      <Script
-        strategy="afterInteractive"
-        src={`https://www.googletagmanager.com/gtag/js?id=AW-11012610070`}
-      />
-      <Script id="google-analytics" strategy="afterInteractive">
-        {`
+        <Script
+          strategy="afterInteractive"
+          src={`https://www.googletagmanager.com/gtag/js?id=AW-11012610070`}
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
           gtag('config', 'AW-11012610070');
         `}
-      </Script>
+        </Script>
       </head>
       <SessionWrapper session={session}>
         <SWRProvider>
           <body className="min-w-[320px]">
-          <GoogleAnalytics
+            <GoogleAnalytics
               GA_MEASUREMENT_ID={`G-MJ7BYHRN8T`}
-            />               
-              <NextIntlClientProvider locale={locale} messages={messages}>
-                <SubHeader />
-                <Header />
-                {children}
-                <CookieBanner />
-                <Footer />
-              </NextIntlClientProvider>
+            />
+            <NextIntlClientProvider locale={locale} messages={messages}>
+              <SubHeader />
+              <Header />
+              {children}
+              <CookieBanner />
+              <Footer />
+            </NextIntlClientProvider>
           </body>
         </SWRProvider>
       </SessionWrapper>

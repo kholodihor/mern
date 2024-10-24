@@ -44,20 +44,25 @@ const FuturisticCard = () => {
   }, []);
 
   return (
-    <div className={styles.cardbody}>
-      <div className={styles.screen} id="screen">
-        <div className={styles.screenImage}></div>
-        <div className={styles.screenOverlay}></div>
+    <article className={styles.cardbody}>
+      <div className={styles.screen} id="screen" role="button" tabIndex={0}>
+        <div className={styles.screenImage} aria-hidden="true"></div>
+        <div className={styles.screenOverlay} aria-hidden="true"></div>
         <div className={styles.screenContent}>
-          <FaCarAlt className={styles.screenIcon} />
+          <FaCarAlt className={styles.screenIcon} aria-hidden="true" />
           <div className={styles.screenUser}>
-            <span className={styles.name} id="name" data-value="MERN">
+            <span
+              className={styles.name}
+              id="name"
+              data-value="MERN"
+              aria-label="Mern Serwis"
+            >
               MERN
             </span>
           </div>
         </div>
       </div>
-    </div>
+    </article>
   );
 };
 

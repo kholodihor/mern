@@ -10,10 +10,10 @@ const Footer = () => {
   )
     return null;
 
-  const getCurrentYear = new Date().getFullYear().toString();
+  const getCurrentYear = new Date().getFullYear();
   return (
     <div className="w-full p-[1rem] flex flex-col justify-center items-center border-t border-[#666]">
-      <p>{getCurrentYear} by KholodIhor</p>
+      <p>&copy; {getCurrentYear} KholodIhor. All rights reserved.</p>
     </div>
   );
 };

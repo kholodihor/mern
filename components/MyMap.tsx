@@ -10,7 +10,7 @@ const MyMap = () => {
     width: "100%",
   };
   return (
-    <div className=" relative w-full h-full min-h-[50vh]">
+    <div className="relative w-full h-full min-h-[50vh]" role="application" >
       <ReactMapGL
         {...viewPort}
         mapboxAccessToken={process.env.NEXT_PUBLIC_MAPBOX_API_TOKEN}
@@ -19,11 +19,16 @@ const MyMap = () => {
           latitude: 52.37645,
           zoom: 14,
         }}
-        mapStyle={"mapbox://tyles/leighhalliday/ckhjaksxg0x2v19s1ovps41ef"}
+        mapStyle={"mapbox://styles/leighhalliday/ckhjaksxg0x2v19s1ovps41ef"}
+        aria-label="Map showing location"
       >
-        <Marker latitude={52.37645} longitude={21.04058}>
-          <button className="w-[2rem] h-[2rem] text-[2rem]" type="button">
-            <FaMapMarkerAlt className="text-purple-600text-[2.5rem]" />
+        <Marker latitude={52.37645} longitude={21.04058} aria-hidden="true">
+          <button
+            className="w-[2rem] h-[2rem] text-[2rem]"
+            type="button"
+            aria-label="Marker at the location"
+          >
+            <FaMapMarkerAlt className="text-purple-600 text-[2.5rem]" />
           </button>
         </Marker>
       </ReactMapGL>

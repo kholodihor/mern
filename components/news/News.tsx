@@ -35,36 +35,48 @@ const News = () => {
   }
 
   return (
-       <motion.div 
+    <motion.div
       className="min-h-[100vh] pt-[25vh] pb-[24px]"
       initial="hidden"
       animate="visible"
       variants={containerVariants}
+      role="main" // Indicates the main content of the page
     >
-      <motion.div 
+      <motion.div
         className="flex flex-col justify-center items-center gap-4"
         variants={containerVariants}
       >
-        <motion.h1 
+        <motion.h1
           className="mainTitle"
           variants={itemVariants}
+          tabIndex={0} // Make the heading focusable
+          aria-label={t("title")} // Provide an accessible label for the heading
         >
           {t("title")}
         </motion.h1>
-        {newsData.map((item: INewsItem, index: number) => (
-          <motion.div 
-            key={index}
+        {newsData.length > 0 ? (
+          newsData.map((item: INewsItem, index: number) => (
+            <motion.div
+              key={index}
+              variants={itemVariants}
+              role="article" // Specify that this is an article
+              aria-labelledby={`news-title-${index}`} // Associate with the heading
+            >
+              {isTabletOrMobile ? (
+                <MobileNews item={item} index={index} />
+              ) : (
+                <NewsItem item={item} index={index} />
+              )}
+            </motion.div>
+          ))
+        ) : (
+          <motion.p
+            className="text-center"
             variants={itemVariants}
-            // whileHover={{ scale: 1.02 }}
-            // whileTap={{ scale: 0.98 }}
           >
-            {isTabletOrMobile ? (
-              <MobileNews item={item} index={index} />
-            ) : (
-              <NewsItem item={item} index={index} />
-            )}
-          </motion.div>
-        ))}
+            {t("noNews")} {/* Provide feedback if there are no news items */}
+          </motion.p>
+        )}
       </motion.div>
     </motion.div>
   );

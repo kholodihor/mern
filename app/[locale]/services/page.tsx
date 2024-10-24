@@ -5,9 +5,30 @@ import ServicesList from "@/components/ServicesList";
 export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
+  const baseUrl = "https://mernserwis.pl";
+
+  // Define titles and descriptions based on locale
+  const metadata = {
+    pl: {
+      title: 'Usługi | MERN Serwis',
+      description: 'MERN Serwis | Nasze Usługi',
+    },
+    en: {
+      title: 'Services | MERN Car Service',
+      description: 'MERN Serwis | Our Services',
+    },
+    ua: {
+      title: 'Послуги | Автосервіс MERN',
+      description: 'MERN Serwis | Наші послуги',
+    },
+  };
+
+  // Fallback to Polish if locale is not defined
+  const localeMetadata = metadata[params.locale] || metadata.pl;
+
   return {
-    title: `${params.locale === 'pl' ? 'Usługi | MERN Serwis ': params.locale === 'en' ? 'Services | MERN Car Service ' : 'Послуги | Автосервіс MERN'} `,
-    description: `MERN Serwis | https://mernserwis.pl ${params.locale === 'pl' ? 'Nasze Usługi' : params.locale === 'en' ? 'Our Services' : 'Наші послуги'} `,
+    title: localeMetadata.title,
+    description: `${localeMetadata.description} | ${baseUrl}`,
   };
 }
 

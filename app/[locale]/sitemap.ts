@@ -1,63 +1,29 @@
 import { MetadataRoute } from "next";
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://mernserwis.pl";
+const baseUrl = "https://mernserwis.pl";
 
-  return [
-    {
-      url: baseUrl,
-      lastModified: new Date(),
-      alternates: {
-        languages: {
-          uk: `${baseUrl}/ua`,
-          en: `${baseUrl}/en`,
-          pl: `${baseUrl}/pl`,
-        },
-      },
+// List of routes and their paths
+const routes = [
+  { path: "", lastModified: new Date("2024-01-01") }, // Replace with actual last modified date
+  { path: "about", lastModified: new Date("2024-01-01") },
+  { path: "services", lastModified: new Date("2024-01-01") },
+  { path: "contacts", lastModified: new Date("2024-01-01") },
+  { path: "news", lastModified: new Date("2024-01-01") },
+];
+
+// Function to generate alternate URLs
+const generateAlternates = (path: string) => ({
+  uk: `${baseUrl}/ua${path ? '/' + path : ''}`,
+  en: `${baseUrl}/en${path ? '/' + path : ''}`,
+  pl: `${baseUrl}/pl${path ? '/' + path : ''}`,
+});
+
+export default function sitemap(): MetadataRoute.Sitemap {
+  return routes.map(({ path, lastModified }) => ({
+    url: `${baseUrl}/${path}`,
+    lastModified,
+    alternates: {
+      languages: generateAlternates(path),
     },
-    {
-      url: `${baseUrl}/about`,
-      lastModified: new Date(),
-      alternates: {
-        languages: {
-          uk: `${baseUrl}/ua/about`,
-          en: `${baseUrl}/en/about`,
-          pl: `${baseUrl}/pl/about`,
-        },
-      },
-    },
-    {
-      url: `${baseUrl}/services`,
-      lastModified: new Date(),
-      alternates: {
-        languages: {
-          uk: `${baseUrl}/ua/services`,
-          en: `${baseUrl}/en/services`,
-          pl: `${baseUrl}/pl/services`,
-        },
-      },
-    },
-    {
-      url: `${baseUrl}/contacts`,
-      lastModified: new Date(),
-      alternates: {
-        languages: {
-          uk: `${baseUrl}/ua/contacts`,
-          en: `${baseUrl}/en/contacts`,
-          pl: `${baseUrl}/pl/contacts`,
-        },
-      },
-    },
-    {
-      url: `${baseUrl}/news`,
-      lastModified: new Date(),
-      alternates: {
-        languages: {
-          uk: `${baseUrl}/ua/news`,
-          en: `${baseUrl}/en/news`,
-          pl: `${baseUrl}/pl/news`,
-        },
-      },
-    },
-  ];
+  }));
 }

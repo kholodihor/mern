@@ -14,23 +14,41 @@ const DynamicPage = dynamic(
   { ssr: false, loading: () => <Spiral /> }
 );
 
-const cars = newsData.map((car)=>car.car)
-
-const carsString = cars.join(',');
-
-
 export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
+  const baseUrl = "https://mernserwis.pl";
+  const cars = newsData.map((car) => car.car)
+  const carsString = cars.join(',');
+
+  const metadata = {
+    pl: {
+      title: 'Nasze Aktualności | MERN Serwis',
+      description: `MERN Serwis | ${baseUrl} Nasze Aktualności ${carsString}`,
+    },
+    en: {
+      title: 'Our Last Works | MERN Car Service',
+      description: `MERN Serwis | ${baseUrl} Our Last Works ${carsString}`,
+    },
+    ua: {
+      title: 'Наші Останні Роботи | Автосервіс MERN',
+      description: `MERN Serwis | ${baseUrl} Наші Останні Роботи ${carsString}`,
+    },
+  };
+
+  // Fallback to Polish metadata if locale is not recognized
+  const localeMetadata = metadata[params.locale] || metadata.pl;
+
   return {
-    title: `${params.locale === 'pl' ? 'Nasze Aktualnosci | MERN Serwis' : params.locale === 'en' ? 'Our Last Works | MERN Car Service' : 'Наші Останні Роботи | Автосервіс MERN'} `,
-    description: `MERN Serwis | https://mernserwis.pl ${params.locale === 'pl' ? `Nasze Aktualności ${carsString}` : params.locale === 'en' ? `Our last Works ${carsString}` : `Наші останні Роботи ${carsString}`} `,
+    title: localeMetadata.title,
+    description: localeMetadata.description,
   };
 }
 
 
+
 const NewsPage = () => {
-  return <DynamicPage/>;
+  return <DynamicPage />;
 };
 
 export default NewsPage;

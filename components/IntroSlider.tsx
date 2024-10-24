@@ -43,6 +43,9 @@ const IntroSlider = () => {
       effect="fade"
       loop
       className="h-screen z-0"
+      role="region"
+      aria-live="polite"
+      aria-label="Intro slides"
     >
       <SwiperSlide>
         <div>
@@ -50,37 +53,40 @@ const IntroSlider = () => {
             src={
               isMobileView ? "/intro/intro1_mobile.webp" : "/intro/intro1.webp"
             }
-            alt="Slide 1"
+            alt="A dynamic view of the first slide's content"
             fill
             className="w-full object-cover"
           />
         </div>
       </SwiperSlide>
+
       <SwiperSlide>
         <div>
           <Image
             src={
               isMobileView ? "/intro/intro2_mobile.webp" : "/intro/intro2.webp"
             }
-            alt="Slide 2"
+            alt="A detailed look at the second slide"
             fill
             className="w-full object-cover"
           />
         </div>
       </SwiperSlide>
+
       <SwiperSlide>
         <div>
           <Image
             src={
               isMobileView ? "/intro/intro3_mobile.webp" : "/intro/intro3.webp"
             }
-            alt="Slide 3"
+            alt="The vibrant visuals of the third slide"
             fill
             className="w-full object-cover"
           />
         </div>
       </SwiperSlide>
     </Swiper>
+
   );
 };
 

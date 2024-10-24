@@ -16,40 +16,41 @@ const NewsItem = ({ item, index }: INewsItemProps) => {
 
   return (
     <div
-      className={`slide-row flex flex-col w-full mx-auto transition-all relative px-4 my-[2rem] ${
-        index % 2 !== 0 ? "justify-end" : "justify-start"
-      }`}
+      className={`slide-row flex flex-col w-full mx-auto transition-all relative px-4 my-[2rem] ${index % 2 !== 0 ? "justify-end" : "justify-start"
+        }`}
+      role="group" // Group for related elements
+      aria-labelledby={`slide-title-${index}`} // Associate the slide with a heading
     >
       <div className="slide-col relative w-[85vw] xl:w-[80vw] 2xl:w-[65vw] h-[400px]">
         {/* Thumbnail images on the side */}
         <div
-          className={`flex gap-2 flex-col absolute top-[50%] -translate-y-[50%] ${
-            index % 2 !== 0 ? "left-0" : "right-0"
-          }`}
+          className={`flex gap-2 flex-col absolute top-[50%] -translate-y-[50%] ${index % 2 !== 0 ? "left-0" : "right-0"
+            }`}
         >
           {item.images.map((image, i) => (
-           <Image
-           src={image}
-           key={i}
-           alt="thumbnail"
-           width={60}
-           height={60}
-           onClick={() => setActiveImage(image)}
-           className={`rounded-full object-cover cursor-pointer ${image === activeImage ? "border-2 border-white" : ""}`}
-         />
+            <Image
+              src={image}
+              key={i}
+              alt={`Thumbnail of ${item.car}`} // More descriptive alt text
+              width={60}
+              height={60}
+              onClick={() => setActiveImage(image)}
+              className={`rounded-full object-cover cursor-pointer ${image === activeImage ? "border-2 border-white" : ""}`}
+            />
           ))}
         </div>
 
         {/* Text content */}
         <div
-          className={`absolute top-[50%] -translate-y-[50%] w-[530px] min-h-[270px] bg-[rgba(255,255,255,0.2)] backdrop-blur-sm backdrop-brightness-10 p-4 rounded-md z-[2] ${
-            index % 2 !== 0 ? "left-[250px]" : "right-[250px]"
-          }`}
+          className={`absolute top-[50%] -translate-y-[50%] w-[530px] min-h-[270px] bg-[rgba(255,255,255,0.2)] backdrop-blur-sm backdrop-brightness-10 p-4 rounded-md z-[2] ${index % 2 !== 0 ? "left-[250px]" : "right-[250px]"
+            }`}
         >
-       <div className="flex items-center justify-between mb-[24px]">
-       <h2 className="font-bold text-lg">{item.car}</h2>
-       <span className="text-gray-500">{item.createdAt}</span>
-       </div>
+          <div className="flex items-center justify-between mb-[24px]">
+            <h2 id={`slide-title-${index}`} className="font-bold text-lg">
+              {item.car}
+            </h2>
+            <span className="text-gray-500">{item.createdAt}</span>
+          </div>
           <ul className="text-sm leading-[1.3] mb-4">
             {item.services.map((service, idx) => (
               <li key={idx}>{t(service)}</li>
@@ -58,8 +59,16 @@ const NewsItem = ({ item, index }: INewsItemProps) => {
           <ul className="text-sm leading-[1.3]">
             <li>{t(item.contact.serviceCenter)}</li>
             <li>{item.contact.address}</li>
-            <li>{item.contact.phone}</li>
-            <li>{item.contact.email}</li>
+            <li>
+              <a href={`tel:${item.contact.phone}`} className="text-blue-500 underline">
+                {item.contact.phone}
+              </a>
+            </li>
+            <li>
+              <a href={`mailto:${item.contact.email}`} className="text-blue-500 underline">
+                {item.contact.email}
+              </a>
+            </li>
           </ul>
           <ul className="text-sm leading-[1.3] mt-4 flex flex-wrap text-blue-500">
             {item.hashtags.map((hashtag, idx) => (
@@ -72,17 +81,16 @@ const NewsItem = ({ item, index }: INewsItemProps) => {
 
         {/* Active image */}
         <div
-          className={`absolute top-0 h-full ${
-            index % 2 !== 0 ? "right-0" : "left-0"
-          }`}
+          className={`absolute top-0 h-full ${index % 2 !== 0 ? "right-0" : "left-0"
+            }`}
         >
-         <Image
-           src={activeImage}
-           alt={item.car}
-           width={350}
-           height={0}
-           className="h-full object-cover rounded-md"
-/>
+          <Image
+            src={activeImage}
+            alt={`${item.car} - Main View`} // Descriptive alt text for active image
+            width={350}
+            height={0}
+            className="h-full object-cover rounded-md"
+          />
         </div>
       </div>
       <div className="w-[30vw] h-[2px] bg-blue-300 mx-auto mt-[4rem]"></div>

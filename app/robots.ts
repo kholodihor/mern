@@ -4,13 +4,18 @@ export default function robots() {
       {
         userAgent: "*",
         allow: "/",
-        disallow: ["/admin", "/api", "/public/", "/login"],
+        disallow: [
+          "/admin",
+          "/api",
+          "/public/",
+          "/login",
+        ],
       },
     ],
     sitemap: [
-      `https://mernserwis.pl/ua/sitemap.xml`,
-      `https://mernserwis.pl/en/sitemap.xml`,
-      `https://mernserwis.pl/pl/sitemap.xml`,
+      `${process.env.BASE_URL}/ua/sitemap.xml`,
+      `${process.env.BASE_URL}/en/sitemap.xml`,
+      `${process.env.BASE_URL}/pl/sitemap.xml`,
     ],
   };
 }

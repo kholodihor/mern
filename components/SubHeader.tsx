@@ -14,15 +14,23 @@ const SubHeader = () => {
     return null;
 
   return (
-    <ul
+    <nav
       className={`fixed top-0 left-0 w-full hidden h-[7vh] py-4 px-6 lg:flex justify-around items-center z-50 bg-black text-xs md:text-sm border-b border-b-white`}
+      aria-label="Contact Information Bar"
     >
-      <li>{t('independent')}</li>
-      <li>ul.Przyszłość 2A Stanisławów Pierwszy</li>
-      <li>mern.serwis@gmail.com</li>
-      <li>509 158 159</li>
-      <li>509 159 158</li>
-    </ul>
+      <p>{t('independent')}</p>
+      <address className="not-italic">
+        <p>ul. Przyszłość 2A Stanisławów Pierwszy</p>
+
+      </address>
+      <a href="mailto:mern.serwis@gmail.com" className="underline">
+        mern.serwis@gmail.com
+      </a>
+      <div className="flex gap-4">
+        <a href="tel:+48509158159" className="underline">509 158 159</a>
+        <a href="tel:+48509159158" className="underline">509 159 158</a>
+      </div>
+    </nav>
   );
 };
 
