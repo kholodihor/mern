@@ -2,7 +2,7 @@
 
 import SectionTitle from '@/components/shared/section-title'
 import { Link } from '@/i18n/routing';
-import { newsData } from './data'
+import { galleryData } from './data'
 import { useTranslations } from "next-intl";
 import Slider from '../home/shared/slider/slider'
 import Image from 'next/image'
@@ -21,7 +21,7 @@ const CarImage = ({ data }: { data: string }) => {
 
 const CarPage = ({ slug }: { slug: string }) => {
   const t = useTranslations();
-  const car = newsData.find(car => car.slug === slug)
+  const car = galleryData.find(car => car.slug === slug)
   return (
     <section
       id="about-us"
