@@ -3,22 +3,52 @@
     "strona_glowna": "STRONA GŁÓWNA",
     "o_nas": "O NAS",
     "uslugi": "USŁUGI",
-    "kontakt": "Nasze kontakty",
+    "gallery": "Galeria",
+    "kontakt": "kontakt",
     "news": "Aktualności",
     "motto": "IDEALNY SERWIS DLA IDEALNYCH AUT",
-    "button":"Zostaw prośbę o obsługę 👉",
-    "independent":"Niezależny serwis BMW, Rolls-Royce i MINI"
+    "button": "Zostaw prośbę o obsługę 👉",
+    "independent": "Niezależny serwis BMW, Rolls-Royce i MINI"
   },
   "About": {
-    "title": "kim jesteśmy",
+    "title": "o nas",
     "content": "Firma Mern sp. Z o.o. powstała z zamiłowania do marki BMW. W chwili obecnej zajmujemy się głównie mechaniką i diagnostyką takich samochodów jak BMW, Mini i Rolls Royce. Nasze doświadczenie zarówno jak i doświadczenie naszych pracowników pozwala nam świadczyć usługi na najwyższym poziomie. Dysponujemy profesjonalnym sprzętem co pozwala nam zrobić swoją pracę sprawnie i precyzyjnie. Do naprawy pojazdów używamy oryginalnych części oraz części zamiennych wysokiej jakości. Do każdego klienta podchodzimy indywidualnie.",
     "call": "Zapraszamy do kontaktu!"
   },
+  "Gallery": {
+    "title": "GALERIA",
+    "not_found": "Brak auta w tej kategorii",
+    "BMWII3Rex": {
+      "desc": "Naprawa wiązki przewodów fotela, diagnostyka, wymiana przednich klocków hamulcowych, zapis w elektronicznej książce BMW dla bezpieczeństwa i komfortu.",
+      "fullDesc": "Wykonaliśmy szereg ważnych prac, w tym naprawę wiązki przewodów fotela, co przywróciło prawidłowe funkcjonowanie komponentów elektrycznych fotela, poprawiając komfort zarówno kierowcy, jak i pasażerów. Ponadto przeprowadzono diagnostykę komputerową, która szybko zidentyfikowała i rozwiązała potencjalne problemy techniczne, zapewniając niezawodność pojazdu. Zrealizowaliśmy również wymianę przednich klocków hamulcowych, co znacząco poprawiło bezpieczeństwo hamowania, szczególnie w sytuacjach krytycznych. Wszystkie wykonane prace zostały zapisane w elektronicznej książce serwisowej BMW, co potwierdza prawidłową obsługę pojazdu i zwiększa jego wartość na rynku."
+    },
+    "BMW7F01": {
+      "desc": "Wymiana wentylatora, skrzynki przekładni VTG, DPF, siłowników pokrywy silnika, hamulców, zacisków, amortyzatorów VDC, czyszczenie kanałów dolotowych, diagnostyka.",
+      "fullDesc": "Wymieniliśmy wentylator, skrzynkę przekładni VTG, DPF (system oczyszczania spalin) oraz siłowniki pokrywy silnika, zapewniając płynne działanie tych kluczowych systemów i poprawiając ogólną wydajność pojazdu. Przeprowadziliśmy również wymianę komponentów hamulcowych, regenerację zacisków oraz amortyzatorów VDC, co znacznie poprawiło bezpieczeństwo i komfort jazdy. Czyszczenie kanałów dolotowych pomogło poprawić efektywność pracy silnika. Ponadto przeprowadzono szczegółową diagnostykę, która pozwoliła zidentyfikować i usunąć potencjalne problemy techniczne, zapewniając niezawodność i trwałość pojazdu."
+    },
+    "BMW2F44GranCoupé": {
+      "desc": "Wymiana płynu hamulcowego i przednich klocków hamulcowych, usługa Door To Door dla wygody i oszczędności czasu.",
+      "fullDesc": "Wymieniliśmy płyn hamulcowy i przednie klocki hamulcowe, zapewniając prawidłową wydajność hamulców i zwiększając bezpieczeństwo na drodze. Dodatkowo oferujemy usługę Door To Door, pozwalając naszym klientom zaoszczędzić czas i cieszyć się wygodą, ponieważ organizujemy dostawę pojazdu bezpośrednio do Państwa domu lub biura na serwis. Gwarantuje to komfort i nieprzerwaną eksploatację pojazdu bez konieczności wyjazdów do serwisu."
+    },
+    "BMW1F40M135iX": {
+      "desc": "Wymiana poduszki silnika, aktualizacja płynu hamulcowego, wymiana tylnych klocków hamulcowych, zapis w elektronicznej książce BMW.",
+      "fullDesc": "Wymieniliśmy poduszkę silnika, co poprawiło stabilność pracy silnika i zmniejszyło wibracje, zapewniając płynniejszą jazdę. Zaktualizowaliśmy płyn hamulcowy, zapewniając prawidłową wydajność hamulców i zwiększając bezpieczeństwo na drodze. Wymieniliśmy tylne klocki hamulcowe, co poprawiło reakcję układu hamulcowego i zapewniło bardziej efektywne hamowanie. Wszystkie wykonane prace zostały zapisane w elektronicznej książce serwisowej BMW, co potwierdza wykonanie usługi i zwiększa wartość pojazdu."
+    },
+    "BMWX2F39": {
+      "desc": "Aktualizacja oprogramowania sterowników, usługa Door To Door dla optymalnej pracy pojazdu.",
+      "fullDesc": "Wykonaliśmy aktualizację oprogramowania sterowników, co poprawiło wydajność i stabilność systemów pojazdu. Oferujemy również usługę Door To Door, która obejmuje kompleksową kontrolę i regulację wszystkich kluczowych komponentów pojazdu, zapewniając optymalną wydajność i komfort użytkowania. Wszystkie wykonane prace zostały zapisane w elektronicznej książce serwisowej BMW, co potwierdza ich wykonanie i zwiększa wartość pojazdu."
+    },
+    "BMW5G30540iX": {
+      "desc": "Wymiana oleju, wymiana tylnych tarcz i klocków hamulcowych, fumigacja klimatyzacji w celu poprawy jakości powietrza.",
+      "fullDesc": "Wykonaliśmy kompleksową obsługę pojazdu, w tym wymianę oleju, aby zapewnić prawidłowe działanie silnika. Wymieniliśmy tylne tarcze i klocki hamulcowe, co zapewniło skuteczność hamowania i poprawiło bezpieczeństwo na drodze. Dodatkowo przeprowadziliśmy fumigację klimatyzacji, aby poprawić jakość powietrza w kabinie i pozbyć się nieprzyjemnych zapachów. Oferujemy również usługę Door To Door, w ramach której sprawdzamy i regulujemy wszystkie systemy pojazdu. Wszystkie prace zostały zapisane w elektronicznej książce serwisowej BMW, co potwierdza ich wykonanie i zwiększa wartość pojazdu."
+    },
+    "read_more": "Dowiedź się więcej"
+  },
   "Services": {
-    "title": "co my robimy",
-    "diagnostics": "Diagnostyka komputerowa",
+    "title": "USŁUGI",
+    "computer_diagnostics": "Diagnostyka komputerowa",
     "diagnostics_text": "Precyzyjna diagnostyka BMW, Rolls-Royce i Mini z wykorzystaniem  oprogramowania ISTA",
-    "service": "Serwis mechaniczny i elektryczny",
+    "mechanical_electrical_service": "Serwis mechaniczny i elektryczny",
     "service_text": "Naprawa mechaniki i układów elektrycznych z wykorzystaniem oryginalnych części i wysokiej jakości zamienników",
     "inspections": "Przeglądy i serwis okresowy",
     "inspections_text": "Kompleksowe przeglądy techniczne i serwisowe zgodne z zaleceniami producenta",
@@ -28,35 +58,28 @@
     "brakes_service_text": "Serwis i wymiana elementów zawieszenia oraz układów hamulcowych z zapewnieniem maksymalnego bezpieczeństwa",
     "coding": "Kodowanie i programowanie",
     "coding_text": "Kodowanie oraz programowanie modułów i sterowników zgodnie z najnowszymi standardami BMW",
-    "paintwork": "Naprawy blacharskie i lakiernicze",
+    "painting": "Naprawy blacharskie i lakiernicze",
     "paintwork_text": "Profesjonalne usługi napraw blacharskich oraz lakierowanie zgodnie z oryginalnymi specyfikacjami producenta",
     "conditioning": "Serwis klimatyzacji",
     "conditioning_text": "Pełny serwis klimatyzacji, obejmujący napełnianie, odgrzybianie oraz naprawę układu klimatyzacyjnego",
-    "accesoires": "Montaż i serwis akcesoriów",
+    "accessoires": "Montaż i serwis akcesoriów",
     "accesoires_text": "Montaż oryginalnych akcesoriów BMW, w tym haków holowniczych, systemów audio, kamer cofania i wielu innych",
     "pricing": "Indywidualna wycena naprawy na podstawie numeru VIN",
-    "pricing_text": "Każdą wycenę dopasowujemy indywidualnie do Twojego pojazdu. Wycena jest tworzona za pomocą AIR (Aftersales Information Research). Naprawy są wpisywane do książki elektronicznej BMW"
+    "pricing_text": "Każdą wycenę dopasowujemy indywidualnie do Twojego pojazdu."
   },
-  "Steps": {
-    "title": "JAK TO ZROBIĆ",
-    "content1": "Niezależnie, czy chcesz skontrolować stan swojego samochodu, czy potrzebujesz naprawy, skontakuj się z nami dzwoniąc pod numer +48 509 158 159 i wybierz dogodny dla siebie termin. ",
-    "title1": "Umów się",
-    "content2": "Przyprowadź samochód do naszego warsztatu i o nic się nie martw - zadbamy o niego w najlepszy sposób. ",
-    "title2": "Przyprowadź samochód ",
-    "content3": "Zweryfikujemy co wymaga naprawy i skontaktujemy się z Tobą. W tym celu będziemy musieli przeprowadzić jazdę próbną, bądź podnieść samochód na podnośniku.",
-    "title3": "Diagnostyka i wycena",
-    "content4": "To do Ciebie należy decyzja o naprawie pojazdu i bez akceptacji kosztów sami nic nie wymienimy.",
-    "title4": "Naprawa"
+  "Reviews": {
+    "title": "Opinie"
   },
   "Contacts": {
-    "title": "NASZE KONTAKTY",
+    "title": "Zapraszamy",
+    "title_2": "kontakt",
     "social": "Poznaj nas bliżej"
   },
   "Form": {
     "title": "Napisz do nas",
     "paragraph_1": "Potrzebujesz porady dotyczącej Twojego BMW lub chcesz umówić się na wizytę serwisową?",
-    "paragraph_2": "Proszę wypełnij nasz formularz kontaktowy, podając swoje dane oraz opis problemu lub pytania.😇 Nasz doświadczony personel serwisowy odpowie na Twoje zapytania tak szybko, jak to będzie możliwe. Gwarantujemy uczciwą i dokładną diagnozę oraz konkurencyjne ceny.👌",
-    "paragraph_3": " Jesteśmy tutaj, aby pomóc Ci cieszyć się swoim auto bez żadnych kłopotów.😉",
+    "paragraph_2": "Proszę wypełnij nasz formularz kontaktowy, podając swoje dane oraz opis problemu lub pytania. Nasz doświadczony personel serwisowy odpowie na Twoje zapytania tak szybko, jak to będzie możliwe. Gwarantujemy uczciwą i dokładną diagnozę oraz konkurencyjne ceny.",
+    "paragraph_3": " Jesteśmy tutaj, aby pomóc Ci cieszyć się swoim auto bez żadnych kłopotów.",
     "name": "Imię",
     "email": "Adres email do kontaktu",
     "phone": "Numer telefonu",
@@ -94,42 +117,27 @@
     "tryagain": "Spróbuj ponownie"
   },
   "News": {
-    "title": "Nasze Aktualności",
-    "motto":" 📌 Mern Serwis - Twoje zaufane centrum obsługi samochodów marki BMW!",
-    "services":{
-      "seat":"➡️ Naprawa wiązki fotela",
-      "diagnostics":"➡️ Diagnostyka komputerowa",
-      "front_brake":"➡️ Wymiana klocków hamulcowych przód",
-      "back_brake":"➡️ Wymiana klocków hamulcowych tylą",
-      "electronic_book":"➡️ Wpis do książki elektronicznej BMW",
-      "inspection":"➡️ Przegląd samochodu",
-      "brake_fluid":"➡️ Wymiana płynu hamulcowego",
-      "door_to_door":"➡️ Usługa Door To Door",
-      "oil_service":"➡️ Serwis olejowy",
-      "brake_disks":"➡️ Wymiana tarcz i klocków hamulcowych tył",
-      "contidioning_disinfection":"➡️ Odgrzybianie klimatyzacji",
-      "upgrade":"➡️ Aktualizacja oprogramowania wszystkich sterowników",
-      "engine_mount":"➡️ Wymiana poduszki silnika"
-    },
-    "hashtags": {
-      "0":"#bmwii3",
-      "1":"#naprawawiazki",
-      "2":"#naprawafotela",
-      "3":"#wymianapłynuhamulcowego",
-      "4":"#bmwserwis",
-      "5":"#bmwwarszwa",
-      "6":"#wymianaklocków",
-      "7":"#bmwf44",
-      "8":"#bmwg30",
-      "9":"#bmwlove",
-      "10":"#serwisolejowy",
-      "11":"#bmwx2",
-      "12":"#bmwaktualizacjaoprogramowania",
-      "13":"#niezależnyserwisbmw",
-      "14":"#mernserwis",
-      "15":"#bmw1f40",
-      "16":"#bmw",
-      "17":"#dbamyodetale"
+    "title": "Aktualności",
+    "read_more": "Dowiedź się więcej"
+  },
+  "Filters": {
+    "categories": {
+      "all": "Wszystkie kategorie",
+      "computer_diagnostics": "Diagnostyka komputerowa",
+      "suspension": "Naprawa zawieszenia",
+      "brake": "Naprawa hamulców",
+      "mechanical": "Serwis mechaniczny",
+      "electrical": "Serwis elektryczny",
+      "inspections": "Okresowy przegląd",
+      "engine": "Naprawa silnika",
+      "coding_programming": "Kodowanie i programowanie",
+      "body": "Naprawa karoserii",
+      "painting": "Naprawa lakiernicza",
+      "air_conditioning": "Serwis klimatyzacji",
+      "accessoires_assembly": "Montaż akcesoriów",
+      "accessoires": "Serwis akcesoriów",
+      "disc": "Naprawa tarcz i klocków",
+      "pricing": "Indywidualna wycena naprawy"
     }
   }
 }

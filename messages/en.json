@@ -3,22 +3,52 @@
     "strona_glowna": "Main Page",
     "o_nas": "About Us",
     "uslugi": "Services",
-    "kontakt": "Contact us",
+    "gallery": "Gallery",
+    "kontakt": "Contact",
     "news": "Our News",
     "motto": "Perfect service for perfect cars",
-    "button":"Leave a request for service 👉 ",
-    "independent":"Independent BMW, Rolls-Royce and MINI service"
+    "button": "Leave a request for service 👉 ",
+    "independent": "Independent BMW, Rolls-Royce and MINI service"
   },
   "About": {
-    "title": "Who we are",
+    "title": "about us",
     "content": "The company Mern sp. Z o. o. was created out of passion for the BMW brand. Currently, we mainly deal with mechanics and diagnostics of cars such as BMW, Mini and Rolls Royce. Our experience and the experience of our employees allow us to provide services at the highest level. We have professional equipment that allows us to do our work efficiently and precisely. We use original parts and high-quality spare parts to repair vehicles. We approach each customer individually.",
-    "call": "Please contact us!"
+    "call": "We invite you to contact us!"
+  },
+  "Gallery": {
+    "title": "GALLERY",
+    "not_found": "No auto by this category",
+    "BMWII3Rex": {
+      "desc": "Seat wiring harness repair, diagnostics, replacement of front brake pads, recording in the BMW electronic book for safety and comfort.",
+      "fullDesc": "We performed a range of important works, including the repair of the seat wiring harness, which restored the proper functioning of the electrical components of the seat, enhancing comfort for both the driver and passengers. Additionally, a computer diagnostic was carried out, quickly identifying and resolving potential technical issues, ensuring the car's reliability. We also replaced the front brake pads, significantly improving braking safety, especially in critical situations. All performed work was documented in the BMW electronic service book, confirming the proper maintenance of the vehicle and increasing its market value."
+    },
+    "BMW7F01": {
+      "desc": "Fan replacement, VTG transmission box, DPF, bonnet actuators, brakes, calipers, VDC shock absorbers, intake channel cleaning, diagnostics.",
+      "fullDesc": "We replaced the fan, VTG transmission box, DPF (exhaust gas cleaning system), and bonnet actuators, ensuring the smooth operation of these vital systems and improving the overall performance of the vehicle. We also replaced the braking components, restored calipers, and VDC shock absorbers, greatly enhancing safety and comfort during driving. Cleaning of the intake channels helped improve engine efficiency. Furthermore, a detailed diagnosis was performed, allowing us to identify and eliminate potential technical problems, ensuring the car's reliability and longevity."
+    },
+    "BMW2F44GranCoupé": {
+      "desc": "Brake fluid and front brake pad replacement, Door To Door service for convenience and time savings.",
+      "fullDesc": "We replaced the brake fluid and front brake pads, ensuring proper braking efficiency and increasing road safety. Additionally, we offer the Door To Door service, allowing our customers to save time and enjoy convenience as we arrange the delivery of the vehicle directly to your home or office for servicing. This guarantees comfort and uninterrupted operation of your vehicle without the need for trips to the service center."
+    },
+    "BMW1F40M135iX": {
+      "desc": "Engine mount replacement, brake fluid update, rear brake pad replacement, recording in the BMW electronic book.",
+      "fullDesc": "We replaced the engine mount, improving engine stability and reducing vibration for a smoother driving experience. We updated the brake fluid, ensuring proper braking efficiency and enhancing safety on the road. Rear brake pads were replaced, improving the brake system’s response and ensuring more effective braking. All performed work was documented in the BMW electronic service book, confirming the maintenance and increasing your vehicle's value."
+    },
+    "BMWX2F39": {
+      "desc": "Driver software update, Door To Door service for optimal vehicle operation.",
+      "fullDesc": "We performed a driver software update, which enhanced the efficiency and stability of the vehicle’s systems. We also provided the Door To Door service, which included a comprehensive check-up and adjustment of all key vehicle components, ensuring optimal performance and user comfort. All performed work was documented in the BMW electronic service book, confirming the services and increasing the vehicle's value."
+    },
+    "BMW5G30540iX": {
+      "desc": "Oil change, rear brake discs and pads replacement, air conditioner fumigation to improve air quality.",
+      "fullDesc": "We performed comprehensive maintenance on your vehicle, including an oil change to ensure the engine runs smoothly. Rear brake discs and pads were replaced to ensure efficient braking and improve safety on the road. We also performed air conditioner fumigation to improve air quality inside the cabin and eliminate unpleasant odors. Additionally, we provided Door To Door service, including inspection and adjustment of all vehicle systems. All work was documented in the BMW electronic service book, confirming its completion and increasing the vehicle’s value."
+    },
+    "read_more": "Find out more"
   },
   "Services": {
-    "title": "What We do",
-    "diagnostics": "Computer diagnostics",
+    "title": "Services",
+    "computer_diagnostics": "Computer diagnostics",
     "diagnostics_text": "Precise diagnostics for BMW, Rolls-Royce and Mini using ISTA software",
-    "service": "Mechanical and electrical service",
+    "mechanical_electrical_service": "Mechanical and electrical service",
     "service_text": "Repair of mechanics and electrical systems using original parts and high-quality replacements",
     "inspections": "Inspections and periodic service",
     "inspections_text": "Comprehensive technical and service inspections in accordance with the manufacturer's recommendations",
@@ -28,35 +58,28 @@
     "brakes_service_text": "Service and replacement of suspension components and brake systems ensuring maximum safety",
     "coding": "Coding and programming",
     "coding_text": "Coding and programming of modules and controllers in accordance with the latest BMW standards",
-    "paintwork": "Bodywork and painting repairs",
+    "painting": "Bodywork and painting repairs",
     "paintwork_text": "Professional bodywork repair services and painting to the original manufacturer's specifications",
     "conditioning": "Air conditioning service",
     "conditioning_text": "Full air conditioning service, including filling, disinfection and repair of the air conditioning system",
-    "accesoires": "Accessories assembly and service",
+    "accessoires": "Accessories assembly and service",
     "accesoires_text": "Installation of original BMW accessories, including towbars, audio systems, reversing cameras and much more",
     "pricing": "Individual repair quote based on VIN number",
-    "pricing_text": "Each quote is individually tailored to your vehicle. The valuation is created using AIR (Aftersales Information Research). Repairs are entered into the BMW e-book"
+    "pricing_text": "Each quote is individually tailored to your vehicle."
   },
-  "Steps": {
-    "title": "how to do it",
-    "content1": "Regardless of whether you want to check the condition of your car or need repairs, contact us by calling +48 509 158 159 and choose a date convenient for you.",
-    "title1": "Make an appointment",
-    "content2": "Bring your car to our workshop and don't worry about anything - we will take care of it in the best possible way. ",
-    "title2": "Bring the Сar",
-    "content3": "We will verify what needs repair and contact you. To do this, we will have to conduct a test drive or raise the car on a lift.",
-    "title3": "Diagnostics and valuation",
-    "content4": "It is up to you to decide whether to repair the vehicle and we will not replace anything without accepting the costs.",
-    "title4": "Repair"
+  "Reviews": {
+    "title": "Reviews"
   },
   "Contacts": {
-    "title": "Our Contacts",
+    "title": "Welcome",
+    "title_2": "contact",
     "social": "Get to know us better"
   },
   "Form": {
     "title": "Write to us",
     "paragraph_1": "Do you need advice about your BMW or want to make an appointment for a service visit?",
-    "paragraph_2": "Please complete our contact form with your details and a description of your problem or question.😇 Our experienced service staff will respond to your inquiries as quickly as possible. We guarantee honest and accurate diagnosis and competitive prices.👌",
-    "paragraph_3": "We are here to help you enjoy your auto without any hassle.😉",
+    "paragraph_2": "Please complete our contact form with your details and a description of your problem or question. Our experienced service staff will respond to your inquiries as quickly as possible. We guarantee honest and accurate diagnosis and competitive prices.",
+    "paragraph_3": "We are here to help you enjoy your auto without any hassle.",
     "name": "Name",
     "email": "Email",
     "phone": "Phone number",
@@ -94,43 +117,27 @@
     "tryagain": "Try again"
   },
   "News": {
-    "title": "Our last works",
-    "motto":" 📌 Mern Serwis - Your trusted BMW car service center!",
-    "services":{
-      "seat":"➡️ Seat harness repair",
-      "diagnostics":"➡️ Computer diagnostics",
-      "front_brake":"➡️ Front brake pad replacement",
-      "back_brake":"➡️ Replacing rear brake pads",
-      "electronic_book":"➡️ BMW eBook Entry",
-      "inspection":"➡️ Car inspection",
-      "brake_fluid":"➡️ Brake fluid replacement",
-      "door_to_door":"➡️ Door To Door Service",
-      "oil_service":"➡️ Oil service",
-      "brake_disks":"➡️ Replacing rear brake discs and pads",
-      "contidioning_disinfection":"➡️ Air conditioning fumigation",
-      "upgrade":"➡️ Software update for all drivers",
-      "engine_mount":"➡️ Replacing the engine mount"
-    },
-    "hashtags": {
-      "0":"#bmwii3",
-      "1":"#harnessrepair",
-      "2":"#armchairrepair",
-      "3":"#brakefluidreplacement",
-      "4":"#bmwserwis",
-      "5":"#bmwwarszwa",
-      "6":"#padreplacement",
-      "7":"#bmwf44",
-      "8":"#bmwg30",
-      "9":"#bmwlove",
-      "10":"#oilservice",
-      "11":"#bmwx2",
-      "12":"#bmwsoftwareupdate",
-      "13":"#independentbmwservice",
-      "14":"#mernserwis",
-      "15":"#bmw1f40",
-      "16":"#bmw",
-      "17":"#wecareaboutdetails"
-    }
+    "title": "News",
+    "read_more": "Find out more"
+  },
+  "Filters": {
+    "categories": {
+      "all": "All Categories",
+      "computer_diagnostics": "Computer Diagnostics",
+      "suspension": "Suspension repair",
+      "brake": "Brakes repair",
+      "mechanical": "Mechanical service",
+      "electrical": "Electrical service",
+      "inspections": "Periodic Service",
+      "engine": "Engine Repair",
+      "coding_programming": "Coding and Programming",
+      "body": "Body Repair",
+      "painting": "Paint Repair",
+      "air_conditioning": "Air Conditioning Service",
+      "accessoires_assembly": "Accessory Installation",
+      "accessoires": "Accessory Service",
+      "disc": "Disc and pad repair",
+      "pricing": "Individual repair cost estimate"
     }
   }
-
+}
