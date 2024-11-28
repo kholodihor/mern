@@ -1,18 +1,14 @@
 import type { Metadata } from "next";
 import { Open_Sans } from 'next/font/google';
-import Script from "next/script";
 import { PageProps } from "@/types";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { Locale, routing } from '@/i18n/routing';
-// import { SWRProvider } from "../swr-provider";
-// import { getServerSession } from "next-auth";
 import Header from "@/components/shared/header";
 import Footer from "@/components/shared/footer";
-// import GoogleAnalytics from "@/components/GoogleAnalytics";
-// import CookieBanner from "@/components/CookieBanner";
-// import SessionWrapper from "../session-provider";
+import GoogleAnalytics from "@/components/shared/google-analytics";
+import CookieBanner from "@/components/shared/cookie-banner";
 import SubHeader from "@/components/shared/sub-header";
 import "../globals.css";
 
@@ -62,9 +58,26 @@ export async function generateMetadata({
       },
     },
     openGraph: {
+      type: 'website',
+      locale: locale,
+      url: baseUrl.toString(),
       title: defaultTitle,
       description: defaultDescription,
-      images: ["/og-image.png"],
+      siteName: 'MERN Serwis',
+      images: [
+        {
+          url: '/opengraph-image.png',
+          width: 1200,
+          height: 630,
+          alt: 'MERN Serwis Samochodowy',
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: defaultTitle,
+      description: defaultDescription,
+      images: ['/opengraph-image.png'],
     },
     keywords: ["MERN", "BMW", "Serwis Samochodowy",
       "Автосервіс", "Варшава", "Rolls Royce",
@@ -92,28 +105,32 @@ export default async function RootLayout({
   return (
     <html lang={locale}>
       <head>
-        <Script
-          strategy="afterInteractive"
-          src={`https://www.googletagmanager.com/gtag/js?id=AW-11012610070`}
-        />
-        <Script id="google-analytics" strategy="afterInteractive">
-          {`
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', 'AW-11012610070');
-        `}
-        </Script>
+        <title>MERN Car Service</title>
+        <meta name="description" content="MERN Serwis is the best service for repairing your BMW, Rolls Royce, Mini Cooper" />
+
+        <meta property="og:url" content="https://mernserwis.pl/en" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="MERN Car Service" />
+        <meta property="og:description" content="MERN Serwis is the best service for repairing your BMW, Rolls Royce, Mini Cooper" />
+        <meta property="og:image" content="https://mernserwis.pl/opengraph-image.png" />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta property="twitter:domain" content="mernserwis.pl" />
+        <meta property="twitter:url" content="https://mernserwis.pl/en" />
+        <meta name="twitter:title" content="MERN Car Service" />
+        <meta name="twitter:description" content="MERN Serwis is the best service for repairing your BMW, Rolls Royce, Mini Cooper" />
+        <meta name="twitter:image" content="https://mernserwis.pl/opengraph-image.png" />
+
       </head>
       <body className={`min-w-[320px] ${open_sans.variable}`}>
-        {/* <GoogleAnalytics
-          GA_MEASUREMENT_ID={`G-MJ7BYHRN8T`}
-        /> */}
+        <GoogleAnalytics
+          GA_MEASUREMENT_ID={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || ''}
+        />
         <NextIntlClientProvider locale={locale} messages={messages}>
           <SubHeader />
           <Header />
           {children}
-          {/* <CookieBanner /> */}
+          <CookieBanner />
           <Footer />
         </NextIntlClientProvider>
       </body>

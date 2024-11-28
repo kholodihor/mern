@@ -1,7 +1,7 @@
 'use client'
 
 import { useTranslations } from "next-intl";
-import { galleryData } from "./data";
+import { galleryData } from "@/data/gallery";
 import { useFilters } from '@/stores/useFilters';
 import { CATEGORIES } from '@/constants/categories';
 import SectionTitle from "@/components/shared/section-title";

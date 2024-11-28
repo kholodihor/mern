@@ -4,7 +4,6 @@ import { Locale } from '@/i18n/routing';
 import { baseUrl, contactInfo } from '@/constants';
 import Contacts from '@/components/pages/contacts/contacts';
 
-
 const metadata: PageMetadata = {
   pl: {
     title: 'Kontakty | MERN Serwis',
@@ -19,7 +18,6 @@ const metadata: PageMetadata = {
     description: `MERN Serwis | ${baseUrl} | ${contactInfo} | Наші контакти`,
   },
 };
-
 
 export async function generateMetadata({
   params,

@@ -65,11 +65,11 @@ export interface INewsItem {
 }
 
 export interface IReviewItem {
-  id: number,
+  id: string,
   name: string;
   review: string;
   rating: number;
-  createdAt: string;
+  created_at: string;
 }
 
 export type PageMetadata = {

@@ -1,7 +1,55 @@
-import Gallery from '@/components/pages/gallery/gallery'
+import { Metadata } from 'next';
+import dynamic from 'next/dynamic';
+import { INewsItem, PageMetadata } from '@/types';
+import { galleryData } from '@/data/gallery';
+import { Locale } from '@/i18n/routing';
+import { baseUrl } from '@/constants';
+import Spiral from '@/components/shared/spiral/Spiral';
+
+const DynamicPage = dynamic(
+  () =>
+    import(
+      '@/components/pages/gallery/gallery'
+    ),
+
+  { ssr: false, loading: () => <Spiral /> }
+);
+
+const cars = galleryData.map((car: INewsItem) => car.car)
+const carsString = cars.join(',');
+
+const metadata: PageMetadata = {
+  pl: {
+    title: 'Galeria | MERN Serwis',
+    description: `MERN Serwis | ${baseUrl} Galeria ${carsString}`,
+  },
+  en: {
+    title: 'Gallery | MERN Car Service',
+    description: `MERN Serwis | ${baseUrl} Gallery ${carsString}`,
+  },
+  ua: {
+    title: 'Галерея | Автосервіс MERN',
+    description: `MERN Serwis | ${baseUrl} Галерея ${carsString}`,
+  },
+};
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: Locale }>
+}): Promise<Metadata> {
+  const { locale } = await params;
+
+  const localeMetadata = metadata[locale] || metadata.pl;
+
+  return {
+    title: localeMetadata.title,
+    description: localeMetadata.description,
+  };
+}
 
 const GalleryPage = () => {
-  return <Gallery />
+  return <DynamicPage />
 }
 
 export default GalleryPage

@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import { db } from "@/lib/firebase";
 import { collection, onSnapshot, doc, deleteDoc } from "firebase/firestore";
 import { IApplicationResponse } from "@/types";
-import ApplicationItem from "./ApplicationItem";
+import ApplicationItem from "./application-item";
 
 const Applications = () => {
   const [applications, setApplications] = useState<any[]>([]);

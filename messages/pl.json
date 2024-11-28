@@ -139,5 +139,8 @@
       "disc": "Naprawa tarcz i klocków",
       "pricing": "Indywidualna wycena naprawy"
     }
+  },
+  "404": {
+    "button": "Strona główna"
   }
 }

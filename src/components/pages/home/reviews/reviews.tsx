@@ -1,17 +1,37 @@
 'use client'
 
-import { reviews } from "./data";
+import Image from "next/image";
+import { useEffect, useState } from "react";
 import { useTranslations } from 'next-intl';
+import { Rating } from '@smastrom/react-rating'
+import { db } from "@/lib/firebase";
+import { collection, onSnapshot } from "firebase/firestore";
+import '@smastrom/react-rating/style.css'
+
 import Slider from '../shared/slider/slider';
 import SectionTitle from '@/components/shared/section-title';
 import ReviewCard from "./review-card";
-import { Rating } from '@smastrom/react-rating'
-// 
-import '@smastrom/react-rating/style.css'
-import Image from "next/image";
 
 const Reviews = () => {
   const t = useTranslations("Reviews");
+
+  const [reviews, setReviews] = useState<any[]>([]);
+
+  useEffect(() => {
+    const ref = collection(db, "testimonials");
+    const unsubscribe = onSnapshot(ref, (snapshot) => {
+      if (!snapshot.empty) {
+        const reviewsData: any[] = [];
+        snapshot.forEach((doc) => {
+          reviewsData.push({ ...doc.data() });
+        });
+        setReviews(reviewsData);
+      }
+    })
+
+    return () => unsubscribe();
+  }, []);
+
   return (
     <section className='px-2 md:px-4 my-8'>
       <SectionTitle id='services-title' title={t("title")} />

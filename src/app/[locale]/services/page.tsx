@@ -1,9 +1,14 @@
 import { Metadata } from 'next';
-import { PageMetadata } from '@/types';
+import { PageMetadata, TServiceCard } from '@/types';
 import { Locale } from '@/i18n/routing';
 import { baseUrl } from '@/constants';
+import { services } from '@/data/services';
 import ServicesPage from '@/components/pages/services/services';
-// import ServicesList from "@/components/ServicesList";
+
+const s = services.map((service: TServiceCard) => service.title);
+const servicesString = s.join(',');
+
+console.log(servicesString)
 
 const metadata: PageMetadata = {
   pl: {

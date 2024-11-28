@@ -19,7 +19,6 @@ const metadata: PageMetadata = {
   },
 };
 
-
 export async function generateMetadata({
   params,
 }: {

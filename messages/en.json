@@ -139,5 +139,8 @@
       "disc": "Disc and pad repair",
       "pricing": "Individual repair cost estimate"
     }
+  },
+  "404": {
+    "button": "Go to main page"
   }
 }

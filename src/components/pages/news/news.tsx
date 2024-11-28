@@ -1,11 +1,34 @@
+'use client'
+
+import { useState, useEffect } from "react";
 import Image from "next/image";
-import { news } from './data';
 import { Link } from '@/i18n/routing';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
+import { db } from "@/lib/firebase";
+import { collection, onSnapshot } from "firebase/firestore";
 import SectionTitle from '@/components/shared/section-title';
 
 const NewsPage = () => {
   const t = useTranslations("News");
+  const locale = useLocale();
+
+  const [news, setNews] = useState<any[]>([]);
+
+  useEffect(() => {
+    const ref = collection(db, "news");
+    const unsubscribe = onSnapshot(ref, (snapshot) => {
+      if (!snapshot.empty) {
+        const newsData: any[] = [];
+        snapshot.forEach((doc) => {
+          newsData.push({ ...doc.data(), id: doc.id });
+        });
+        setNews(newsData);
+      }
+    })
+
+    return () => unsubscribe();
+  }, []);
+
   return (
     <section
       id="news"
@@ -35,10 +58,10 @@ const NewsPage = () => {
             {/* Text Content */}
             <div className="flex flex-col gap-4 w-full md:w-1/2 text-center md:text-left">
               <h4 className="text-2xl md:text-3xl lg:text-4xl font-bold">
-                {item.title}
+                {item.title[locale]}
               </h4>
               <p className="text-base md:text-lg lg:text-xl text-gray-500">
-                {item.short_text}{' '}
+                {item.short_text[locale]}{' '}
                 <Link
                   className="hover:text-white hover:underline"
                   href={`/news/${item.id}`}

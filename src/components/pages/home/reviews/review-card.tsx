@@ -1,14 +1,11 @@
 import Avatar from 'react-avatar';
 import { IReviewItem } from '@/types';
-// import { useTranslations } from 'next-intl';
 import { Rating } from '@smastrom/react-rating'
 
 import '@smastrom/react-rating/style.css'
 import { colors } from '@/constants';
-import { formatDate } from '@/helpers/formatDate';
 
 const ReviewCard = ({ data: card, index }: { data: IReviewItem, index?: number }) => {
-  // const t = useTranslations("Services");
 
   return (
     <article id={card.name} className="w-[90%] sm:w-[75%] md:w-[300px] h-[315px] 
@@ -21,7 +18,7 @@ const ReviewCard = ({ data: card, index }: { data: IReviewItem, index?: number }
             <h4 className="text-[20px] -mb-[5px]">
               {card.name}
             </h4>
-            <span className='text-[16px] text-gray-500'>{formatDate(card.createdAt)}</span>
+            <span className='text-[16px] text-white font-[800]'>{card.created_at}</span>
           </div>
         </div>
         <Rating style={{ maxWidth: 100 }} value={card.rating} readOnly />

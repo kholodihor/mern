@@ -2,7 +2,7 @@
 
 import SectionTitle from '@/components/shared/section-title'
 import { Link } from '@/i18n/routing';
-import { galleryData } from './data'
+import { galleryData } from '@/data/gallery';
 import { useTranslations } from "next-intl";
 import Slider from '../home/shared/slider/slider'
 import Image from 'next/image'
