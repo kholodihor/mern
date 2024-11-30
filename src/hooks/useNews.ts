@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { collection, onSnapshot } from "firebase/firestore";
-import { db } from "@/lib/firebase"; // Adjust based on your project structure
+import { db } from "@/lib/firebase";
 
 interface NewsItem {
   id: string;
-  [key: string]: any; // Extend this with specific fields your news items contain
+  [key: string]: any;
 }
 
 export const useNews = () => {

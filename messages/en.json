@@ -65,10 +65,11 @@
     "accessoires": "Accessories assembly and service",
     "accesoires_text": "Installation of original BMW accessories, including towbars, audio systems, reversing cameras and much more",
     "pricing": "Individual repair quote based on VIN number",
-    "pricing_text": "Each quote is individually tailored to your vehicle."
+    "pricing_text": "We tailor each quote individually to your vehicle. The quote is created using AIR (Aftersales Information Research). Repairs are entered into the BMW electronic book."
   },
   "Reviews": {
-    "title": "Reviews"
+    "title": "Reviews",
+    "subtitle": "Based on 14 reviews"
   },
   "Contacts": {
     "title": "Welcome",

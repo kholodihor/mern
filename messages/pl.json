@@ -65,10 +65,11 @@
     "accessoires": "Montaż i serwis akcesoriów",
     "accesoires_text": "Montaż oryginalnych akcesoriów BMW, w tym haków holowniczych, systemów audio, kamer cofania i wielu innych",
     "pricing": "Indywidualna wycena naprawy na podstawie numeru VIN",
-    "pricing_text": "Każdą wycenę dopasowujemy indywidualnie do Twojego pojazdu."
+    "pricing_text": "Każdą wycenę dopasowujemy indywidualnie do Twojego pojazdu. Wycena jest tworzona za pomocą AIR (Aftersales Information Research). Naprawy są wpisywane do książki elektronicznej BMW."
   },
   "Reviews": {
-    "title": "Opinie"
+    "title": "Opinie",
+    "subtitle": "Na podstawie 14 opinij"
   },
   "Contacts": {
     "title": "Zapraszamy",

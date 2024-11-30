@@ -31,12 +31,12 @@ const ServicesCard = ({ data: card }: { data: TServiceCard }) => {
           height={300}
           className='rounded-[2.5rem] w-full object-cover h-auto'
         />
-        <div className='flex flex-col justify-center items-center gap-2 top-[40%] absolute p-2'>
-          <h4 className="text-center text-[24px]">
+        <div className='flex flex-col justify-center items-center gap-2 top-[30%] absolute p-2'>
+          <h4 className="text-center text-[20px]">
             {t(`${card.title}`)}
           </h4>
 
-          <p className="text-center text-gray-400 text-[18px]">{t(`${card.text}`)}</p>
+          <p className="text-center text-gray-400 text-[16px]">{t(`${card.text}`)}</p>
         </div>
       </div>
     </article>

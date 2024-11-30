@@ -36,7 +36,7 @@ const Reviews = () => {
     <section className='px-2 md:px-4 my-8'>
       <SectionTitle id='services-title' title={t("title")} />
       <Rating style={{ maxWidth: 150 }} value={5} readOnly className="mx-auto" />
-      <h6 className="text-center text-[24px] md:text-[32px]">Na podstawie 14 opinij</h6>
+      <h6 className="text-center text-[24px] md:text-[32px]">{t("subtitle")}</h6>
       <Image
         src={'/google.svg'}
         alt="Google logo"
@@ -60,8 +60,8 @@ const Reviews = () => {
             spaceBetween: 20
           },
           1280: {
-            slidesPerView: 3,
-            spaceBetween: 64
+            slidesPerView: 4,
+            spaceBetween: 25
           },
           1560: {
             slidesPerView: 4,

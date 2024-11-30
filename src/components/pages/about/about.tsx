@@ -15,7 +15,7 @@ const About = () => {
 
         {/* Text Section */}
         <div className="w-full md:w-1/2 flex flex-col justify-center items-start p-4">
-          <p className="w-full text-sm md:text-base lg:text-lg">
+          <p className="w-full text-[18px] md:text-[20px] lg:text-lg">
             {t("content")}
           </p>
           <h5 className="text-lg md:text-xl mt-4 font-semibold">{t('call')}</h5>

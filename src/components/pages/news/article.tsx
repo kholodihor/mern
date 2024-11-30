@@ -13,7 +13,6 @@ const Article = ({ id }: { id: string }) => {
 
   const article = useMemo(() => newsMap[id], [newsMap, id]);
 
-
   return (
     <section
       id={`Article ${article?.title}`}

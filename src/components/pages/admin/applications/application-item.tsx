@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from '@/i18n/routing';
 import clsx from 'clsx';
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from "@/lib/firebase";
@@ -7,6 +7,7 @@ import { isOutOf96Hours } from "@/helpers/isOutOf96Hours";
 import { IApplicationResponse } from "@/types";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { useState } from "react";
+import { FaEye } from "react-icons/fa";
 
 type ApplicationItemProps = {
   item: IApplicationResponse;
@@ -40,7 +41,9 @@ const ApplicationItem = ({ item, onDelete }: ApplicationItemProps) => {
       )}
     >
       <span className="w-1/5 flex justify-center hover:text-blue-300">
-        <Link href={`/admin/applications/${item.id}`}>{item?.name}</Link>
+        <Link href={`/admin/applications/${item.id}`} className='flex gap-2 items-center'>
+          {item?.name}<FaEye />
+        </Link>
       </span>
 
       <span className="w-1/5 flex justify-center">{item?.phone}</span>

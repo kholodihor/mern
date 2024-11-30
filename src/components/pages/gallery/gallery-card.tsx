@@ -15,7 +15,7 @@ const GalleryCard = ({ data }: { data: INewsItem }) => {
           alt="Car image"
           width={350}
           height={150}
-          className="object-cover w-full h-[200px] md:h-[150px] xl:h-[200px]" />
+          className="object-cover w-full h-[200px] md:h-[150px] xl:h-[200px] grayscale" />
 
         <h4 className="text-[20px] mb-[5px]">
           {data.car}
