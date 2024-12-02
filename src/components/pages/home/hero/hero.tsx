@@ -18,7 +18,7 @@ const Hero = () => {
       flex flex-col justify-end gap-6 px-6">
         <h1
           className="uppercase text-[10vh] mb-4 md:-mb-4 sm:text-[13vh]
-           md:text-[17vh] font-bold text-white">
+           md:text-[17vh] font-bold text-white font-open-sans">
           MERN
         </h1>
 

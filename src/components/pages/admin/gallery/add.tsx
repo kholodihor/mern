@@ -8,14 +8,14 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useTranslations } from "next-intl"
 import { db } from "@/lib/firebase"
 import { addDoc, collection } from "firebase/firestore"
+import { translateText } from "@/utils/translator"
+import { getImageUrlsFromGroup } from '@/utils/imageFetcher';
 import { CATEGORIES } from '@/constants/categories';
-
 import { Widget } from "@uploadcare/react-widget";
 
 import TextArea from "@/components/ui/text-area"
 import TextInput from "@/components/ui/text-input"
 import Multiselect from "@/components/ui/multi-select"
-import { translateText } from "@/utils/translator"
 
 const AddGallery = () => {
   const router = useRouter()
@@ -45,46 +45,55 @@ const AddGallery = () => {
     },
   })
 
+
   const onSubmit: SubmitHandler<TGalleryScheme> = async (values) => {
     try {
-      setIsProcessing(true)
+      setIsProcessing(true);
+
       const translatedDescUA = await translateText(values.desc, 'uk');
       const translatedFullDescUA = await translateText(values.fullDesc, 'uk');
       const translatedDescEN = await translateText(values.desc, 'en');
       const translatedFullDescEN = await translateText(values.fullDesc, 'en');
 
+      const images = await getImageUrlsFromGroup(values.images)
+      const urls = images.map((image: any) => `https://ucarecdn.com/${image.file_id}/${image.filename}`)
+
       const data = {
         car: values.car,
         slug: values.car.toLowerCase().replace(/\s+/g, '-'),
         categories: values.categories,
-        images: values.images,
+        images: urls,
         desc: {
           pl: values.desc,
           ua: translatedDescUA,
-          en: translatedDescEN
+          en: translatedDescEN,
         },
         fullDesc: {
           pl: values.fullDesc,
           ua: translatedFullDescUA,
-          en: translatedFullDescEN
+          en: translatedFullDescEN,
         },
-        created_at: new Date(Date.now()).toLocaleDateString(),
+        created_at: new Date(Date.now()),
       };
-      const ref = collection(db, "gallery")
-      await addDoc(ref, data)
-      reset()
-      setIsProcessing(false)
-      router.push('/admin/gallery')
+      const ref = collection(db, 'gallery');
+      await addDoc(ref, data);
+      alert('Статтю успішно додано!')
+      reset();
+      setIsProcessing(false);
+      router.push('/admin/gallery');
     } catch (error) {
-      alert(error)
+      setIsProcessing(false);
+      alert(error);
     }
-  }
+  };
+
   return (
-    <>
+    <div className="p-[24px]">
+      <h1 className="text-3xl font-bold mb-[24px]">Додати статтю в галерею</h1>
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="space-y-2 gap-4 flex flex-col 
-  justify-start items-start p-[24px] w-full mt-[2rem] md:mt-0"
+  justify-start items-start w-full mt-[2rem] md:mt-0"
       >
         <Controller
           name="car"
@@ -124,7 +133,7 @@ const AddGallery = () => {
           render={({ field: { onChange, value, ref } }) => (
             <div>
               <label htmlFor="file-upload" className="text-sm font-medium mr-4">
-                Завнтажити фото
+                Завантажити фото
               </label>
               <Widget
                 publicKey="ff76dce7219a0b044f12"
@@ -151,7 +160,7 @@ const AddGallery = () => {
             <TextArea
               {...field}
               errorText={errors.desc?.message}
-              placeholder="Короткий опис"
+              placeholder="Короткий опис польскою мовою"
             />
           )}
         />
@@ -163,7 +172,7 @@ const AddGallery = () => {
             <TextArea
               {...field}
               errorText={errors.fullDesc?.message}
-              placeholder="Повний опис"
+              placeholder="Повний опис польскою мовою"
             />
           )}
         />
@@ -176,7 +185,7 @@ const AddGallery = () => {
           {isProcessing ? "Обробка" : "Додати"}
         </button>
       </form>
-    </>
+    </div>
   )
 }
 

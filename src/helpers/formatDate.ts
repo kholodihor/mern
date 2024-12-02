@@ -1,13 +1,12 @@
-export const formatDate = (input: string): string => {
-  const date = new Date(input);
+export function formatDate(timestamp: { seconds: number; nanoseconds: number }): string {
+  // Convert the seconds to milliseconds (ignoring nanoseconds for simplicity)
+  const date = new Date(timestamp.seconds * 1000);
 
-  if (isNaN(date.getTime())) {
-    throw new Error("Invalid date format");
-  }
+  // Extract the day, month, and year
+  const day: string = String(date.getDate()).padStart(2, '0');
+  const month: string = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+  const year: number = date.getFullYear();
 
-  const year = date.getFullYear();
-  const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are 0-indexed
-  const day = String(date.getDate()).padStart(2, '0');
-
-  return `${year}.${month}.${day}`;
+  // Return the formatted date
+  return `${day}.${month}.${year}`;
 }

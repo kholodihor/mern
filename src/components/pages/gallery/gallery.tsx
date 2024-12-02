@@ -1,20 +1,31 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 'use client'
 
 import { useTranslations } from "next-intl";
-import { galleryData } from "@/data/gallery";
 import { useFilters } from '@/stores/useFilters';
 import { CATEGORIES } from '@/constants/categories';
 import SectionTitle from "@/components/shared/section-title";
 import GalleryCard from "./gallery-card";
 import CustomDropdown from "@/components/ui/select";
+import { useGallery } from "@/hooks/useGallery";
+import { useEffect } from "react";
 
 const Gallery = () => {
   const t = useTranslations("Gallery");
   const { filters } = useFilters();
+  const { galleryList, fetchGalleryAsList } = useGallery();
 
-  const filteredData = galleryData.filter((item) => {
-    return filters[0] === CATEGORIES.ALL ? true : item.categories.some(category => filters.includes(category));
+  useEffect(() => {
+    fetchGalleryAsList();
+  }, [])
+
+  const filteredData = galleryList.filter((item) => {
+    return filters[0] === CATEGORIES.ALL ? true
+      :
+      item.categories.some((category: string) => filters.includes(CATEGORIES[category]));
   });
+
+  console.log(filters)
 
   const options = Object.values(CATEGORIES);
 

@@ -53,6 +53,7 @@ const Multiselect = forwardRef(function Multiselect(
     }),
     placeholder: (base: any) => ({
       ...base,
+      fontSize: "14px",
       color: "#aaaaaa",
     }),
     multiValue: (base: any) => ({

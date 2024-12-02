@@ -14,7 +14,6 @@ const ServicesCard = ({ data: card }: { data: TServiceCard }) => {
     router.push('/gallery')
   }
 
-
   return (
     <article
       onClick={handleRedirect}

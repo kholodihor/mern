@@ -28,3 +28,16 @@ select:-webkit-autofill:focus {
 .textArea .errorText {
   font-size: 14px;
 }
+
+.uploadcare--widget {
+  background-color: #121212 !important;
+  color: #ffffff !important;
+}
+
+.uploadcare--dialog__footer {
+  background-color: #1e1e1e !important;
+}
+
+.uploadcare--tab__header {
+  background-color: #222222 !important;
+}

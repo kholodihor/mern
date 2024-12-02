@@ -21,8 +21,6 @@ const CustomDropdown: React.FC<CustomDropdownProps> =
       setIsOpen(false);
     };
 
-    console.log(options)
-
     return (
       <div className="relative w-full sm:w-72 xl:w-[360px] 2xl:w-72">
         <div

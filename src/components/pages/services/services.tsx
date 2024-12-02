@@ -17,12 +17,11 @@ const ServicesPage = () => {
       <SectionTitle id='gallery-title' title={t("title")} />
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 
-      xl:grid-cols-4 gap-6 w-full py-[2rem] lg:px-4">
+      xl:grid-cols-4 gap-6 py-[2rem] lg:px-4 mx-auto place-items-center">
         {services.length ? services.map((item, index) => (
           <ServicesCard key={index} data={item} />
         )) : null}
       </div>
-
     </section>
   )
 }

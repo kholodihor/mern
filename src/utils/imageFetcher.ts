@@ -7,17 +7,15 @@ export async function getImageUrlsFromGroup(groupUuid: string): Promise<string[]
 
   const uuid = extractUuid(groupUuid);
 
-  const publicKey = 'ff76dce7219a0b044f12';  // Replace with your actual public key
+  const publicKey = process.env.NEXT_PUBLIC_UPLOADCARE_PUBLIC_KEY;
+  const secretKey = process.env.NEXT_PUBLIC_UPLOADCARE_SECRET_KEY;
   const groupApiUrl = `https://upload.uploadcare.com/group/info/?pub_key=${publicKey}&group_id=${uuid}`
-
-
-
 
   try {
     const response = await fetch(groupApiUrl, {
       method: 'GET',
       headers: {
-        'Authorization': `Uploadcare.Simple ${publicKey}:your-secret-key`  // Replace with your actual secret key
+        'Authorization': `Uploadcare.Simple ${publicKey}:${secretKey}`
       }
     });
 
@@ -26,8 +24,6 @@ export async function getImageUrlsFromGroup(groupUuid: string): Promise<string[]
     }
 
     const data = await response.json()
-    // console.log(data.files)
-    // Assuming the API returns an array of files
     return data.files
   } catch (error) {
     console.error('Error fetching group images:', error);

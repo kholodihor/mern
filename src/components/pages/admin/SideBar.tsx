@@ -46,6 +46,14 @@ const SideBar = () => {
         >
           Галерея
         </SideBarItem>
+        <SideBarItem
+          className=""
+          icon={<IoMdPhotos />}
+          iconClassName="text-xl"
+          href="/admin/testimonials"
+        >
+          Відгуки
+        </SideBarItem>
       </div>
       <button
         onClick={handleSignOut}
