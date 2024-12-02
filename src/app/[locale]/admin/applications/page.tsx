@@ -1,7 +1,7 @@
-import Applications from '@/components/pages/admin/applications'
+import Applications from "@/components/pages/admin/applications";
 
 const ApplicationsPage = () => {
-  return <Applications />
-}
+  return <Applications />;
+};
 
-export default ApplicationsPage
+export default ApplicationsPage;

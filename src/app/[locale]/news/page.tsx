@@ -1,30 +1,29 @@
-import { Metadata } from 'next';
-import dynamic from 'next/dynamic';
-import { PageMetadata } from '@/types';
-import { Locale } from '@/i18n/routing';
-import { baseUrl } from '@/constants';
-import Spiral from '@/components/shared/spiral/Spiral';
+import { Metadata } from "next";
+import dynamic from "next/dynamic";
+
+import { baseUrl } from "@/constants";
+import { Locale } from "@/i18n/routing";
+import { PageMetadata } from "@/types";
+
+import Spiral from "@/components/shared/spiral/Spiral";
 
 const DynamicPage = dynamic(
-  () =>
-    import(
-      '@/components/pages/news/news'
-    ),
+  () => import("@/components/pages/news/news"),
 
   { ssr: false, loading: () => <Spiral /> }
 );
 
 const metadata: PageMetadata = {
   pl: {
-    title: 'Aktualności | MERN Serwis',
+    title: "Aktualności | MERN Serwis",
     description: `MERN Serwis | ${baseUrl} Aktualności`,
   },
   en: {
-    title: 'News | MERN Car Service',
+    title: "News | MERN Car Service",
     description: `MERN Serwis | ${baseUrl} News`,
   },
   ua: {
-    title: 'Новини | Автосервіс MERN',
+    title: "Новини | Автосервіс MERN",
     description: `MERN Serwis | ${baseUrl} Наші Новини`,
   },
 };
@@ -32,7 +31,7 @@ const metadata: PageMetadata = {
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ locale: Locale }>
+  params: Promise<{ locale: Locale }>;
 }): Promise<Metadata> {
   const { locale } = await params;
 
@@ -44,10 +43,8 @@ export async function generateMetadata({
   };
 }
 
-
-
 const Page = () => {
-  return <DynamicPage />
+  return <DynamicPage />;
 };
 
 export default Page;

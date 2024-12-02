@@ -12,16 +12,18 @@ const TextArea = forwardRef(function TextArea(
 ) {
   const inputClassName = `w-full outline-none rounded-[0.7rem] border border-white
   min-h-[150px] py-2 px-4 placeholder:text-sm bg-black
-  ${errorText
+  ${
+    errorText
       ? "border-red-500 caret-error outline-red-500 focus:outline-red-500"
       : "border-lightgrey focus:outline-none"
-    }
+  }
 `;
 
   return (
     <div
-      className={`w-full min-w-[100px] max-w-[500px] ${errorText ? "text-error" : "text-inherit"
-        }`}
+      className={`w-full min-w-[100px] max-w-[500px] ${
+        errorText ? "text-error" : "text-inherit"
+      }`}
     >
       {!!title && (
         <label htmlFor={title} className="text-sm font-medium">
@@ -30,7 +32,7 @@ const TextArea = forwardRef(function TextArea(
       )}
       <textarea {...rest} id={title} value={value} className={inputClassName} />
 
-      {errorText && <span className=" ml-2 text-xs">{errorText}</span>}
+      {errorText && <span className="ml-2 text-xs">{errorText}</span>}
     </div>
   );
 });

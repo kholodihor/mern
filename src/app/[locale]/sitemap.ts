@@ -1,7 +1,9 @@
 import { MetadataRoute } from "next";
-import { db } from "@/lib/firebase";
+
 import { collection, getDocs } from "firebase/firestore";
+
 import { galleryData } from "@/data/gallery";
+import { db } from "@/lib/firebase";
 
 const baseUrl = "https://mernserwis.pl";
 
@@ -17,17 +19,19 @@ const staticRoutes = [
 
 // Function to generate alternate URLs
 const generateAlternates = (path: string) => ({
-  uk: `${baseUrl}/ua${path ? '/' + path : ''}`,
-  en: `${baseUrl}/en${path ? '/' + path : ''}`,
-  pl: `${baseUrl}/pl${path ? '/' + path : ''}`,
+  uk: `${baseUrl}/ua${path ? "/" + path : ""}`,
+  en: `${baseUrl}/en${path ? "/" + path : ""}`,
+  pl: `${baseUrl}/pl${path ? "/" + path : ""}`,
 });
 
 // Function to generate sitemap entries
-const generateSitemapEntries = (routes: { path: string; lastModified: Date }[]): MetadataRoute.Sitemap => {
+const generateSitemapEntries = (
+  routes: { path: string; lastModified: Date }[]
+): MetadataRoute.Sitemap => {
   return routes.map(({ path, lastModified }) => ({
-    url: `${baseUrl}/pl${path ? '/' + path : ''}`,
+    url: `${baseUrl}/pl${path ? "/" + path : ""}`,
     lastModified,
-    changeFrequency: 'weekly' as const,
+    changeFrequency: "weekly" as const,
     priority: 1,
     alternates: {
       languages: generateAlternates(path),
@@ -39,17 +43,19 @@ const generateSitemapEntries = (routes: { path: string; lastModified: Date }[]):
 async function fetchDynamicRoutes() {
   try {
     // Process gallery items
-    const galleryItems = galleryData.map(item => ({
+    const galleryItems = galleryData.map((item) => ({
       slug: item.slug,
-      lastModified: new Date()
+      lastModified: new Date(),
     }));
 
     // Fetch news items from Firestore
     const newsRef = collection(db, "news");
     const newsSnapshot = await getDocs(newsRef);
-    const newsItems = newsSnapshot.docs.map(doc => ({
+    const newsItems = newsSnapshot.docs.map((doc) => ({
       id: doc.id,
-      lastModified: doc.data().lastModified ? new Date(doc.data().lastModified) : new Date()
+      lastModified: doc.data().lastModified
+        ? new Date(doc.data().lastModified)
+        : new Date(),
     }));
 
     return {
@@ -68,17 +74,21 @@ async function fetchDynamicRoutes() {
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const { galleryItems, newsItems } = await fetchDynamicRoutes();
 
-  const dynamicGalleryRoutes = galleryItems.map(item => ({
+  const dynamicGalleryRoutes = galleryItems.map((item) => ({
     path: `gallery/${item.slug}`,
     lastModified: item.lastModified,
   }));
 
-  const dynamicNewsRoutes = newsItems.map(item => ({
+  const dynamicNewsRoutes = newsItems.map((item) => ({
     path: `news/${item.id}`,
     lastModified: new Date(),
   }));
 
-  const allRoutes = [...staticRoutes, ...dynamicGalleryRoutes, ...dynamicNewsRoutes];
+  const allRoutes = [
+    ...staticRoutes,
+    ...dynamicGalleryRoutes,
+    ...dynamicNewsRoutes,
+  ];
 
   return generateSitemapEntries(allRoutes);
 }

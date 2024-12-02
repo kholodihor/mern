@@ -1,5 +1,5 @@
 export const CATEGORIES: {
-  [key: string]: string
+  [key: string]: string;
 } = {
   ALL: "all",
   COMPUTER_DIAGNOSTICS: "computer_diagnostics",
@@ -16,5 +16,5 @@ export const CATEGORIES: {
   ACCESSOIRES_SERVICE: "accessoires",
   ACCESSOIRES_INSTALLATION: "accessoires_assembly",
   INDIVIDUAL_PRICING: "pricing",
-  DISCS_AND_PADS_REPAIR: "disc"
-}
+  DISCS_AND_PADS_REPAIR: "disc",
+};

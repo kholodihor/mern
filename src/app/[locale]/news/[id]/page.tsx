@@ -1,20 +1,22 @@
-import Article from '@/components/pages/news/article'
-import { baseUrl } from '@/constants';
-import { Locale } from '@/i18n/routing';
-import { PageMetadata } from '@/types';
-import { Metadata } from 'next';
+import { Metadata } from "next";
+
+import { baseUrl } from "@/constants";
+import { Locale } from "@/i18n/routing";
+import { PageMetadata } from "@/types";
+
+import Article from "@/components/pages/news/article";
 
 const metadata: PageMetadata = {
   pl: {
-    title: 'Aktualności | MERN Serwis',
+    title: "Aktualności | MERN Serwis",
     description: `MERN Serwis | ${baseUrl} Aktualności`,
   },
   en: {
-    title: 'News | MERN Car Service',
+    title: "News | MERN Car Service",
     description: `MERN Serwis | ${baseUrl} News`,
   },
   ua: {
-    title: 'Новини | Автосервіс MERN',
+    title: "Новини | Автосервіс MERN",
     description: `MERN Serwis | ${baseUrl} Новини`,
   },
 };
@@ -22,7 +24,7 @@ const metadata: PageMetadata = {
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ locale: Locale }>
+  params: Promise<{ locale: Locale }>;
 }): Promise<Metadata> {
   const { locale } = await params;
 
@@ -35,9 +37,7 @@ export async function generateMetadata({
 }
 
 const NewsArticlePage = ({ params }: { params: { id: string } }) => {
-  return (
-    <Article id={params.id} />
-  )
-}
+  return <Article id={params.id} />;
+};
 
-export default NewsArticlePage
+export default NewsArticlePage;

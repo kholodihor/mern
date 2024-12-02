@@ -1,19 +1,27 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import * as z from "zod";
 import { useEffect, useState } from "react";
-import { useRouter } from "@/i18n/routing";
-import { Controller, SubmitHandler, useForm } from "react-hook-form";
+
 import { zodResolver } from "@hookform/resolvers/zod";
-import { loginScheme } from "./validationSchema";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { Controller, SubmitHandler, useForm } from "react-hook-form";
+import * as z from "zod";
 
 import { useAuth } from "@/hooks/useAuth";
+import { useRouter } from "@/i18n/routing";
 import { auth } from "@/lib/firebase";
-import { signInWithEmailAndPassword } from "firebase/auth";
 
-import TextInput from "@/components/ui/text-input";
 import PasswordInput from "@/components/ui/password-input";
+import TextInput from "@/components/ui/text-input";
+
+import { loginScheme } from "./validationSchema";
+
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 const Login = () => {
   const user = useAuth();
@@ -29,8 +37,8 @@ const Login = () => {
     resolver: zodResolver(loginScheme),
     mode: "onChange",
     defaultValues: {
-      email: '',
-      password: ''
+      email: "",
+      password: "",
     },
   });
 
@@ -44,15 +52,16 @@ const Login = () => {
     values: z.infer<typeof loginScheme>
   ) => {
     try {
-      const { email, password } = values
+      const { email, password } = values;
       setIsProcessing(true);
-      signInWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-          console.log(userCredential)
+      signInWithEmailAndPassword(auth, email, password).then(
+        (userCredential) => {
+          console.log(userCredential);
           setIsProcessing(false);
-        })
+        }
+      );
     } catch (error: any) {
-      console.log(error)
+      console.log(error);
       setError("password", {
         message: "Невірний логін або пароль",
       });
@@ -60,8 +69,8 @@ const Login = () => {
   };
 
   return (
-    <section className="w-full min-h-[100vh] flex flex-col justify-center items-center">
-      <div className=" flex flex-col justify-center items-center mb-[2rem]">
+    <section className="flex min-h-[100vh] w-full flex-col items-center justify-center">
+      <div className="mb-[2rem] flex flex-col items-center justify-center">
         <h1 className="text-3xl font-bold">Адміністрування сайту</h1>
         <p className="text-center text-sm">
           Для входу на панель адміністратора
@@ -73,7 +82,7 @@ const Login = () => {
       <div>
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="w-[50vw] flex flex-col justify-center items-center gap-[1rem]"
+          className="flex w-[50vw] flex-col items-center justify-center gap-[1rem]"
         >
           <Controller
             name="email"
@@ -103,12 +112,11 @@ const Login = () => {
             <button
               type="submit"
               disabled={isProcessing}
-              className={`rounded-[0.7rem] border border-white shadow-sm 
-               py-2 px-4 w-[250px] disabled:border-gray-200 disabled:shadow-none 
-               disabled:cursor-not-allowed mt-[2rem] hover:bg-white/20 ${!isValid
+              className={`mt-[2rem] w-[250px] rounded-[0.7rem] border border-white px-4 py-2 shadow-sm hover:bg-white/20 disabled:cursor-not-allowed disabled:border-gray-200 disabled:shadow-none ${
+                !isValid
                   ? "border-white shadow-sm shadow-white"
                   : "border-green-700 shadow-md"
-                }`}
+              }`}
             >
               {isProcessing ? "Обробка запиту..." : "Увійти"}
             </button>

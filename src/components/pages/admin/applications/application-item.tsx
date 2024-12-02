@@ -1,13 +1,15 @@
-import { Link } from '@/i18n/routing';
-import clsx from 'clsx';
-import { doc, updateDoc } from "firebase/firestore";
-import { db } from "@/lib/firebase";
-import { isWithin48Hours } from "@/helpers/isWithin48Hours";
-import { isOutOf96Hours } from "@/helpers/isOutOf96Hours";
-import { IApplicationResponse } from "@/types";
-import { FaRegTrashAlt } from "react-icons/fa";
 import { useState } from "react";
+
+import clsx from "clsx";
+import { doc, updateDoc } from "firebase/firestore";
+import { FaRegTrashAlt } from "react-icons/fa";
 import { FaEye } from "react-icons/fa";
+
+import { isOutOf96Hours } from "@/helpers/isOutOf96Hours";
+import { isWithin48Hours } from "@/helpers/isWithin48Hours";
+import { Link } from "@/i18n/routing";
+import { db } from "@/lib/firebase";
+import { IApplicationResponse } from "@/types";
 
 type ApplicationItemProps = {
   item: IApplicationResponse;
@@ -32,38 +34,38 @@ const ApplicationItem = ({ item, onDelete }: ApplicationItemProps) => {
 
   return (
     <li
-      className={clsx(
-        'w-full border-b border-b-slate-700 p-4 flex gap-4',
-        {
-          'text-green-400': isWithin48Hours(item.created_at),
-          'text-red-400': isOutOf96Hours(item.created_at),
-        }
-      )}
+      className={clsx("flex w-full gap-4 border-b border-b-slate-700 p-4", {
+        "text-green-400": isWithin48Hours(item.created_at),
+        "text-red-400": isOutOf96Hours(item.created_at),
+      })}
     >
-      <span className="w-1/5 flex justify-center hover:text-blue-300">
-        <Link href={`/admin/applications/${item.id}`} className='flex gap-2 items-center'>
-          {item?.name}<FaEye />
+      <span className="flex w-1/5 justify-center hover:text-blue-300">
+        <Link
+          href={`/admin/applications/${item.id}`}
+          className="flex items-center gap-2"
+        >
+          {item?.name}
+          <FaEye />
         </Link>
       </span>
 
-      <span className="w-1/5 flex justify-center">{item?.phone}</span>
+      <span className="flex w-1/5 justify-center">{item?.phone}</span>
 
-      <span className={`w-1/5 flex justify-center `}>
-        {item?.created_at}
-      </span>
+      <span className={`flex w-1/5 justify-center`}>{item?.created_at}</span>
 
-      <span className={`w-1/5 flex justify-center`}>
+      <span className={`flex w-1/5 justify-center`}>
         <select
           name="status"
           id="status"
           defaultValue={item?.status}
           onChange={(e) => handleStatus(e.target.value)}
           className={clsx(
-            'border text-center rounded-xl px-2 uppercase flex justify-center items-center bg-black',
+            "flex items-center justify-center rounded-xl border bg-black px-2 text-center uppercase",
             {
-              'text-green-700 bg-green-200': status === 'new',
-              'text-yellow-700 bg-yellow-200': status === 'inprocess',
-              'text-gray-700 bg-gray-200': status !== 'new' && status !== 'inprocess',
+              "bg-green-200 text-green-700": status === "new",
+              "bg-yellow-200 text-yellow-700": status === "inprocess",
+              "bg-gray-200 text-gray-700":
+                status !== "new" && status !== "inprocess",
             }
           )}
         >
@@ -79,7 +81,7 @@ const ApplicationItem = ({ item, onDelete }: ApplicationItemProps) => {
         </select>
       </span>
 
-      <span className="w-1/5 flex justify-center">
+      <span className="flex w-1/5 justify-center">
         <button className="text-red-500" onClick={() => onDelete(item?.id)}>
           <FaRegTrashAlt />
         </button>

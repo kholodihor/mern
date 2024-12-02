@@ -1,5 +1,5 @@
-import { INewsItem } from "@/types";
 import { CATEGORIES } from "@/constants/categories";
+import { INewsItem } from "@/types";
 
 export const galleryData: INewsItem[] = [
   {
@@ -13,8 +13,7 @@ export const galleryData: INewsItem[] = [
       "services.electronic_book",
     ],
     contact: {
-      serviceCenter:
-        "motto",
+      serviceCenter: "motto",
       address: " 📍 Przyszłość 2A, Stanisławów Pierwszy",
       phone: " ☎️ 509 158 159",
       email: "📨 mern.serwis@gmail.com",
@@ -22,7 +21,7 @@ export const galleryData: INewsItem[] = [
     categories: [
       CATEGORIES.COMPUTER_DIAGNOSTICS,
       CATEGORIES.MECHANICAL_SERVICE,
-      CATEGORIES.ELECTRICAL_SERVICE
+      CATEGORIES.ELECTRICAL_SERVICE,
     ],
     images: [
       "/news/f40_1.webp",
@@ -33,27 +32,20 @@ export const galleryData: INewsItem[] = [
     ],
     desc: "BMW1F40M135iX.desc",
     fullDesc: "BMW1F40M135iX.fullDesc",
-    createdAt: '15.10.2024'
+    createdAt: "15.10.2024",
   },
   {
     id: 4,
     car: "BMW X2 F39",
     slug: "BMW-X2-F39",
-    services: [
-      "services.upgrade",
-      "services.door_to_door",
-    ],
+    services: ["services.upgrade", "services.door_to_door"],
     contact: {
-      serviceCenter:
-        "motto",
+      serviceCenter: "motto",
       address: " 📍 Przyszłość 2A, Stanisławów Pierwszy",
       phone: " ☎️ 509 158 159",
       email: "📨 mern.serwis@gmail.com",
     },
-    categories: [
-      CATEGORIES.MECHANICAL_SERVICE,
-      CATEGORIES.SUSPENSION_REPAIR,
-    ],
+    categories: [CATEGORIES.MECHANICAL_SERVICE, CATEGORIES.SUSPENSION_REPAIR],
     images: [
       "/news/bmwx2_1.webp",
       "/news/bmwx2_2.webp",
@@ -63,7 +55,7 @@ export const galleryData: INewsItem[] = [
     ],
     desc: "BMWX2F39.desc",
     fullDesc: "BMWX2F39.fullDesc",
-    createdAt: '08.10.2024'
+    createdAt: "08.10.2024",
   },
   {
     id: 3,
@@ -76,8 +68,7 @@ export const galleryData: INewsItem[] = [
       "services.electronic_book",
     ],
     contact: {
-      serviceCenter:
-        "motto",
+      serviceCenter: "motto",
       address: " 📍 Przyszłość 2A, Stanisławów Pierwszy",
       phone: " ☎️ 509 158 159",
       email: "📨 mern.serwis@gmail.com",
@@ -95,7 +86,7 @@ export const galleryData: INewsItem[] = [
     ],
     desc: "BMWII3Rex.desc",
     fullDesc: "BMWII3Rex.fullDesc",
-    createdAt: '21.09.2024'
+    createdAt: "21.09.2024",
   },
   {
     id: 2,
@@ -109,8 +100,7 @@ export const galleryData: INewsItem[] = [
       "services.door_to_door",
     ],
     contact: {
-      serviceCenter:
-        "motto",
+      serviceCenter: "motto",
       address: " 📍 Przyszłość 2A, Stanisławów Pierwszy",
       phone: " ☎️ 509 158 159",
       email: "📨 mern.serwis@gmail.com",
@@ -129,7 +119,7 @@ export const galleryData: INewsItem[] = [
     ],
     desc: "BMW2F44GranCoupé.desc",
     fullDesc: "BMW2F44GranCoupé.fullDesc",
-    createdAt: '14.09.2024'
+    createdAt: "14.09.2024",
   },
   {
     id: 1,
@@ -143,8 +133,7 @@ export const galleryData: INewsItem[] = [
       "services.electronic_book",
     ],
     contact: {
-      serviceCenter:
-        "motto",
+      serviceCenter: "motto",
       address: " 📍 Przyszłość 2A, Stanisławów Pierwszy",
       phone: " ☎️ 509 158 159",
       email: "📨 mern.serwis@gmail.com",
@@ -163,6 +152,6 @@ export const galleryData: INewsItem[] = [
     ],
     desc: "BMW5G30540iX.desc",
     fullDesc: "BMW5G30540iX.fullDesc",
-    createdAt: '13.08.2024'
+    createdAt: "13.08.2024",
   },
 ];

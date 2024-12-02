@@ -1,6 +1,7 @@
 "use client";
 
 import { ForwardedRef, InputHTMLAttributes, forwardRef, useState } from "react";
+
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 interface SignInPasswordProps extends InputHTMLAttributes<HTMLInputElement> {
@@ -25,16 +26,18 @@ const SignInPassword = forwardRef(function SignInPassword(
 
   const inputClassName = `w-full outline-none rounded-[0.7rem] border border-white
   p-2 placeholder:text-sm bg-black
-      ${errorText
-      ? "border-red-500 caret-error outline-red-500 focus:outline-red-500"
-      : "border-lightgrey focus:outline-none"
-    }
+      ${
+        errorText
+          ? "border-red-500 caret-error outline-red-500 focus:outline-red-500"
+          : "border-lightgrey focus:outline-none"
+      }
     `;
 
   return (
     <div
-      className={`w-full min-w-[100px] max-w-[500px] ${errorText ? "text-error" : "text-inherit"
-        }`}
+      className={`w-full min-w-[100px] max-w-[500px] ${
+        errorText ? "text-error" : "text-inherit"
+      }`}
     >
       {!!title && (
         <label htmlFor={title} className="text-sm font-medium">
@@ -52,7 +55,7 @@ const SignInPassword = forwardRef(function SignInPassword(
           type={inputType}
           ref={ref}
         />
-        <div className="absolute right-[16px] top-[9px] ">
+        <div className="absolute right-[16px] top-[9px]">
           <button type="button" onClick={handleEditToggle}>
             {isEditing ? <FaEye /> : <FaEyeSlash />}
           </button>

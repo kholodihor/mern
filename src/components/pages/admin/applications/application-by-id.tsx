@@ -1,13 +1,15 @@
 "use client";
 
+import { useEffect, useState } from "react";
+
+import { collection, onSnapshot } from "firebase/firestore";
+import { CiBarcode } from "react-icons/ci";
 import { FaRegUser } from "react-icons/fa";
 import { FaPhoneAlt } from "react-icons/fa";
-import { IoMdMail } from "react-icons/io";
-import { CiBarcode } from "react-icons/ci";
 import { FaRegMessage } from "react-icons/fa6";
+import { IoMdMail } from "react-icons/io";
+
 import { db } from "@/lib/firebase";
-import { collection, onSnapshot } from "firebase/firestore";
-import { useEffect, useState } from "react";
 
 const ApplicationById = ({ id }: { id: string }) => {
   const [applications, setApplications] = useState<any[]>([]);
@@ -22,7 +24,7 @@ const ApplicationById = ({ id }: { id: string }) => {
         });
         setApplications(applicationsData);
       }
-    })
+    });
 
     return () => unsubscribe();
   }, []);
@@ -30,24 +32,24 @@ const ApplicationById = ({ id }: { id: string }) => {
   const application = applications.find((application) => application.id === id);
 
   return (
-    <ul className="w-full min-h-[100vh] flex justify-center items-center flex-col p-4  gap-[1rem]">
-      <li className="p-4 flex text-xl gap-[1rem] w-[80%] ">
+    <ul className="flex min-h-[100vh] w-full flex-col items-center justify-center gap-[1rem] p-4">
+      <li className="flex w-[80%] gap-[1rem] p-4 text-xl">
         <FaRegUser />
         {application?.name}
       </li>
-      <li className="p-4 flex text-xl gap-[1rem] w-[80%] ">
+      <li className="flex w-[80%] gap-[1rem] p-4 text-xl">
         <FaPhoneAlt />
         {application?.phone}
       </li>
-      <li className="p-4 flex text-xl gap-[1rem] w-[80%] ">
+      <li className="flex w-[80%] gap-[1rem] p-4 text-xl">
         <IoMdMail />
         {application?.email}
       </li>
-      <li className="p-4 flex text-xl gap-[1rem] w-[80%] ">
+      <li className="flex w-[80%] gap-[1rem] p-4 text-xl">
         <CiBarcode />
         {application?.vin}
       </li>
-      <li className="p-4 flex text-xl gap-[1rem] w-[80%] ">
+      <li className="flex w-[80%] gap-[1rem] p-4 text-xl">
         <FaRegMessage className="min-w-[1.5rem]" />
         <p>{application?.message}</p>
       </li>

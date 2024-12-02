@@ -1,22 +1,23 @@
-import CarPage from '@/components/pages/gallery/car-page'
-import { baseUrl } from '@/constants';
-import { Locale } from '@/i18n/routing';
-import { PageMetadata } from '@/types';
-import { Metadata } from 'next';
-import React from 'react'
+import { Metadata } from "next";
+import React from "react";
 
+import { baseUrl } from "@/constants";
+import { Locale } from "@/i18n/routing";
+import { PageMetadata } from "@/types";
+
+import CarPage from "@/components/pages/gallery/car-page";
 
 const metadata: PageMetadata = {
   pl: {
-    title: 'Galeria | MERN Serwis',
+    title: "Galeria | MERN Serwis",
     description: `MERN Serwis | ${baseUrl} Galeria `,
   },
   en: {
-    title: 'Gallery | MERN Car Service',
+    title: "Gallery | MERN Car Service",
     description: `MERN Serwis | ${baseUrl} Gallery `,
   },
   ua: {
-    title: 'Галерея | Автосервіс MERN',
+    title: "Галерея | Автосервіс MERN",
     description: `MERN Serwis | ${baseUrl} Галерея `,
   },
 };
@@ -24,7 +25,7 @@ const metadata: PageMetadata = {
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ locale: Locale, slug: string }>
+  params: Promise<{ locale: Locale; slug: string }>;
 }): Promise<Metadata> {
   const { locale, slug } = await params;
 
@@ -37,9 +38,7 @@ export async function generateMetadata({
 }
 
 const Car = ({ params }: { params: { slug: string } }) => {
-  return (
-    <CarPage slug={params.slug} />
-  )
-}
+  return <CarPage slug={params.slug} />;
+};
 
-export default Car
+export default Car;

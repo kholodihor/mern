@@ -1,12 +1,15 @@
-'use client'
+"use client";
 
-import { useState, useEffect } from "react";
 import Image from "next/image";
-import { Link } from '@/i18n/routing';
-import { useLocale, useTranslations } from 'next-intl';
-import { db } from "@/lib/firebase";
+import { useEffect, useState } from "react";
+
 import { collection, onSnapshot } from "firebase/firestore";
-import SectionTitle from '@/components/shared/section-title';
+import { useLocale, useTranslations } from "next-intl";
+
+import { Link } from "@/i18n/routing";
+import { db } from "@/lib/firebase";
+
+import SectionTitle from "@/components/shared/section-title";
 
 const NewsPage = () => {
   const t = useTranslations("News");
@@ -24,7 +27,7 @@ const NewsPage = () => {
         });
         setNews(newsData);
       }
-    })
+    });
 
     return () => unsubscribe();
   }, []);
@@ -32,36 +35,34 @@ const NewsPage = () => {
   return (
     <section
       id="news"
-      className="flex flex-col w-full min-h-screen pt-[18vh] md:pt-[25vh]"
+      className="flex min-h-screen w-full flex-col pt-[18vh] md:pt-[25vh]"
       aria-labelledby="news-title"
     >
-      <SectionTitle id='news-title' title={t("title")} />
-      <div
-        className="flex flex-col gap-10 mt-[10vh] py-8 px-4 md:px-8 lg:px-24 xl:px-36"
-      >
+      <SectionTitle id="news-title" title={t("title")} />
+      <div className="mt-[10vh] flex flex-col gap-10 px-4 py-8 md:px-8 lg:px-24 xl:px-36">
         {news.map((item, index) => (
           <div
             key={index}
-            className="flex flex-col md:flex-row items-center md:items-start gap-6 md:gap-10 lg:gap-14"
+            className="flex flex-col items-center gap-6 md:flex-row md:items-start md:gap-10 lg:gap-14"
           >
             {/* Responsive Image */}
-            <div className="w-full md:w-1/2 flex-shrink-0">
+            <div className="w-full flex-shrink-0 md:w-1/2">
               <Image
                 src={item.image}
                 alt="Car image"
                 width={500}
                 height={500}
-                className="object-cover w-full h-auto rounded-lg shadow-lg"
+                className="h-auto w-full rounded-lg object-cover shadow-lg"
               />
             </div>
 
             {/* Text Content */}
-            <div className="flex flex-col gap-4 w-full md:w-1/2 text-center md:text-left">
-              <h4 className="text-2xl md:text-3xl lg:text-4xl font-bold">
+            <div className="flex w-full flex-col gap-4 text-center md:w-1/2 md:text-left">
+              <h4 className="text-2xl font-bold md:text-3xl lg:text-4xl">
                 {item.title[locale]}
               </h4>
-              <p className="text-base md:text-lg lg:text-xl text-gray-500">
-                {item.short_text[locale]}{' '}
+              <p className="text-base text-gray-500 md:text-lg lg:text-xl">
+                {item.short_text[locale]}{" "}
                 <Link
                   className="hover:text-white hover:underline"
                   href={`/news/${item.id}`}
@@ -74,7 +75,7 @@ const NewsPage = () => {
         ))}
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default NewsPage
+export default NewsPage;

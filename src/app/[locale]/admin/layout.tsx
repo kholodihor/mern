@@ -5,11 +5,10 @@ export default function AdminLayout({
 }: {
   children: React.ReactNode;
 }) {
-
   return (
-    <div className="flex bg-black text-white pt-[5vh]">
+    <div className="flex bg-black pt-[5vh] text-white">
       <SideBar />
-      <div className="flex-1 max-h-[95vh] overflow-auto">{children}</div>
+      <div className="max-h-[95vh] flex-1 overflow-auto">{children}</div>
     </div>
   );
 }

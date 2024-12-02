@@ -1,14 +1,16 @@
-import Link from "next/link";
 import Image from "next/image";
-import { TLink } from "@/types";
-import { Link as LocalizedLink, locales, pathnames } from "@/i18n/routing";
+import Link from "next/link";
+
 import { useTranslations } from "next-intl";
+
+import { Link as LocalizedLink, locales, pathnames } from "@/i18n/routing";
+import { TLink } from "@/types";
 
 const MobileMenu = ({ links }: { links: TLink[] }) => {
   const t = useTranslations("Menu");
   return (
-    <nav className="w-full h-[85vh] absolute top-[14vh] left-0 bg-black mt-4 md:hidden">
-      <ul className="w-full h-full m-0 p-4 flex flex-col justify-center items-center gap-4">
+    <nav className="absolute left-0 top-[14vh] mt-4 h-[85vh] w-full bg-black md:hidden">
+      <ul className="m-0 flex h-full w-full flex-col items-center justify-center gap-4 p-4">
         {/* Language Switcher */}
         <li className="flex gap-2">
           {locales.map((lang, i) => (
@@ -27,8 +29,11 @@ const MobileMenu = ({ links }: { links: TLink[] }) => {
 
         {/* Navigation Links */}
         {links.map((link, index) => (
-          <LocalizedLink key={index} href={{ pathname: link.href as keyof typeof pathnames }}>
-            <li className="relative uppercase text-xl cursor-pointer" id="link">
+          <LocalizedLink
+            key={index}
+            href={{ pathname: link.href as keyof typeof pathnames }}
+          >
+            <li className="relative cursor-pointer text-xl uppercase" id="link">
               {t(link.name)}
             </li>
           </LocalizedLink>

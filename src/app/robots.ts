@@ -1,18 +1,14 @@
-import { MetadataRoute } from 'next'
+import { MetadataRoute } from "next";
 
 export default function robots(): MetadataRoute.Robots {
-  const baseUrl = process.env.BASE_URL || 'https://mernserwis.pl'
+  const baseUrl = process.env.BASE_URL || "https://mernserwis.pl";
 
   return {
     rules: [
       {
-        userAgent: '*',
-        allow: '/',
-        disallow: [
-          '/admin/',
-          '/api/',
-          '/login/',
-        ],
+        userAgent: "*",
+        allow: "/",
+        disallow: ["/admin/", "/api/", "/login/"],
       },
     ],
     sitemap: [
@@ -21,5 +17,5 @@ export default function robots(): MetadataRoute.Robots {
       `${baseUrl}/en/sitemap.xml`,
       `${baseUrl}/pl/sitemap.xml`,
     ],
-  }
+  };
 }

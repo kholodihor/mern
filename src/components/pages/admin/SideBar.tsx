@@ -1,13 +1,16 @@
 "use client";
 
 import Image from "next/image";
-import { useRouter, Link } from "@/i18n/routing";
+
 import { signOut } from "firebase/auth";
-import { auth } from "@/lib/firebase";
-import { TiMessages } from "react-icons/ti";
 import { CiLogout } from "react-icons/ci";
-import { SideBarItem } from "./SideBarItem";
 import { IoMdPhotos } from "react-icons/io";
+import { TiMessages } from "react-icons/ti";
+
+import { Link, useRouter } from "@/i18n/routing";
+import { auth } from "@/lib/firebase";
+
+import { SideBarItem } from "./SideBarItem";
 
 const SideBar = () => {
   const router = useRouter();
@@ -23,8 +26,8 @@ const SideBar = () => {
   };
 
   return (
-    <aside className="relative min-h-[95vh] w-[250px] overflow-auto border-r border-gray-800 bg-black flex flex-col">
-      <div className="flex justify-center items-center p-2 mb-[2rem]">
+    <aside className="relative flex min-h-[95vh] w-[250px] flex-col overflow-auto border-r border-gray-800 bg-black">
+      <div className="mb-[2rem] flex items-center justify-center p-2">
         <Link href="/">
           <Image src="/logo.png" alt="MERN logo" width={150} height={150} />
         </Link>
@@ -57,10 +60,7 @@ const SideBar = () => {
       </div>
       <button
         onClick={handleSignOut}
-        className={`absolute bottom-4 left-[50%] -translate-x-[50%] 
-          flex gap-2 justify-center items-center text-xl rounded-md 
-          border border-white hover:border-red-700 py-2 px-4 w-[220px] 
-          mt-[2rem] mx-auto`}
+        className={`absolute bottom-4 left-[50%] mx-auto mt-[2rem] flex w-[220px] -translate-x-[50%] items-center justify-center gap-2 rounded-md border border-white px-4 py-2 text-xl hover:border-red-700`}
       >
         <CiLogout />
         Вийти

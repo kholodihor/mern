@@ -1,10 +1,9 @@
-import Gallery from '@/components/pages/admin/gallery'
-import React from 'react'
+import React from "react";
+
+import Gallery from "@/components/pages/admin/gallery";
 
 const GalleryPage = () => {
-  return (
-    <Gallery />
-  )
-}
+  return <Gallery />;
+};
 
-export default GalleryPage
+export default GalleryPage;

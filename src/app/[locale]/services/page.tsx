@@ -1,34 +1,36 @@
-import { Metadata } from 'next';
-import { PageMetadata, TServiceCard } from '@/types';
-import { Locale } from '@/i18n/routing';
-import { baseUrl } from '@/constants';
-import { services } from '@/data/services';
-import ServicesPage from '@/components/pages/services/services';
+import { Metadata } from "next";
+
+import { baseUrl } from "@/constants";
+import { services } from "@/data/services";
+import { Locale } from "@/i18n/routing";
+import { PageMetadata, TServiceCard } from "@/types";
+
+import ServicesPage from "@/components/pages/services/services";
 
 const s = services.map((service: TServiceCard) => service.title);
-const servicesString = s.join(',');
+const servicesString = s.join(",");
 
-console.log(servicesString)
+console.log(servicesString);
 
 const metadata: PageMetadata = {
   pl: {
-    title: 'Usługi | MERN Serwis',
-    description: 'MERN Serwis | Nasze Usługi',
+    title: "Usługi | MERN Serwis",
+    description: "MERN Serwis | Nasze Usługi",
   },
   en: {
-    title: 'Services | MERN Car Service',
-    description: 'MERN Serwis | Our Services',
+    title: "Services | MERN Car Service",
+    description: "MERN Serwis | Our Services",
   },
   ua: {
-    title: 'Послуги | Автосервіс MERN',
-    description: 'MERN Serwis | Наші послуги',
+    title: "Послуги | Автосервіс MERN",
+    description: "MERN Serwis | Наші послуги",
   },
 };
 
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ locale: Locale }>
+  params: Promise<{ locale: Locale }>;
 }): Promise<Metadata> {
   const { locale } = await params;
 
@@ -41,7 +43,7 @@ export async function generateMetadata({
 }
 
 const Services = () => {
-  return <ServicesPage />
+  return <ServicesPage />;
 };
 
 export default Services;

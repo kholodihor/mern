@@ -1,20 +1,22 @@
-import { Metadata } from 'next';
-import { PageMetadata } from '@/types';
-import { Locale } from '@/i18n/routing';
-import { baseUrl } from '@/constants';
+import { Metadata } from "next";
+
+import { baseUrl } from "@/constants";
+import { Locale } from "@/i18n/routing";
+import { PageMetadata } from "@/types";
+
 import About from "@/components/pages/about/about";
 
 const metadata: PageMetadata = {
   pl: {
-    title: 'O Nas | MERN Serwis',
+    title: "O Nas | MERN Serwis",
     description: `MERN Serwis | ${baseUrl} | Informacja o nas`,
   },
   en: {
-    title: 'About Us | MERN Car Service',
+    title: "About Us | MERN Car Service",
     description: `MERN Serwis | ${baseUrl} | Information about us`,
   },
   ua: {
-    title: 'Про нас | Автосервіс MERN',
+    title: "Про нас | Автосервіс MERN",
     description: `MERN Serwis | ${baseUrl} | Інформація про нас`,
   },
 };
@@ -22,7 +24,7 @@ const metadata: PageMetadata = {
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ locale: Locale }>
+  params: Promise<{ locale: Locale }>;
 }): Promise<Metadata> {
   const { locale } = await params;
 
@@ -34,9 +36,8 @@ export async function generateMetadata({
   };
 }
 
-
 const AboutPage = () => {
-  return <About />
+  return <About />;
 };
 
 export default AboutPage;

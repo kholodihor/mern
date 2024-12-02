@@ -10,7 +10,7 @@ export type TServiceCard = {
   text: string;
   image?: string;
   link: string;
-  tags: string[]
+  tags: string[];
 };
 
 export type TStep = {
@@ -51,12 +51,12 @@ export interface ContactInfo {
 }
 
 export interface INewsItem {
-  id: number,
+  id: number;
   car: string;
   services: string[];
   contact: ContactInfo;
   hashtags?: string[];
-  categories: string[]
+  categories: string[];
   images: string[];
   slug: string;
   desc: string;
@@ -65,7 +65,7 @@ export interface INewsItem {
 }
 
 export interface IReviewItem {
-  id: string,
+  id: string;
   name: string;
   review: string;
   rating: number;
@@ -76,5 +76,5 @@ export type PageMetadata = {
   [key in Locale]: {
     title: string;
     description: string;
-  }
+  };
 };

@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
+
 import { collection, deleteDoc, doc, onSnapshot } from "firebase/firestore";
+
 import { db } from "@/lib/firebase";
 
 interface GalleryItem {
@@ -46,6 +48,6 @@ export const useGallery = () => {
   return {
     galleryList,
     fetchGalleryAsList,
-    deleteGalleryItem
+    deleteGalleryItem,
   };
 };

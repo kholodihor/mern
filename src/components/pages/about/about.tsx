@@ -1,37 +1,37 @@
-import { useTranslations } from "next-intl";
-import SectionTitle from "@/components/shared/section-title";
 import Image from "next/image";
+
+import { useTranslations } from "next-intl";
+
+import SectionTitle from "@/components/shared/section-title";
 
 const About = () => {
   const t = useTranslations("About");
   return (
     <section
       id="about-us"
-      className="flex flex-col w-full min-h-screen pt-[18vh] md:pt-[25vh]"
+      className="flex min-h-screen w-full flex-col pt-[18vh] md:pt-[25vh]"
       aria-labelledby="about-us-title"
     >
-      <SectionTitle id='about-us-title' title={t("title")} />
-      <div className="flex flex-col md:flex-row justify-center items-center w-full py-[2rem] lg:px-[6rem] space-y-8 md:space-y-0 md:space-x-8">
-
+      <SectionTitle id="about-us-title" title={t("title")} />
+      <div className="flex w-full flex-col items-center justify-center space-y-8 py-[2rem] md:flex-row md:space-x-8 md:space-y-0 lg:px-[6rem]">
         {/* Text Section */}
-        <div className="w-full md:w-1/2 flex flex-col justify-center items-start p-4">
+        <div className="flex w-full flex-col items-start justify-center p-4 md:w-1/2">
           <p className="w-full text-[18px] md:text-[20px] lg:text-lg">
             {t("content")}
           </p>
-          <h5 className="text-lg md:text-xl mt-4 font-semibold">{t('call')}</h5>
+          <h5 className="mt-4 text-lg font-semibold md:text-xl">{t("call")}</h5>
         </div>
 
         {/* Image Section */}
-        <div className="w-full md:w-1/2 flex justify-center">
+        <div className="flex w-full justify-center md:w-1/2">
           <Image
-            src={'/about/about.png'}
+            src={"/about/about.png"}
             alt="Car image"
             width={500}
             height={500}
-            className="object-cover w-full max-w-[500px] md:max-w-[80%]"
+            className="w-full max-w-[500px] object-cover md:max-w-[80%]"
           />
         </div>
-
       </div>
     </section>
   );

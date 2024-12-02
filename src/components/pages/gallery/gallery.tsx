@@ -1,14 +1,24 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-'use client'
+"use client";
+
+import { useEffect } from "react";
 
 import { useTranslations } from "next-intl";
-import { useFilters } from '@/stores/useFilters';
-import { CATEGORIES } from '@/constants/categories';
-import SectionTitle from "@/components/shared/section-title";
-import GalleryCard from "./gallery-card";
-import CustomDropdown from "@/components/ui/select";
+
+import { CATEGORIES } from "@/constants/categories";
 import { useGallery } from "@/hooks/useGallery";
-import { useEffect } from "react";
+import { useFilters } from "@/stores/useFilters";
+
+import SectionTitle from "@/components/shared/section-title";
+import CustomDropdown from "@/components/ui/select";
+
+import GalleryCard from "./gallery-card";
+
+/* eslint-disable react-hooks/exhaustive-deps */
+
+/* eslint-disable react-hooks/exhaustive-deps */
+
+/* eslint-disable react-hooks/exhaustive-deps */
 
 const Gallery = () => {
   const t = useTranslations("Gallery");
@@ -17,45 +27,45 @@ const Gallery = () => {
 
   useEffect(() => {
     fetchGalleryAsList();
-  }, [])
+  }, []);
 
   const filteredData = galleryList.filter((item) => {
-    return filters[0] === CATEGORIES.ALL ? true
-      :
-      item.categories.some((category: string) => filters.includes(CATEGORIES[category]));
+    return filters[0] === CATEGORIES.ALL
+      ? true
+      : item.categories.some((category: string) =>
+          filters.includes(CATEGORIES[category])
+        );
   });
 
-  console.log(filters)
+  console.log(filters);
 
   const options = Object.values(CATEGORIES);
 
   return (
     <section
       id="gallery"
-      className="flex flex-col w-full min-h-screen pt-[18vh] md:pt-[25vh] px-2 md:px-4"
+      className="flex min-h-screen w-full flex-col px-2 pt-[18vh] md:px-4 md:pt-[25vh]"
       aria-labelledby="gallery-title"
     >
-      <SectionTitle id='gallery-title' title={t("title")} />
+      <SectionTitle id="gallery-title" title={t("title")} />
 
-      <div className="lg:px-[6rem] mt-[10vh]">
-        <CustomDropdown
-          options={options} />
+      <div className="mt-[10vh] lg:px-[6rem]">
+        <CustomDropdown options={options} />
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 
-      2xl:grid-cols-4 gap-6 w-full py-[2rem] lg:px-[6rem]">
-        {filteredData.length ? filteredData.map((item, index) => (
-          <GalleryCard key={index} data={item} />
-        )) : (
-          <p className="col-span-4 text-center text-[20px] mt-[24px] text-gray-400">
+      <div className="grid w-full grid-cols-1 gap-6 py-[2rem] sm:grid-cols-2 lg:grid-cols-3 lg:px-[6rem] 2xl:grid-cols-4">
+        {filteredData.length ? (
+          filteredData.map((item, index) => (
+            <GalleryCard key={index} data={item} />
+          ))
+        ) : (
+          <p className="col-span-4 mt-[24px] text-center text-[20px] text-gray-400">
             {t("not_found")}
           </p>
         )}
       </div>
-
     </section>
-  )
-}
+  );
+};
 
-export default Gallery
-
+export default Gallery;

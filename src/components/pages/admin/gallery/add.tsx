@@ -1,32 +1,36 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { useRouter } from "@/i18n/routing"
-import { Controller, SubmitHandler, useForm } from "react-hook-form"
-import { gallerySchema, TGalleryScheme } from "./schema"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useTranslations } from "next-intl"
-import { db } from "@/lib/firebase"
-import { addDoc, collection } from "firebase/firestore"
-import { translateText } from "@/utils/translator"
-import { getImageUrlsFromGroup } from '@/utils/imageFetcher';
-import { CATEGORIES } from '@/constants/categories';
+import { useState } from "react";
+
+import { zodResolver } from "@hookform/resolvers/zod";
 import { Widget } from "@uploadcare/react-widget";
+import { addDoc, collection } from "firebase/firestore";
+import { useTranslations } from "next-intl";
+import { Controller, SubmitHandler, useForm } from "react-hook-form";
 
-import TextArea from "@/components/ui/text-area"
-import TextInput from "@/components/ui/text-input"
-import Multiselect from "@/components/ui/multi-select"
+import { CATEGORIES } from "@/constants/categories";
+import { useRouter } from "@/i18n/routing";
+import { db } from "@/lib/firebase";
+import { getImageUrlsFromGroup } from "@/utils/imageFetcher";
+import { translateText } from "@/utils/translator";
+
+import Multiselect from "@/components/ui/multi-select";
+import TextArea from "@/components/ui/text-area";
+import TextInput from "@/components/ui/text-input";
+
+import { TGalleryScheme, gallerySchema } from "./schema";
 
 const AddGallery = () => {
-  const router = useRouter()
-  const t = useTranslations("Filters.categories")
-  const [isProcessing, setIsProcessing] = useState(false)
+  const router = useRouter();
+  const t = useTranslations("Filters.categories");
+  const [isProcessing, setIsProcessing] = useState(false);
 
-  const options = Object.entries(CATEGORIES).map(([key, value]) => ({
-    value: key,
-    label: t(value),
-  })).filter(option => option.value !== 'ALL');
-
+  const options = Object.entries(CATEGORIES)
+    .map(([key, value]) => ({
+      value: key,
+      label: t(value),
+    }))
+    .filter((option) => option.value !== "ALL");
 
   const {
     handleSubmit,
@@ -39,28 +43,30 @@ const AddGallery = () => {
     defaultValues: {
       car: "",
       categories: [],
-      images: '',
+      images: "",
       desc: "",
       fullDesc: "",
     },
-  })
-
+  });
 
   const onSubmit: SubmitHandler<TGalleryScheme> = async (values) => {
     try {
       setIsProcessing(true);
 
-      const translatedDescUA = await translateText(values.desc, 'uk');
-      const translatedFullDescUA = await translateText(values.fullDesc, 'uk');
-      const translatedDescEN = await translateText(values.desc, 'en');
-      const translatedFullDescEN = await translateText(values.fullDesc, 'en');
+      const translatedDescUA = await translateText(values.desc, "uk");
+      const translatedFullDescUA = await translateText(values.fullDesc, "uk");
+      const translatedDescEN = await translateText(values.desc, "en");
+      const translatedFullDescEN = await translateText(values.fullDesc, "en");
 
-      const images = await getImageUrlsFromGroup(values.images)
-      const urls = images.map((image: any) => `https://ucarecdn.com/${image.file_id}/${image.filename}`)
+      const images = await getImageUrlsFromGroup(values.images);
+      const urls = images.map(
+        (image: any) =>
+          `https://ucarecdn.com/${image.file_id}/${image.filename}`
+      );
 
       const data = {
         car: values.car,
-        slug: values.car.toLowerCase().replace(/\s+/g, '-'),
+        slug: values.car.toLowerCase().replace(/\s+/g, "-"),
         categories: values.categories,
         images: urls,
         desc: {
@@ -75,12 +81,12 @@ const AddGallery = () => {
         },
         created_at: new Date(Date.now()),
       };
-      const ref = collection(db, 'gallery');
+      const ref = collection(db, "gallery");
       await addDoc(ref, data);
-      alert('Статтю успішно додано!')
+      alert("Статтю успішно додано!");
       reset();
       setIsProcessing(false);
-      router.push('/admin/gallery');
+      router.push("/admin/gallery");
     } catch (error) {
       setIsProcessing(false);
       alert(error);
@@ -89,11 +95,10 @@ const AddGallery = () => {
 
   return (
     <div className="p-[24px]">
-      <h1 className="text-3xl font-bold mb-[24px]">Додати статтю в галерею</h1>
+      <h1 className="mb-[24px] text-3xl font-bold">Додати статтю в галерею</h1>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="space-y-2 gap-4 flex flex-col 
-  justify-start items-start w-full mt-[2rem] md:mt-0"
+        className="mt-[2rem] flex w-full flex-col items-start justify-start gap-4 space-y-2 md:mt-0"
       >
         <Controller
           name="car"
@@ -117,8 +122,8 @@ const AddGallery = () => {
               ref={ref}
               options={options}
               value={options.filter((option) => value?.includes(option.value))} // Transform string[] to MultiValue
-              onChange={(selected) =>
-                onChange(selected.map((option) => option.value)) // Transform MultiValue to string[]
+              onChange={
+                (selected) => onChange(selected.map((option) => option.value)) // Transform MultiValue to string[]
               }
               errorText={errors.categories?.message}
               placeholder="Категорії ремонту"
@@ -132,7 +137,7 @@ const AddGallery = () => {
           rules={{ required: "File is required" }}
           render={({ field: { onChange, value, ref } }) => (
             <div>
-              <label htmlFor="file-upload" className="text-sm font-medium mr-4">
+              <label htmlFor="file-upload" className="mr-4 text-sm font-medium">
                 Завантажити фото
               </label>
               <Widget
@@ -178,15 +183,14 @@ const AddGallery = () => {
         />
 
         <button
-          className={`w-full md:w-[200px] rounded-[1rem] min-w-[325px] border py-2 px-4 
-      transition-all hover:bg-gray-400/50`}
+          className={`w-full min-w-[325px] rounded-[1rem] border px-4 py-2 transition-all hover:bg-gray-400/50 md:w-[200px]`}
           type="submit"
         >
           {isProcessing ? "Обробка" : "Додати"}
         </button>
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default AddGallery
+export default AddGallery;

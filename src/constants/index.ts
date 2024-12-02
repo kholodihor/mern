@@ -1,5 +1,6 @@
 export const baseUrl = "https://mernserwis.pl";
-export const contactInfo = "+48 509 158 159 | Przyszłość 2A, 05-126 Stanisławów Pierwszy";
+export const contactInfo =
+  "+48 509 158 159 | Przyszłość 2A, 05-126 Stanisławów Pierwszy";
 
 export const colors = [
   "#FF5733",
@@ -11,5 +12,5 @@ export const colors = [
   "#FFD733",
   "#8B33FF",
   "#33FF88",
-  "#FF8833"
+  "#FF8833",
 ];

@@ -1,34 +1,33 @@
-import { Metadata } from 'next';
-import dynamic from 'next/dynamic';
-import { INewsItem, PageMetadata } from '@/types';
-import { galleryData } from '@/data/gallery';
-import { Locale } from '@/i18n/routing';
-import { baseUrl } from '@/constants';
-import Spiral from '@/components/shared/spiral/Spiral';
+import { Metadata } from "next";
+import dynamic from "next/dynamic";
+
+import { baseUrl } from "@/constants";
+import { galleryData } from "@/data/gallery";
+import { Locale } from "@/i18n/routing";
+import { INewsItem, PageMetadata } from "@/types";
+
+import Spiral from "@/components/shared/spiral/Spiral";
 
 const DynamicPage = dynamic(
-  () =>
-    import(
-      '@/components/pages/gallery/gallery'
-    ),
+  () => import("@/components/pages/gallery/gallery"),
 
   { ssr: false, loading: () => <Spiral /> }
 );
 
-const cars = galleryData.map((car: INewsItem) => car.car)
-const carsString = cars.join(',');
+const cars = galleryData.map((car: INewsItem) => car.car);
+const carsString = cars.join(",");
 
 const metadata: PageMetadata = {
   pl: {
-    title: 'Galeria | MERN Serwis',
+    title: "Galeria | MERN Serwis",
     description: `MERN Serwis | ${baseUrl} Galeria ${carsString}`,
   },
   en: {
-    title: 'Gallery | MERN Car Service',
+    title: "Gallery | MERN Car Service",
     description: `MERN Serwis | ${baseUrl} Gallery ${carsString}`,
   },
   ua: {
-    title: 'Галерея | Автосервіс MERN',
+    title: "Галерея | Автосервіс MERN",
     description: `MERN Serwis | ${baseUrl} Галерея ${carsString}`,
   },
 };
@@ -36,7 +35,7 @@ const metadata: PageMetadata = {
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ locale: Locale }>
+  params: Promise<{ locale: Locale }>;
 }): Promise<Metadata> {
   const { locale } = await params;
 
@@ -49,7 +48,7 @@ export async function generateMetadata({
 }
 
 const GalleryPage = () => {
-  return <DynamicPage />
-}
+  return <DynamicPage />;
+};
 
-export default GalleryPage
+export default GalleryPage;

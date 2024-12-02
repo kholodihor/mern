@@ -1,7 +1,9 @@
-'use client'
-import { useRouter } from "@/i18n/routing";
-import { useAuth } from "@/hooks/useAuth";
+"use client";
+
 import { useEffect } from "react";
+
+import { useAuth } from "@/hooks/useAuth";
+import { useRouter } from "@/i18n/routing";
 
 const AdminPage = () => {
   const user = useAuth();
@@ -15,7 +17,7 @@ const AdminPage = () => {
     }
   }, [user, router]);
 
-  return null
-}
+  return null;
+};
 
-export default AdminPage
+export default AdminPage;

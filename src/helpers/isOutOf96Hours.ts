@@ -12,4 +12,3 @@ export function isOutOf96Hours(dateString: string): boolean {
 
   return Math.abs(diffInHours) >= 96;
 }
-

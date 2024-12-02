@@ -1,7 +1,7 @@
-import AddGallery from '@/components/pages/admin/gallery/add'
+import AddGallery from "@/components/pages/admin/gallery/add";
 
 const GalleryAddPage = () => {
-  return <AddGallery />
-}
+  return <AddGallery />;
+};
 
-export default GalleryAddPage
+export default GalleryAddPage;

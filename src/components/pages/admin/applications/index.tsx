@@ -1,11 +1,20 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
+
+import { collection, deleteDoc, doc, onSnapshot } from "firebase/firestore";
+
 import { db } from "@/lib/firebase";
-import { collection, onSnapshot, doc, deleteDoc } from "firebase/firestore";
 import { IApplicationResponse } from "@/types";
+
 import ApplicationItem from "./application-item";
+
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 const Applications = () => {
   const [applications, setApplications] = useState<any[]>([]);
@@ -20,7 +29,7 @@ const Applications = () => {
         });
         setApplications(applicationsData);
       }
-    })
+    });
 
     return () => unsubscribe();
   }, []);
@@ -39,9 +48,9 @@ const Applications = () => {
   };
 
   return (
-    <section className="px-[24px] relative">
-      <h1 className="text-3xl font-bold mb-[24px]">Заявки на сервіс</h1>
-      <ul className="w-full flex flex-col gap-[1rem] text-white">
+    <section className="relative px-[24px]">
+      <h1 className="mb-[24px] text-3xl font-bold">Заявки на сервіс</h1>
+      <ul className="flex w-full flex-col gap-[1rem] text-white">
         {applications &&
           Array.isArray(applications) &&
           applications.map((item: IApplicationResponse) => (

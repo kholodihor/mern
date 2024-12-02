@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { getRequestConfig } from 'next-intl/server';
-import { Locale, routing } from '@/i18n/routing';
+import { getRequestConfig } from "next-intl/server";
+
+import { Locale, routing } from "@/i18n/routing";
 
 export default getRequestConfig(async ({ requestLocale }) => {
   // This typically corresponds to the `[locale]` segment.
@@ -13,6 +14,6 @@ export default getRequestConfig(async ({ requestLocale }) => {
 
   return {
     locale,
-    messages: (await import(`../../messages/${locale}.json`)).default
+    messages: (await import(`../../messages/${locale}.json`)).default,
   };
 });

@@ -1,16 +1,18 @@
 import {
-  FaInstagram,
   FaFacebook,
-  FaYoutube,
+  FaInstagram,
+  FaMapMarkerAlt,
   FaTiktok,
   FaWhatsapp,
-  FaMapMarkerAlt,
+  FaYoutube,
 } from "react-icons/fa";
 
 const Socials = () => {
   return (
-    <ul className="flex justify-center sm:justify-start items-center 
-    gap-6 text-3xl mt-8" role="list">
+    <ul
+      className="mt-8 flex items-center justify-center gap-6 text-3xl sm:justify-start"
+      role="list"
+    >
       <li>
         <a
           href="https://www.instagram.com/mern.serwis/"
@@ -18,7 +20,10 @@ const Socials = () => {
           rel="noopener noreferrer"
           aria-label="Visit us on Instagram"
         >
-          <FaInstagram className="hover:text-orange-400 transition-all" aria-hidden="true" />
+          <FaInstagram
+            className="transition-all hover:text-orange-400"
+            aria-hidden="true"
+          />
         </a>
       </li>
       <li>
@@ -28,7 +33,10 @@ const Socials = () => {
           rel="noopener noreferrer"
           aria-label="Visit us on YouTube"
         >
-          <FaYoutube className="hover:text-red-400 transition-all" aria-hidden="true" />
+          <FaYoutube
+            className="transition-all hover:text-red-400"
+            aria-hidden="true"
+          />
         </a>
       </li>
       <li>
@@ -38,7 +46,10 @@ const Socials = () => {
           rel="noopener noreferrer"
           aria-label="Visit us on TikTok"
         >
-          <FaTiktok className="hover:text-purple-400 transition-all" aria-hidden="true" />
+          <FaTiktok
+            className="transition-all hover:text-purple-400"
+            aria-hidden="true"
+          />
         </a>
       </li>
       <li>
@@ -48,7 +59,10 @@ const Socials = () => {
           rel="noopener noreferrer"
           aria-label="Visit us on Facebook"
         >
-          <FaFacebook className="hover:text-blue-400 transition-all" aria-hidden="true" />
+          <FaFacebook
+            className="transition-all hover:text-blue-400"
+            aria-hidden="true"
+          />
         </a>
       </li>
       <li>
@@ -58,7 +72,10 @@ const Socials = () => {
           rel="noopener noreferrer"
           aria-label="View our location on Google Maps"
         >
-          <FaMapMarkerAlt className="hover:text-yellow-400 transition-all" aria-hidden="true" />
+          <FaMapMarkerAlt
+            className="transition-all hover:text-yellow-400"
+            aria-hidden="true"
+          />
         </a>
       </li>
       <li>
@@ -68,7 +85,10 @@ const Socials = () => {
           rel="noopener noreferrer"
           aria-label="Contact us on WhatsApp"
         >
-          <FaWhatsapp className="hover:text-green-400 transition-all" aria-hidden="true" />
+          <FaWhatsapp
+            className="transition-all hover:text-green-400"
+            aria-hidden="true"
+          />
         </a>
       </li>
     </ul>

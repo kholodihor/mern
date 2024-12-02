@@ -1,12 +1,15 @@
-'use client'
+"use client";
 
-import { Link } from '@/i18n/routing';
-import SectionTitle from "@/components/shared/section-title"
-import ChevronLeft from '@/components/icons/chevron-left';
-import { useLocale } from 'next-intl';
-import { useEffect, useState } from 'react';
-import { db } from '@/lib/firebase';
-import { collection, onSnapshot } from 'firebase/firestore';
+import { useEffect, useState } from "react";
+
+import { collection, onSnapshot } from "firebase/firestore";
+import { useLocale } from "next-intl";
+
+import { Link } from "@/i18n/routing";
+import { db } from "@/lib/firebase";
+
+import ChevronLeft from "@/components/icons/chevron-left";
+import SectionTitle from "@/components/shared/section-title";
 
 const Article = ({ id }: { id: string }) => {
   const locale = useLocale();
@@ -23,7 +26,7 @@ const Article = ({ id }: { id: string }) => {
         });
         setArticles(applicationsData);
       }
-    })
+    });
 
     return () => unsubscribe();
   }, []);
@@ -33,41 +36,60 @@ const Article = ({ id }: { id: string }) => {
   return (
     <section
       id={`Article ${article?.title}`}
-      className="flex flex-col w-full min-h-screen pt-[18vh] md:pt-[25vh] px-[24px] pb-[100px]"
+      className="flex min-h-screen w-full flex-col px-[24px] pb-[100px] pt-[18vh] md:pt-[25vh]"
       aria-labelledby={`Article ${article?.title[locale]}-title`}
     >
-      <SectionTitle id={`Article ${article?.title[locale]}-title`} title={article?.title[locale] as string} />
+      <SectionTitle
+        id={`Article ${article?.title[locale]}-title`}
+        title={article?.title[locale] as string}
+      />
 
-      <div className="flex flex-col md:flex-row items-start mt-[10vh] gap-6 md:gap-10">
+      <div className="mt-[10vh] flex flex-col items-start gap-6 md:flex-row md:gap-10">
         <Link href="/news">
-          <button className="text-xl md:text-2xl lg:text-3xl flex items-center gap-2">
+          <button className="flex items-center gap-2 text-xl md:text-2xl lg:text-3xl">
             <ChevronLeft />
           </button>
         </Link>
 
-        <p className="text-base md:text-lg lg:text-xl text-gray-500 leading-relaxed md:max-w-[85vw]">
+        <p className="text-base leading-relaxed text-gray-500 md:max-w-[85vw] md:text-lg lg:text-xl">
           {article?.full_text[locale]
             ?.split(".")
-            .slice(0, Math.floor(article?.full_text[locale].split(".").length / 3))
-            .map((chunk: string | number, index: number, array: string | any[]) => chunk + (index < array.length - 1 ? "." : ""))
+            .slice(
+              0,
+              Math.floor(article?.full_text[locale].split(".").length / 3)
+            )
+            .map(
+              (chunk: string | number, index: number, array: string | any[]) =>
+                chunk + (index < array.length - 1 ? "." : "")
+            )
             .join(".")}
           <br /> <br />
           {article?.full_text[locale]
             ?.split(".")
-            .slice(Math.floor(article?.full_text[locale].split(".").length / 3), Math.floor((article?.full_text[locale].split(".").length * 2) / 3))
-            .map((chunk: string | number, index: number, array: string | any[]) => chunk + (index < array.length - 1 ? "." : ""))
+            .slice(
+              Math.floor(article?.full_text[locale].split(".").length / 3),
+              Math.floor((article?.full_text[locale].split(".").length * 2) / 3)
+            )
+            .map(
+              (chunk: string | number, index: number, array: string | any[]) =>
+                chunk + (index < array.length - 1 ? "." : "")
+            )
             .join(".")}
           <br /> <br />
           {article?.full_text[locale]
             ?.split(".")
-            .slice(Math.floor((article?.full_text[locale].split(".").length * 2) / 3))
-            .map((chunk: string | number, index: number, array: string | any[]) => chunk + (index < array.length - 1 ? "." : ""))
+            .slice(
+              Math.floor((article?.full_text[locale].split(".").length * 2) / 3)
+            )
+            .map(
+              (chunk: string | number, index: number, array: string | any[]) =>
+                chunk + (index < array.length - 1 ? "." : "")
+            )
             .join(".")}
         </p>
-
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default Article
+export default Article;

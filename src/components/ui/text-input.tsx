@@ -12,16 +12,18 @@ const TextInput = forwardRef(function TextInput(
 ) {
   const inputClassName = `w-full outline-none rounded-[0.7rem] border border-white
    py-2 px-4 placeholder:text-sm bg-black
-      ${errorText
-      ? "border-red-500 caret-error outline-red-500 focus:outline-red-500"
-      : "border-lightgrey focus:outline-none"
-    }
+      ${
+        errorText
+          ? "border-red-500 caret-error outline-red-500 focus:outline-red-500"
+          : "border-lightgrey focus:outline-none"
+      }
     `;
 
   return (
     <div
-      className={`w-full min-w-[100px] max-w-[500px] ${errorText ? "text-error" : "text-inherit"
-        }`}
+      className={`w-full min-w-[100px] max-w-[500px] ${
+        errorText ? "text-error" : "text-inherit"
+      }`}
     >
       {!!title && (
         <label htmlFor={title} className="text-sm font-medium">

@@ -1,20 +1,22 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { useRouter } from "@/i18n/routing"
-import { Controller, SubmitHandler, useForm } from "react-hook-form"
-import { TestimonialScheme, testimonialScheme } from './schema'
-import { zodResolver } from "@hookform/resolvers/zod"
-import { db } from "@/lib/firebase"
-import { addDoc, collection } from "firebase/firestore"
+import { useState } from "react";
 
-import TextArea from "@/components/ui/text-area"
-import TextInput from "@/components/ui/text-input"
+import { zodResolver } from "@hookform/resolvers/zod";
+import { addDoc, collection } from "firebase/firestore";
+import { Controller, SubmitHandler, useForm } from "react-hook-form";
+
+import { useRouter } from "@/i18n/routing";
+import { db } from "@/lib/firebase";
+
+import TextArea from "@/components/ui/text-area";
+import TextInput from "@/components/ui/text-input";
+
+import { TestimonialScheme, testimonialScheme } from "./schema";
 
 const AddTestimonial = () => {
-  const router = useRouter()
-  const [isProcessing, setIsProcessing] = useState(false)
-
+  const router = useRouter();
+  const [isProcessing, setIsProcessing] = useState(false);
 
   const {
     handleSubmit,
@@ -25,12 +27,11 @@ const AddTestimonial = () => {
     resolver: zodResolver(testimonialScheme),
     mode: "onChange",
     defaultValues: {
-      name: '',
-      review: '',
-      rating: '',
+      name: "",
+      review: "",
+      rating: "",
     },
-  })
-
+  });
 
   const onSubmit: SubmitHandler<TestimonialScheme> = async (values) => {
     try {
@@ -43,12 +44,12 @@ const AddTestimonial = () => {
         created_at: new Date(Date.now()),
       };
 
-      const ref = collection(db, 'testimonials');
+      const ref = collection(db, "testimonials");
       await addDoc(ref, data);
-      alert('Відгук успішно додано!')
+      alert("Відгук успішно додано!");
       reset();
       setIsProcessing(false);
-      router.push('/admin/testimonials');
+      router.push("/admin/testimonials");
     } catch (error) {
       setIsProcessing(false);
       alert(error);
@@ -57,11 +58,10 @@ const AddTestimonial = () => {
 
   return (
     <div className="p-[24px]">
-      <h1 className="text-3xl font-bold mb-[24px]">Додати відгук</h1>
+      <h1 className="mb-[24px] text-3xl font-bold">Додати відгук</h1>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="space-y-2 gap-4 flex flex-col 
-  justify-start items-start w-full mt-[2rem] md:mt-0"
+        className="mt-[2rem] flex w-full flex-col items-start justify-start gap-4 space-y-2 md:mt-0"
       >
         <Controller
           name="name"
@@ -100,16 +100,14 @@ const AddTestimonial = () => {
         />
 
         <button
-          className={`w-full md:w-[200px] rounded-[1rem] min-w-[325px] border py-2 px-4 
-      transition-all hover:bg-gray-400/50`}
+          className={`w-full min-w-[325px] rounded-[1rem] border px-4 py-2 transition-all hover:bg-gray-400/50 md:w-[200px]`}
           type="submit"
         >
           {isProcessing ? "Обробка" : "Додати"}
         </button>
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default AddTestimonial
-
+export default AddTestimonial;

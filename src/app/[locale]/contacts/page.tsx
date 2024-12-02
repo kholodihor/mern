@@ -1,20 +1,22 @@
-import { Metadata } from 'next';
-import { PageMetadata } from '@/types';
-import { Locale } from '@/i18n/routing';
-import { baseUrl, contactInfo } from '@/constants';
-import Contacts from '@/components/pages/contacts/contacts';
+import { Metadata } from "next";
+
+import { baseUrl, contactInfo } from "@/constants";
+import { Locale } from "@/i18n/routing";
+import { PageMetadata } from "@/types";
+
+import Contacts from "@/components/pages/contacts/contacts";
 
 const metadata: PageMetadata = {
   pl: {
-    title: 'Kontakty | MERN Serwis',
+    title: "Kontakty | MERN Serwis",
     description: `MERN Serwis | ${baseUrl} | ${contactInfo} | Nasze Kontakty`,
   },
   en: {
-    title: 'Contacts | MERN Car Service',
+    title: "Contacts | MERN Car Service",
     description: `MERN Serwis | ${baseUrl} | ${contactInfo} | Our Contacts`,
   },
   ua: {
-    title: 'Контакти | Автосервіс MERN',
+    title: "Контакти | Автосервіс MERN",
     description: `MERN Serwis | ${baseUrl} | ${contactInfo} | Наші контакти`,
   },
 };
@@ -22,9 +24,9 @@ const metadata: PageMetadata = {
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ locale: Locale }>
+  params: Promise<{ locale: Locale }>;
 }): Promise<Metadata> {
-  const { locale } = await params
+  const { locale } = await params;
 
   const localeMetadata = metadata[locale] || metadata.pl;
 
@@ -35,7 +37,7 @@ export async function generateMetadata({
 }
 
 const ContactsPage = () => {
-  return <Contacts />
+  return <Contacts />;
 };
 
 export default ContactsPage;

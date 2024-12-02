@@ -1,17 +1,24 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-'use client';
+"use client";
 
-import { FC, useRef } from 'react';
-import clsx from 'clsx';
-import { Navigation, Pagination } from 'swiper/modules';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { SwiperOptions } from 'swiper/types';
-import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import { FC, useRef } from "react";
 
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
-import './styles.css';
+import clsx from "clsx";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import { Navigation, Pagination } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { SwiperOptions } from "swiper/types";
+
+import "./styles.css";
+
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 interface SliderProps extends SwiperOptions {
   data: any[];
@@ -47,19 +54,17 @@ const Slider: FC<SliderProps> = ({
   return (
     <div className="my-4 flex w-full flex-col items-center justify-center">
       <nav
-        className="relative mx-auto mb-6 flex h-fit w-full items-center 
-        justify-center py-4 pr-4 text-white"
+        className="relative mx-auto mb-6 flex h-fit w-full items-center justify-center py-4 pr-4 text-white"
         aria-label="Slider navigation"
       >
-        <div className="absolute right-6 top-0 hidden h-full items-center 
-        justify-center gap-4 md:flex text-white">
+        <div className="absolute right-6 top-0 hidden h-full items-center justify-center gap-4 text-white md:flex">
           <button
             onClick={handlePrev}
             aria-label="Previous slide"
             aria-controls="slider"
             disabled={!sliderRef.current}
             className={clsx(
-              'button-prev duration-300 hover:text-gray-500 disabled:opacity-40',
+              "button-prev duration-300 hover:text-gray-500 disabled:opacity-40",
               prevElName
             )}
           >
@@ -71,7 +76,7 @@ const Slider: FC<SliderProps> = ({
             aria-controls="slider"
             disabled={!sliderRef.current}
             className={clsx(
-              'button-next duration-300 hover:text-gray-500 disabled:opacity-40',
+              "button-next duration-300 hover:text-gray-500 disabled:opacity-40",
               nextElName
             )}
           >
@@ -89,18 +94,19 @@ const Slider: FC<SliderProps> = ({
         modules={[Pagination, Navigation]}
         navigation={{
           nextEl: nextElName ? `.${nextElName}` : null,
-          prevEl: prevElName ? `.${prevElName}` : null
+          prevEl: prevElName ? `.${prevElName}` : null,
         }}
         loop
         onSwiper={(swiper) => {
           (sliderRef.current as any) = swiper;
         }}
       >
-        {data && data.map((item: any, i: number) => (
-          <SwiperSlide key={i} className='flex justify-center items-center'>
-            <Component data={item} index={i} />
-          </SwiperSlide>
-        ))}
+        {data &&
+          data.map((item: any, i: number) => (
+            <SwiperSlide key={i} className="flex items-center justify-center">
+              <Component data={item} index={i} />
+            </SwiperSlide>
+          ))}
       </Swiper>
     </div>
   );

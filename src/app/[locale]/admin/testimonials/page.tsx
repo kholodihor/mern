@@ -1,7 +1,7 @@
-import TestimonialsPage from '@/components/pages/admin/testimonials'
+import TestimonialsPage from "@/components/pages/admin/testimonials";
 
 const Testimonials = () => {
-  return <TestimonialsPage />
-}
+  return <TestimonialsPage />;
+};
 
-export default Testimonials
+export default Testimonials;

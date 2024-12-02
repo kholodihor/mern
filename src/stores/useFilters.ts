@@ -1,5 +1,6 @@
-import { create } from 'zustand';
-import { CATEGORIES } from '@/constants/categories';
+import { create } from "zustand";
+
+import { CATEGORIES } from "@/constants/categories";
 
 interface FiltersState {
   filters: string[];

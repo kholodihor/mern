@@ -1,6 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
+
 import { onAuthStateChanged } from "firebase/auth";
+
 import { auth } from "@/lib/firebase";
 
 export const useAuth = () => {
@@ -11,13 +13,12 @@ export const useAuth = () => {
       if (user) {
         setUser(user);
       } else {
-        console.log('There`s no user')
+        console.log("There`s no user");
       }
-
     });
 
     return () => unsubscribe();
   }, []);
 
   return user;
-}
+};

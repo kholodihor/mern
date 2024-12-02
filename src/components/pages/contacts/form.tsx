@@ -1,21 +1,26 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Controller, SubmitHandler, useForm } from "react-hook-form"
-import { formValidation, TFormScheme } from "@/components/pages/contacts/formScheme"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useTranslations } from "next-intl"
-import { db } from "@/lib/firebase"
-import { addDoc, collection } from "firebase/firestore"
+import { useState } from "react";
 
-import TextArea from "@/components/ui/text-area"
-import TextInput from "@/components/ui/text-input"
-import SuccessModal from "@/components/modals/SuccessModal"
+import { zodResolver } from "@hookform/resolvers/zod";
+import { addDoc, collection } from "firebase/firestore";
+import { useTranslations } from "next-intl";
+import { Controller, SubmitHandler, useForm } from "react-hook-form";
+
+import { db } from "@/lib/firebase";
+
+import SuccessModal from "@/components/modals/SuccessModal";
+import {
+  TFormScheme,
+  formValidation,
+} from "@/components/pages/contacts/formScheme";
+import TextArea from "@/components/ui/text-area";
+import TextInput from "@/components/ui/text-input";
 
 const Form = () => {
-  const t = useTranslations("Form")
-  const [isProcessing, setIsProcessing] = useState(false)
-  const [isModalOpen, setIsModalOpen] = useState(false)
+  const t = useTranslations("Form");
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const {
     handleSubmit,
@@ -32,11 +37,11 @@ const Form = () => {
       vin: "",
       message: "",
     },
-  })
+  });
 
   const onSubmit: SubmitHandler<TFormScheme> = async (values) => {
     try {
-      setIsProcessing(true)
+      setIsProcessing(true);
       const data = {
         name: values.name,
         email: values.email,
@@ -45,22 +50,21 @@ const Form = () => {
         message: values.message,
         status: "new",
         created_at: new Date(Date.now()).toLocaleDateString(),
-      }
-      const ref = collection(db, "applications")
-      await addDoc(ref, data)
-      setIsModalOpen(true)
-      reset()
-      setIsProcessing(false)
+      };
+      const ref = collection(db, "applications");
+      await addDoc(ref, data);
+      setIsModalOpen(true);
+      reset();
+      setIsProcessing(false);
     } catch (error) {
-      alert(error)
+      alert(error);
     }
-  }
+  };
   return (
     <>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="space-y-2 gap-4 flex flex-col 
-    justify-center items-center w-full md:w-1/2 mt-[2rem] md:mt-0"
+        className="mt-[2rem] flex w-full flex-col items-center justify-center gap-4 space-y-2 md:mt-0 md:w-1/2"
       >
         <Controller
           name="name"
@@ -117,31 +121,34 @@ const Form = () => {
             <TextArea
               {...field}
               aria-describedby="message-error"
-              errorText={errors.message?.message && t(`${errors.message?.message}`)}
+              errorText={
+                errors.message?.message && t(`${errors.message?.message}`)
+              }
               placeholder={t("message")}
             />
           )}
         />
 
-        <div className="text-sm text-gray-400 space-y-2">
-          <h5 className="font-semibold text-[20px]">{t("policies.title")}</h5>
+        <div className="space-y-2 text-sm text-gray-400">
+          <h5 className="text-[20px] font-semibold">{t("policies.title")}</h5>
           <p>
             {t("policies.paragraph_1")}{" "}
             <a
               href="/Polityka Prywatności.pdf"
               target="_blank"
               rel="noreferrer"
-              className="hover:text-white underline"
+              className="underline hover:text-white"
             >
               {t("policies.policy")}
-            </a>.
+            </a>
+            .
           </p>
           <p>
             {t("policies.paragraph_2")}{" "}
             <a
               href="mailto:mern.serwis@gmail.com"
               rel="noopener noreferrer"
-              className="hover:text-white underline"
+              className="underline hover:text-white"
             >
               mern.serwis@gmail.com
             </a>{" "}
@@ -149,16 +156,16 @@ const Form = () => {
             <a
               href="tel:+48509159158"
               rel="noopener noreferrer"
-              className="hover:text-white underline"
+              className="underline hover:text-white"
             >
               +48 509 159 158
-            </a>.
+            </a>
+            .
           </p>
         </div>
 
         <button
-          className={`w-full md:w-[200px] rounded-[1rem] mx-auto min-w-[325px] border py-2 px-4 
-        transition-all hover:bg-gray-400/50`}
+          className={`mx-auto w-full min-w-[325px] rounded-[1rem] border px-4 py-2 transition-all hover:bg-gray-400/50 md:w-[200px]`}
           type="submit"
         >
           {isProcessing ? t("processing") : t("send")}
@@ -166,10 +173,13 @@ const Form = () => {
       </form>
 
       {isModalOpen && (
-        <SuccessModal handleClose={() => setIsModalOpen(false)} isModalOpen={isModalOpen} />
+        <SuccessModal
+          handleClose={() => setIsModalOpen(false)}
+          isModalOpen={isModalOpen}
+        />
       )}
     </>
-  )
-}
+  );
+};
 
-export default Form
+export default Form;

@@ -1,14 +1,22 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import Image from "next/image";
-import { FaBars, FaTimes } from "react-icons/fa";
-import { useTranslations } from "next-intl";
-import { usePathname, useRouter, Link, pathnames, locales } from "@/i18n/routing";
-import { links } from "@/constants/links";
-import MobileMenu from "./mobile-menu";
-import clsx from "clsx";
+import { useEffect, useState } from "react";
 
+import clsx from "clsx";
+import { useTranslations } from "next-intl";
+import { FaBars, FaTimes } from "react-icons/fa";
+
+import { links } from "@/constants/links";
+import {
+  Link,
+  locales,
+  pathnames,
+  usePathname,
+  useRouter,
+} from "@/i18n/routing";
+
+import MobileMenu from "./mobile-menu";
 
 const Header = () => {
   const router = useRouter();
@@ -43,11 +51,9 @@ const Header = () => {
 
   return (
     <header
-      className={`fixed top-0 lg:top-[7vh] left-0 w-full h-[17vh] 
-        md:h-[16vh] py-4 px-6 flex justify-between items-center 
-        z-50 backdrop-blur-sm backdrop-brightness-10
-        ${showMobileMenu ? "bg-black" : "bg-black/50"
-        }`}
+      className={`backdrop-brightness-10 fixed left-0 top-0 z-50 flex h-[17vh] w-full items-center justify-between px-6 py-4 backdrop-blur-sm md:h-[16vh] lg:top-[7vh] ${
+        showMobileMenu ? "bg-black" : "bg-black/50"
+      }`}
       id="header"
     >
       <Link href="/">
@@ -58,30 +64,36 @@ const Header = () => {
         aria-expanded={showMobileMenu}
         aria-controls="mobile-menu"
         onClick={toggleMobileMenu}
-        className="block md:hidden border-none bg-none text-white mr-[1.5rem]"
+        className="mr-[1.5rem] block border-none bg-none text-white md:hidden"
       >
         {showMobileMenu ? (
-          <FaTimes className=" text-[2rem] transition-all" />
+          <FaTimes className="text-[2rem] transition-all" />
         ) : (
           <FaBars className="text-[2rem] transition-all" />
         )}
       </button>
 
-      {showMobileMenu && (
-        <MobileMenu links={links} />
-      )}
+      {showMobileMenu && <MobileMenu links={links} />}
 
       <nav className="hidden md:block" role="navigation" aria-label="Main Menu">
-        <ul className="m-0 flex justify-around items-center gap-4 p-2" id="links">
+        <ul
+          className="m-0 flex items-center justify-around gap-4 p-2"
+          id="links"
+        >
           {links.map((link, index) => (
             <li
               key={index}
               aria-current={link.href === pathname ? "page" : undefined}
               className={clsx(
-                "uppercase relative text-xs lg:text-[16px] whitespace-nowrap hover:text-blue-400 transition-all",
+                "relative whitespace-nowrap text-xs uppercase transition-all hover:text-blue-400 lg:text-[16px]",
                 {
-                  "text-blue-400 underline": link.href !== "/" && pathname.split("/").includes(link.href.replace(/\//g, "")),
-                  "text-white": !(link.href !== "/" && pathname.split("/").includes(link.href.replace(/\//g, "")))
+                  "text-blue-400 underline":
+                    link.href !== "/" &&
+                    pathname.split("/").includes(link.href.replace(/\//g, "")),
+                  "text-white": !(
+                    link.href !== "/" &&
+                    pathname.split("/").includes(link.href.replace(/\//g, ""))
+                  ),
                 }
               )}
             >

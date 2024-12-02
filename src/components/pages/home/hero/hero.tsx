@@ -1,46 +1,41 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import HeroSlider from "./hero-slider";
+import { RiScrollToBottomFill } from "react-icons/ri";
+
 import ContactsBubble from "@/components/shared/contacts-bubble";
+
+import HeroSlider from "./hero-slider";
 
 const Hero = () => {
   const t = useTranslations("Menu");
 
   return (
-    <section className="relative w-full min-h-[80vh] sm:h-screen overflow-hidden 
-     font-open-sans">
-
+    <section className="relative min-h-[100vh] w-full overflow-hidden font-open-sans sm:h-screen">
       <HeroSlider />
 
-      <header className="absolute w-full sm:w-2/3 text-center 
-      sm:text-left top-[50%] sm:top-[40%] md:top-[70%] sm:left-0 z-10 
-      flex flex-col justify-end gap-6 px-6">
-        <h1
-          className="uppercase text-[10vh] mb-4 md:-mb-4 sm:text-[13vh]
-           md:text-[17vh] font-bold text-white font-open-sans">
+      <header className="absolute top-[50%] z-10 flex w-full flex-col justify-end gap-6 px-6 text-center sm:left-0 sm:top-[40%] sm:w-2/3 sm:text-left md:top-[70%]">
+        <h1 className="mb-4 font-open-sans text-[10vh] font-bold uppercase text-white sm:text-[13vh] md:-mb-4 md:text-[17vh]">
           MERN
         </h1>
 
         <section aria-labelledby="motto-section">
-          <div
-            className='w-full -mt-[4rem] sm:-mt-[3rem] h-full flex 
-            flex-col justify-between items-center md:flex-row'
-          >
+          <div className="-mt-[4rem] flex h-full w-full flex-col items-center justify-between sm:-mt-[3rem] md:flex-row">
             <p
               id="motto-section"
-              className="uppercase text-[1.5rem] sm:text-[2rem] font-bold 
-              text-white"
+              className="text-[1.5rem] font-bold uppercase text-white sm:text-[2rem]"
             >
               {t("motto")}
             </p>
           </div>
         </section>
       </header>
-
+      <RiScrollToBottomFill
+        className="text-[3rem] absolute bottom-10 left-[45%] 
+       animate-bounce cursor-pointer text-white sm:hidden"
+      />
       <ContactsBubble />
     </section>
-
   );
 };
 

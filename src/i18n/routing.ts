@@ -1,9 +1,9 @@
-import { defineRouting } from 'next-intl/routing';
-import { createNavigation } from 'next-intl/navigation';
+import { createNavigation } from "next-intl/navigation";
+import { defineRouting } from "next-intl/routing";
 
-export type Locale = 'pl' | 'en' | 'ua'
+export type Locale = "pl" | "en" | "ua";
 
-export const locales = ['pl', 'en', 'ua'];
+export const locales = ["pl", "en", "ua"];
 
 export const pathnames = {
   "/": "/",
@@ -15,7 +15,7 @@ export const pathnames = {
 
 export const routing = defineRouting({
   locales,
-  defaultLocale: 'pl'
+  defaultLocale: "pl",
 });
 
 export const { Link, redirect, usePathname, useRouter, getPathname } =

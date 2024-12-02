@@ -1,6 +1,7 @@
-import { Link } from "@/i18n/routing";
-import React, { useState } from "react";
 import { usePathname } from "next/navigation";
+import React, { useState } from "react";
+
+import { Link } from "@/i18n/routing";
 
 interface SideBarItemProps {
   href: string;
@@ -29,8 +30,9 @@ export const SideBarItem: React.FC<SideBarItemProps> = ({
   return (
     <Link className="flex w-full" href={href}>
       <li
-        className={`flex h-16 w-full flex-1 cursor-pointer items-center font-bold gap-3 border-t border-b border-gray pl-[32px] ${isHovered || isActive ? "border-white bg-white text-black" : ""
-          } ${className} `}
+        className={`border-gray flex h-16 w-full flex-1 cursor-pointer items-center gap-3 border-b border-t pl-[32px] font-bold ${
+          isHovered || isActive ? "border-white bg-white text-black" : ""
+        } ${className} `}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
