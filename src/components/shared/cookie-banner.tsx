@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-
 import { getLocalStorage, setLocalStorage } from "@/helpers/storageHelper";
 
 export default function CookieBanner() {

@@ -1,14 +1,11 @@
 "use client";
 
 import { useState } from "react";
-
 import { zodResolver } from "@hookform/resolvers/zod";
 import { addDoc, collection } from "firebase/firestore";
 import { useTranslations } from "next-intl";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
-
 import { db } from "@/lib/firebase";
-
 import SuccessModal from "@/components/modals/SuccessModal";
 import {
   TFormScheme,

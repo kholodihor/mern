@@ -1,7 +1,6 @@
 "use client";
 
 import { ForwardedRef, InputHTMLAttributes, forwardRef, useState } from "react";
-
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 interface SignInPasswordProps extends InputHTMLAttributes<HTMLInputElement> {

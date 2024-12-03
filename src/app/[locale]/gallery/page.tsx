@@ -1,12 +1,9 @@
+import Spiral from "@/components/shared/spiral/Spiral";
+import { baseUrl } from "@/constants";
+import { Locale } from "@/i18n/routing";
+import { PageMetadata } from "@/types";
 import { Metadata } from "next";
 import dynamic from "next/dynamic";
-
-import { baseUrl } from "@/constants";
-import { galleryData } from "@/data/gallery";
-import { Locale } from "@/i18n/routing";
-import { INewsItem, PageMetadata } from "@/types";
-
-import Spiral from "@/components/shared/spiral/Spiral";
 
 const DynamicPage = dynamic(
   () => import("@/components/pages/gallery/gallery"),
@@ -14,21 +11,19 @@ const DynamicPage = dynamic(
   { ssr: false, loading: () => <Spiral /> }
 );
 
-const cars = galleryData.map((car: INewsItem) => car.car);
-const carsString = cars.join(",");
 
 const metadata: PageMetadata = {
   pl: {
     title: "Galeria | MERN Serwis",
-    description: `MERN Serwis | ${baseUrl} Galeria ${carsString}`,
+    description: `MERN Serwis | ${baseUrl} Galeria`,
   },
   en: {
     title: "Gallery | MERN Car Service",
-    description: `MERN Serwis | ${baseUrl} Gallery ${carsString}`,
+    description: `MERN Serwis | ${baseUrl} Gallery`,
   },
   ua: {
     title: "Галерея | Автосервіс MERN",
-    description: `MERN Serwis | ${baseUrl} Галерея ${carsString}`,
+    description: `MERN Serwis | ${baseUrl} Галерея`,
   },
 };
 

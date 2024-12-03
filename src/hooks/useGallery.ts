@@ -1,23 +1,21 @@
-import { useEffect, useState } from "react";
-
-import { collection, deleteDoc, doc, onSnapshot } from "firebase/firestore";
-
 import { db } from "@/lib/firebase";
-
-interface GalleryItem {
-  id: string;
-  [key: string]: any;
-}
+import { IGalleryItem } from "@/types";
+import { collection, deleteDoc, doc, onSnapshot } from "firebase/firestore";
+import { useState } from "react";
 
 export const useGallery = () => {
-  const [galleryList, setGalleryList] = useState<GalleryItem[]>([]);
+  const [galleryList, setGalleryList] = useState<IGalleryItem[]>([]);
 
   const fetchGalleryAsList = () => {
     const applicationsRef = collection(db, "gallery");
     const unsubscribe = onSnapshot(applicationsRef, (snapshot) => {
-      const galleryDataList: GalleryItem[] = [];
+      const galleryDataList: IGalleryItem[] = [];
       snapshot.forEach((doc) => {
-        galleryDataList.push({ ...doc.data(), id: doc.id });
+        const data = doc.data() as Omit<IGalleryItem, "id">; // Cast data to match the interface without `id`
+        galleryDataList.push({ ...data, id: doc.id });
+      });
+      galleryDataList.sort((a, b) => {
+        return new Date(b.created_at.seconds).getTime() - new Date(a.created_at.seconds).getTime();
       });
       setGalleryList(galleryDataList);
     });
@@ -37,13 +35,6 @@ export const useGallery = () => {
     }
   };
 
-  useEffect(() => {
-    const unsubscribeList = fetchGalleryAsList();
-
-    return () => {
-      unsubscribeList();
-    };
-  }, []);
 
   return {
     galleryList,

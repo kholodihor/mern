@@ -1,5 +1,4 @@
 import { create } from "zustand";
-
 import { CATEGORIES } from "@/constants/categories";
 
 interface FiltersState {

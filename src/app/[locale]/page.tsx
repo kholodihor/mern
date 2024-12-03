@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
-
 import { Locale } from "@/i18n/routing";
 import { PageMetadata } from "@/types";
-
 import Hero from "@/components/pages/home/hero/hero";
 import Location from "@/components/pages/home/location/location";
 import Reviews from "@/components/pages/home/reviews/reviews";

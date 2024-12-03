@@ -2,20 +2,18 @@
 "use client";
 
 import { useEffect, useState } from "react";
-
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import * as z from "zod";
-
 import { useAuth } from "@/hooks/useAuth";
 import { useRouter } from "@/i18n/routing";
 import { auth } from "@/lib/firebase";
-
 import PasswordInput from "@/components/ui/password-input";
 import TextInput from "@/components/ui/text-input";
-
 import { loginScheme } from "./validationSchema";
+
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 

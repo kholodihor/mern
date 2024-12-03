@@ -3,7 +3,6 @@
 import Lottie from "lottie-react";
 import { useTranslations } from "next-intl";
 import { IoMdHome } from "react-icons/io";
-
 import not_found from "@/animations/not_found.json";
 import { Link } from "@/i18n/routing";
 

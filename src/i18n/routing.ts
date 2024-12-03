@@ -3,7 +3,7 @@ import { defineRouting } from "next-intl/routing";
 
 export type Locale = "pl" | "en" | "ua";
 
-export const locales = ["pl", "en", "ua"];
+export const locales: Locale[] = ["pl", "en", "ua"];
 
 export const pathnames = {
   "/": "/",

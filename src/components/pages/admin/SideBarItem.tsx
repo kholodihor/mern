@@ -1,6 +1,5 @@
 import { usePathname } from "next/navigation";
 import React, { useState } from "react";
-
 import { Link } from "@/i18n/routing";
 
 interface SideBarItemProps {

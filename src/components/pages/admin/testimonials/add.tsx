@@ -1,17 +1,13 @@
 "use client";
 
 import { useState } from "react";
-
 import { zodResolver } from "@hookform/resolvers/zod";
 import { addDoc, collection } from "firebase/firestore";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
-
 import { useRouter } from "@/i18n/routing";
 import { db } from "@/lib/firebase";
-
 import TextArea from "@/components/ui/text-area";
 import TextInput from "@/components/ui/text-input";
-
 import { TestimonialScheme, testimonialScheme } from "./schema";
 
 const AddTestimonial = () => {

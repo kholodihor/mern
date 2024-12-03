@@ -1,9 +1,6 @@
-import { MetadataRoute } from "next";
-
-import { collection, getDocs } from "firebase/firestore";
-
-import { galleryData } from "@/data/gallery";
 import { db } from "@/lib/firebase";
+import { collection, getDocs } from "firebase/firestore";
+import { MetadataRoute } from "next";
 
 const baseUrl = "https://mernserwis.pl";
 
@@ -39,16 +36,20 @@ const generateSitemapEntries = (
   }));
 };
 
-// Function to fetch dynamic routes (replace with your actual data fetching logic)
 async function fetchDynamicRoutes() {
   try {
-    // Process gallery items
-    const galleryItems = galleryData.map((item) => ({
-      slug: item.slug,
-      lastModified: new Date(),
-    }));
 
-    // Fetch news items from Firestore
+    const galleryRef = collection(db, "gallery");
+    const gallerySnapshot = await getDocs(galleryRef);
+
+    const galleryItems = gallerySnapshot.docs.map((doc) => {
+      const data = doc.data();
+      return {
+        slug: data.slug,
+        lastModified: data.lastModified ? new Date(data.lastModified) : new Date(),
+      };
+    });
+
     const newsRef = collection(db, "news");
     const newsSnapshot = await getDocs(newsRef);
     const newsItems = newsSnapshot.docs.map((doc) => ({

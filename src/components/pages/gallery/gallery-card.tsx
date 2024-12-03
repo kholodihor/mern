@@ -1,20 +1,17 @@
-import Image from "next/image";
-
-import { useLocale } from "next-intl";
-import { useTranslations } from "next-intl";
-
 import { CATEGORIES } from "@/constants/categories";
 import { formatDate } from "@/helpers/formatDate";
 import { Link } from "@/i18n/routing";
+import { IGalleryItem } from "@/types";
+import { useLocale, useTranslations } from "next-intl";
+import Image from "next/image";
 
-const GalleryCard = ({ data }: { data: any }) => {
+const GalleryCard = ({ data }: { data: IGalleryItem }) => {
   const t = useTranslations();
   const locale = useLocale();
 
-  console.log(formatDate(data.created_at));
-
   return (
-    <article className="mx-auto flex h-[590px] w-full flex-col items-center justify-center overflow-hidden border border-white p-2">
+    <article className="mx-auto flex h-[590px] w-full flex-col items-center 
+    justify-center overflow-hidden border border-white p-2">
       <div className="flex h-full w-full flex-col justify-start gap-2">
         <Image
           src={data.images[0]}
@@ -31,7 +28,7 @@ const GalleryCard = ({ data }: { data: any }) => {
           </span>
         </div>
 
-        <p className="text-[18px] leading-8 text-gray-400">
+        <p className="text-[16px] leading-8 text-gray-400">
           {data.desc[locale]}
         </p>
 

@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { ForwardedRef, forwardRef, useEffect, useState } from "react";
-
 import Select, { MultiValue } from "react-select";
 
 interface MultiselectProps {

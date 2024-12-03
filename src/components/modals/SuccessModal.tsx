@@ -1,10 +1,8 @@
 import Lottie from "lottie-react";
 import { useTranslations } from "next-intl";
 import { createPortal } from "react-dom";
-
 import firework from "@/animations/firework.json";
 import { useBodyScrollLock } from "@/hooks/useBodyScrollLock";
-
 import CloseIcon from "@/components/icons/close-icon";
 
 interface ModalProps {

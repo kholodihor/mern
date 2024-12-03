@@ -1,5 +1,4 @@
 import { useTranslations } from "next-intl";
-
 import { TServiceCard } from "@/types";
 
 const ServicesCard = ({ data: card }: { data: TServiceCard }) => {

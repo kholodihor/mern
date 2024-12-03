@@ -2,11 +2,9 @@
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
-
 import clsx from "clsx";
 import { useTranslations } from "next-intl";
 import { FaBars, FaTimes } from "react-icons/fa";
-
 import { links } from "@/constants/links";
 import {
   Link,
@@ -15,7 +13,6 @@ import {
   usePathname,
   useRouter,
 } from "@/i18n/routing";
-
 import MobileMenu from "./mobile-menu";
 
 const Header = () => {

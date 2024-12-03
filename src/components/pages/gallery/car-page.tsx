@@ -1,20 +1,16 @@
 "use client";
 
-import Image from "next/image";
-import { useEffect, useState } from "react";
-
-import { collection, onSnapshot, query, where } from "firebase/firestore";
-import { useTranslations } from "next-intl";
-import { useLocale } from "next-intl";
-
+import ChevronLeft from "@/components/icons/chevron-left";
+import SectionTitle from "@/components/shared/section-title";
 import { CATEGORIES } from "@/constants/categories";
 import { formatDate } from "@/helpers/formatDate";
 import { Link } from "@/i18n/routing";
 import { db } from "@/lib/firebase";
-
-import ChevronLeft from "@/components/icons/chevron-left";
-import SectionTitle from "@/components/shared/section-title";
-
+import { IGalleryItem } from "@/types";
+import { collection, onSnapshot, query, where } from "firebase/firestore";
+import { useLocale, useTranslations } from "next-intl";
+import Image from "next/image";
+import { useEffect, useState } from "react";
 import Slider from "../home/shared/slider/slider";
 
 const CarImage = ({ data }: { data: string }) => {
@@ -24,7 +20,7 @@ const CarImage = ({ data }: { data: string }) => {
 const CarPage = ({ slug }: { slug: string }) => {
   const t = useTranslations();
   const locale = useLocale();
-  const [carItem, setCarItem] = useState<any | null>(null);
+  const [carItem, setCarItem] = useState<IGalleryItem | null>(null);
 
   useEffect(() => {
     if (!slug) return;
@@ -34,13 +30,14 @@ const CarPage = ({ slug }: { slug: string }) => {
 
     const unsubscribe = onSnapshot(slugQuery, (snapshot) => {
       if (!snapshot.empty) {
-        const itemData = snapshot.docs.map((doc) => ({
-          ...doc.data(),
-          id: doc.id,
-        }))[0]; // Get the first matching document
-        setCarItem(itemData);
+        const sortedData = snapshot.docs
+          .map((doc) => {
+            const data = doc.data() as Omit<IGalleryItem, "id">;
+            return { ...data, id: doc.id };
+          })
+        setCarItem(sortedData[0]);
       } else {
-        setCarItem(null); // No matching item found
+        setCarItem(null);
       }
     });
 
@@ -49,11 +46,11 @@ const CarPage = ({ slug }: { slug: string }) => {
 
   return (
     <section
-      id="about-us"
+      id={carItem?.car as string}
       className="flex min-h-screen w-full flex-col p-4 pb-[100px] pt-[18vh] md:pt-[25vh]"
-      aria-labelledby="about-us-title"
+      aria-labelledby={`${carItem?.car}-title`}
     >
-      <SectionTitle id="about-us-title" title={carItem?.car as string} />
+      <SectionTitle id={`${carItem?.car}-title`} title={carItem?.car as string} />
       <div className="relative pl-[10vw]">
         <Link href="/gallery">
           <button className="absolute left-[2vw] top-1/2 z-10 flex -translate-x-1/2 -translate-y-1/3 items-center text-[2rem] md:left-[5vw] md:text-[70px]">
@@ -63,9 +60,9 @@ const CarPage = ({ slug }: { slug: string }) => {
         <Slider
           data={carItem?.images as string[]}
           Component={CarImage}
-          aria-label="Reviews Slider"
-          nextElName="nextReviews"
-          prevElName="prevReviews"
+          aria-label="Cars Slider"
+          nextElName="nextCars"
+          prevElName="prevCars"
           breakpoints={{
             450: {
               slidesPerView: 1.5,

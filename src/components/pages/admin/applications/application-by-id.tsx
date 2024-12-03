@@ -1,14 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
-
 import { collection, onSnapshot } from "firebase/firestore";
 import { CiBarcode } from "react-icons/ci";
 import { FaRegUser } from "react-icons/fa";
 import { FaPhoneAlt } from "react-icons/fa";
 import { FaRegMessage } from "react-icons/fa6";
 import { IoMdMail } from "react-icons/io";
-
 import { db } from "@/lib/firebase";
 
 const ApplicationById = ({ id }: { id: string }) => {

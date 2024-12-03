@@ -1,10 +1,8 @@
 import { Metadata } from "next";
 import React from "react";
-
 import { baseUrl } from "@/constants";
 import { Locale } from "@/i18n/routing";
 import { PageMetadata } from "@/types";
-
 import CarPage from "@/components/pages/gallery/car-page";
 
 const metadata: PageMetadata = {

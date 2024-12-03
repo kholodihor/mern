@@ -2,9 +2,7 @@
 
 import Image from "next/image";
 import { useEffect } from "react";
-
 import { FaRegTrashAlt } from "react-icons/fa";
-
 import { useGallery } from "@/hooks/useGallery";
 import { Link } from "@/i18n/routing";
 

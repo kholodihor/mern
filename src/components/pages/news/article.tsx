@@ -1,13 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
-
 import { collection, onSnapshot } from "firebase/firestore";
 import { useLocale } from "next-intl";
-
 import { Link } from "@/i18n/routing";
 import { db } from "@/lib/firebase";
-
 import ChevronLeft from "@/components/icons/chevron-left";
 import SectionTitle from "@/components/shared/section-title";
 

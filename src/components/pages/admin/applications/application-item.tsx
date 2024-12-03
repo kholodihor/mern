@@ -1,10 +1,8 @@
 import { useState } from "react";
-
 import clsx from "clsx";
 import { doc, updateDoc } from "firebase/firestore";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { FaEye } from "react-icons/fa";
-
 import { isOutOf96Hours } from "@/helpers/isOutOf96Hours";
 import { isWithin48Hours } from "@/helpers/isWithin48Hours";
 import { Link } from "@/i18n/routing";

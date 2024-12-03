@@ -1,7 +1,6 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-
 import { FaGithub, FaTelegram } from "react-icons/fa";
 
 const Footer = () => {

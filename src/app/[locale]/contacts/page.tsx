@@ -1,9 +1,7 @@
 import { Metadata } from "next";
-
 import { baseUrl, contactInfo } from "@/constants";
 import { Locale } from "@/i18n/routing";
 import { PageMetadata } from "@/types";
-
 import Contacts from "@/components/pages/contacts/contacts";
 
 const metadata: PageMetadata = {

@@ -1,7 +1,6 @@
 import { Rating } from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
 import Avatar from "react-avatar";
-
 import { colors } from "@/constants";
 import { formatDate } from "@/helpers/formatDate";
 

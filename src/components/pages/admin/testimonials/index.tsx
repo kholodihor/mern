@@ -1,13 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
-
 import { Rating } from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
 import { collection, deleteDoc, doc, onSnapshot } from "firebase/firestore";
 import Avatar from "react-avatar";
 import { FaRegTrashAlt } from "react-icons/fa";
-
 import { colors } from "@/constants";
 import { formatDate } from "@/helpers/formatDate";
 import { Link } from "@/i18n/routing";

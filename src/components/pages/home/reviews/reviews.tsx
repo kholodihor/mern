@@ -2,16 +2,12 @@
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
-
 import { Rating } from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
 import { collection, onSnapshot } from "firebase/firestore";
 import { useTranslations } from "next-intl";
-
 import { db } from "@/lib/firebase";
-
 import SectionTitle from "@/components/shared/section-title";
-
 import Slider from "../shared/slider/slider";
 import ReviewCard from "./review-card";
 

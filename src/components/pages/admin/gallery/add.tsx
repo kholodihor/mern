@@ -1,23 +1,19 @@
 "use client";
 
-import { useState } from "react";
-
-import { zodResolver } from "@hookform/resolvers/zod";
-import { Widget } from "@uploadcare/react-widget";
-import { addDoc, collection } from "firebase/firestore";
-import { useTranslations } from "next-intl";
-import { Controller, SubmitHandler, useForm } from "react-hook-form";
-
+import Multiselect from "@/components/ui/multi-select";
+import TextArea from "@/components/ui/text-area";
+import TextInput from "@/components/ui/text-input";
 import { CATEGORIES } from "@/constants/categories";
 import { useRouter } from "@/i18n/routing";
 import { db } from "@/lib/firebase";
 import { getImageUrlsFromGroup } from "@/utils/imageFetcher";
 import { translateText } from "@/utils/translator";
-
-import Multiselect from "@/components/ui/multi-select";
-import TextArea from "@/components/ui/text-area";
-import TextInput from "@/components/ui/text-input";
-
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Widget } from "@uploadcare/react-widget";
+import { addDoc, collection } from "firebase/firestore";
+import { useTranslations } from "next-intl";
+import { useState } from "react";
+import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { TGalleryScheme, gallerySchema } from "./schema";
 
 const AddGallery = () => {
@@ -61,7 +57,7 @@ const AddGallery = () => {
       const images = await getImageUrlsFromGroup(values.images);
       const urls = images.map(
         (image: any) =>
-          `https://ucarecdn.com/${image.file_id}/${image.filename}`
+          `https://ucarecdn.com/${image.file_id}/${image.filename.replace(/\.\w+$/, ".webp")}`
       );
 
       const data = {

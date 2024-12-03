@@ -2,7 +2,6 @@
 "use client";
 
 import { FC, useRef } from "react";
-
 import clsx from "clsx";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import "swiper/css";
@@ -11,8 +10,9 @@ import "swiper/css/pagination";
 import { Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { SwiperOptions } from "swiper/types";
-
 import "./styles.css";
+
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 

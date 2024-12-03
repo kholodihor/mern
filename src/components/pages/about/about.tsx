@@ -1,7 +1,5 @@
 import Image from "next/image";
-
 import { useTranslations } from "next-intl";
-
 import SectionTitle from "@/components/shared/section-title";
 
 const About = () => {

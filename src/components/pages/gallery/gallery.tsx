@@ -1,24 +1,13 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
-
-import { useEffect } from "react";
-
-import { useTranslations } from "next-intl";
-
-import { CATEGORIES } from "@/constants/categories";
-import { useGallery } from "@/hooks/useGallery";
-import { useFilters } from "@/stores/useFilters";
 
 import SectionTitle from "@/components/shared/section-title";
 import CustomDropdown from "@/components/ui/select";
-
+import { CATEGORIES } from "@/constants/categories";
+import { useGallery } from "@/hooks/useGallery";
+import { useFilters } from "@/stores/useFilters";
+import { useTranslations } from "next-intl";
+import { useEffect } from "react";
 import GalleryCard from "./gallery-card";
-
-/* eslint-disable react-hooks/exhaustive-deps */
-
-/* eslint-disable react-hooks/exhaustive-deps */
-
-/* eslint-disable react-hooks/exhaustive-deps */
 
 const Gallery = () => {
   const t = useTranslations("Gallery");
@@ -26,18 +15,20 @@ const Gallery = () => {
   const { galleryList, fetchGalleryAsList } = useGallery();
 
   useEffect(() => {
-    fetchGalleryAsList();
+    const unsubscribeList = fetchGalleryAsList();
+
+    return () => {
+      unsubscribeList();
+    };
   }, []);
 
   const filteredData = galleryList.filter((item) => {
     return filters[0] === CATEGORIES.ALL
       ? true
       : item.categories.some((category: string) =>
-          filters.includes(CATEGORIES[category])
-        );
+        filters.includes(CATEGORIES[category])
+      );
   });
-
-  console.log(filters);
 
   const options = Object.values(CATEGORIES);
 

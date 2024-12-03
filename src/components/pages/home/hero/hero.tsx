@@ -2,9 +2,7 @@
 
 import { useTranslations } from "next-intl";
 import { RiScrollToBottomFill } from "react-icons/ri";
-
 import ContactsBubble from "@/components/shared/contacts-bubble";
-
 import HeroSlider from "./hero-slider";
 
 const Hero = () => {
@@ -30,10 +28,7 @@ const Hero = () => {
           </div>
         </section>
       </header>
-      <RiScrollToBottomFill
-        className="text-[3rem] absolute bottom-10 left-[45%] 
-       animate-bounce cursor-pointer text-white sm:hidden"
-      />
+      <RiScrollToBottomFill className="absolute bottom-10 left-[45%] animate-bounce cursor-pointer text-[3rem] text-white sm:hidden" />
       <ContactsBubble />
     </section>
   );

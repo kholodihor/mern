@@ -1,5 +1,4 @@
 import { FaEnvelope, FaMapMarkerAlt, FaPhone } from "react-icons/fa";
-
 import Socials from "./socials";
 
 const Contacts = () => {

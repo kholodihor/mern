@@ -1,7 +1,5 @@
 import { useTranslations } from "next-intl";
-
 import SectionTitle from "@/components/shared/section-title";
-
 import ApplicationForm from "./application";
 import ContactsLocation from "./location";
 

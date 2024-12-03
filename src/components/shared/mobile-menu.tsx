@@ -1,8 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-
 import { useTranslations } from "next-intl";
-
 import { Link as LocalizedLink, locales, pathnames } from "@/i18n/routing";
 import { TLink } from "@/types";
 

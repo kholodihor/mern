@@ -1,10 +1,8 @@
 import { Metadata } from "next";
-
 import { baseUrl } from "@/constants";
 import { services } from "@/data/services";
 import { Locale } from "@/i18n/routing";
 import { PageMetadata, TServiceCard } from "@/types";
-
 import ServicesPage from "@/components/pages/services/services";
 
 const s = services.map((service: TServiceCard) => service.title);

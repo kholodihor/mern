@@ -2,13 +2,10 @@
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
-
 import { collection, onSnapshot } from "firebase/firestore";
 import { useLocale, useTranslations } from "next-intl";
-
 import { Link } from "@/i18n/routing";
 import { db } from "@/lib/firebase";
-
 import SectionTitle from "@/components/shared/section-title";
 
 const NewsPage = () => {

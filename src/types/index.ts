@@ -50,18 +50,19 @@ export interface ContactInfo {
   email: string;
 }
 
-export interface INewsItem {
-  id: number;
+export type Description = {
+  [key: string]: string;
+};
+
+export interface IGalleryItem {
+  id: string;
   car: string;
-  services: string[];
-  contact: ContactInfo;
-  hashtags?: string[];
   categories: string[];
   images: string[];
   slug: string;
-  desc: string;
-  fullDesc: string;
-  createdAt: string;
+  desc: Description;
+  fullDesc: Description;
+  created_at: { seconds: number; nanoseconds: number; };
 }
 
 export interface IReviewItem {

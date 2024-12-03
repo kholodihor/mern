@@ -1,19 +1,15 @@
 import type { Metadata } from "next";
 import { Open_Sans } from "next/font/google";
 import { notFound } from "next/navigation";
-
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
-
 import { Locale, routing } from "@/i18n/routing";
 import { PageProps } from "@/types";
-
 import CookieBanner from "@/components/shared/cookie-banner";
 import Footer from "@/components/shared/footer";
 import GoogleAnalytics from "@/components/shared/google-analytics";
 import Header from "@/components/shared/header";
 import SubHeader from "@/components/shared/sub-header";
-
 import "../globals.css";
 
 const open_sans = Open_Sans({

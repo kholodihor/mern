@@ -1,15 +1,12 @@
 "use client";
 
 import Image from "next/image";
-
 import { signOut } from "firebase/auth";
 import { CiLogout } from "react-icons/ci";
 import { IoMdPhotos } from "react-icons/io";
 import { TiMessages } from "react-icons/ti";
-
 import { Link, useRouter } from "@/i18n/routing";
 import { auth } from "@/lib/firebase";
-
 import { SideBarItem } from "./SideBarItem";
 
 const SideBar = () => {

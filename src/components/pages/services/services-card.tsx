@@ -1,7 +1,5 @@
 import Image from "next/image";
-
 import { useTranslations } from "next-intl";
-
 import { useRouter } from "@/i18n/routing";
 import { useFilters } from "@/stores/useFilters";
 import { TServiceCard } from "@/types";
