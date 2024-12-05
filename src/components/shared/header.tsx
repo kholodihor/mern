@@ -1,10 +1,5 @@
 "use client";
 
-import Image from "next/image";
-import { useEffect, useState } from "react";
-import clsx from "clsx";
-import { useTranslations } from "next-intl";
-import { FaBars, FaTimes } from "react-icons/fa";
 import { links } from "@/constants/links";
 import {
   Link,
@@ -13,6 +8,11 @@ import {
   usePathname,
   useRouter,
 } from "@/i18n/routing";
+import clsx from "clsx";
+import { useTranslations } from "next-intl";
+import Image from "next/image";
+import { useEffect, useState } from "react";
+import { FaBars, FaTimes } from "react-icons/fa";
 import MobileMenu from "./mobile-menu";
 
 const Header = () => {
@@ -48,9 +48,8 @@ const Header = () => {
 
   return (
     <header
-      className={`backdrop-brightness-10 fixed left-0 top-0 z-50 flex h-[17vh] w-full items-center justify-between px-6 py-4 backdrop-blur-sm md:h-[16vh] lg:top-[7vh] ${
-        showMobileMenu ? "bg-black" : "bg-black/50"
-      }`}
+      className={`backdrop-brightness-10 fixed left-0 top-0 z-50 flex h-[17vh] w-full items-center justify-between px-6 py-4 backdrop-blur-sm md:h-[16vh] lg:top-[7vh] ${showMobileMenu ? "bg-black" : "bg-black/50"
+        }`}
       id="header"
     >
       <Link href="/">
@@ -105,6 +104,7 @@ const Header = () => {
                 <button
                   onClick={() => handleCheckLocale(lang)}
                   aria-label={`Change language to ${lang}`}
+                  className="hover:text-blue-400 hover:underline"
                 >
                   {lang.toUpperCase()}
                 </button>

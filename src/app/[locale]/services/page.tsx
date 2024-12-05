@@ -1,14 +1,9 @@
-import { Metadata } from "next";
-import { baseUrl } from "@/constants";
-import { services } from "@/data/services";
-import { Locale } from "@/i18n/routing";
-import { PageMetadata, TServiceCard } from "@/types";
 import ServicesPage from "@/components/pages/services/services";
+import { baseUrl } from "@/constants";
+import { Locale } from "@/i18n/routing";
+import { PageMetadata } from "@/types";
+import { Metadata } from "next";
 
-const s = services.map((service: TServiceCard) => service.title);
-const servicesString = s.join(",");
-
-console.log(servicesString);
 
 const metadata: PageMetadata = {
   pl: {

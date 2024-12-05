@@ -88,15 +88,57 @@ const CarPage = ({ slug }: { slug: string }) => {
         />
       </div>
       <div className="mx-auto w-[77%]">
-        <p className="mt-[24px] w-full text-[18px] text-gray-400">
-          {carItem?.fullDesc[locale]}
-        </p>
+
+        {carItem?.fullDesc[locale] && carItem?.fullDesc[locale].length > 500 ?
+          <p className="text-base leading-relaxed text-gray-500 md:max-w-[85vw] md:text-lg lg:text-xl">
+            {carItem?.fullDesc[locale]
+              ?.split(".")
+              .slice(
+                0,
+                Math.floor(carItem?.fullDesc[locale].split(".").length / 3)
+              )
+              .map(
+                (chunk: string | number, index: number, array: string | any[]) =>
+                  chunk + (index < array.length - 1 ? "." : "")
+              )
+              .join(".")}
+            <br /> <br />
+            {carItem?.fullDesc[locale]
+              ?.split(".")
+              .slice(
+                Math.floor(carItem?.fullDesc[locale].split(".").length / 3),
+                Math.floor((carItem?.fullDesc[locale].split(".").length * 2) / 3)
+              )
+              .map(
+                (chunk: string | number, index: number, array: string | any[]) =>
+                  chunk + (index < array.length - 1 ? "." : "")
+              )
+              .join(".")}
+            <br /> <br />
+            {carItem?.fullDesc[locale]
+              ?.split(".")
+              .slice(
+                Math.floor((carItem?.fullDesc[locale].split(".").length * 2) / 3)
+              )
+              .map(
+                (chunk: string | number, index: number, array: string | any[]) =>
+                  chunk + (index < array.length - 1 ? "." : "")
+              )
+              .join(".")}
+          </p> : <p className="mt-[24px] w-full text-[18px] text-gray-400">
+            {carItem?.fullDesc[locale]}
+          </p>
+        }
+
+
         <div className="mt-[24px] flex w-full flex-col-reverse items-start justify-center gap-4 md:mt-[50px] md:flex-row md:justify-between">
           <div className="flex flex-wrap gap-2 text-[16px] text-gray-400">
+
             {carItem?.categories.map((item: any, index: number) => (
               <span
                 key={index}
-                className="flex items-center justify-center rounded-[1rem] bg-gray-400/30 px-2 py-[2px]"
+                className="flex w-fit items-center justify-center 
+              rounded-[1rem] bg-gray-500/30 px-2 py-[1px] "
               >
                 {t(`Filters.categories.${CATEGORIES[item]}`)}
               </span>

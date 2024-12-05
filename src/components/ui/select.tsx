@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useState } from "react";
-import { useTranslations } from "next-intl";
 import { useFilters } from "@/stores/useFilters";
+import { useTranslations } from "next-intl";
+import React, { useState } from "react";
 
 interface CustomDropdownProps {
   options: string[];
@@ -23,14 +23,14 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({ options }) => {
   return (
     <div className="relative w-full sm:w-72 xl:w-[360px] 2xl:w-72">
       <div
-        className="flex cursor-pointer items-center justify-between rounded border border-white bg-black px-4 py-2 text-white"
+        className="flex cursor-pointer items-center justify-between rounded 
+        border border-white bg-black px-4 py-2 text-white"
         onClick={toggleDropdown}
       >
         {t(`categories.${filters[0]}`)}
         <span
-          className={`transition-transform duration-300 ${
-            isOpen ? "rotate-180" : ""
-          }`}
+          className={`transition-transform duration-300 ${isOpen ? "rotate-180" : ""
+            }`}
         >
           ▼
         </span>

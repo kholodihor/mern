@@ -40,11 +40,12 @@ const Gallery = () => {
     >
       <SectionTitle id="gallery-title" title={t("title")} />
 
-      <div className="mt-[10vh] lg:px-[6rem]">
+      <div className="mt-[10vh] lg:px-[3rem]">
         <CustomDropdown options={options} />
       </div>
 
-      <div className="grid w-full grid-cols-1 gap-6 py-[2rem] sm:grid-cols-2 lg:grid-cols-3 lg:px-[6rem] 2xl:grid-cols-4">
+      <div className="grid w-full grid-cols-1 gap-6 py-[2rem] sm:grid-cols-2 lg:grid-cols-3
+       lg:px-[3rem] 2xl:grid-cols-4">
         {filteredData.length ? (
           filteredData.map((item, index) => (
             <GalleryCard key={index} data={item} />

@@ -2,6 +2,13 @@ import { CATEGORIES } from "@/constants/categories";
 
 export const services = [
   {
+    title: "brakes_service",
+    text: "brakes_service_text",
+    link: "#",
+    image: "/services/suspense.png",
+    tags: [CATEGORIES.BRAKES_REPAIR],
+  },
+  {
     title: "computer_diagnostics",
     text: "diagnostics_text",
     link: "#",
@@ -29,13 +36,7 @@ export const services = [
     image: "/services/engine.png",
     tags: [CATEGORIES.ENGINE_REPAIR],
   },
-  {
-    title: "brakes_service",
-    text: "brakes_service_text",
-    link: "#",
-    image: "/services/suspense.png",
-    tags: [CATEGORIES.BRAKES_REPAIR],
-  },
+
   {
     title: "coding",
     text: "coding_text",

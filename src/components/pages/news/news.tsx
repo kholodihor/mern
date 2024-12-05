@@ -1,12 +1,12 @@
 "use client";
 
-import Image from "next/image";
-import { useEffect, useState } from "react";
-import { collection, onSnapshot } from "firebase/firestore";
-import { useLocale, useTranslations } from "next-intl";
+import SectionTitle from "@/components/shared/section-title";
 import { Link } from "@/i18n/routing";
 import { db } from "@/lib/firebase";
-import SectionTitle from "@/components/shared/section-title";
+import { collection, onSnapshot } from "firebase/firestore";
+import { useLocale, useTranslations } from "next-intl";
+import Image from "next/image";
+import { useEffect, useState } from "react";
 
 const NewsPage = () => {
   const t = useTranslations("News");
@@ -60,6 +60,7 @@ const NewsPage = () => {
               </h4>
               <p className="text-base text-gray-500 md:text-lg lg:text-xl">
                 {item.short_text[locale]}{" "}
+                <br />
                 <Link
                   className="hover:text-white hover:underline"
                   href={`/news/${item.id}`}
