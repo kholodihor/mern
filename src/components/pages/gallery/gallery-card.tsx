@@ -1,17 +1,16 @@
+import Image from "next/image";
+import { useLocale, useTranslations } from "next-intl";
 import { CATEGORIES } from "@/constants/categories";
 import { formatDate } from "@/helpers/formatDate";
 import { Link } from "@/i18n/routing";
 import { IGalleryItem } from "@/types";
-import { useLocale, useTranslations } from "next-intl";
-import Image from "next/image";
 
 const GalleryCard = ({ data }: { data: IGalleryItem }) => {
   const t = useTranslations();
   const locale = useLocale();
 
   return (
-    <article className="mx-auto flex h-[590px] 2xl:w-[350px] w-full flex-col items-center 
-    justify-center overflow-hidden border border-white p-2">
+    <article className="mx-auto flex h-[590px] w-full flex-col items-center justify-center overflow-hidden border border-white p-2 2xl:w-[350px]">
       <div className="flex h-full w-full flex-col justify-start gap-2">
         <Image
           src={data.images[0]}
@@ -38,15 +37,17 @@ const GalleryCard = ({ data }: { data: IGalleryItem }) => {
           {data.categories.slice(0, 2).map((item: any, index: number) => (
             <span
               key={index}
-              className="flex w-fit items-center justify-center 
-              rounded-[1rem] bg-gray-500/30 px-2 py-[1px] min-w-[60%]"
+              className="flex w-fit min-w-[60%] items-center justify-center rounded-[1rem] bg-gray-500/30 px-2 py-[1px]"
             >
               {t(`Filters.categories.${CATEGORIES[item]}`)}&nbsp;
             </span>
           ))}
-          {data.categories.length > 2 &&
-            <span className="bg-gray-500/30 rounded-[1rem] text-white px-2 py-[1px]">               +{data.categories.length - 2}
-            </span>}
+          {data.categories.length > 2 && (
+            <span className="rounded-[1rem] bg-gray-500/30 px-2 py-[1px] text-white">
+              {" "}
+              +{data.categories.length - 2}
+            </span>
+          )}
         </div>
 
         <div className="flex-grow"></div>

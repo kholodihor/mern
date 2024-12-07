@@ -1,8 +1,8 @@
 "use client";
 
-import SectionTitle from "@/components/shared/section-title";
-import { services } from "@/data/services";
 import { useTranslations } from "next-intl";
+import { services } from "@/data/services";
+import SectionTitle from "@/components/shared/section-title";
 import ServicesCard from "./services-card";
 
 const ServicesPage = () => {
@@ -26,8 +26,8 @@ const ServicesPage = () => {
       <div className="mx-auto flex flex-wrap justify-center gap-4 py-[2rem]">
         {services.length
           ? services.map((item, index) => (
-            <ServicesCard key={index} data={item} />
-          ))
+              <ServicesCard key={index} data={item} />
+            ))
           : null}
       </div>
     </section>

@@ -1,16 +1,16 @@
 "use client";
 
-import ChevronLeft from "@/components/icons/chevron-left";
-import SectionTitle from "@/components/shared/section-title";
+import Image from "next/image";
+import { useEffect, useState } from "react";
+import { collection, onSnapshot, query, where } from "firebase/firestore";
+import { useLocale, useTranslations } from "next-intl";
 import { CATEGORIES } from "@/constants/categories";
 import { formatDate } from "@/helpers/formatDate";
 import { Link } from "@/i18n/routing";
 import { db } from "@/lib/firebase";
 import { IGalleryItem } from "@/types";
-import { collection, onSnapshot, query, where } from "firebase/firestore";
-import { useLocale, useTranslations } from "next-intl";
-import Image from "next/image";
-import { useEffect, useState } from "react";
+import ChevronLeft from "@/components/icons/chevron-left";
+import SectionTitle from "@/components/shared/section-title";
 import Slider from "../home/shared/slider/slider";
 
 const CarImage = ({ data }: { data: string }) => {
@@ -30,11 +30,10 @@ const CarPage = ({ slug }: { slug: string }) => {
 
     const unsubscribe = onSnapshot(slugQuery, (snapshot) => {
       if (!snapshot.empty) {
-        const sortedData = snapshot.docs
-          .map((doc) => {
-            const data = doc.data() as Omit<IGalleryItem, "id">;
-            return { ...data, id: doc.id };
-          })
+        const sortedData = snapshot.docs.map((doc) => {
+          const data = doc.data() as Omit<IGalleryItem, "id">;
+          return { ...data, id: doc.id };
+        });
         setCarItem(sortedData[0]);
       } else {
         setCarItem(null);
@@ -50,7 +49,10 @@ const CarPage = ({ slug }: { slug: string }) => {
       className="flex min-h-screen w-full flex-col p-4 pb-[100px] pt-[18vh] md:pt-[25vh]"
       aria-labelledby={`${carItem?.car}-title`}
     >
-      <SectionTitle id={`${carItem?.car}-title`} title={carItem?.car as string} />
+      <SectionTitle
+        id={`${carItem?.car}-title`}
+        title={carItem?.car as string}
+      />
       <div className="relative pl-[10vw]">
         <Link href="/gallery">
           <button className="absolute left-[2vw] top-1/2 z-10 flex -translate-x-1/2 -translate-y-1/3 items-center text-[2rem] md:left-[5vw] md:text-[70px]">
@@ -88,8 +90,7 @@ const CarPage = ({ slug }: { slug: string }) => {
         />
       </div>
       <div className="mx-auto w-[77%]">
-
-        {carItem?.fullDesc[locale] && carItem?.fullDesc[locale].length > 500 ?
+        {carItem?.fullDesc[locale] && carItem?.fullDesc[locale].length > 500 ? (
           <p className="text-base leading-relaxed text-gray-500 md:max-w-[85vw] md:text-lg lg:text-xl">
             {carItem?.fullDesc[locale]
               ?.split(".")
@@ -98,8 +99,11 @@ const CarPage = ({ slug }: { slug: string }) => {
                 Math.floor(carItem?.fullDesc[locale].split(".").length / 3)
               )
               .map(
-                (chunk: string | number, index: number, array: string | any[]) =>
-                  chunk + (index < array.length - 1 ? "." : "")
+                (
+                  chunk: string | number,
+                  index: number,
+                  array: string | any[]
+                ) => chunk + (index < array.length - 1 ? "." : "")
               )
               .join(".")}
             <br /> <br />
@@ -107,38 +111,47 @@ const CarPage = ({ slug }: { slug: string }) => {
               ?.split(".")
               .slice(
                 Math.floor(carItem?.fullDesc[locale].split(".").length / 3),
-                Math.floor((carItem?.fullDesc[locale].split(".").length * 2) / 3)
+                Math.floor(
+                  (carItem?.fullDesc[locale].split(".").length * 2) / 3
+                )
               )
               .map(
-                (chunk: string | number, index: number, array: string | any[]) =>
-                  chunk + (index < array.length - 1 ? "." : "")
+                (
+                  chunk: string | number,
+                  index: number,
+                  array: string | any[]
+                ) => chunk + (index < array.length - 1 ? "." : "")
               )
               .join(".")}
             <br /> <br />
             {carItem?.fullDesc[locale]
               ?.split(".")
               .slice(
-                Math.floor((carItem?.fullDesc[locale].split(".").length * 2) / 3)
+                Math.floor(
+                  (carItem?.fullDesc[locale].split(".").length * 2) / 3
+                )
               )
               .map(
-                (chunk: string | number, index: number, array: string | any[]) =>
-                  chunk + (index < array.length - 1 ? "." : "")
+                (
+                  chunk: string | number,
+                  index: number,
+                  array: string | any[]
+                ) => chunk + (index < array.length - 1 ? "." : "")
               )
               .join(".")}
-          </p> : <p className="mt-[24px] w-full text-[18px] text-gray-400">
+          </p>
+        ) : (
+          <p className="mt-[24px] w-full text-[18px] text-gray-400">
             {carItem?.fullDesc[locale]}
           </p>
-        }
-
+        )}
 
         <div className="mt-[24px] flex w-full flex-col-reverse items-start justify-center gap-4 md:mt-[50px] md:flex-row md:justify-between">
           <div className="flex flex-wrap gap-2 text-[16px] text-gray-400">
-
             {carItem?.categories.map((item: any, index: number) => (
               <span
                 key={index}
-                className="flex w-fit items-center justify-center 
-              rounded-[1rem] bg-gray-500/30 px-2 py-[1px] "
+                className="flex w-fit items-center justify-center rounded-[1rem] bg-gray-500/30 px-2 py-[1px]"
               >
                 {t(`Filters.categories.${CATEGORIES[item]}`)}
               </span>

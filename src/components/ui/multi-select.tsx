@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import React, { ForwardedRef, forwardRef, useEffect, useState } from "react";
+import { ForwardedRef, forwardRef, useEffect, useState } from "react";
+import clsx from "clsx";
 import Select, { MultiValue } from "react-select";
 
 interface MultiselectProps {
@@ -77,7 +78,10 @@ const Multiselect = forwardRef(function Multiselect(
 
   return (
     <div
-      className={`w-full min-w-[100px] max-w-[500px] ${errorText ? "text-error" : "text-inherit"}`}
+      className={clsx("w-full min-w-[100px] max-w-[500px]", {
+        "text-error": errorText,
+        "text-inherit": !errorText,
+      })}
     >
       {!!title && (
         <label htmlFor={title} className="mb-1 block text-sm font-medium">

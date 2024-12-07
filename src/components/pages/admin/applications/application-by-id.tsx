@@ -1,33 +1,36 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { collection, onSnapshot } from "firebase/firestore";
+import { collection, onSnapshot, query, where } from "firebase/firestore";
 import { CiBarcode } from "react-icons/ci";
-import { FaRegUser } from "react-icons/fa";
-import { FaPhoneAlt } from "react-icons/fa";
+import { FaPhoneAlt, FaRegUser } from "react-icons/fa";
 import { FaRegMessage } from "react-icons/fa6";
 import { IoMdMail } from "react-icons/io";
 import { db } from "@/lib/firebase";
 
 const ApplicationById = ({ id }: { id: string }) => {
-  const [applications, setApplications] = useState<any[]>([]);
+  const [application, setApplication] = useState<any>(null);
 
   useEffect(() => {
-    const applicationsRef = collection(db, "applications");
-    const unsubscribe = onSnapshot(applicationsRef, (snapshot) => {
+    if (!id) return;
+
+    const ref = collection(db, "applications");
+    const slugQuery = query(ref, where("__name__", "==", id));
+
+    const unsubscribe = onSnapshot(slugQuery, (snapshot) => {
       if (!snapshot.empty) {
-        const applicationsData: any[] = [];
-        snapshot.forEach((doc) => {
-          applicationsData.push({ ...doc.data(), id: doc.id });
+        const sortedData = snapshot.docs.map((doc) => {
+          const data = doc.data();
+          return { ...data, id: doc.id };
         });
-        setApplications(applicationsData);
+        setApplication(sortedData[0]);
+      } else {
+        setApplication(null);
       }
     });
 
     return () => unsubscribe();
-  }, []);
-
-  const application = applications.find((application) => application.id === id);
+  }, [id]);
 
   return (
     <ul className="flex min-h-[100vh] w-full flex-col items-center justify-center gap-[1rem] p-4">

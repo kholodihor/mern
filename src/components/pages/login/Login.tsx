@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { useEffect, useState } from "react";
@@ -12,14 +11,6 @@ import { auth } from "@/lib/firebase";
 import PasswordInput from "@/components/ui/password-input";
 import TextInput from "@/components/ui/text-input";
 import { loginScheme } from "./validationSchema";
-
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
-/* eslint-disable @typescript-eslint/no-explicit-any */
 
 const Login = () => {
   const user = useAuth();

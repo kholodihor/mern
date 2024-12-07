@@ -62,7 +62,7 @@ export interface IGalleryItem {
   slug: string;
   desc: Description;
   fullDesc: Description;
-  created_at: { seconds: number; nanoseconds: number; };
+  created_at: { seconds: number; nanoseconds: number };
 }
 
 export interface IReviewItem {

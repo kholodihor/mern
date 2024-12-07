@@ -1,7 +1,7 @@
+import { useState } from "react";
+import { collection, deleteDoc, doc, onSnapshot } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import { IGalleryItem } from "@/types";
-import { collection, deleteDoc, doc, onSnapshot } from "firebase/firestore";
-import { useState } from "react";
 
 export const useGallery = () => {
   const [galleryList, setGalleryList] = useState<IGalleryItem[]>([]);
@@ -15,7 +15,10 @@ export const useGallery = () => {
         galleryDataList.push({ ...data, id: doc.id });
       });
       galleryDataList.sort((a, b) => {
-        return new Date(b.created_at.seconds).getTime() - new Date(a.created_at.seconds).getTime();
+        return (
+          new Date(b.created_at.seconds).getTime() -
+          new Date(a.created_at.seconds).getTime()
+        );
       });
       setGalleryList(galleryDataList);
     });
@@ -34,7 +37,6 @@ export const useGallery = () => {
       }
     }
   };
-
 
   return {
     galleryList,

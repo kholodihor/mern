@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import clsx from "clsx";
 import { getLocalStorage, setLocalStorage } from "@/helpers/storageHelper";
 
 export default function CookieBanner() {
@@ -28,9 +29,13 @@ export default function CookieBanner() {
 
   return (
     <div
-      className={`fixed bottom-0 left-0 right-0 z-50 mx-auto my-10 max-w-max flex-col items-center justify-between gap-4 rounded-lg bg-gray-700 px-3 py-3 shadow sm:flex-row md:max-w-screen-sm md:px-4 ${
-        cookieConsent != null ? "hidden" : "flex"
-      } `}
+      className={clsx(
+        "fixed bottom-0 left-0 right-0 z-50 mx-auto my-10 max-w-max flex-col items-center justify-between gap-4 rounded-lg bg-gray-700 px-3 py-3 shadow",
+        {
+          hidden: cookieConsent != null, // Hidden if cookieConsent is not null
+          "flex sm:flex-row md:max-w-screen-sm md:px-4": cookieConsent == null, // Flex and additional classes if cookieConsent is null
+        }
+      )}
     >
       <div className="text-center">
         <Link href="/info/cookies">

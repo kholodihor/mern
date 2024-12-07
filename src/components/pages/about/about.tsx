@@ -12,15 +12,12 @@ const About = () => {
     >
       <SectionTitle id="about-us-title" title={t("title")} />
       <div className="flex w-full flex-col items-center justify-center space-y-8 py-[2rem] md:flex-row md:space-x-8 md:space-y-0 lg:px-[6rem]">
-        {/* Text Section */}
         <div className="flex w-full flex-col items-start justify-center p-4 md:w-1/2">
           <p className="w-full text-[18px] md:text-[20px] lg:text-lg">
             {t("content")}
           </p>
           <h5 className="mt-4 text-lg font-semibold md:text-xl">{t("call")}</h5>
         </div>
-
-        {/* Image Section */}
         <div className="flex w-full justify-center md:w-1/2">
           <Image
             src={"/about/about.png"}

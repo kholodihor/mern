@@ -1,5 +1,6 @@
 import { usePathname } from "next/navigation";
 import React, { useState } from "react";
+import clsx from "clsx";
 import { Link } from "@/i18n/routing";
 
 interface SideBarItemProps {
@@ -29,9 +30,13 @@ export const SideBarItem: React.FC<SideBarItemProps> = ({
   return (
     <Link className="flex w-full" href={href}>
       <li
-        className={`border-gray flex h-16 w-full flex-1 cursor-pointer items-center gap-3 border-b border-t pl-[32px] font-bold ${
-          isHovered || isActive ? "border-white bg-white text-black" : ""
-        } ${className} `}
+        className={clsx(
+          "border-gray flex h-16 w-full flex-1 cursor-pointer items-center gap-3 border-b border-t pl-[32px] font-bold",
+          {
+            "border-white bg-white text-black": isHovered || isActive,
+          },
+          className
+        )}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >

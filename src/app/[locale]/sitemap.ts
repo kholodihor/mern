@@ -1,6 +1,6 @@
-import { db } from "@/lib/firebase";
-import { collection, getDocs } from "firebase/firestore";
 import { MetadataRoute } from "next";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "@/lib/firebase";
 
 const baseUrl = "https://mernserwis.pl";
 
@@ -38,7 +38,6 @@ const generateSitemapEntries = (
 
 async function fetchDynamicRoutes() {
   try {
-
     const galleryRef = collection(db, "gallery");
     const gallerySnapshot = await getDocs(galleryRef);
 
@@ -46,7 +45,9 @@ async function fetchDynamicRoutes() {
       const data = doc.data();
       return {
         slug: data.slug,
-        lastModified: data.lastModified ? new Date(data.lastModified) : new Date(),
+        lastModified: data.lastModified
+          ? new Date(data.lastModified)
+          : new Date(),
       };
     });
 

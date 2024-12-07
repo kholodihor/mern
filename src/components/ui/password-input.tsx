@@ -1,6 +1,7 @@
 "use client";
 
 import { ForwardedRef, InputHTMLAttributes, forwardRef, useState } from "react";
+import clsx from "clsx";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 interface SignInPasswordProps extends InputHTMLAttributes<HTMLInputElement> {
@@ -23,20 +24,21 @@ const SignInPassword = forwardRef(function SignInPassword(
     setIsEditing(false);
   };
 
-  const inputClassName = `w-full outline-none rounded-[0.7rem] border border-white
-  p-2 placeholder:text-sm bg-black
-      ${
-        errorText
-          ? "border-red-500 caret-error outline-red-500 focus:outline-red-500"
-          : "border-lightgrey focus:outline-none"
-      }
-    `;
+  const inputClassName = clsx(
+    "w-full outline-none rounded-[0.7rem] border p-2 placeholder:text-sm bg-black",
+    {
+      "border-red-500 caret-error outline-red-500 focus:outline-red-500":
+        errorText, // Apply error styles when errorText exists
+      "border-lightgrey focus:outline-none": !errorText, // Apply light grey border and no outline focus when no error
+    }
+  );
 
   return (
     <div
-      className={`w-full min-w-[100px] max-w-[500px] ${
-        errorText ? "text-error" : "text-inherit"
-      }`}
+      className={clsx("w-full min-w-[100px] max-w-[500px]", {
+        "text-error": errorText,
+        "text-inherit": !errorText,
+      })}
     >
       {!!title && (
         <label htmlFor={title} className="text-sm font-medium">

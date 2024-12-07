@@ -1,12 +1,13 @@
 "use client";
 
-import SectionTitle from "@/components/shared/section-title";
-import CustomDropdown from "@/components/ui/select";
+import { useEffect } from "react";
+import { useTranslations } from "next-intl";
 import { CATEGORIES } from "@/constants/categories";
 import { useGallery } from "@/hooks/useGallery";
 import { useFilters } from "@/stores/useFilters";
-import { useTranslations } from "next-intl";
-import { useEffect } from "react";
+import SectionTitle from "@/components/shared/section-title";
+import Spiral from "@/components/shared/spiral/Spiral";
+import CustomDropdown from "@/components/ui/select";
 import GalleryCard from "./gallery-card";
 
 const Gallery = () => {
@@ -26,8 +27,8 @@ const Gallery = () => {
     return filters[0] === CATEGORIES.ALL
       ? true
       : item.categories.some((category: string) =>
-        filters.includes(CATEGORIES[category])
-      );
+          filters.includes(CATEGORIES[category])
+        );
   });
 
   const options = Object.values(CATEGORIES);
@@ -44,18 +45,21 @@ const Gallery = () => {
         <CustomDropdown options={options} />
       </div>
 
-      <div className="grid w-full grid-cols-1 gap-6 py-[2rem] sm:grid-cols-2 lg:grid-cols-3
-       lg:px-[3rem] 2xl:grid-cols-4">
-        {filteredData.length ? (
-          filteredData.map((item, index) => (
-            <GalleryCard key={index} data={item} />
-          ))
-        ) : (
-          <p className="col-span-4 mt-[24px] text-center text-[20px] text-gray-400">
-            {t("not_found")}
-          </p>
-        )}
-      </div>
+      {galleryList && galleryList.length ? (
+        <div className="grid w-full grid-cols-1 gap-6 py-[2rem] sm:grid-cols-2 lg:grid-cols-3 lg:px-[3rem] 2xl:grid-cols-4">
+          {filteredData && filteredData.length ? (
+            filteredData.map((item, index) => (
+              <GalleryCard key={index} data={item} />
+            ))
+          ) : (
+            <p className="col-span-4 mt-[24px] text-center text-[20px] text-gray-400">
+              {t("not_found")}
+            </p>
+          )}
+        </div>
+      ) : (
+        <Spiral />
+      )}
     </section>
   );
 };
