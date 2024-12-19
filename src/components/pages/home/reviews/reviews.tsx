@@ -1,13 +1,11 @@
 "use client";
 
-import Image from "next/image";
-import { useEffect, useState } from "react";
+import SectionTitle from "@/components/shared/section-title";
 import { Rating } from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
-import { collection, onSnapshot } from "firebase/firestore";
 import { useTranslations } from "next-intl";
-import { db } from "@/lib/firebase";
-import SectionTitle from "@/components/shared/section-title";
+import Image from "next/image";
+import { useEffect, useState } from "react";
 import Slider from "../shared/slider/slider";
 import ReviewCard from "./review-card";
 
@@ -15,20 +13,39 @@ const Reviews = () => {
   const t = useTranslations("Reviews");
 
   const [reviews, setReviews] = useState<any[]>([]);
+  const [reviewsNumber, setReviewsNumber] = useState(0);
+
+  const getReviews = async (): Promise<void> => {
+    try {
+      const response = await fetch(
+        "https://api.apify.com/v2/datasets/XjM5r6afVEoefQdCo/items?token=apify_api_WSKzAtkdIGVTGx6UlGp8O5KfcDgfWr3XVLox",
+        { method: "GET" }
+      );
+
+      if (!response.ok) {
+        throw new Error(`Error fetching reviews: ${response.statusText}`);
+      }
+
+      const data = await response.json();
+
+      setReviewsNumber(data.length);
+
+      const reviews = data.filter((review: any) => review.text !== null).map((review: any) => ({
+        name: review.name,
+        rating: review.stars,
+        review: review.text,
+        created_at: review.publishedAtDate
+      }));
+
+      setReviews(reviews);
+
+    } catch (error) {
+      console.error("Failed to fetch reviews:", error);
+    }
+  };
 
   useEffect(() => {
-    const ref = collection(db, "testimonials");
-    const unsubscribe = onSnapshot(ref, (snapshot) => {
-      if (!snapshot.empty) {
-        const reviewsData: any[] = [];
-        snapshot.forEach((doc) => {
-          reviewsData.push({ ...doc.data() });
-        });
-        setReviews(reviewsData);
-      }
-    });
-
-    return () => unsubscribe();
+    getReviews();
   }, []);
 
   return (
@@ -41,7 +58,7 @@ const Reviews = () => {
         className="mx-auto"
       />
       <h6 className="text-center text-[24px] md:text-[32px]">
-        {t("subtitle")}
+        {t("subtitle1")}{reviewsNumber}{t("subtitle2")}
       </h6>
       <Image
         src={"/google.svg"}

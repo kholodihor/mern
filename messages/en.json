@@ -69,7 +69,8 @@
   },
   "Reviews": {
     "title": "Reviews",
-    "subtitle": "Based on 14 reviews"
+    "subtitle1": "Based on ",
+    "subtitle2": " reviews"
   },
   "Contacts": {
     "title": "Welcome",

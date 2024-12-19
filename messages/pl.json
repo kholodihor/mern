@@ -69,7 +69,8 @@
   },
   "Reviews": {
     "title": "Opinie",
-    "subtitle": "Na podstawie 14 opinij"
+    "subtitle1": "Na podstawie ",
+    "subtitle2": " opinij"
   },
   "Contacts": {
     "title": "Zapraszamy",

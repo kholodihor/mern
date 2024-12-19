@@ -1,12 +1,11 @@
 "use client";
 
-import Image from "next/image";
+import { useRouter } from "@/i18n/routing";
+import { auth } from "@/lib/firebase";
 import { signOut } from "firebase/auth";
 import { CiLogout } from "react-icons/ci";
 import { IoMdPhotos } from "react-icons/io";
 import { TiMessages } from "react-icons/ti";
-import { Link, useRouter } from "@/i18n/routing";
-import { auth } from "@/lib/firebase";
 import { SideBarItem } from "./SideBarItem";
 
 const SideBar = () => {
@@ -24,11 +23,11 @@ const SideBar = () => {
 
   return (
     <aside className="relative flex min-h-[95vh] w-[250px] flex-col overflow-auto border-r border-gray-800 bg-black">
-      <div className="mb-[2rem] flex items-center justify-center p-2">
+      {/* <div className="mb-[2rem] flex items-center justify-center p-2">
         <Link href="/">
           <Image src="/logo.png" alt="MERN logo" width={150} height={150} />
         </Link>
-      </div>
+      </div> */}
       <div className="mb-[5rem]">
         <SideBarItem
           className=""
