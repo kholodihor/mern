@@ -125,15 +125,18 @@ const CarPage = ({ slug }: { slug: string }) => {
             ))}
           </div>
 
-          <div className="prose prose-invert max-w-none">
-            {carItem.fullDesc[locale].split(".").map((paragraph, index) => (
-              paragraph.trim() && (
-                <p key={index} className="text-base sm:text-lg text-gray-300 leading-relaxed">
-                  {paragraph.trim()}.
-                </p>
-              )
-            ))}
-          </div>
+          <div
+            className="text-base sm:text-lg text-gray-300 leading-relaxed"
+            dangerouslySetInnerHTML={{
+              __html: carItem.fullDesc[locale] || 'Add More Details',
+            }}
+          />
+
+          {carItem.youtubeUrl && <a href={carItem.youtubeUrl} target="_blank" rel="noopener noreferrer" className="text-blue-400 mt-8 inline-block underline hover:text-blue-700
+           transition-colors">
+            {carItem.youtubeUrl}
+          </a>}
+
 
           <div className="text-sm text-gray-400">
             {formatDate(carItem.created_at)}

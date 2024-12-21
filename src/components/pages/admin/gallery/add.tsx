@@ -1,20 +1,30 @@
 "use client";
 
 import Multiselect from "@/components/ui/multi-select";
-import TextArea from "@/components/ui/text-area";
 import TextInput from "@/components/ui/text-input";
+import TextArea from "@/components/ui/text-area";
 import { CATEGORIES } from "@/constants/categories";
 import { useRouter } from "@/i18n/routing";
 import { db } from "@/lib/firebase";
+import '@/styles/quill.css';
 import { getImageUrlsFromGroup } from "@/utils/imageFetcher";
 import { translateText } from "@/utils/translator";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Widget } from "@uploadcare/react-widget";
 import { addDoc, collection } from "firebase/firestore";
 import { useTranslations } from "next-intl";
+import dynamic from "next/dynamic";
 import { useState } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
+import 'react-quill-new/dist/quill.snow.css';
 import { TGalleryScheme, gallerySchema } from "./schema";
+
+const ReactQuill = dynamic(() => import('react-quill-new'), {
+  ssr: false,
+  loading: () => (
+    <div className="h-[200px] w-full animate-pulse rounded-md bg-slate-100" />
+  ),
+});
 
 const AddGallery = () => {
   const router = useRouter();
@@ -44,6 +54,7 @@ const AddGallery = () => {
       images: "",
       desc: "",
       fullDesc: "",
+      youtubeUrl: "",
     },
   });
 
@@ -80,6 +91,7 @@ const AddGallery = () => {
           ua: translatedFullDescUA,
           en: translatedFullDescEN,
         },
+        youtubeUrl: values.youtubeUrl,
         created_at: new Date(Date.now()),
       };
       const ref = collection(db, "gallery");
@@ -160,6 +172,18 @@ const AddGallery = () => {
         />
 
         <Controller
+          name="youtubeUrl"
+          control={control}
+          render={({ field }) => (
+            <TextInput
+              {...field}
+              errorText={errors.youtubeUrl?.message}
+              placeholder="YouTube URL (опціонально)"
+            />
+          )}
+        />
+
+        <Controller
           name="desc"
           control={control}
           render={({ field }) => (
@@ -175,11 +199,27 @@ const AddGallery = () => {
           name="fullDesc"
           control={control}
           render={({ field }) => (
-            <TextArea
-              {...field}
-              errorText={errors.fullDesc?.message}
-              placeholder="Повний опис польскою мовою"
-            />
+            <div className="w-[500px]">
+              <ReactQuill
+                {...field}
+                theme="snow"
+                placeholder="Повний опис польскою мовою"
+                className={`${errors.fullDesc ? 'quill-error' : ''}`}
+                modules={{
+                  toolbar: [
+                    [{ 'header': [1, 2, 3, false] }],
+                    ['bold', 'italic', 'underline'],
+                    [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+                    ['clean']
+                  ]
+                }}
+              />
+              {errors.fullDesc && (
+                <span className="text-xs text-red-500">
+                  {errors.fullDesc?.message}
+                </span>
+              )}
+            </div>
           )}
         />
 

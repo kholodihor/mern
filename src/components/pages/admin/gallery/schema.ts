@@ -6,6 +6,7 @@ export const gallerySchema = z.object({
   images: z.string(),
   desc: z.string().max(150, "Короткий опис має містити максимум 150 символів"),
   fullDesc: z.string(),
+  youtubeUrl: z.string().optional(),
 });
 
 export type TGalleryScheme = z.infer<typeof gallerySchema>;

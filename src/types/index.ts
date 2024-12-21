@@ -62,6 +62,7 @@ export interface IGalleryItem {
   slug: string;
   desc: Description;
   fullDesc: Description;
+  youtubeUrl: string;
   created_at: { seconds: number; nanoseconds: number };
 }
 
