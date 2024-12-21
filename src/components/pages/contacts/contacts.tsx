@@ -8,12 +8,17 @@ const Contacts = () => {
   return (
     <section
       id="contacts"
-      className="flex min-h-screen w-full flex-col pt-[18vh] md:pt-[25vh]"
+      className="min-h-screen w-full py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 mt-[15vh] md:mt-[20vh]"
       aria-labelledby="contacts-title"
     >
-      <SectionTitle id="services-title" title={t("title_2")} />
-      <ApplicationForm />
-      <ContactsLocation />
+      <div className="max-w-7xl mx-auto">
+        <SectionTitle id="services-title" title={t("title_2")} />
+        
+        <div className="mt-8 sm:mt-12 lg:mt-16 space-y-12 sm:space-y-16">
+          <ApplicationForm />
+          <ContactsLocation />
+        </div>
+      </div>
     </section>
   );
 };

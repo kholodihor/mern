@@ -1,136 +1,118 @@
-"use client";
+'use client'
 
-import Multiselect from "@/components/ui/multi-select";
 import TextArea from "@/components/ui/text-area";
 import TextInput from "@/components/ui/text-input";
-import { CATEGORIES } from "@/constants/categories";
 import { useRouter } from "@/i18n/routing";
 import { db } from "@/lib/firebase";
-import { getImageUrlsFromGroup } from "@/utils/imageFetcher";
 import { translateText } from "@/utils/translator";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Widget } from "@uploadcare/react-widget";
 import { addDoc, collection } from "firebase/firestore";
-import { useTranslations } from "next-intl";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
-import { TGalleryScheme, gallerySchema } from "./schema";
+import { newsSchema, TNewsScheme } from "./schema";
 
-const AddGallery = () => {
+const AddNews = () => {
   const router = useRouter();
-  const t = useTranslations("Filters.categories");
   const [isProcessing, setIsProcessing] = useState(false);
+  const mounted = useRef(true);
 
-  const options = Object.entries(CATEGORIES)
-    .map(([key, value]) => ({
-      value: key,
-      label: t(value),
-    }))
-    .filter((option) => option.value !== "ALL");
-
-  console.log(options)
+  useEffect(() => {
+    return () => {
+      mounted.current = false;
+    };
+  }, []);
 
   const {
     handleSubmit,
     control,
     reset,
     formState: { errors },
-  } = useForm<TGalleryScheme>({
-    resolver: zodResolver(gallerySchema),
+  } = useForm<TNewsScheme>({
+    resolver: zodResolver(newsSchema),
     mode: "onChange",
     defaultValues: {
-      car: "",
-      categories: [],
-      images: "",
-      desc: "",
-      fullDesc: "",
+      title: "",
+      image: "",
+      short_text: "",
+      full_text: "",
     },
   });
 
-  const onSubmit: SubmitHandler<TGalleryScheme> = async (values) => {
+  const onSubmit: SubmitHandler<TNewsScheme> = async (values) => {
+    if (isProcessing) return;
+
     try {
       setIsProcessing(true);
 
-      const translatedDescUA = await translateText(values.desc, "uk");
-      const translatedFullDescUA = await translateText(values.fullDesc, "uk");
-      const translatedDescEN = await translateText(values.desc, "en");
-      const translatedFullDescEN = await translateText(values.fullDesc, "en");
+      if (!values.image) {
+        throw new Error("Please select an image");
+      }
 
-      const images = await getImageUrlsFromGroup(values.images);
-      const urls = images.map(
-        (image: any) =>
-          `https://ucarecdn.com/${image.file_id}/${image.filename.replace(/\.\w+$/, ".webp")}`
-      );
+      const translatedTitleUA = await translateText(values.title, "uk");
+      const translatedDescUA = await translateText(values.short_text, "uk");
+      const translatedFullDescUA = await translateText(values.full_text, "uk");
+      const translatedTitleEN = await translateText(values.title, "en");
+      const translatedDescEN = await translateText(values.short_text, "en");
+      const translatedFullDescEN = await translateText(values.full_text, "en");
+
+      const imageUrl = values.image ? `${values.image.replace(/\.\w+$/, ".webp")}` : '';
 
       const data = {
-        car: values.car,
-        slug: values.car.toLowerCase().replace(/\s+/g, "-"),
-        categories: values.categories,
-        images: urls,
-        desc: {
-          pl: values.desc,
+        title: {
+          pl: values.title,
+          ua: translatedTitleUA,
+          en: translatedTitleEN,
+        },
+        image: imageUrl,
+        short_text: {
+          pl: values.short_text,
           ua: translatedDescUA,
           en: translatedDescEN,
         },
-        fullDesc: {
-          pl: values.fullDesc,
+        full_text: {
+          pl: values.full_text,
           ua: translatedFullDescUA,
           en: translatedFullDescEN,
         },
         created_at: new Date(Date.now()),
       };
-      const ref = collection(db, "gallery");
+
+      const ref = collection(db, "news");
       await addDoc(ref, data);
       alert("Статтю успішно додано!");
       reset();
       setIsProcessing(false);
-      router.replace("/admin/gallery");
+      router.replace("/admin/news");
     } catch (error) {
-      setIsProcessing(false);
-      alert(error);
+      if (mounted.current) {
+        setIsProcessing(false);
+        alert(error instanceof Error ? error.message : "An error occurred");
+      }
     }
   };
 
   return (
     <div className="p-[24px]">
-      <h1 className="mb-[24px] text-3xl font-bold">Додати статтю в галерею</h1>
+      <h1 className="mb-[24px] text-3xl font-bold">Додати статтю в актуальності</h1>
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="mt-[2rem] flex w-full flex-col items-start justify-start gap-4 space-y-2 md:mt-0"
       >
         <Controller
-          name="car"
+          name="title"
           control={control}
           render={({ field }) => (
             <TextInput
               {...field}
-              errorText={errors.car?.message}
-              placeholder="Марка автомобилю"
+              errorText={errors.title?.message}
+              placeholder="Заголовок статті польскою мовою"
             />
           )}
         />
 
         <Controller
-          name="categories"
-          control={control}
-          rules={{ required: "Please select at least one category" }}
-          render={({ field: { onChange, value, ref, ...rest } }) => (
-            <Multiselect
-              {...rest}
-              ref={ref}
-              options={options}
-              value={options.filter((option) => value?.includes(option.value))} // Transform string[] to MultiValue
-              onChange={
-                (selected) => onChange(selected.map((option) => option.value)) // Transform MultiValue to string[]
-              }
-              errorText={errors.categories?.message}
-              placeholder="Категорії ремонту"
-            />
-          )}
-        />
-
-        <Controller
-          name="images"
+          name="image"
           control={control}
           rules={{ required: "File is required" }}
           render={({ field: { onChange, value, ref } }) => (
@@ -140,16 +122,15 @@ const AddGallery = () => {
               </label>
               <Widget
                 publicKey="ff76dce7219a0b044f12"
-                multiple={true}
                 value={value}
                 onChange={(fileInfo) => {
                   onChange(fileInfo.cdnUrl);
                 }}
                 ref={ref}
               />
-              {errors.images && (
+              {errors.image && (
                 <span className="text-xs text-red-500">
-                  {errors.images?.message}
+                  {errors.image?.message}
                 </span>
               )}
             </div>
@@ -157,24 +138,24 @@ const AddGallery = () => {
         />
 
         <Controller
-          name="desc"
+          name="short_text"
           control={control}
           render={({ field }) => (
             <TextArea
               {...field}
-              errorText={errors.desc?.message}
+              errorText={errors.short_text?.message}
               placeholder="Короткий опис польскою мовою"
             />
           )}
         />
 
         <Controller
-          name="fullDesc"
+          name="full_text"
           control={control}
           render={({ field }) => (
             <TextArea
               {...field}
-              errorText={errors.fullDesc?.message}
+              errorText={errors.full_text?.message}
               placeholder="Повний опис польскою мовою"
             />
           )}
@@ -191,4 +172,4 @@ const AddGallery = () => {
   );
 };
 
-export default AddGallery;
+export default AddNews;

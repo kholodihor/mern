@@ -1,23 +1,26 @@
 "use client";
 
-import { useTranslations } from "next-intl";
-import { services } from "@/data/services";
 import SectionTitle from "@/components/shared/section-title";
+import { services } from "@/data/services";
+import { useTranslations } from "next-intl";
 import Slider from "../shared/slider/slider";
 import ServicesCard from "./services-card";
 
 const Services = () => {
   const t = useTranslations("Services");
   return (
-    <section className="mb-[5rem] sm:my-[8rem]">
+    <section className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8">
       <SectionTitle id="services-title" title={t("title")} />
       <Slider
         data={services}
         Component={ServicesCard}
-        aria-label="Services Slider"
         nextElName="nextPosts"
         prevElName="prevPosts"
         breakpoints={{
+          550: {
+            slidesPerView: 2,
+            spaceBetween: 20,
+          },
           768: {
             slidesPerView: 2.5,
             spaceBetween: 20,

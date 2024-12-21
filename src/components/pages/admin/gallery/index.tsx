@@ -1,10 +1,10 @@
 "use client";
 
+import { useGallery } from "@/hooks/useGallery";
+import { Link } from "@/i18n/routing";
 import Image from "next/image";
 import { useEffect } from "react";
 import { FaRegTrashAlt } from "react-icons/fa";
-import { useGallery } from "@/hooks/useGallery";
-import { Link } from "@/i18n/routing";
 
 const Gallery = () => {
   const { galleryList, fetchGalleryAsList, deleteGalleryItem } = useGallery();
@@ -25,8 +25,8 @@ const Gallery = () => {
           </Link>
         </li>
         {galleryList &&
-          galleryList.map((item, index) => (
-            <li key={index} className="relative flex flex-col">
+          galleryList.map((item) => (
+            <li key={item.id} className="relative flex flex-col">
               <Image
                 src={item.images[0]}
                 width={208}

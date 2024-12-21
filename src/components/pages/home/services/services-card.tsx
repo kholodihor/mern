@@ -1,5 +1,5 @@
-import { useTranslations } from "next-intl";
 import { TServiceCard } from "@/types";
+import { useTranslations } from "next-intl";
 
 const ServicesCard = ({ data: card }: { data: TServiceCard }) => {
   const t = useTranslations("Services");
@@ -7,18 +7,29 @@ const ServicesCard = ({ data: card }: { data: TServiceCard }) => {
   return (
     <article
       id={card.title}
-      className="mx-auto flex h-[315px] w-[90%] flex-col items-center justify-center rounded-[2.5rem] border border-white px-4 py-[20%] sm:w-[75%] md:w-[300px]"
+      className="mx-auto h-[320px] w-full sm:w-[300px] flex flex-col rounded-2xl border border-white/20 bg-white/5 backdrop-blur-sm p-6 transition-all hover:border-white/30 hover:bg-white/10 group"
     >
-      <div className="flex h-full w-full flex-col items-center justify-center gap-4 md:justify-between">
+      <div className="flex h-full flex-col items-center justify-center gap-6">
         {card.title === "coding" ? (
-          <a href={card.link} target="_blank" rel="noreferrer">
-            <h4 className="text-center text-[24px]">{t(`${card.title}`)}</h4>
+          <a
+            href={card.link}
+            target="_blank"
+            rel="noreferrer"
+            className="transition-transform group-hover:scale-105"
+          >
+            <h4 className="text-2xl font-semibold text-center group-hover:text-white/90">
+              {t(`${card.title}`)}
+            </h4>
           </a>
         ) : (
-          <h4 className="text-center text-[24px]">{t(`${card.title}`)}</h4>
+          <h4 className="text-2xl font-semibold text-center">
+            {t(`${card.title}`)}
+          </h4>
         )}
-        <div className="flex-grow" />
-        <p className="text-center text-gray-400">{t(`${card.text}`)}</p>
+
+        <p className="text-gray-300 text-center text-base leading-relaxed max-w-[90%]">
+          {t(`${card.text}`)}
+        </p>
       </div>
     </article>
   );

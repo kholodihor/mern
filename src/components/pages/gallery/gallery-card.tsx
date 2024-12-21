@@ -1,64 +1,67 @@
-import Image from "next/image";
-import { useLocale, useTranslations } from "next-intl";
 import { CATEGORIES } from "@/constants/categories";
 import { formatDate } from "@/helpers/formatDate";
 import { Link } from "@/i18n/routing";
 import { IGalleryItem } from "@/types";
+import { useLocale, useTranslations } from "next-intl";
+import Image from "next/image";
 
 const GalleryCard = ({ data }: { data: IGalleryItem }) => {
   const t = useTranslations();
   const locale = useLocale();
 
   return (
-    <article className="mx-auto flex h-[590px] w-full flex-col items-center justify-center overflow-hidden border border-white p-2 2xl:w-[350px]">
-      <div className="flex h-full w-full flex-col justify-start gap-2">
+    <article className="w-full sm:w-[400px] flex flex-col border border-white/20 bg-white/5 backdrop-blur-sm rounded-2xl overflow-hidden hover:border-white/30 transition-all">
+      <div className="relative h-48 w-full overflow-hidden">
         <Image
           src={data.images[0]}
-          alt="Car image"
-          width={350}
-          height={150}
-          className="h-[200px] w-full object-cover grayscale md:h-[150px] xl:h-[200px]"
+          alt={data.car}
+          fill
+          className="object-cover transition-transform grayscale hover:grayscale-0"
+          sizes="(max-width: 768px) 100vw, 350px"
         />
+      </div>
 
+      <div className="flex flex-col flex-grow p-4 sm:p-6 space-y-4">
         <div className="flex items-center justify-between">
-          <h4 className="text-[20px]">{data.car}</h4>
-          <span className="text-sm text-gray-500">
+          <h4 className="text-lg sm:text-xl font-semibold text-white">
+            {data.car}
+          </h4>
+          <span className="text-sm text-gray-400">
             {formatDate(data?.created_at)}
           </span>
         </div>
 
-        <p className="text-[16px] leading-8 text-gray-400">
+        <p className="text-sm sm:text-base text-gray-300 line-clamp-3">
           {data.desc[locale]}
         </p>
 
-        <div className="flex-grow"></div>
-
-        <div className="tags mt-[24px] flex flex-wrap gap-2 text-[18px] text-white">
+        <div className="flex flex-wrap gap-2">
           {data.categories.slice(0, 2).map((item: any, index: number) => (
             <span
               key={index}
-              className="flex w-fit min-w-[60%] items-center justify-center rounded-[1rem] bg-gray-500/30 px-2 py-[1px]"
+              className="px-3 py-1 text-sm rounded-full bg-white/10 text-gray-200"
             >
-              {t(`Filters.categories.${CATEGORIES[item]}`)}&nbsp;
+              {t(`Filters.categories.${CATEGORIES[item]}`)}
             </span>
           ))}
           {data.categories.length > 2 && (
-            <span className="rounded-[1rem] bg-gray-500/30 px-2 py-[1px] text-white">
-              {" "}
+            <span className="px-3 py-1 text-sm rounded-full bg-white/10 text-gray-200">
               +{data.categories.length - 2}
             </span>
           )}
         </div>
 
-        <div className="flex-grow"></div>
-
-        <div className="my-2 flex justify-end px-2">
-          <Link href={`/gallery/${data.slug}`}>
-            <button className="text-[24px] transition-all hover:underline">
-              {`${t("Gallery.read_more")}  >`}
-            </button>
-          </Link>
-        </div>
+        <Link
+          href={`/gallery/${data.slug}`}
+          className="inline-flex items-center justify-end text-white hover:text-gray-300 transition-colors group"
+        >
+          <span className="text-lg font-medium group-hover:underline">
+            {t("Gallery.read_more")}
+          </span>
+          <span className="ml-2 text-xl group-hover:translate-x-1 transition-transform">
+            →
+          </span>
+        </Link>
       </div>
     </article>
   );

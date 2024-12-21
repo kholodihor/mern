@@ -11,24 +11,17 @@ const ServicesPage = () => {
   return (
     <section
       id="services"
-      className="flex min-h-screen w-full flex-col px-2 pt-[18vh] md:px-4 md:pt-[25vh]"
+      className="min-h-screen w-full py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 mt-[15vh] md:mt-[20vh]"
       aria-labelledby="services-title"
     >
-      <SectionTitle id="services-title" title={t("title")} />
+      <div className="max-w-7xl mx-auto">
+        <SectionTitle id="services-title" title={t("title")} />
 
-      {/* <div className="mx-auto grid grid-cols-1 place-items-center gap-6 py-[2rem] sm:grid-cols-2 lg:grid-cols-3 lg:px-4 xl:grid-cols-4">
-        {services.length
-          ? services.map((item, index) => (
-              <ServicesCard key={index} data={item} />
-            ))
-          : null}
-      </div> */}
-      <div className="mx-auto flex flex-wrap justify-center gap-4 py-[2rem]">
-        {services.length
-          ? services.map((item, index) => (
-              <ServicesCard key={index} data={item} />
-            ))
-          : null}
+        <div className="mt-8 sm:mt-12 lg:mt-16 flex flex-wrap justify-center gap-4 sm:gap-6 lg:gap-8">
+          {services.length > 0 && services.map((item, index) => (
+            <ServicesCard key={index} data={item} />
+          ))}
+        </div>
       </div>
     </section>
   );

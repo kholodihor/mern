@@ -5,7 +5,7 @@
     "uslugi": "Services",
     "gallery": "Gallery",
     "kontakt": "Contact",
-    "news": "Our News",
+    "news": "Actual info",
     "motto": "Perfect service for perfect cars",
     "button": "Leave a request for service 👉 ",
     "independent": "Independent BMW, Rolls-Royce and MINI service"
@@ -119,7 +119,7 @@
     "tryagain": "Try again"
   },
   "News": {
-    "title": "News",
+    "title": "Actual information",
     "read_more": "Find out more"
   },
   "Filters": {

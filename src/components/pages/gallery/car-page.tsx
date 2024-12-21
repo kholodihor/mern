@@ -1,20 +1,30 @@
 "use client";
 
-import Image from "next/image";
-import { useEffect, useState } from "react";
-import { collection, onSnapshot, query, where } from "firebase/firestore";
-import { useLocale, useTranslations } from "next-intl";
+import ChevronLeft from "@/components/icons/chevron-left";
+import SectionTitle from "@/components/shared/section-title";
 import { CATEGORIES } from "@/constants/categories";
 import { formatDate } from "@/helpers/formatDate";
 import { Link } from "@/i18n/routing";
 import { db } from "@/lib/firebase";
 import { IGalleryItem } from "@/types";
-import ChevronLeft from "@/components/icons/chevron-left";
-import SectionTitle from "@/components/shared/section-title";
+import { collection, onSnapshot, query, where } from "firebase/firestore";
+import { useLocale, useTranslations } from "next-intl";
+import Image from "next/image";
+import { useEffect, useState } from "react";
 import Slider from "../home/shared/slider/slider";
 
 const CarImage = ({ data }: { data: string }) => {
-  return <Image src={data} alt="Car image" width={300} height={300} />;
+  return (
+    <div className="relative aspect-[4/3] overflow-hidden rounded-xl">
+      <Image
+        src={data}
+        alt="Car image"
+        fill
+        className="object-cover transition-transform hover:scale-105"
+        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+      />
+    </div>
+  );
 };
 
 const CarPage = ({ slug }: { slug: string }) => {
@@ -43,123 +53,91 @@ const CarPage = ({ slug }: { slug: string }) => {
     return () => unsubscribe();
   }, [slug]);
 
+  if (!carItem) {
+    return (
+      <section className="min-h-screen w-full py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 mt-[15vh] md:mt-[20vh]">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex items-center justify-center min-h-[400px]">
+            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-white"></div>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section
-      id={carItem?.car as string}
-      className="flex min-h-screen w-full flex-col p-4 pb-[100px] pt-[18vh] md:pt-[25vh]"
-      aria-labelledby={`${carItem?.car}-title`}
+      id={carItem.car}
+      className="min-h-screen w-full py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 mt-[15vh] md:mt-[20vh]"
+      aria-labelledby={`${carItem.car}-title`}
     >
-      <SectionTitle
-        id={`${carItem?.car}-title`}
-        title={carItem?.car as string}
-      />
-      <div className="relative pl-[10vw]">
-        <Link href="/gallery">
-          <button className="absolute left-[2vw] top-1/2 z-10 flex -translate-x-1/2 -translate-y-1/3 items-center text-[2rem] md:left-[5vw] md:text-[70px]">
-            <ChevronLeft />
-          </button>
-        </Link>
-        <Slider
-          data={carItem?.images as string[]}
-          Component={CarImage}
-          aria-label="Cars Slider"
-          nextElName="nextCars"
-          prevElName="prevCars"
-          breakpoints={{
-            450: {
-              slidesPerView: 1.5,
-              spaceBetween: 10,
-            },
-            560: {
-              slidesPerView: 2,
-              spaceBetween: 10,
-            },
-            991: {
-              slidesPerView: 3,
-              spaceBetween: 10,
-            },
-            1024: {
-              slidesPerView: 4,
-              spaceBetween: 10,
-            },
-            1280: {
-              slidesPerView: 4.5,
-              spaceBetween: 10,
-            },
-          }}
-        />
-      </div>
-      <div className="mx-auto w-[77%]">
-        {carItem?.fullDesc[locale] && carItem?.fullDesc[locale].length > 500 ? (
-          <p className="text-base leading-relaxed text-gray-500 md:max-w-[85vw] md:text-lg lg:text-xl">
-            {carItem?.fullDesc[locale]
-              ?.split(".")
-              .slice(
-                0,
-                Math.floor(carItem?.fullDesc[locale].split(".").length / 3)
-              )
-              .map(
-                (
-                  chunk: string | number,
-                  index: number,
-                  array: string | any[]
-                ) => chunk + (index < array.length - 1 ? "." : "")
-              )
-              .join(".")}
-            <br /> <br />
-            {carItem?.fullDesc[locale]
-              ?.split(".")
-              .slice(
-                Math.floor(carItem?.fullDesc[locale].split(".").length / 3),
-                Math.floor(
-                  (carItem?.fullDesc[locale].split(".").length * 2) / 3
-                )
-              )
-              .map(
-                (
-                  chunk: string | number,
-                  index: number,
-                  array: string | any[]
-                ) => chunk + (index < array.length - 1 ? "." : "")
-              )
-              .join(".")}
-            <br /> <br />
-            {carItem?.fullDesc[locale]
-              ?.split(".")
-              .slice(
-                Math.floor(
-                  (carItem?.fullDesc[locale].split(".").length * 2) / 3
-                )
-              )
-              .map(
-                (
-                  chunk: string | number,
-                  index: number,
-                  array: string | any[]
-                ) => chunk + (index < array.length - 1 ? "." : "")
-              )
-              .join(".")}
-          </p>
-        ) : (
-          <p className="mt-[24px] w-full text-[18px] text-gray-400">
-            {carItem?.fullDesc[locale]}
-          </p>
-        )}
+      <div className="max-w-7xl mx-auto">
+        <div className="relative mb-8 sm:mb-12">
+          <Link
+            href="/gallery"
+            className="absolute left-0 top-1/2 -translate-y-1/2 p-2 text-white hover:text-gray-300 transition-colors"
+          >
+            <ChevronLeft className="w-8 h-8 sm:w-10 sm:h-10" />
+          </Link>
+          <SectionTitle
+            id={`${carItem.car}-title`}
+            title={carItem.car}
+          />
+        </div>
 
-        <div className="mt-[24px] flex w-full flex-col-reverse items-start justify-center gap-4 md:mt-[50px] md:flex-row md:justify-between">
-          <div className="flex flex-wrap gap-2 text-[16px] text-gray-400">
-            {carItem?.categories.map((item: any, index: number) => (
+        <div className="mt-8 sm:mt-12">
+          <Slider
+            data={carItem.images}
+            Component={CarImage}
+            aria-label="Cars Slider"
+            nextElName="nextCars"
+            prevElName="prevCars"
+            breakpoints={{
+              450: {
+                slidesPerView: 1.2,
+                spaceBetween: 16,
+              },
+              640: {
+                slidesPerView: 2,
+                spaceBetween: 20,
+              },
+              1024: {
+                slidesPerView: 3,
+                spaceBetween: 24,
+              },
+              1280: {
+                slidesPerView: 3.5,
+                spaceBetween: 32,
+              },
+            }}
+          />
+        </div>
+
+        <div className="mt-8 sm:mt-12 space-y-6">
+          <div className="flex flex-wrap gap-2">
+            {carItem.categories.map((category: string, index: number) => (
               <span
                 key={index}
-                className="flex w-fit items-center justify-center rounded-[1rem] bg-gray-500/30 px-2 py-[1px]"
+                className="px-3 py-1 text-sm rounded-full bg-white/10 text-gray-200"
               >
-                {t(`Filters.categories.${CATEGORIES[item]}`)}
+                {t(`Filters.categories.${CATEGORIES[category]}`)}
               </span>
             ))}
           </div>
-          <span className="text-gray-400">
-            {carItem && formatDate(carItem?.created_at)}
-          </span>
+
+          <div className="prose prose-invert max-w-none">
+            {carItem.fullDesc[locale].split(".").map((paragraph, index) => (
+              paragraph.trim() && (
+                <p key={index} className="text-base sm:text-lg text-gray-300 leading-relaxed">
+                  {paragraph.trim()}.
+                </p>
+              )
+            ))}
+          </div>
+
+          <div className="text-sm text-gray-400">
+            {formatDate(carItem.created_at)}
+          </div>
         </div>
       </div>
     </section>

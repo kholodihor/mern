@@ -21,9 +21,8 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const analytics =
-  app.name && typeof window !== "undefined" ? getAnalytics(app) : null;
-const auth = getAuth(app);
-const db = getFirestore(app);
+export const analytics = typeof window !== "undefined" ? getAnalytics(app) : null;
+export const auth = getAuth(app);
+export const db = getFirestore(app);
 
-export { app, analytics, auth, db };
+export default app;

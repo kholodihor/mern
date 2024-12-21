@@ -45,13 +45,21 @@ const SideBar = () => {
         >
           Галерея
         </SideBarItem>
-        <SideBarItem
+        {/* <SideBarItem
           className=""
           icon={<IoMdPhotos />}
           iconClassName="text-xl"
           href="/admin/testimonials"
         >
           Відгуки
+        </SideBarItem> */}
+        <SideBarItem
+          className=""
+          icon={<IoMdPhotos />}
+          iconClassName="text-xl"
+          href="/admin/news"
+        >
+          Актуальності
         </SideBarItem>
       </div>
       <button

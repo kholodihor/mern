@@ -11,7 +11,6 @@ import SectionTitle from "@/components/shared/section-title";
 const NewsPage = () => {
   const t = useTranslations("News");
   const locale = useLocale();
-
   const [news, setNews] = useState<any[]>([]);
 
   useEffect(() => {
@@ -32,44 +31,47 @@ const NewsPage = () => {
   return (
     <section
       id="news"
-      className="flex min-h-screen w-full flex-col pt-[18vh] md:pt-[25vh]"
+      className="min-h-screen w-full py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 mt-[15vh] md:mt-[20vh]"
       aria-labelledby="news-title"
     >
-      <SectionTitle id="news-title" title={t("title")} />
-      <div className="mt-[10vh] flex flex-col gap-10 px-4 py-8 md:px-8 lg:px-24 xl:px-36">
-        {news.map((item, index) => (
-          <div
-            key={index}
-            className="flex flex-col items-center gap-6 md:flex-row md:items-start md:gap-10 lg:gap-14"
-          >
-            {/* Responsive Image */}
-            <div className="w-full flex-shrink-0 md:w-1/2">
-              <Image
-                src={item.image}
-                alt="Car image"
-                width={500}
-                height={500}
-                className="h-auto w-full rounded-lg object-cover shadow-lg"
-              />
-            </div>
+      <div className="max-w-7xl mx-auto">
+        <SectionTitle id="news-title" title={t("title")} />
+        
+        <div className="mt-8 sm:mt-12 lg:mt-16 space-y-12 sm:space-y-16">
+          {news.map((item, index) => (
+            <article
+              key={index}
+              className="flex flex-col md:flex-row gap-6 sm:gap-8 lg:gap-12"
+            >
+              <div className="w-full md:w-1/2">
+                <div className="relative aspect-[4/3] overflow-hidden rounded-xl">
+                  <Image
+                    src={item.image}
+                    alt={item.title[locale]}
+                    fill
+                    className="object-cover transition-transform hover:scale-105"
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                  />
+                </div>
+              </div>
 
-            {/* Text Content */}
-            <div className="flex w-full flex-col gap-4 text-center md:w-1/2 md:text-left">
-              <h4 className="text-2xl font-bold md:text-3xl lg:text-4xl">
-                {item.title[locale]}
-              </h4>
-              <p className="text-base text-gray-500 md:text-lg lg:text-xl">
-                {item.short_text[locale]} <br />
+              <div className="w-full md:w-1/2 flex flex-col justify-center space-y-4">
+                <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white">
+                  {item.title[locale]}
+                </h3>
+                <p className="text-base sm:text-lg text-gray-300">
+                  {item.short_text[locale]}
+                </p>
                 <Link
-                  className="hover:text-white hover:underline"
+                  className="inline-block text-white hover:text-gray-300 transition-colors mt-2 text-lg font-medium hover:underline"
                   href={`/news/${item.id}`}
                 >
-                  {t("read_more")}
+                  {t("read_more")} →
                 </Link>
-              </p>
-            </div>
-          </div>
-        ))}
+              </div>
+            </article>
+          ))}
+        </div>
       </div>
     </section>
   );

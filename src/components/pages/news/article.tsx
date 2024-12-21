@@ -1,16 +1,15 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { collection, onSnapshot } from "firebase/firestore";
-import { useLocale } from "next-intl";
-import { Link } from "@/i18n/routing";
-import { db } from "@/lib/firebase";
 import ChevronLeft from "@/components/icons/chevron-left";
 import SectionTitle from "@/components/shared/section-title";
+import { Link } from "@/i18n/routing";
+import { db } from "@/lib/firebase";
+import { collection, onSnapshot } from "firebase/firestore";
+import { useLocale } from "next-intl";
+import { useEffect, useState } from "react";
 
 const Article = ({ id }: { id: string }) => {
   const locale = useLocale();
-
   const [articles, setArticles] = useState<any | null>(null);
 
   useEffect(() => {
@@ -33,57 +32,34 @@ const Article = ({ id }: { id: string }) => {
   return (
     <section
       id={`Article ${article?.title}`}
-      className="flex min-h-screen w-full flex-col px-[24px] pb-[100px] pt-[18vh] md:pt-[25vh]"
+      className="flex min-h-screen w-full flex-col px-4 sm:px-6 lg:px-8 pb-20 pt-[18vh] md:pt-[25vh]"
       aria-labelledby={`Article ${article?.title[locale]}-title`}
     >
-      <SectionTitle
-        id={`Article ${article?.title[locale]}-title`}
-        title={article?.title[locale] as string}
-      />
+      <div className="max-w-4xl mx-auto w-full">
+        <div className="flex items-center gap-8 mb-12">
+          <Link href="/news">
+            <button className="group flex items-center justify-center w-12 h-12 rounded-full bg-white/5 hover:bg-white/10 transition-all">
+              <ChevronLeft className="w-6 h-6 text-gray-400 group-hover:text-white transition-colors" />
+            </button>
+          </Link>
+          <SectionTitle
+            id={`Article ${article?.title[locale]}-title`}
+            title={article?.title[locale] as string}
+          />
+        </div>
 
-      <div className="mt-[10vh] flex flex-col items-start gap-6 md:flex-row md:gap-10">
-        <Link href="/news">
-          <button className="flex items-center gap-2 text-xl md:text-2xl lg:text-3xl">
-            <ChevronLeft />
-          </button>
-        </Link>
-
-        <p className="text-base leading-relaxed text-gray-500 md:max-w-[85vw] md:text-lg lg:text-xl">
-          {article?.full_text[locale]
-            ?.split(".")
-            .slice(
-              0,
-              Math.floor(article?.full_text[locale].split(".").length / 3)
-            )
-            .map(
-              (chunk: string | number, index: number, array: string | any[]) =>
-                chunk + (index < array.length - 1 ? "." : "")
-            )
-            .join(".")}
-          <br /> <br />
-          {article?.full_text[locale]
-            ?.split(".")
-            .slice(
-              Math.floor(article?.full_text[locale].split(".").length / 3),
-              Math.floor((article?.full_text[locale].split(".").length * 2) / 3)
-            )
-            .map(
-              (chunk: string | number, index: number, array: string | any[]) =>
-                chunk + (index < array.length - 1 ? "." : "")
-            )
-            .join(".")}
-          <br /> <br />
-          {article?.full_text[locale]
-            ?.split(".")
-            .slice(
-              Math.floor((article?.full_text[locale].split(".").length * 2) / 3)
-            )
-            .map(
-              (chunk: string | number, index: number, array: string | any[]) =>
-                chunk + (index < array.length - 1 ? "." : "")
-            )
-            .join(".")}
-        </p>
+        <article className="prose prose-invert prose-lg max-w-none">
+          <div className="text-base sm:text-lg text-gray-300 leading-relaxed space-y-6">
+            {article?.full_text[locale]
+              ?.split(".")
+              .filter((chunk: string) => chunk.trim())
+              .map((chunk: string, index: number, array: string[]) => (
+                <p key={index}>
+                  {chunk.trim() + (index < array.length - 1 ? "." : "")}
+                </p>
+              ))}
+          </div>
+        </article>
       </div>
     </section>
   );
