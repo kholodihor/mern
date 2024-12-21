@@ -125,20 +125,15 @@
   "Filters": {
     "categories": {
       "all": "Wszystkie kategorie",
+      "brakes_service": "Serwis hamulców",
       "computer_diagnostics": "Diagnostyka komputerowa",
-      "suspension": "Naprawa zawieszenia",
-      "brake": "Naprawa hamulców",
-      "mechanical": "Serwis mechaniczny",
-      "electrical": "Serwis elektryczny",
-      "inspections": "Okresowy przegląd",
-      "engine": "Naprawa silnika",
-      "coding_programming": "Kodowanie i programowanie",
-      "body": "Naprawa karoserii",
-      "painting": "Naprawa lakiernicza",
-      "air_conditioning": "Serwis klimatyzacji",
-      "accessoires_assembly": "Montaż akcesoriów",
-      "accessoires": "Serwis akcesoriów",
-      "disc": "Naprawa tarcz i klocków",
+      "mechanical_electrical_service": "Serwis mechaniczny i elektryczny",
+      "inspections": "Przeglądy i serwis okresowy",
+      "engine_service": "Serwis silnika",
+      "coding": "Kodowanie i programowanie",
+      "painting": "Serwis lakierniczy",
+      "conditioning": "Serwis klimatyzacji",
+      "accessoires": "Serwis i montaż akcesoriów",
       "pricing": "Indywidualna wycena naprawy"
     }
   },

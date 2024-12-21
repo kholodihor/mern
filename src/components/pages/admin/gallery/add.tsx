@@ -64,7 +64,10 @@ const AddGallery = () => {
 
       const data = {
         car: values.car,
-        slug: values.car.toLowerCase().replace(/\s+/g, "-"),
+        slug: values.car.toLowerCase()
+          .replace(/[é]/g, "e")
+          .replace(/[''`]/g, "")
+          .replace(/\s+/g, "-"),
         categories: values.categories,
         images: urls,
         desc: {

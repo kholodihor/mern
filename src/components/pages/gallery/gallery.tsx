@@ -1,7 +1,6 @@
 "use client";
 
 import SectionTitle from "@/components/shared/section-title";
-import Spiral from "@/components/shared/spiral/Spiral";
 import CustomDropdown from "@/components/ui/select";
 import { CATEGORIES } from "@/constants/categories";
 import { useGallery } from "@/hooks/useGallery";
@@ -26,8 +25,8 @@ const Gallery = () => {
     return filters[0] === CATEGORIES.ALL
       ? true
       : item.categories.some((category: string) =>
-          filters.includes(CATEGORIES[category])
-        );
+        filters.includes(CATEGORIES[category])
+      );
   });
 
   const options = Object.values(CATEGORIES);
@@ -67,7 +66,11 @@ const Gallery = () => {
           </div>
         ) : (
           <div className="mt-8 sm:mt-12 flex justify-center min-h-[200px] items-center">
-            <Spiral />
+            <div className="max-w-7xl mx-auto">
+              <div className="flex items-center justify-center min-h-[400px]">
+                <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-white"></div>
+              </div>
+            </div>
           </div>
         )}
       </div>

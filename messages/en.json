@@ -7,7 +7,7 @@
     "kontakt": "Contact",
     "news": "Actual info",
     "motto": "Perfect service for perfect cars",
-    "button": "Leave a request for service 👉 ",
+    "button": "Leave a request for service ",
     "independent": "Independent BMW, Rolls-Royce and MINI service"
   },
   "About": {
@@ -125,21 +125,16 @@
   "Filters": {
     "categories": {
       "all": "All Categories",
+      "brakes_service": "Brake Service",
       "computer_diagnostics": "Computer Diagnostics",
-      "suspension": "Suspension repair",
-      "brake": "Brakes repair",
-      "mechanical": "Mechanical service",
-      "electrical": "Electrical service",
-      "inspections": "Periodic Service",
-      "engine": "Engine Repair",
-      "coding_programming": "Coding and Programming",
-      "body": "Body Repair",
-      "painting": "Paint Repair",
-      "air_conditioning": "Air Conditioning Service",
-      "accessoires_assembly": "Accessory Installation",
-      "accessoires": "Accessory Service",
-      "disc": "Disc and pad repair",
-      "pricing": "Individual repair cost estimate"
+      "mechanical_electrical_service": "Mechanical and Electrical Service",
+      "inspections": "Inspections and Periodic Service",
+      "engine_service": "Engine Service",
+      "coding": "Coding and Programming",
+      "painting": "Painting Service",
+      "conditioning": "Air Conditioning Service",
+      "accessoires": "Accessories Service and Installation",
+      "pricing": "Individual Repair Cost Assessment"
     }
   },
   "404": {
