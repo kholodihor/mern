@@ -8,6 +8,7 @@ import { Link } from "@/i18n/routing";
 import { db } from "@/lib/firebase";
 import { IGalleryItem } from "@/types";
 import { collection, onSnapshot, query, where } from "firebase/firestore";
+import parse from 'html-react-parser';
 import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
 import { useEffect, useState } from "react";
@@ -125,12 +126,9 @@ const CarPage = ({ slug }: { slug: string }) => {
             ))}
           </div>
 
-          <div
-            className="text-base sm:text-lg text-gray-300 leading-relaxed"
-            dangerouslySetInnerHTML={{
-              __html: carItem.fullDesc[locale] || 'Add More Details',
-            }}
-          />
+          <div className="text-base sm:text-lg text-gray-300 leading-relaxed">
+            {parse(carItem.fullDesc[locale] || 'Add More Details')}
+          </div>
 
           {carItem.youtubeUrl && <a href={carItem.youtubeUrl} target="_blank" rel="noopener noreferrer" className="text-blue-400 mt-8 inline-block underline hover:text-blue-700
            transition-colors">

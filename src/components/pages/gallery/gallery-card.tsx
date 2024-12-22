@@ -51,6 +51,8 @@ const GalleryCard = ({ data }: { data: IGalleryItem }) => {
           )}
         </div>
 
+        <div className="flex-1"></div>
+
         <Link
           href={`/gallery/${data.slug}`}
           className="inline-flex items-center justify-end text-white hover:text-gray-300 transition-colors group"
