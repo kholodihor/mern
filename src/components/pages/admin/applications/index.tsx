@@ -1,41 +1,17 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { collection, deleteDoc, doc, onSnapshot } from "firebase/firestore";
-import { db } from "@/lib/firebase";
+import { useEffect } from "react";
 import { IApplicationResponse } from "@/types";
 import ApplicationItem from "./application-item";
+import { useApplications } from "@/hooks/useApplications";
 
 const Applications = () => {
-  const [applications, setApplications] = useState<any[]>([]);
+  const { applications, fetchApplications, deleteApplication } = useApplications();
 
   useEffect(() => {
-    const applicationsRef = collection(db, "applications");
-    const unsubscribe = onSnapshot(applicationsRef, (snapshot) => {
-      if (!snapshot.empty) {
-        const applicationsData: any[] = [];
-        snapshot.forEach((doc) => {
-          applicationsData.push({ ...doc.data(), id: doc.id });
-        });
-        setApplications(applicationsData);
-      }
-    });
-
+    const unsubscribe = fetchApplications();
     return () => unsubscribe();
   }, []);
-
-  const handleDelete = async (id: string) => {
-    if (confirm("Ви впевнені, що хочете видалити цю заявку?")) {
-      try {
-        const itemRef = doc(db, "applications", id);
-        await deleteDoc(itemRef);
-        alert("Заявку успішно видалено!");
-        window.location.reload();
-      } catch (error) {
-        console.error("Error deleting item:", error);
-      }
-    }
-  };
 
   return (
     <section className="relative px-[24px]">
@@ -47,7 +23,7 @@ const Applications = () => {
             <ApplicationItem
               key={item.id}
               item={item}
-              onDelete={handleDelete}
+              onDelete={deleteApplication}
             />
           ))}
       </ul>

@@ -4,14 +4,11 @@ import ChevronLeft from "@/components/icons/chevron-left";
 import SectionTitle from "@/components/shared/section-title";
 import { CATEGORIES } from "@/constants/categories";
 import { formatDate } from "@/helpers/formatDate";
+import { useCar } from "@/hooks/useCar";
 import { Link } from "@/i18n/routing";
-import { db } from "@/lib/firebase";
-import { IGalleryItem } from "@/types";
-import { collection, onSnapshot, query, where } from "firebase/firestore";
 import parse from 'html-react-parser';
 import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
-import { useEffect, useState } from "react";
 import Slider from "../home/shared/slider/slider";
 
 const CarImage = ({ data }: { data: string }) => {
@@ -31,28 +28,31 @@ const CarImage = ({ data }: { data: string }) => {
 const CarPage = ({ slug }: { slug: string }) => {
   const t = useTranslations();
   const locale = useLocale();
-  const [carItem, setCarItem] = useState<IGalleryItem | null>(null);
+  const { carItem, isLoading, isError } = useCar(slug);
 
-  useEffect(() => {
-    if (!slug) return;
+  if (isError) {
+    return (
+      <section className="min-h-screen w-full py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 mt-[15vh] md:mt-[20vh]">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex items-center justify-center min-h-[400px]">
+            <p className="text-red-500">Error loading car data</p>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
-    const ref = collection(db, "gallery");
-    const slugQuery = query(ref, where("slug", "==", slug));
-
-    const unsubscribe = onSnapshot(slugQuery, (snapshot) => {
-      if (!snapshot.empty) {
-        const sortedData = snapshot.docs.map((doc) => {
-          const data = doc.data() as Omit<IGalleryItem, "id">;
-          return { ...data, id: doc.id };
-        });
-        setCarItem(sortedData[0]);
-      } else {
-        setCarItem(null);
-      }
-    });
-
-    return () => unsubscribe();
-  }, [slug]);
+  if (isLoading) {
+    return (
+      <section className="min-h-screen w-full py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 mt-[15vh] md:mt-[20vh]">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex items-center justify-center min-h-[400px]">
+            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-white"></div>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   if (!carItem) {
     return (

@@ -32,6 +32,7 @@
     "react-rating": "^2.0.5",
     "react-select": "^5.8.3",
     "swiper": "^11.1.15",
+    "swr": "^2.2.5",
     "zod": "^3.23.8",
     "zustand": "^5.0.1"
   },

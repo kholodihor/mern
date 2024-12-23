@@ -2,32 +2,21 @@
 
 import ChevronLeft from "@/components/icons/chevron-left";
 import SectionTitle from "@/components/shared/section-title";
+import { useNews } from "@/hooks/useNews";
 import { Link } from "@/i18n/routing";
-import { db } from "@/lib/firebase";
-import { collection, onSnapshot } from "firebase/firestore";
 import { useLocale } from "next-intl";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 const Article = ({ id }: { id: string }) => {
   const locale = useLocale();
-  const [articles, setArticles] = useState<any | null>(null);
+  const { articles, fetchArticles } = useNews();
 
   useEffect(() => {
-    const ref = collection(db, "news");
-    const unsubscribe = onSnapshot(ref, (snapshot) => {
-      if (!snapshot.empty) {
-        const applicationsData: any[] = [];
-        snapshot.forEach((doc) => {
-          applicationsData.push({ ...doc.data(), id: doc.id });
-        });
-        setArticles(applicationsData);
-      }
-    });
-
+    const unsubscribe = fetchArticles();
     return () => unsubscribe();
   }, []);
 
-  const article = articles?.find((a: any) => a.id === id);
+  const article = articles?.find((a) => a.id === id);
 
   return (
     <section
