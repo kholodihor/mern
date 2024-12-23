@@ -1,25 +1,25 @@
 "use client";
 
-import Multiselect from "@/components/ui/multi-select";
-import TextInput from "@/components/ui/text-input";
-import TextArea from "@/components/ui/text-area";
-import { CATEGORIES } from "@/constants/categories";
-import { useRouter } from "@/i18n/routing";
-import { db } from "@/lib/firebase";
-import '@/styles/quill.css';
-import { getImageUrlsFromGroup } from "@/utils/imageFetcher";
-import { translateText } from "@/utils/translator";
+import dynamic from "next/dynamic";
+import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Widget } from "@uploadcare/react-widget";
 import { addDoc, collection } from "firebase/firestore";
 import { useTranslations } from "next-intl";
-import dynamic from "next/dynamic";
-import { useState } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
-import 'react-quill-new/dist/quill.snow.css';
+import "react-quill-new/dist/quill.snow.css";
+import { CATEGORIES } from "@/constants/categories";
+import { useRouter } from "@/i18n/routing";
+import { db } from "@/lib/firebase";
+import "@/styles/quill.css";
+import { getImageUrlsFromGroup } from "@/utils/imageFetcher";
+import { translateText } from "@/utils/translator";
+import Multiselect from "@/components/ui/multi-select";
+import TextArea from "@/components/ui/text-area";
+import TextInput from "@/components/ui/text-input";
 import { TGalleryScheme, gallerySchema } from "./schema";
 
-const ReactQuill = dynamic(() => import('react-quill-new'), {
+const ReactQuill = dynamic(() => import("react-quill-new"), {
   ssr: false,
   loading: () => (
     <div className="h-[200px] w-full animate-pulse rounded-md bg-slate-100" />
@@ -38,7 +38,7 @@ const AddGallery = () => {
     }))
     .filter((option) => option.value !== "ALL");
 
-  console.log(options)
+  console.log(options);
 
   const {
     handleSubmit,
@@ -75,7 +75,8 @@ const AddGallery = () => {
 
       const data = {
         car: values.car,
-        slug: values.car.toLowerCase()
+        slug: values.car
+          .toLowerCase()
           .replace(/[é]/g, "e")
           .replace(/[''`]/g, "")
           .replace(/\s+/g, "-"),
@@ -204,14 +205,14 @@ const AddGallery = () => {
                 {...field}
                 theme="snow"
                 placeholder="Повний опис польскою мовою"
-                className={`${errors.fullDesc ? 'quill-error' : ''}`}
+                className={`${errors.fullDesc ? "quill-error" : ""}`}
                 modules={{
                   toolbar: [
-                    [{ 'header': [1, 2, 3, false] }],
-                    ['bold', 'italic', 'underline'],
-                    [{ 'list': 'ordered' }, { 'list': 'bullet' }],
-                    ['clean']
-                  ]
+                    [{ header: [1, 2, 3, false] }],
+                    ["bold", "italic", "underline"],
+                    [{ list: "ordered" }, { list: "bullet" }],
+                    ["clean"],
+                  ],
                 }}
               />
               {errors.fullDesc && (

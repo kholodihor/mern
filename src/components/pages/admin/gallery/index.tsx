@@ -1,17 +1,12 @@
 "use client";
 
+import Image from "next/image";
+import { FaRegTrashAlt } from "react-icons/fa";
 import { useGallery } from "@/hooks/useGallery";
 import { Link } from "@/i18n/routing";
-import Image from "next/image";
-import { useEffect } from "react";
-import { FaRegTrashAlt } from "react-icons/fa";
 
 const Gallery = () => {
-  const { galleryList, fetchGalleryAsList, deleteGalleryItem } = useGallery();
-
-  useEffect(() => {
-    fetchGalleryAsList();
-  }, []);
+  const { galleryList, deleteGalleryItem } = useGallery();
 
   return (
     <section className="relative px-[24px]">

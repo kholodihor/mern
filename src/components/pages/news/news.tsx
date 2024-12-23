@@ -31,17 +31,17 @@ const NewsPage = () => {
   return (
     <section
       id="news"
-      className="min-h-screen w-full py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 mt-[15vh] md:mt-[20vh]"
+      className="mt-[15vh] min-h-screen w-full px-4 py-12 sm:px-6 sm:py-16 md:mt-[20vh] lg:px-8 lg:py-20"
       aria-labelledby="news-title"
     >
-      <div className="max-w-7xl mx-auto">
+      <div className="mx-auto max-w-7xl">
         <SectionTitle id="news-title" title={t("title")} />
-        
-        <div className="mt-8 sm:mt-12 lg:mt-16 space-y-12 sm:space-y-16">
+
+        <div className="mt-8 space-y-12 sm:mt-12 sm:space-y-16 lg:mt-16">
           {news.map((item, index) => (
             <article
               key={index}
-              className="flex flex-col md:flex-row gap-6 sm:gap-8 lg:gap-12"
+              className="flex flex-col gap-6 sm:gap-8 md:flex-row lg:gap-12"
             >
               <div className="w-full md:w-1/2">
                 <div className="relative aspect-[4/3] overflow-hidden rounded-xl">
@@ -55,15 +55,15 @@ const NewsPage = () => {
                 </div>
               </div>
 
-              <div className="w-full md:w-1/2 flex flex-col justify-center space-y-4">
-                <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white">
+              <div className="flex w-full flex-col justify-center space-y-4 md:w-1/2">
+                <h3 className="text-2xl font-bold text-white sm:text-3xl lg:text-4xl">
                   {item.title[locale]}
                 </h3>
-                <p className="text-base sm:text-lg text-gray-300">
+                <p className="text-base text-gray-300 sm:text-lg">
                   {item.short_text[locale]}
                 </p>
                 <Link
-                  className="inline-block text-white hover:text-gray-300 transition-colors mt-2 text-lg font-medium hover:underline"
+                  className="mt-2 inline-block text-lg font-medium text-white transition-colors hover:text-gray-300 hover:underline"
                   href={`/news/${item.id}`}
                 >
                   {t("read_more")} →

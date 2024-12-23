@@ -1,11 +1,11 @@
 "use client";
 
-import SectionTitle from "@/components/shared/section-title";
-import CustomDropdown from "@/components/ui/select";
+import { useTranslations } from "next-intl";
 import { CATEGORIES } from "@/constants/categories";
 import { useGallery } from "@/hooks/useGallery";
 import { useFilters } from "@/stores/useFilters";
-import { useTranslations } from "next-intl";
+import SectionTitle from "@/components/shared/section-title";
+import CustomDropdown from "@/components/ui/select";
 import GalleryCard from "./gallery-card";
 
 const Gallery = () => {
@@ -13,21 +13,22 @@ const Gallery = () => {
   const { filters } = useFilters();
   const { galleryList, isLoading, isError } = useGallery();
 
-  const filteredData = galleryList?.filter((item) => {
-    return filters[0] === CATEGORIES.ALL
-      ? true
-      : item.categories.some((category: string) =>
-        filters.includes(CATEGORIES[category])
-      );
-  }) || [];
+  const filteredData =
+    galleryList?.filter((item) => {
+      return filters[0] === CATEGORIES.ALL
+        ? true
+        : item.categories.some((category: string) =>
+            filters.includes(CATEGORIES[category])
+          );
+    }) || [];
 
   const options = Object.values(CATEGORIES);
 
   if (isError) {
     return (
-      <section className="min-h-screen w-full py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 mt-[15vh] md:mt-[20vh]">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex items-center justify-center min-h-[400px]">
+      <section className="mt-[15vh] min-h-screen w-full px-4 py-12 sm:px-6 sm:py-16 md:mt-[20vh] lg:px-8 lg:py-20">
+        <div className="mx-auto max-w-7xl">
+          <div className="flex min-h-[400px] items-center justify-center">
             <p className="text-red-500">Error loading gallery data</p>
           </div>
         </div>
@@ -38,29 +39,29 @@ const Gallery = () => {
   return (
     <section
       id="gallery"
-      className="min-h-screen w-full py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 mt-[15vh] md:mt-[20vh]"
+      className="mt-[15vh] min-h-screen w-full px-4 py-12 sm:px-6 sm:py-16 md:mt-[20vh] lg:px-8 lg:py-20"
       aria-labelledby="gallery-title"
     >
-      <div className="max-w-[1920px] mx-auto">
-        <div className="max-w-7xl mx-auto">
+      <div className="mx-auto max-w-[1920px]">
+        <div className="mx-auto max-w-7xl">
           <SectionTitle id="gallery-title" title={t("title")} />
 
-          <div className="mt-8 sm:mt-12 max-w-xs">
+          <div className="mt-8 max-w-xs sm:mt-12">
             <CustomDropdown options={options} />
           </div>
         </div>
 
         {isLoading ? (
-          <div className="mt-8 sm:mt-12 flex justify-center min-h-[200px] items-center">
-            <div className="max-w-7xl mx-auto">
-              <div className="flex items-center justify-center min-h-[400px]">
-                <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-white"></div>
+          <div className="mt-8 flex min-h-[200px] items-center justify-center sm:mt-12">
+            <div className="mx-auto max-w-7xl">
+              <div className="flex min-h-[400px] items-center justify-center">
+                <div className="h-12 w-12 animate-spin rounded-full border-b-2 border-t-2 border-white"></div>
               </div>
             </div>
           </div>
         ) : (
           <div className="mt-8 sm:mt-12">
-            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-6 sm:gap-8 lg:gap-10">
+            <div className="grid grid-cols-1 gap-6 sm:gap-8 md:grid-cols-2 lg:gap-10 xl:grid-cols-3 2xl:grid-cols-4">
               {filteredData.length > 0 ? (
                 filteredData.map((item, index) => (
                   <div key={index} className="flex justify-center">
@@ -68,8 +69,8 @@ const Gallery = () => {
                   </div>
                 ))
               ) : (
-                <div className="col-span-full flex justify-center items-center min-h-[200px]">
-                  <p className="text-lg sm:text-xl text-gray-400">
+                <div className="col-span-full flex min-h-[200px] items-center justify-center">
+                  <p className="text-lg text-gray-400 sm:text-xl">
                     {t("not_found")}
                   </p>
                 </div>

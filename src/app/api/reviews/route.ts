@@ -1,6 +1,13 @@
-import { db } from "@/lib/firebase";
-import { addDoc, collection, getDocs, limit, orderBy, query } from "firebase/firestore";
 import { NextResponse } from "next/server";
+import {
+  addDoc,
+  collection,
+  getDocs,
+  limit,
+  orderBy,
+  query,
+} from "firebase/firestore";
+import { db } from "@/lib/firebase";
 
 // Cache duration in milliseconds (24 hours)
 const CACHE_DURATION = 24 * 60 * 60 * 1000;
@@ -20,7 +27,7 @@ export async function GET() {
       if (Date.now() - cacheTime.getTime() < CACHE_DURATION) {
         return NextResponse.json({
           reviews: cachedData.reviews,
-          totalReviews: cachedData.totalReviews
+          totalReviews: cachedData.totalReviews,
         });
       }
     }
@@ -28,10 +35,10 @@ export async function GET() {
     // If no cache or cache is old, fetch from Google Places API
     const response = await fetch(
       `https://maps.googleapis.com/maps/api/place/details/json?` +
-      `place_id=${process.env.GOOGLE_PLACE_ID}&` +
-      `fields=reviews,rating,user_ratings_total&` +
-      `language=pl&` +
-      `key=${process.env.GOOGLE_PLACES_API_KEY}`,
+        `place_id=${process.env.GOOGLE_PLACE_ID}&` +
+        `fields=reviews,rating,user_ratings_total&` +
+        `language=pl&` +
+        `key=${process.env.GOOGLE_PLACES_API_KEY}`,
       {
         method: "GET",
         headers: {
@@ -57,7 +64,7 @@ export async function GET() {
         name: review.author_name,
         rating: review.rating,
         review: review.text,
-        created_at: new Date(review.time * 1000).toISOString()
+        created_at: new Date(review.time * 1000).toISOString(),
       }));
 
     const totalReviews = data.result.user_ratings_total;
@@ -66,12 +73,12 @@ export async function GET() {
     await addDoc(reviewsRef, {
       reviews,
       totalReviews,
-      fetchedAt: new Date()
+      fetchedAt: new Date(),
     });
 
     return NextResponse.json({
       reviews,
-      totalReviews
+      totalReviews,
     });
   } catch (error) {
     console.error("Failed to fetch reviews:", error);

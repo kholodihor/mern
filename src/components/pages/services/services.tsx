@@ -11,16 +11,17 @@ const ServicesPage = () => {
   return (
     <section
       id="services"
-      className="min-h-screen w-full py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 mt-[15vh] md:mt-[20vh]"
+      className="mt-[15vh] min-h-screen w-full px-4 py-12 sm:px-6 sm:py-16 md:mt-[20vh] lg:px-8 lg:py-20"
       aria-labelledby="services-title"
     >
-      <div className="max-w-7xl mx-auto">
+      <div className="mx-auto max-w-7xl">
         <SectionTitle id="services-title" title={t("title")} />
 
-        <div className="mt-8 sm:mt-12 lg:mt-16 flex flex-wrap justify-center gap-4 sm:gap-6 lg:gap-8">
-          {services.length > 0 && services.map((item, index) => (
-            <ServicesCard key={index} data={item} />
-          ))}
+        <div className="mt-8 flex flex-wrap justify-center gap-4 sm:mt-12 sm:gap-6 lg:mt-16 lg:gap-8">
+          {services.length > 0 &&
+            services.map((item, index) => (
+              <ServicesCard key={index} data={item} />
+            ))}
         </div>
       </div>
     </section>

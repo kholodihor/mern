@@ -8,13 +8,13 @@ const Contacts = () => {
   return (
     <section
       id="contacts"
-      className="min-h-screen w-full py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 mt-[15vh] md:mt-[20vh]"
+      className="mt-[15vh] min-h-screen w-full px-4 py-12 sm:px-6 sm:py-16 md:mt-[20vh] lg:px-8 lg:py-20"
       aria-labelledby="contacts-title"
     >
-      <div className="max-w-7xl mx-auto">
+      <div className="mx-auto max-w-7xl">
         <SectionTitle id="services-title" title={t("title_2")} />
-        
-        <div className="mt-8 sm:mt-12 lg:mt-16 space-y-12 sm:space-y-16">
+
+        <div className="mt-8 space-y-12 sm:mt-12 sm:space-y-16 lg:mt-16">
           <ApplicationForm />
           <ContactsLocation />
         </div>

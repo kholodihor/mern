@@ -1,5 +1,5 @@
-import useSWR from "swr";
 import { collection, getDocs, query, where } from "firebase/firestore";
+import useSWR from "swr";
 import { db } from "@/lib/firebase";
 import { IGalleryItem } from "@/types";
 
@@ -14,7 +14,7 @@ const fetchCarBySlug = async (slug: string) => {
     const data = snapshot.docs[0].data() as Omit<IGalleryItem, "id">;
     return { ...data, id: snapshot.docs[0].id };
   }
-  
+
   return null;
 };
 

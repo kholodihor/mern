@@ -11,5 +11,5 @@ export const CATEGORIES: {
   PAINTING: "painting",
   AIR_CONDITIONING_SERVICE: "conditioning",
   ACCESSOIRES_SERVICE: "accessoires",
-  INDIVIDUAL_PRICING: "pricing"
+  INDIVIDUAL_PRICING: "pricing",
 };

@@ -1,15 +1,15 @@
 "use client";
 
-import SectionTitle from "@/components/shared/section-title";
-import { services } from "@/data/services";
 import { useTranslations } from "next-intl";
+import { services } from "@/data/services";
+import SectionTitle from "@/components/shared/section-title";
 import Slider from "../shared/slider/slider";
 import ServicesCard from "./services-card";
 
 const Services = () => {
   const t = useTranslations("Services");
   return (
-    <section className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8">
+    <section className="px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
       <SectionTitle id="services-title" title={t("title")} />
       <Slider
         data={services}

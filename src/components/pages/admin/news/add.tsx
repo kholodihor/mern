@@ -1,16 +1,16 @@
-'use client'
+"use client";
 
-import TextArea from "@/components/ui/text-area";
-import TextInput from "@/components/ui/text-input";
-import { useRouter } from "@/i18n/routing";
-import { db } from "@/lib/firebase";
-import { translateText } from "@/utils/translator";
+import { useEffect, useRef, useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Widget } from "@uploadcare/react-widget";
 import { addDoc, collection } from "firebase/firestore";
-import { useEffect, useRef, useState } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
-import { newsSchema, TNewsScheme } from "./schema";
+import { useRouter } from "@/i18n/routing";
+import { db } from "@/lib/firebase";
+import { translateText } from "@/utils/translator";
+import TextArea from "@/components/ui/text-area";
+import TextInput from "@/components/ui/text-input";
+import { TNewsScheme, newsSchema } from "./schema";
 
 const AddNews = () => {
   const router = useRouter();
@@ -56,7 +56,9 @@ const AddNews = () => {
       const translatedDescEN = await translateText(values.short_text, "en");
       const translatedFullDescEN = await translateText(values.full_text, "en");
 
-      const imageUrl = values.image ? `${values.image.replace(/\.\w+$/, ".webp")}` : '';
+      const imageUrl = values.image
+        ? `${values.image.replace(/\.\w+$/, ".webp")}`
+        : "";
 
       const data = {
         title: {
@@ -94,7 +96,9 @@ const AddNews = () => {
 
   return (
     <div className="p-[24px]">
-      <h1 className="mb-[24px] text-3xl font-bold">Додати статтю в актуальності</h1>
+      <h1 className="mb-[24px] text-3xl font-bold">
+        Додати статтю в актуальності
+      </h1>
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="mt-[2rem] flex w-full flex-col items-start justify-start gap-4 space-y-2 md:mt-0"

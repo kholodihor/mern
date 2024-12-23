@@ -1,11 +1,11 @@
 "use client";
 
-import { Link } from "@/i18n/routing";
-import { db } from "@/lib/firebase";
-import { collection, onSnapshot } from "firebase/firestore";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { collection, onSnapshot } from "firebase/firestore";
 import { FaRegTrashAlt } from "react-icons/fa";
+import { Link } from "@/i18n/routing";
+import { db } from "@/lib/firebase";
 
 const News = () => {
   const [news, setNews] = useState<any[]>([]);
@@ -46,11 +46,10 @@ const News = () => {
                 alt={item.title.ua}
                 onError={(e) => {
                   const img = e.target as HTMLImageElement;
-                  img.src = '/placeholder-image.jpg'; // Add a placeholder image
+                  img.src = "/placeholder-image.jpg"; // Add a placeholder image
                 }}
               />
-              <div className="absolute bottom-0 left-0 w-full whitespace-nowrap 
-              bg-white/30 h-1/5 p-2 text-center text-sm flex items-center backdrop-blur-md truncate">
+              <div className="absolute bottom-0 left-0 flex h-1/5 w-full items-center truncate whitespace-nowrap bg-white/30 p-2 text-center text-sm backdrop-blur-md">
                 {item.title.ua}
               </div>
               <button

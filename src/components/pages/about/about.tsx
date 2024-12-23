@@ -1,35 +1,35 @@
-import SectionTitle from "@/components/shared/section-title";
-import { useTranslations } from "next-intl";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
+import SectionTitle from "@/components/shared/section-title";
 
 const About = () => {
   const t = useTranslations("About");
   return (
     <section
       id="about-us"
-      className="min-h-screen w-full py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 mt-[15vh] md:mt-[20vh]"
+      className="mt-[15vh] min-h-screen w-full px-4 py-12 sm:px-6 sm:py-16 md:mt-[20vh] lg:px-8 lg:py-20"
       aria-labelledby="about-us-title"
     >
-      <div className="max-w-7xl mx-auto">
+      <div className="mx-auto max-w-7xl">
         <SectionTitle id="about-us-title" title={t("title")} />
 
-        <div className="mt-8 sm:mt-12 lg:mt-16 flex flex-col md:flex-row gap-8 md:gap-12 lg:gap-16">
-          <div className="w-full md:w-1/2 space-y-6">
-            <p className="text-base sm:text-lg lg:text-xl text-gray-200 leading-relaxed">
+        <div className="mt-8 flex flex-col gap-8 sm:mt-12 md:flex-row md:gap-12 lg:mt-16 lg:gap-16">
+          <div className="w-full space-y-6 md:w-1/2">
+            <p className="text-base leading-relaxed text-gray-200 sm:text-lg lg:text-xl">
               {t("content")}
             </p>
-            <h5 className="text-lg sm:text-xl lg:text-2xl font-semibold text-white">
+            <h5 className="text-lg font-semibold text-white sm:text-xl lg:text-2xl">
               {t("call")}
             </h5>
           </div>
 
-          <div className="w-full md:w-1/2 flex justify-center items-center">
-            <div className="relative w-full max-w-[500px] aspect-square">
+          <div className="flex w-full items-center justify-center md:w-1/2">
+            <div className="relative aspect-square w-full max-w-[500px]">
               <Image
                 src="/about/about.png"
                 alt="Car image"
                 fill
-                className="object-cover rounded-lg"
+                className="rounded-lg object-cover"
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               />
             </div>

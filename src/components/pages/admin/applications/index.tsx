@@ -1,12 +1,13 @@
 "use client";
 
 import { useEffect } from "react";
+import { useApplications } from "@/hooks/useApplications";
 import { IApplicationResponse } from "@/types";
 import ApplicationItem from "./application-item";
-import { useApplications } from "@/hooks/useApplications";
 
 const Applications = () => {
-  const { applications, fetchApplications, deleteApplication } = useApplications();
+  const { applications, fetchApplications, deleteApplication } =
+    useApplications();
 
   useEffect(() => {
     const unsubscribe = fetchApplications();

@@ -12,7 +12,10 @@ export const useApplications = () => {
       if (!snapshot.empty) {
         const applicationsData: IApplicationResponse[] = [];
         snapshot.forEach((doc) => {
-          applicationsData.push({ ...doc.data(), id: doc.id } as IApplicationResponse);
+          applicationsData.push({
+            ...doc.data(),
+            id: doc.id,
+          } as IApplicationResponse);
         });
         setApplications(applicationsData);
       }

@@ -17,7 +17,7 @@ const SuccessModal = ({ handleClose, isModalOpen }: ModalProps) => {
 
   const ModalLayout = () => (
     <div className="fixed inset-0 z-[1000] flex items-center justify-center bg-black/50">
-      <div className="scrollbar-none 5xl:max-w-[964px] relative z-[9999] flex h-[40vh] w-[80%] flex-col items-center justify-center gap-[1rem] overflow-hidden overflow-y-auto rounded-lg border-2 border-white bg-black p-4 text-white sm:w-[90.5%] md:max-h-[95vh] md:max-w-[632px] xl:h-[60vh] xl:w-[45%] xl:max-w-[900px]">
+      <div className="5xl:max-w-[964px] relative z-[9999] flex h-[40vh] w-[80%] flex-col items-center justify-center gap-[1rem] overflow-hidden overflow-y-auto rounded-lg border-2 border-white bg-black p-4 text-white scrollbar-none sm:w-[90.5%] md:max-h-[95vh] md:max-w-[632px] xl:h-[60vh] xl:w-[45%] xl:max-w-[900px]">
         <div
           onClick={handleClose}
           className="absolute right-[1rem] top-[1rem] z-[999] h-[1.5rem] w-[1.5rem] cursor-pointer"
