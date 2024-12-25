@@ -1,9 +1,9 @@
 "use client";
 
-import Image from "next/image";
-import { FaRegTrashAlt } from "react-icons/fa";
 import { useGallery } from "@/hooks/useGallery";
 import { Link } from "@/i18n/routing";
+import Image from "next/image";
+import { FaRegTrashAlt } from "react-icons/fa";
 
 const Gallery = () => {
   const { galleryList, deleteGalleryItem } = useGallery();
@@ -28,7 +28,8 @@ const Gallery = () => {
                 height={208}
                 alt={item.car}
               />
-              <div className="absolute bottom-0 left-0 w-full whitespace-nowrap bg-white/30 p-2 text-center text-sm backdrop-blur-md">
+              <div className="absolute bottom-0 left-0 w-full whitespace-nowrap
+               bg-white/30 p-2 text-center text-sm backdrop-blur-md truncate">
                 {item.car}
               </div>
               <button

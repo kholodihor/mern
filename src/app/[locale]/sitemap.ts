@@ -1,8 +1,8 @@
-import { MetadataRoute } from "next";
-import { collection, getDocs } from "firebase/firestore";
 import { db } from "@/lib/firebase";
+import { collection, getDocs } from "firebase/firestore";
+import { MetadataRoute } from "next";
 
-const baseUrl = "https://mernserwis.pl";
+const baseUrl = "https://mernserwis.com";
 
 // List of static routes and their paths
 const staticRoutes = [

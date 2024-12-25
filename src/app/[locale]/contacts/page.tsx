@@ -1,8 +1,8 @@
-import { Metadata } from "next";
+import Contacts from "@/components/pages/contacts/contacts";
 import { baseUrl, contactInfo } from "@/constants";
 import { Locale } from "@/i18n/routing";
 import { PageMetadata } from "@/types";
-import Contacts from "@/components/pages/contacts/contacts";
+import { Metadata } from "next";
 
 const metadata: PageMetadata = {
   pl: {
@@ -10,7 +10,7 @@ const metadata: PageMetadata = {
     description: `MERN Serwis | ${baseUrl} | ${contactInfo} | Nasze Kontakty`,
   },
   en: {
-    title: "Contacts | MERN Car Service",
+    title: "Contacts | MERN Service",
     description: `MERN Serwis | ${baseUrl} | ${contactInfo} | Our Contacts`,
   },
   ua: {

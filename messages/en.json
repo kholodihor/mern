@@ -124,17 +124,17 @@
   },
   "Filters": {
     "categories": {
-      "all": "All Categories",
-      "brakes_service": "Brake Service",
-      "computer_diagnostics": "Computer Diagnostics",
-      "mechanical_electrical_service": "Mechanical and Electrical Service",
-      "inspections": "Inspections and Periodic Service",
-      "engine_service": "Engine Service",
-      "coding": "Coding and Programming",
-      "painting": "Painting Service",
-      "conditioning": "Air Conditioning Service",
-      "accessoires": "Accessories Service and Installation",
-      "pricing": "Individual Repair Cost Assessment"
+      "all": "All categories",
+      "brakes_service": "Suspension and braking system repairs",
+      "computer_diagnostics": "Computer diagnostics",
+      "mechanical_electrical_service": "Mechanical and electrical service",
+      "inspections": "Inspections and periodic servicing",
+      "engine_service": "Engine repairs",
+      "coding": "Coding and programming",
+      "painting": "Body and paint repairs",
+      "conditioning": "Air conditioning service",
+      "accessoires": "Accessory installation and service",
+      "pricing": "Individual repair estimate based on VIN"
     }
   },
   "404": {

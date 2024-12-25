@@ -1,9 +1,8 @@
-import { Metadata } from "next";
-import React from "react";
+import CarPage from "@/components/pages/gallery/car-page";
 import { baseUrl } from "@/constants";
 import { Locale } from "@/i18n/routing";
 import { PageMetadata } from "@/types";
-import CarPage from "@/components/pages/gallery/car-page";
+import { Metadata } from "next";
 
 const metadata: PageMetadata = {
   pl: {
@@ -11,7 +10,7 @@ const metadata: PageMetadata = {
     description: `MERN Serwis | ${baseUrl} Galeria `,
   },
   en: {
-    title: "Gallery | MERN Car Service",
+    title: "Gallery | MERN Service",
     description: `MERN Serwis | ${baseUrl} Gallery `,
   },
   ua: {

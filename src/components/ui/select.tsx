@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useState } from "react";
-import { useTranslations } from "next-intl";
 import { useFilters } from "@/stores/useFilters";
+import { useTranslations } from "next-intl";
+import React, { useState } from "react";
 
 interface CustomDropdownProps {
   options: string[];
@@ -21,26 +21,31 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({ options }) => {
   };
 
   return (
-    <div className="relative w-full sm:w-72 xl:w-[360px] 2xl:w-72">
+    <div className="relative w-full">
       <div
-        className="flex cursor-pointer items-center justify-between rounded border border-white bg-black px-4 py-2 text-white"
+        className="flex cursor-pointer items-center justify-between rounded-lg border
+         border-white/20 bg-black/80 backdrop-blur-sm px-4 py-3 text-white text-sm
+         hover:border-white/40 transition-all duration-200 ease-in-out"
         onClick={toggleDropdown}
       >
-        {t(`categories.${filters[0]}`)}
+        <span className="font-medium">{t(`categories.${filters[0]}`)}</span>
         <span
-          className={`transition-transform duration-300 ${
-            isOpen ? "rotate-180" : ""
-          }`}
+          className={`ml-2 text-xs transition-transform duration-300 ease-in-out ${isOpen ? "rotate-180" : ""
+            }`}
         >
           ▼
         </span>
       </div>
       {isOpen && (
-        <ul className="absolute left-0 right-0 z-10 mt-1 max-h-60 overflow-y-auto rounded border border-white bg-black">
+        <ul className="absolute left-0 right-0 z-10 mt-2 max-h-60 overflow-y-auto rounded-lg 
+          border border-white/20 bg-black/90 backdrop-blur-sm shadow-lg 
+          transition-all duration-200 ease-in-out scrollbar-thin scrollbar-track-transparent 
+          scrollbar-thumb-white/20 hover:scrollbar-thumb-white/40">
           {options.map((option, index) => (
             <li
               key={index}
-              className="cursor-pointer px-4 py-2 hover:bg-white hover:text-black"
+              className={`cursor-pointer px-4 py-3 text-sm transition-colors duration-200 
+                hover:bg-white/10 ${filters[0] === option ? 'bg-white/5' : ''}`}
               onClick={() => handleOptionClick(option)}
             >
               {t(`categories.${option}`)}

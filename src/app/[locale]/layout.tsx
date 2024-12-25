@@ -1,15 +1,15 @@
-import type { Metadata } from "next";
-import { Open_Sans } from "next/font/google";
-import { notFound } from "next/navigation";
-import { NextIntlClientProvider } from "next-intl";
-import { getMessages } from "next-intl/server";
-import { Locale, routing } from "@/i18n/routing";
-import { PageProps } from "@/types";
 import CookieBanner from "@/components/shared/cookie-banner";
 import Footer from "@/components/shared/footer";
 import GoogleAnalytics from "@/components/shared/google-analytics";
 import Header from "@/components/shared/header";
 import SubHeader from "@/components/shared/sub-header";
+import { Locale, routing } from "@/i18n/routing";
+import { PageProps } from "@/types";
+import type { Metadata } from "next";
+import { NextIntlClientProvider } from "next-intl";
+import { getMessages } from "next-intl/server";
+import { Open_Sans } from "next/font/google";
+import { notFound } from "next/navigation";
 import "../globals.css";
 
 const open_sans = Open_Sans({
@@ -23,14 +23,14 @@ export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
   const { locale } = await params;
-  const baseUrl = new URL("https://mernserwis.pl");
+  const baseUrl = new URL("https://mernserwis.com");
   const contactInfo =
     "+48 509 158 159 | Przyszłość 2A, 05-126 Stanisławów Pierwszy";
 
   const titles = {
     ua: "Автосервіс MERN",
-    en: "MERN Car Service",
-    pl: "MERN Serwis Samochodowy",
+    en: "MERN Service",
+    pl: "MERN Serwis",
   };
 
   const descriptions = {
@@ -46,7 +46,7 @@ export async function generateMetadata({
     metadataBase: baseUrl,
     title: {
       default: defaultTitle,
-      template: `%s | MERN Serwis Samochodowy`,
+      template: `%s | MERN Serwis`,
     },
     description: `${baseUrl} | ${contactInfo} | ${defaultDescription}`,
     alternates: {
@@ -110,35 +110,35 @@ export default async function RootLayout({
   return (
     <html lang={locale}>
       <head>
-        <title>MERN Car Service</title>
+        {/* <title>{titles[locale]}</title> */}
         <meta
           name="description"
           content="MERN Serwis is the best service for repairing your BMW, Rolls Royce, Mini Cooper"
         />
 
-        <meta property="og:url" content="https://mernserwis.pl/en" />
+        <meta property="og:url" content="https://mernserwis.com/en" />
         <meta property="og:type" content="website" />
-        <meta property="og:title" content="MERN Car Service" />
+        <meta property="og:title" content="MERN Service" />
         <meta
           property="og:description"
           content="MERN Serwis is the best service for repairing your BMW, Rolls Royce, Mini Cooper"
         />
         <meta
           property="og:image"
-          content="https://mernserwis.pl/opengraph-image.png"
+          content="https://mernserwis.com/opengraph-image.png"
         />
 
         <meta name="twitter:card" content="summary_large_image" />
-        <meta property="twitter:domain" content="mernserwis.pl" />
-        <meta property="twitter:url" content="https://mernserwis.pl/en" />
-        <meta name="twitter:title" content="MERN Car Service" />
+        <meta property="twitter:domain" content="mernserwis.com" />
+        <meta property="twitter:url" content="https://mernserwis.com/en" />
+        <meta name="twitter:title" content="MERN Service" />
         <meta
           name="twitter:description"
           content="MERN Serwis is the best service for repairing your BMW, Rolls Royce, Mini Cooper"
         />
         <meta
           name="twitter:image"
-          content="https://mernserwis.pl/opengraph-image.png"
+          content="https://mernserwis.com/opengraph-image.png"
         />
       </head>
       <body className={`min-w-[320px] ${open_sans.variable}`}>

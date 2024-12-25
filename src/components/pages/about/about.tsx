@@ -1,13 +1,13 @@
-import Image from "next/image";
-import { useTranslations } from "next-intl";
 import SectionTitle from "@/components/shared/section-title";
+import { useTranslations } from "next-intl";
+import Image from "next/image";
 
 const About = () => {
   const t = useTranslations("About");
   return (
     <section
       id="about-us"
-      className="mt-[15vh] min-h-screen w-full px-4 py-12 sm:px-6 sm:py-16 md:mt-[20vh] lg:px-8 lg:py-20"
+      className="mt-[15vh] min-h-screen w-full px-4 py-12 sm:px-6 sm:py-16 md:mt-[17vh] lg:px-8 lg:py-20"
       aria-labelledby="about-us-title"
     >
       <div className="mx-auto max-w-7xl">

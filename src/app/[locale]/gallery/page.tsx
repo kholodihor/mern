@@ -1,9 +1,9 @@
-import { Metadata } from "next";
-import dynamic from "next/dynamic";
+import Spiral from "@/components/shared/spiral/Spiral";
 import { baseUrl } from "@/constants";
 import { Locale } from "@/i18n/routing";
 import { PageMetadata } from "@/types";
-import Spiral from "@/components/shared/spiral/Spiral";
+import { Metadata } from "next";
+import dynamic from "next/dynamic";
 
 const DynamicPage = dynamic(
   () => import("@/components/pages/gallery/gallery"),
@@ -17,7 +17,7 @@ const metadata: PageMetadata = {
     description: `MERN Serwis | ${baseUrl} Galeria`,
   },
   en: {
-    title: "Gallery | MERN Car Service",
+    title: "Gallery | MERN Service",
     description: `MERN Serwis | ${baseUrl} Gallery`,
   },
   ua: {

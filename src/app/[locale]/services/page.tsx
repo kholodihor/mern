@@ -1,8 +1,8 @@
-import { Metadata } from "next";
+import ServicesPage from "@/components/pages/services/services";
 import { baseUrl } from "@/constants";
 import { Locale } from "@/i18n/routing";
 import { PageMetadata } from "@/types";
-import ServicesPage from "@/components/pages/services/services";
+import { Metadata } from "next";
 
 const metadata: PageMetadata = {
   pl: {
@@ -10,7 +10,7 @@ const metadata: PageMetadata = {
     description: "MERN Serwis | Nasze Usługi",
   },
   en: {
-    title: "Services | MERN Car Service",
+    title: "Services | MERN Service",
     description: "MERN Serwis | Our Services",
   },
   ua: {

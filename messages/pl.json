@@ -125,16 +125,16 @@
   "Filters": {
     "categories": {
       "all": "Wszystkie kategorie",
-      "brakes_service": "Serwis hamulców",
+      "brakes_service": "Naprawy zawieszenia i układów hamulcowych",
       "computer_diagnostics": "Diagnostyka komputerowa",
       "mechanical_electrical_service": "Serwis mechaniczny i elektryczny",
       "inspections": "Przeglądy i serwis okresowy",
-      "engine_service": "Serwis silnika",
+      "engine_service": "Naprawy silników",
       "coding": "Kodowanie i programowanie",
-      "painting": "Serwis lakierniczy",
+      "painting": "Naprawy blacharskie i lakiernicze",
       "conditioning": "Serwis klimatyzacji",
-      "accessoires": "Serwis i montaż akcesoriów",
-      "pricing": "Indywidualna wycena naprawy"
+      "accessoires": "Montaż i serwis akcesoriów",
+      "pricing": "Indywidualna wycena naprawy na podstawie numeru VIN"
     }
   },
   "404": {
