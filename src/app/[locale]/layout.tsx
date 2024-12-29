@@ -45,7 +45,7 @@ export async function generateMetadata({
   return {
     metadataBase: baseUrl,
     alternates: {
-      canonical: `${baseUrl}/${locale}`,
+      canonical: `${baseUrl}/pl`,
       languages: {
         "en-US": `${baseUrl}/en`,
         "pl-PL": `${baseUrl}/pl`,
