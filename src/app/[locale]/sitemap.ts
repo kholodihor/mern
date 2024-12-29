@@ -16,9 +16,12 @@ const staticRoutes = [
 
 // Function to generate alternate URLs
 const generateAlternates = (path: string) => ({
-  uk: `${baseUrl}/ua${path ? "/" + path : ""}`,
-  en: `${baseUrl}/en${path ? "/" + path : ""}`,
-  pl: `${baseUrl}/pl${path ? "/" + path : ""}`,
+  canonical: `${baseUrl}/pl${path ? "/" + path : ""}`,
+  languages: {
+    "uk-UK": `${baseUrl}/ua${path ? "/" + path : ""}`,
+    "en-US": `${baseUrl}/en${path ? "/" + path : ""}`,
+    "pl-PL": `${baseUrl}/pl${path ? "/" + path : ""}`,
+  },
 });
 
 // Function to generate sitemap entries
@@ -29,10 +32,8 @@ const generateSitemapEntries = (
     url: `${baseUrl}/pl${path ? "/" + path : ""}`,
     lastModified,
     changeFrequency: "weekly" as const,
-    priority: 1,
-    alternates: {
-      languages: generateAlternates(path),
-    },
+    priority: path === "" ? 1 : 0.8,
+    alternates: generateAlternates(path),
   }));
 };
 

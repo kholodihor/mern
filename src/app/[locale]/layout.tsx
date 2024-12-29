@@ -44,19 +44,19 @@ export async function generateMetadata({
 
   return {
     metadataBase: baseUrl,
+    alternates: {
+      canonical: `${baseUrl}/${locale}`,
+      languages: {
+        "en-US": `${baseUrl}/en`,
+        "pl-PL": `${baseUrl}/pl`,
+        "uk-UK": `${baseUrl}/ua`,
+      },
+    },
     title: {
       default: defaultTitle,
       template: `%s | MERN Serwis`,
     },
     description: `${baseUrl} | ${contactInfo} | ${defaultDescription}`,
-    alternates: {
-      canonical: "/",
-      languages: {
-        "en-US": "/en",
-        "pl-PL": "/pl",
-        "uk-UK": "/ua",
-      },
-    },
     openGraph: {
       type: "website",
       locale: locale,
@@ -110,7 +110,6 @@ export default async function RootLayout({
   return (
     <html lang={locale}>
       <head>
-        {/* <title>{titles[locale]}</title> */}
         <meta
           name="description"
           content="MERN Serwis is the best service for repairing your BMW, Rolls Royce, Mini Cooper"
