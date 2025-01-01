@@ -13,11 +13,6 @@ export type TServiceCard = {
   tags: string[];
 };
 
-export type TStep = {
-  title: string;
-  text: string;
-  image: string;
-};
 
 export interface IApplication {
   name: string;
@@ -80,3 +75,21 @@ export type PageMetadata = {
     description: string;
   };
 };
+
+export interface INewsArticle {
+  id: string;
+  title: {
+    [key: string]: string;
+  };
+  short_text: {
+    [key: string]: string;
+  };
+  full_text: {
+    [key: string]: string;
+  };
+  created_at: {
+    seconds: number;
+    nanoseconds: number;
+  };
+  image: string;
+}

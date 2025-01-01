@@ -1,19 +1,7 @@
-import { useState } from "react";
-import { collection, deleteDoc, doc, onSnapshot } from "firebase/firestore";
 import { db } from "@/lib/firebase";
-
-interface INewsArticle {
-  id: string;
-  title: {
-    [key: string]: string;
-  };
-  full_text: {
-    [key: string]: string;
-  };
-  created_at: {
-    seconds: number;
-  };
-}
+import { INewsArticle } from "@/types";
+import { collection, deleteDoc, doc, onSnapshot } from "firebase/firestore";
+import { useState } from "react";
 
 export const useNews = () => {
   const [articles, setArticles] = useState<INewsArticle[]>([]);
@@ -27,10 +15,7 @@ export const useNews = () => {
           articlesData.push({ ...doc.data(), id: doc.id } as INewsArticle);
         });
         articlesData.sort((a, b) => {
-          return (
-            new Date(b.created_at.seconds).getTime() -
-            new Date(a.created_at.seconds).getTime()
-          );
+          return b.created_at.seconds - a.created_at.seconds;
         });
         setArticles(articlesData);
       }

@@ -1,16 +1,27 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { Widget } from "@uploadcare/react-widget";
-import { addDoc, collection } from "firebase/firestore";
-import { Controller, SubmitHandler, useForm } from "react-hook-form";
+import TextArea from "@/components/ui/text-area";
+import TextInput from "@/components/ui/text-input";
 import { useRouter } from "@/i18n/routing";
 import { db } from "@/lib/firebase";
 import { translateText } from "@/utils/translator";
-import TextArea from "@/components/ui/text-area";
-import TextInput from "@/components/ui/text-input";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Widget } from "@uploadcare/react-widget";
+import { addDoc, collection } from "firebase/firestore";
+import { useEffect, useRef, useState } from "react";
+import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { TNewsScheme, newsSchema } from "./schema";
+
+import "@/styles/quill.css";
+import dynamic from "next/dynamic";
+import "react-quill-new/dist/quill.snow.css";
+
+const ReactQuill = dynamic(() => import("react-quill-new"), {
+  ssr: false,
+  loading: () => (
+    <div className="h-[200px] w-full animate-pulse rounded-md bg-slate-100" />
+  ),
+});
 
 const AddNews = () => {
   const router = useRouter();
@@ -152,7 +163,7 @@ const AddNews = () => {
             />
           )}
         />
-
+        {/* 
         <Controller
           name="full_text"
           control={control}
@@ -162,6 +173,33 @@ const AddNews = () => {
               errorText={errors.full_text?.message}
               placeholder="Повний опис польскою мовою"
             />
+          )}
+        /> */}
+        <Controller
+          name="full_text"
+          control={control}
+          render={({ field }) => (
+            <div className="w-[500px]">
+              <ReactQuill
+                {...field}
+                theme="snow"
+                placeholder="Повний опис польскою мовою"
+                className={`${errors.full_text ? "quill-error" : ""}`}
+                modules={{
+                  toolbar: [
+                    [{ header: [1, 2, 3, false] }],
+                    ["bold", "italic", "underline"],
+                    [{ list: "ordered" }, { list: "bullet" }],
+                    ["clean"],
+                  ],
+                }}
+              />
+              {errors.full_text && (
+                <span className="text-xs text-red-500">
+                  {errors.full_text?.message}
+                </span>
+              )}
+            </div>
           )}
         />
 

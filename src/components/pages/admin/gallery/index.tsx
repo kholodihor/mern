@@ -9,7 +9,7 @@ const Gallery = () => {
   const { galleryList, deleteGalleryItem } = useGallery();
 
   return (
-    <section className="relative px-[24px]">
+    <section className="relative px-[24px] pb-[24px]">
       <h1 className="mb-[24px] text-3xl font-bold">Галерея</h1>
       <ul className="flex w-full flex-wrap gap-[1rem] text-white">
         <li>

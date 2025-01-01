@@ -1,30 +1,19 @@
 "use client";
 
 import SectionTitle from "@/components/shared/section-title";
+import { useNews } from "@/hooks/useNews";
 import { Link } from "@/i18n/routing";
-import { db } from "@/lib/firebase";
-import { collection, onSnapshot } from "firebase/firestore";
 import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 const NewsPage = () => {
   const t = useTranslations("News");
   const locale = useLocale();
-  const [news, setNews] = useState<any[]>([]);
+  const { articles, fetchArticles } = useNews();
 
   useEffect(() => {
-    const ref = collection(db, "news");
-    const unsubscribe = onSnapshot(ref, (snapshot) => {
-      if (!snapshot.empty) {
-        const newsData: any[] = [];
-        snapshot.forEach((doc) => {
-          newsData.push({ ...doc.data(), id: doc.id });
-        });
-        setNews(newsData);
-      }
-    });
-
+    const unsubscribe = fetchArticles();
     return () => unsubscribe();
   }, []);
 
@@ -38,7 +27,7 @@ const NewsPage = () => {
         <SectionTitle id="news-title" title={t("title")} />
 
         <div className="mt-8 space-y-12 sm:mt-12 sm:space-y-16 lg:mt-16">
-          {news.map((item, index) => (
+          {articles.map((item, index) => (
             <article
               key={index}
               className="flex flex-col gap-6 sm:gap-8 md:flex-row lg:gap-12"
@@ -67,7 +56,7 @@ const NewsPage = () => {
                   className="mt-2 inline-flex items-center text-lg font-medium text-white transition-all duration-300 hover:text-gray-300 hover:translate-x-1 group"
                   href={`/news/${item.id}`}
                 >
-                  {t("read_more")} 
+                  {t("read_more")}
                   <span className="ml-1 transition-transform duration-300 group-hover:translate-x-1">→</span>
                 </Link>
               </div>
