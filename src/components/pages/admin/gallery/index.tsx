@@ -3,7 +3,7 @@
 import { useGallery } from "@/hooks/useGallery";
 import { Link } from "@/i18n/routing";
 import Image from "next/image";
-import { FaRegTrashAlt } from "react-icons/fa";
+import DeleteButton from "../shared/delete-button";
 
 const Gallery = () => {
   const { galleryList, deleteGalleryItem } = useGallery();
@@ -32,12 +32,7 @@ const Gallery = () => {
                bg-white/30 p-2 text-center text-sm backdrop-blur-md truncate">
                 {item.car}
               </div>
-              <button
-                onClick={() => deleteGalleryItem(item.id)}
-                className="absolute right-0 top-0 p-2 text-red-700 hover:scale-110"
-              >
-                <FaRegTrashAlt />
-              </button>
+              <DeleteButton onClick={() => deleteGalleryItem(item.id)} />
             </li>
           ))}
       </ul>

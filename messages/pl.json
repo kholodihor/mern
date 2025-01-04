@@ -139,5 +139,8 @@
   },
   "404": {
     "button": "Strona główna"
+  },
+  "Error": {
+    "error": "Ups... coś poszło nie tak, spróbuj ponownie później"
   }
 }

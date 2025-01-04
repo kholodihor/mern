@@ -1,14 +1,16 @@
 "use client";
 
-import Image from "next/image";
-import parse from "html-react-parser";
-import { useLocale, useTranslations } from "next-intl";
+import ChevronLeft from "@/components/icons/chevron-left";
+import Loader from "@/components/shared/loader";
+import LoadingError from "@/components/shared/loading-error";
+import SectionTitle from "@/components/shared/section-title";
 import { CATEGORIES } from "@/constants/categories";
 import { formatDate } from "@/helpers/formatDate";
 import { useCar } from "@/hooks/useCar";
 import { Link } from "@/i18n/routing";
-import ChevronLeft from "@/components/icons/chevron-left";
-import SectionTitle from "@/components/shared/section-title";
+import parse from "html-react-parser";
+import { useLocale, useTranslations } from "next-intl";
+import Image from "next/image";
 import Slider from "../home/shared/slider/slider";
 
 const CarImage = ({ data }: { data: string }) => {
@@ -31,39 +33,11 @@ const CarPage = ({ slug }: { slug: string }) => {
   const { carItem, isLoading, isError } = useCar(slug);
 
   if (isError) {
-    return (
-      <section className="mt-[15vh] min-h-screen w-full px-4 py-12 sm:px-6 sm:py-16 md:mt-[20vh] lg:px-8 lg:py-20">
-        <div className="mx-auto max-w-7xl">
-          <div className="flex min-h-[400px] items-center justify-center">
-            <p className="text-red-500">Error loading car data</p>
-          </div>
-        </div>
-      </section>
-    );
+    return <LoadingError />
   }
 
-  if (isLoading) {
-    return (
-      <section className="mt-[15vh] min-h-screen w-full px-4 py-12 sm:px-6 sm:py-16 md:mt-[20vh] lg:px-8 lg:py-20">
-        <div className="mx-auto max-w-7xl">
-          <div className="flex min-h-[400px] items-center justify-center">
-            <div className="h-12 w-12 animate-spin rounded-full border-b-2 border-t-2 border-white"></div>
-          </div>
-        </div>
-      </section>
-    );
-  }
-
-  if (!carItem) {
-    return (
-      <section className="mt-[15vh] min-h-screen w-full px-4 py-12 sm:px-6 sm:py-16 md:mt-[20vh] lg:px-8 lg:py-20">
-        <div className="mx-auto max-w-7xl">
-          <div className="flex min-h-[400px] items-center justify-center">
-            <div className="h-12 w-12 animate-spin rounded-full border-b-2 border-t-2 border-white"></div>
-          </div>
-        </div>
-      </section>
-    );
+  if (isLoading || !carItem) {
+    return <Loader />
   }
 
   return (
@@ -82,7 +56,6 @@ const CarPage = ({ slug }: { slug: string }) => {
           </Link>
           <SectionTitle id={`${carItem.car}-title`} title={carItem.car} />
         </div>
-
         <div className="mt-8 sm:mt-12">
           <Slider
             data={carItem.images}

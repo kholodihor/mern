@@ -1,7 +1,9 @@
+import { CATEGORIES } from "@/constants/categories";
+import { db } from "@/lib/firebase";
+import { useFilters } from "@/stores/useFilters";
+import { IGalleryItem } from "@/types";
 import { collection, deleteDoc, doc, getDocs } from "firebase/firestore";
 import useSWR from "swr";
-import { db } from "@/lib/firebase";
-import { IGalleryItem } from "@/types";
 
 const fetchGalleryItems = async () => {
   const applicationsRef = collection(db, "gallery");
@@ -22,14 +24,25 @@ const fetchGalleryItems = async () => {
 };
 
 export const useGallery = () => {
+  const { filters } = useFilters();
+
   const {
     data: galleryList,
     error,
     mutate,
   } = useSWR<IGalleryItem[]>("gallery", fetchGalleryItems, {
-    refreshInterval: 5000, // Refresh every 5 seconds
-    revalidateOnFocus: true,
+    // refreshInterval: 5000, // Refresh every 5 seconds
+    // revalidateOnFocus: true,
   });
+
+  const filteredData =
+    galleryList?.filter((item) => {
+      return filters[0] === CATEGORIES.ALL
+        ? true
+        : item.categories.some((category: string) =>
+          filters.includes(CATEGORIES[category])
+        );
+    }) || [];
 
   const deleteGalleryItem = async (id: string) => {
     if (confirm("Ви впевнені, що хочете видалити статтю?")) {
@@ -46,6 +59,7 @@ export const useGallery = () => {
 
   return {
     galleryList,
+    filteredData,
     isLoading: !error && !galleryList,
     isError: error,
     deleteGalleryItem,

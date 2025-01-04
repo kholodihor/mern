@@ -3,16 +3,10 @@
 import { useNews } from "@/hooks/useNews";
 import { Link } from "@/i18n/routing";
 import Image from "next/image";
-import { useEffect } from "react";
-import { FaRegTrashAlt } from "react-icons/fa";
+import DeleteButton from "../shared/delete-button";
 
 const News = () => {
-  const { articles, fetchArticles, deleteArticle } = useNews();
-
-  useEffect(() => {
-    const unsubscribe = fetchArticles();
-    return () => unsubscribe();
-  }, []);
+  const { newsList, deleteArticle } = useNews();
 
   return (
     <section className="relative px-[24px]">
@@ -25,9 +19,9 @@ const News = () => {
             </button>
           </Link>
         </li>
-        {articles &&
-          articles.map((item) => (
-            <li key={item.id} className="relative flex flex-col h-[210px] overflow-hidden">
+        {newsList &&
+          newsList.map((item) => (
+            <li key={item.id} className="relative flex flex-col h-[210px] w-[220px] overflow-hidden">
               <Image
                 src={item.image}
                 width={250}
@@ -42,12 +36,7 @@ const News = () => {
               <div className="absolute bottom-0 left-0 flex h-1/5 w-full items-center truncate whitespace-nowrap bg-white/30 p-2 text-center text-sm backdrop-blur-md">
                 {item.title.ua}
               </div>
-              <button
-                onClick={() => deleteArticle(item.id)}
-                className="absolute right-0 top-0 p-2 text-red-700 hover:scale-110"
-              >
-                <FaRegTrashAlt />
-              </button>
+              <DeleteButton onClick={() => deleteArticle(item.id)} />
             </li>
           ))}
       </ul>
