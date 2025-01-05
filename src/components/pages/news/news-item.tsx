@@ -3,7 +3,6 @@ import { INewsArticle } from "@/types";
 import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
 
-
 const NewsItem = ({ item, index }: { item: INewsArticle, index: number }) => {
   const t = useTranslations("News");
   const locale = useLocale();
@@ -15,12 +14,16 @@ const NewsItem = ({ item, index }: { item: INewsArticle, index: number }) => {
       <div className="w-full md:w-1/3">
         <div className="relative aspect-[4/3] overflow-hidden rounded-xl shadow-lg">
           <Image
-            src={item.image}
+            src={item.images[0] || "/images/placeholder-news.jpg"}
             alt={item.title[locale]}
             fill
             className="object-cover transition-transform duration-300 hover:scale-105"
             sizes="(max-width: 768px) 100vw, 33vw"
             priority={index === 0}
+            onError={(e) => {
+              const img = e.target as HTMLImageElement;
+              img.src = "/images/placeholder-news.jpg";
+            }}
           />
         </div>
       </div>

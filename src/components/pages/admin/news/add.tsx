@@ -4,15 +4,18 @@ import TextArea from "@/components/ui/text-area";
 import TextInput from "@/components/ui/text-input";
 import { useRouter } from "@/i18n/routing";
 import { db } from "@/lib/firebase";
+import { getImageUrlsFromGroup } from "@/utils/imageFetcher";
 import { translateText } from "@/utils/translator";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Widget } from "@uploadcare/react-widget";
 import { addDoc, collection } from "firebase/firestore";
 import { useEffect, useRef, useState } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { TNewsScheme, newsSchema } from "./schema";
 
+import { convertToWebp } from "@/helpers/convertToWebp";
+import { getUploadcareUrls } from "@/helpers/getUploadcareUrls";
 import "@/styles/quill.css";
+import { Widget } from "@uploadcare/react-widget";
 import dynamic from "next/dynamic";
 import "react-quill-new/dist/quill.snow.css";
 
@@ -27,6 +30,7 @@ const AddNews = () => {
   const router = useRouter();
   const [isProcessing, setIsProcessing] = useState(false);
   const mounted = useRef(true);
+  // const [selectedImages, setSelectedImages] = useState<string[]>([]);
 
   useEffect(() => {
     return () => {
@@ -44,9 +48,10 @@ const AddNews = () => {
     mode: "onChange",
     defaultValues: {
       title: "",
-      image: "",
+      images: "",
       short_text: "",
       full_text: "",
+      youtubeUrl: "",
     },
   });
 
@@ -56,9 +61,12 @@ const AddNews = () => {
     try {
       setIsProcessing(true);
 
-      if (!values.image) {
-        throw new Error("Please select an image");
+      if (!values.images.length) {
+        throw new Error("Будь ласка, виберіть хоча б одну картинку");
       }
+
+      console.log('Submitting form with values:', values);
+      console.log('Submitting form with images:', values.images);
 
       const translatedTitleUA = await translateText(values.title, "uk");
       const translatedDescUA = await translateText(values.short_text, "uk");
@@ -67,9 +75,8 @@ const AddNews = () => {
       const translatedDescEN = await translateText(values.short_text, "en");
       const translatedFullDescEN = await translateText(values.full_text, "en");
 
-      const imageUrl = values.image
-        ? `${values.image.replace(/\.\w+$/, ".webp")}`
-        : "";
+      const images = await getImageUrlsFromGroup(values.images);
+      const urls = getUploadcareUrls(images);
 
       const data = {
         title: {
@@ -77,7 +84,8 @@ const AddNews = () => {
           ua: translatedTitleUA,
           en: translatedTitleEN,
         },
-        image: imageUrl,
+        images: convertToWebp(urls),
+        youtubeUrl: values.youtubeUrl || "",
         short_text: {
           pl: values.short_text,
           ua: translatedDescUA,
@@ -127,7 +135,7 @@ const AddNews = () => {
         />
 
         <Controller
-          name="image"
+          name="images"
           control={control}
           rules={{ required: "File is required" }}
           render={({ field: { onChange, value, ref } }) => (
@@ -137,18 +145,32 @@ const AddNews = () => {
               </label>
               <Widget
                 publicKey="ff76dce7219a0b044f12"
+                multiple={true}
                 value={value}
                 onChange={(fileInfo) => {
                   onChange(fileInfo.cdnUrl);
                 }}
                 ref={ref}
               />
-              {errors.image && (
+              {errors.images && (
                 <span className="text-xs text-red-500">
-                  {errors.image?.message}
+                  {errors.images?.message}
                 </span>
               )}
             </div>
+          )}
+        />
+
+
+        <Controller
+          name="youtubeUrl"
+          control={control}
+          render={({ field }) => (
+            <TextInput
+              {...field}
+              errorText={errors.youtubeUrl?.message}
+              placeholder="URL відео на YouTube (необов'язково)"
+            />
           )}
         />
 
@@ -163,18 +185,7 @@ const AddNews = () => {
             />
           )}
         />
-        {/* 
-        <Controller
-          name="full_text"
-          control={control}
-          render={({ field }) => (
-            <TextArea
-              {...field}
-              errorText={errors.full_text?.message}
-              placeholder="Повний опис польскою мовою"
-            />
-          )}
-        /> */}
+
         <Controller
           name="full_text"
           control={control}
@@ -204,10 +215,11 @@ const AddNews = () => {
         />
 
         <button
-          className={`w-full min-w-[325px] rounded-[1rem] border px-4 py-2 transition-all hover:bg-gray-400/50 md:w-[200px]`}
           type="submit"
+          disabled={isProcessing}
+          className="mt-4 rounded-md bg-blue-500 px-4 py-2 text-white transition-colors hover:bg-blue-600 disabled:cursor-not-allowed disabled:opacity-50"
         >
-          {isProcessing ? "Обробка" : "Додати"}
+          {isProcessing ? "Обробка..." : "Додати"}
         </button>
       </form>
     </div>
@@ -215,3 +227,4 @@ const AddNews = () => {
 };
 
 export default AddNews;
+

@@ -23,17 +23,17 @@ const News = () => {
           newsList.map((item) => (
             <li key={item.id} className="relative flex flex-col h-[210px] w-[220px] overflow-hidden">
               <Image
-                src={item.image}
+                src={item.images[0] || "/images/placeholder-news.jpg"}
                 width={250}
                 height={210}
                 alt={item.title.ua}
+                className="h-full w-full object-cover"
                 onError={(e) => {
                   const img = e.target as HTMLImageElement;
                   img.src = "/images/placeholder-news.jpg";
                 }}
-                className="object-cover"
               />
-              <div className="absolute bottom-0 left-0 flex h-1/5 w-full items-center truncate whitespace-nowrap bg-white/30 p-2 text-center text-sm backdrop-blur-md">
+              <div className="absolute bottom-0 left-0 w-full bg-white/30 p-2 text-center text-sm backdrop-blur-md truncate">
                 {item.title.ua}
               </div>
               <DeleteButton onClick={() => deleteArticle(item.id)} />

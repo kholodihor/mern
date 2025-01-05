@@ -91,5 +91,6 @@ export interface INewsArticle {
     seconds: number;
     nanoseconds: number;
   };
-  image: string;
+  images: string[];
+  youtubeUrl?: string;
 }

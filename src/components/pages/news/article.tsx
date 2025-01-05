@@ -1,40 +1,118 @@
 "use client";
 
 import ChevronLeft from "@/components/icons/chevron-left";
+import Loader from "@/components/shared/loader";
+import LoadingError from "@/components/shared/loading-error";
 import SectionTitle from "@/components/shared/section-title";
+import Slider from "@/components/shared/slider/slider";
+import { formatDate } from "@/helpers/formatDate";
 import { useNews } from "@/hooks/useNews";
-import { Link } from "@/i18n/routing";
+import { Link, useRouter } from "@/i18n/routing";
 import parse from "html-react-parser";
 import { useLocale } from "next-intl";
+import Image from "next/image";
+import { useEffect } from "react";
+
+const NewsImage = ({ data }: { data: string }) => {
+  return (
+    <div className="relative aspect-[4/3] overflow-hidden rounded-xl">
+      <Image
+        src={data}
+        alt="News image"
+        fill
+        className="object-cover transition-transform hover:scale-105"
+        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+      />
+    </div>
+  );
+};
 
 const Article = ({ id }: { id: string }) => {
   const locale = useLocale();
-  const { getArticleById } = useNews();
-  const article = getArticleById(id);
+  const router = useRouter();
+  const { getArticleById, isLoading, isError } = useNews();
+
+  const newsItem = getArticleById(id);
+
+  useEffect(() => {
+    if (!newsItem) {
+      router.push("/news");
+    }
+  }, [newsItem]);
+
+  if (isError) {
+    return <LoadingError />;
+  }
+
+  if (isLoading || !newsItem) {
+    return <Loader />;
+  }
 
   return (
     <section
-      id={`Article ${article?.title}`}
-      className="flex min-h-screen w-full flex-col px-4 pb-20 pt-[18vh] sm:px-6 md:pt-[25vh] lg:px-8"
-      aria-labelledby={`Article ${article?.title[locale]}-title`}
+      id={id}
+      className="mt-[15vh] min-h-screen w-full px-4 py-12 sm:px-6 sm:py-16 md:mt-[20vh] lg:px-8 lg:py-20"
+      aria-labelledby={`${id}-title`}
     >
-      <div className="mx-auto w-full max-w-4xl">
-        <div className="mb-12 flex items-center gap-8">
-          <Link href="/news">
-            <button className="group flex h-12 w-12 items-center justify-center rounded-full bg-white/5 transition-all hover:bg-white/10">
-              <ChevronLeft className="h-6 w-6 text-gray-400 transition-colors group-hover:text-white" />
-            </button>
+      <div className="mx-auto max-w-7xl">
+        <div className="relative mb-8 sm:mb-12">
+          <Link
+            href="/news"
+            className="absolute left-0 top-1/2 -translate-y-1/2 p-2 text-white transition-colors hover:text-gray-300"
+          >
+            <ChevronLeft className="h-8 w-8 sm:h-10 sm:w-10" />
           </Link>
-          <SectionTitle
-            id={`Article ${article?.title[locale]}-title`}
-            title={article?.title[locale] as string}
+          <SectionTitle id={`${id}-title`} title={newsItem.title[locale]} />
+        </div>
+
+        <div className="mt-8 sm:mt-12">
+          <Slider
+            data={newsItem.images}
+            Component={NewsImage}
+            aria-label="News Images Slider"
+            nextElName="nextNews"
+            prevElName="prevNews"
+            breakpoints={{
+              450: {
+                slidesPerView: 1.2,
+                spaceBetween: 16,
+              },
+              640: {
+                slidesPerView: 2,
+                spaceBetween: 20,
+              },
+              1024: {
+                slidesPerView: 3,
+                spaceBetween: 24,
+              },
+              1280: {
+                slidesPerView: 3.5,
+                spaceBetween: 32,
+              },
+            }}
           />
         </div>
-        <article className="prose prose-invert prose-lg max-w-none">
+
+        <div className="mt-8 space-y-6 sm:mt-12">
           <div className="text-base leading-relaxed text-gray-300 sm:text-lg">
-            {parse(article?.full_text[locale] || "Add More Details")}
+            {parse(newsItem.full_text[locale] || "")}
           </div>
-        </article>
+
+          {newsItem.youtubeUrl && (
+            <a
+              href={newsItem.youtubeUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-8 inline-block text-blue-400 underline transition-colors hover:text-blue-700"
+            >
+              {newsItem.youtubeUrl}
+            </a>
+          )}
+
+          <div className="text-sm text-gray-400">
+            {formatDate(newsItem.created_at)}
+          </div>
+        </div>
       </div>
     </section>
   );

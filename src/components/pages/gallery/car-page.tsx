@@ -4,6 +4,7 @@ import ChevronLeft from "@/components/icons/chevron-left";
 import Loader from "@/components/shared/loader";
 import LoadingError from "@/components/shared/loading-error";
 import SectionTitle from "@/components/shared/section-title";
+import Slider from "@/components/shared/slider/slider";
 import { CATEGORIES } from "@/constants/categories";
 import { formatDate } from "@/helpers/formatDate";
 import { useCar } from "@/hooks/useCar";
@@ -11,7 +12,6 @@ import { Link } from "@/i18n/routing";
 import parse from "html-react-parser";
 import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
-import Slider from "../home/shared/slider/slider";
 
 const CarImage = ({ data }: { data: string }) => {
   return (

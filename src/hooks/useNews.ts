@@ -1,22 +1,22 @@
 import { db } from "@/lib/firebase";
 import { INewsArticle } from "@/types";
-import { collection, deleteDoc, doc, getDocs } from "firebase/firestore";
+import { deleteUploadcareImages } from "@/utils/uploadcare";
+import { collection, deleteDoc, doc, getDoc, getDocs } from "firebase/firestore";
 import useSWR from "swr";
 
 const fetchArticles = async () => {
-  const ref = collection(db, "news");
-  const snapshot = await getDocs(ref);
-  const articlesData: INewsArticle[] = [];
+  const applicationsRef = collection(db, "news");
+  const snapshot = await getDocs(applicationsRef);
+  const newsDataList: INewsArticle[] = [];
 
   snapshot.forEach((doc) => {
-    const data = doc.data() as Omit<INewsArticle, "id">;
-    articlesData.push({ ...data, id: doc.id });
+    newsDataList.push({ ...doc.data(), id: doc.id } as INewsArticle);
   });
 
-  return articlesData.sort((a, b) => {
+  return newsDataList.sort((a, b) => {
     return (
-      new Date(b.created_at.seconds).getTime() -
-      new Date(a.created_at.seconds).getTime()
+      new Date(b.created_at.seconds * 1000).getTime() -
+      new Date(a.created_at.seconds * 1000).getTime()
     );
   });
 };
@@ -32,19 +32,28 @@ export const useNews = () => {
   });
 
   const deleteArticle = async (id: string) => {
-    if (confirm("Are you sure you want to delete this article?")) {
+    if (confirm("Ви впевнені, що хочете видалити цю статтю?")) {
       try {
+        // First get the article to access its images
         const articleRef = doc(db, "news", id);
+        const articleSnap = await getDoc(articleRef);
+        const article = articleSnap.data() as INewsArticle;
+
+        // Delete images from Uploadcare if they exist
+        if (article?.images && article.images.length > 0) {
+          await deleteUploadcareImages(article.images);
+        }
+
+        // Then delete the document from Firebase
         await deleteDoc(articleRef);
         await mutate();
-        alert("Article successfully deleted!");
+        alert("Статтю успішно видалено!");
         window.location.reload();
       } catch (error) {
-        console.error("Error deleting article:", error);
+        console.error("Помилка видалення статті:", error);
       }
     }
   };
-
 
   const getArticleById = (id: string) => {
     return newsList?.find((article) => article.id === id);

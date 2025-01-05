@@ -2,7 +2,8 @@ import { CATEGORIES } from "@/constants/categories";
 import { db } from "@/lib/firebase";
 import { useFilters } from "@/stores/useFilters";
 import { IGalleryItem } from "@/types";
-import { collection, deleteDoc, doc, getDocs } from "firebase/firestore";
+import { deleteUploadcareImages } from "@/utils/uploadcare";
+import { collection, deleteDoc, doc, getDoc, getDocs } from "firebase/firestore";
 import useSWR from "swr";
 
 const fetchGalleryItems = async () => {
@@ -45,14 +46,25 @@ export const useGallery = () => {
     }) || [];
 
   const deleteGalleryItem = async (id: string) => {
-    if (confirm("Ви впевнені, що хочете видалити статтю?")) {
+    if (confirm("Ви впевнені, що хочете видалити цю статтю?")) {
       try {
+        // First get the item to access its images
         const itemRef = doc(db, "gallery", id);
+        const itemSnap = await getDoc(itemRef);
+        const item = itemSnap.data() as IGalleryItem;
+
+        // Delete images from Uploadcare if they exist
+        if (item?.images && item.images.length > 0) {
+          await deleteUploadcareImages(item.images);
+        }
+
+        // Then delete the document from Firebase
         await deleteDoc(itemRef);
-        await mutate(); // Revalidate the cache after deletion
+        await mutate();
         alert("Статтю успішно видалено!");
+        window.location.reload();
       } catch (error) {
-        console.error("Error deleting item:", error);
+        console.error("Пломилка видалення статті:", error);
       }
     }
   };

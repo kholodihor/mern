@@ -1,12 +1,12 @@
 "use client";
 
-import Image from "next/image";
-import { useEffect, useState } from "react";
+import SectionTitle from "@/components/shared/section-title";
 import { Rating } from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
 import { useTranslations } from "next-intl";
-import SectionTitle from "@/components/shared/section-title";
-import Slider from "../shared/slider/slider";
+import Image from "next/image";
+import { useEffect, useState } from "react";
+import Slider from "../../../shared/slider/slider";
 import ReviewCard from "./review-card";
 
 interface ReviewsResponse {

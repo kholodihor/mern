@@ -1,22 +1,24 @@
 "use client";
 
-import dynamic from "next/dynamic";
-import { useState } from "react";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { Widget } from "@uploadcare/react-widget";
-import { addDoc, collection } from "firebase/firestore";
-import { useTranslations } from "next-intl";
-import { Controller, SubmitHandler, useForm } from "react-hook-form";
-import "react-quill-new/dist/quill.snow.css";
+import Multiselect from "@/components/ui/multi-select";
+import TextArea from "@/components/ui/text-area";
+import TextInput from "@/components/ui/text-input";
 import { CATEGORIES } from "@/constants/categories";
+import { convertToWebp } from "@/helpers/convertToWebp";
+import { getUploadcareUrls } from "@/helpers/getUploadcareUrls";
 import { useRouter } from "@/i18n/routing";
 import { db } from "@/lib/firebase";
 import "@/styles/quill.css";
 import { getImageUrlsFromGroup } from "@/utils/imageFetcher";
 import { translateText } from "@/utils/translator";
-import Multiselect from "@/components/ui/multi-select";
-import TextArea from "@/components/ui/text-area";
-import TextInput from "@/components/ui/text-input";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Widget } from "@uploadcare/react-widget";
+import { addDoc, collection } from "firebase/firestore";
+import { useTranslations } from "next-intl";
+import dynamic from "next/dynamic";
+import { useState } from "react";
+import { Controller, SubmitHandler, useForm } from "react-hook-form";
+import "react-quill-new/dist/quill.snow.css";
 import { TGalleryScheme, gallerySchema } from "./schema";
 
 const ReactQuill = dynamic(() => import("react-quill-new"), {
@@ -62,16 +64,18 @@ const AddGallery = () => {
     try {
       setIsProcessing(true);
 
+      if (!values.images.length) {
+        throw new Error("Будь ласка, виберіть хоча б одну картинку");
+      }
+
       const translatedDescUA = await translateText(values.desc, "uk");
       const translatedFullDescUA = await translateText(values.fullDesc, "uk");
       const translatedDescEN = await translateText(values.desc, "en");
       const translatedFullDescEN = await translateText(values.fullDesc, "en");
 
       const images = await getImageUrlsFromGroup(values.images);
-      const urls = images.map(
-        (image: any) =>
-          `https://ucarecdn.com/${image.file_id}/${image.filename.replace(/\.\w+$/, ".webp")}`
-      );
+
+      const urls = getUploadcareUrls(images);
 
       const data = {
         car: values.car,
@@ -81,7 +85,7 @@ const AddGallery = () => {
           .replace(/[''`]/g, "")
           .replace(/\s+/g, "-"),
         categories: values.categories,
-        images: urls,
+        images: convertToWebp(urls),
         desc: {
           pl: values.desc,
           ua: translatedDescUA,
