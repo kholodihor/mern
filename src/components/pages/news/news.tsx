@@ -1,10 +1,10 @@
 "use client";
 
+import { useTranslations } from "next-intl";
+import { useNews } from "@/hooks/useNews";
 import Loader from "@/components/shared/loader";
 import LoadingError from "@/components/shared/loading-error";
 import SectionTitle from "@/components/shared/section-title";
-import { useNews } from "@/hooks/useNews";
-import { useTranslations } from "next-intl";
 import NewsItem from "./news-item";
 
 const NewsPage = () => {
@@ -12,7 +12,7 @@ const NewsPage = () => {
   const { newsList, isLoading, isError } = useNews();
 
   if (isError) {
-    return <LoadingError />
+    return <LoadingError />;
   }
 
   return (
@@ -28,11 +28,10 @@ const NewsPage = () => {
             <Loader />
           ) : (
             <>
-              {
-                newsList && newsList.map((item, index) => (
+              {newsList &&
+                newsList.map((item, index) => (
                   <NewsItem key={index} item={item} index={index} />
-                ))
-              }
+                ))}
             </>
           )}
         </div>

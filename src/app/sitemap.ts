@@ -1,9 +1,9 @@
-import { db } from "@/lib/firebase";
-import { collection, getDocs } from "firebase/firestore";
 import { MetadataRoute } from "next";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "@/lib/firebase";
 
 const baseUrl = "https://mernserwis.com";
-const locales = ['pl', 'en', 'ua'];
+const locales = ["pl", "en", "ua"];
 
 // List of static routes and their paths
 const staticRoutes = [
@@ -24,7 +24,9 @@ async function fetchDynamicRoutes() {
       const data = doc.data();
       return {
         path: `gallery/${data.slug}`,
-        lastModified: data.lastModified ? new Date(data.lastModified) : new Date(),
+        lastModified: data.lastModified
+          ? new Date(data.lastModified)
+          : new Date(),
       };
     });
   } catch (error) {
@@ -36,7 +38,7 @@ async function fetchDynamicRoutes() {
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const dynamicRoutes = await fetchDynamicRoutes();
   const allRoutes = [...staticRoutes, ...dynamicRoutes];
-  
+
   const sitemapEntries: MetadataRoute.Sitemap = [];
 
   // Generate entries for each route in each locale
@@ -52,7 +54,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             "pl-PL": `${baseUrl}/pl${route.path ? "/" + route.path : ""}`,
             "en-US": `${baseUrl}/en${route.path ? "/" + route.path : ""}`,
             "uk-UK": `${baseUrl}/ua${route.path ? "/" + route.path : ""}`,
-          }
+          },
         },
       });
     }

@@ -1,7 +1,7 @@
 "use client";
 
-import { usePathname } from "@/i18n/routing";
 import { useTranslations } from "next-intl";
+import { usePathname } from "@/i18n/routing";
 
 const SubHeader = () => {
   const t = useTranslations("Menu");
@@ -15,9 +15,7 @@ const SubHeader = () => {
 
   return (
     <nav
-      className={`fixed left-0 top-0 z-50 hidden h-[4vh] w-full items-center 
-        justify-around border-b border-b-white bg-black px-6 
-        py-4 text-xs md:text-sm lg:flex`}
+      className={`fixed left-0 top-0 z-50 hidden h-[4vh] w-full items-center justify-around border-b border-b-white bg-black px-6 py-4 text-xs md:text-sm lg:flex`}
       aria-label="Contact Information Bar"
     >
       <p>{t("independent")}</p>

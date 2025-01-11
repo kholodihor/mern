@@ -1,8 +1,14 @@
+import {
+  collection,
+  deleteDoc,
+  doc,
+  getDoc,
+  getDocs,
+} from "firebase/firestore";
+import useSWR from "swr";
 import { db } from "@/lib/firebase";
 import { INewsArticle } from "@/types";
 import { deleteUploadcareImages } from "@/utils/uploadcare";
-import { collection, deleteDoc, doc, getDoc, getDocs } from "firebase/firestore";
-import useSWR from "swr";
 
 const fetchArticles = async () => {
   const applicationsRef = collection(db, "news");

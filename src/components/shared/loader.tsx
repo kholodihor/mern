@@ -1,4 +1,3 @@
-
 const Loader = () => {
   return (
     <div className="mt-8 flex min-h-[200px] items-center justify-center sm:mt-12">
@@ -8,7 +7,7 @@ const Loader = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Loader
+export default Loader;

@@ -7,7 +7,17 @@ export default function robots(): MetadataRoute.Robots {
     rules: [
       {
         userAgent: "*",
-        allow: ["/", "/*.js", "/*.css", "/*.png", "/*.jpg", "/*.jpeg", "/*.gif", "/*.svg", "/*.ico"],
+        allow: [
+          "/",
+          "/*.js",
+          "/*.css",
+          "/*.png",
+          "/*.jpg",
+          "/*.jpeg",
+          "/*.gif",
+          "/*.svg",
+          "/*.ico",
+        ],
         disallow: [
           "/admin/*",
           "/api/*",

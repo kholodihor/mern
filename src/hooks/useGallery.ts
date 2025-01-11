@@ -1,10 +1,16 @@
+import {
+  collection,
+  deleteDoc,
+  doc,
+  getDoc,
+  getDocs,
+} from "firebase/firestore";
+import useSWR from "swr";
 import { CATEGORIES } from "@/constants/categories";
 import { db } from "@/lib/firebase";
 import { useFilters } from "@/stores/useFilters";
 import { IGalleryItem } from "@/types";
 import { deleteUploadcareImages } from "@/utils/uploadcare";
-import { collection, deleteDoc, doc, getDoc, getDocs } from "firebase/firestore";
-import useSWR from "swr";
 
 const fetchGalleryItems = async () => {
   const applicationsRef = collection(db, "gallery");
@@ -41,8 +47,8 @@ export const useGallery = () => {
       return filters[0] === CATEGORIES.ALL
         ? true
         : item.categories.some((category: string) =>
-          filters.includes(CATEGORIES[category])
-        );
+            filters.includes(CATEGORIES[category])
+          );
     }) || [];
 
   const deleteGalleryItem = async (id: string) => {

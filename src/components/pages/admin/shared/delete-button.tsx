@@ -1,4 +1,4 @@
-import { FaRegTrashAlt } from "react-icons/fa"
+import { FaRegTrashAlt } from "react-icons/fa";
 
 const DeleteButton = ({ onClick }: { onClick: () => void }) => {
   return (
@@ -8,7 +8,7 @@ const DeleteButton = ({ onClick }: { onClick: () => void }) => {
     >
       <FaRegTrashAlt />
     </button>
-  )
-}
+  );
+};
 
-export default DeleteButton
+export default DeleteButton;

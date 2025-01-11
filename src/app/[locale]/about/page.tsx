@@ -1,8 +1,8 @@
-import About from "@/components/pages/about/about";
+import { Metadata } from "next";
 import { baseUrl } from "@/constants";
 import { Locale } from "@/i18n/routing";
 import { PageMetadata } from "@/types";
-import { Metadata } from "next";
+import About from "@/components/pages/about/about";
 
 const metadata: PageMetadata = {
   pl: {

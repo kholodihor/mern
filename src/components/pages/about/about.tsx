@@ -1,6 +1,6 @@
-import SectionTitle from "@/components/shared/section-title";
-import { useTranslations } from "next-intl";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
+import SectionTitle from "@/components/shared/section-title";
 
 const About = () => {
   const t = useTranslations("About");

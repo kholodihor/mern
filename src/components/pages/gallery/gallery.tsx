@@ -1,12 +1,12 @@
 "use client";
 
+import { useTranslations } from "next-intl";
+import { CATEGORIES } from "@/constants/categories";
+import { useGallery } from "@/hooks/useGallery";
 import Loader from "@/components/shared/loader";
 import LoadingError from "@/components/shared/loading-error";
 import SectionTitle from "@/components/shared/section-title";
 import CustomDropdown from "@/components/ui/select";
-import { CATEGORIES } from "@/constants/categories";
-import { useGallery } from "@/hooks/useGallery";
-import { useTranslations } from "next-intl";
 import GalleryCard from "./gallery-card";
 
 const Gallery = () => {
@@ -16,7 +16,7 @@ const Gallery = () => {
   const options = Object.values(CATEGORIES);
 
   if (isError) {
-    return <LoadingError />
+    return <LoadingError />;
   }
 
   return (
@@ -33,7 +33,7 @@ const Gallery = () => {
           <Loader />
         ) : (
           <div className="mt-8 sm:mt-12">
-            <div className="mx-auto w-full md:mx-0 my-8 max-w-[400px] sm:my-12">
+            <div className="mx-auto my-8 w-full max-w-[400px] sm:my-12 md:mx-0">
               <CustomDropdown options={options} />
             </div>
             <div className="grid grid-cols-1 gap-6 sm:gap-8 md:grid-cols-2 lg:gap-10 xl:grid-cols-3 2xl:grid-cols-4">

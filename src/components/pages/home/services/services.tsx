@@ -1,8 +1,8 @@
 "use client";
 
-import SectionTitle from "@/components/shared/section-title";
-import { services } from "@/data/services";
 import { useTranslations } from "next-intl";
+import { services } from "@/data/services";
+import SectionTitle from "@/components/shared/section-title";
 import Slider from "../../../shared/slider/slider";
 import ServicesCard from "./services-card";
 

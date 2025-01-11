@@ -1,9 +1,9 @@
-import Spiral from "@/components/shared/spiral/Spiral";
+import { Metadata } from "next";
+import dynamic from "next/dynamic";
 import { baseUrl } from "@/constants";
 import { Locale } from "@/i18n/routing";
 import { PageMetadata } from "@/types";
-import { Metadata } from "next";
-import dynamic from "next/dynamic";
+import Spiral from "@/components/shared/spiral/Spiral";
 
 const DynamicPage = dynamic(
   () => import("@/components/pages/news/news"),

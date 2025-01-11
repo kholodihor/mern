@@ -1,8 +1,8 @@
-import CarPage from "@/components/pages/gallery/car-page";
+import { Metadata } from "next";
 import { baseUrl } from "@/constants";
 import { Locale } from "@/i18n/routing";
 import { PageMetadata } from "@/types";
-import { Metadata } from "next";
+import CarPage from "@/components/pages/gallery/car-page";
 
 const metadata: PageMetadata = {
   pl: {

@@ -13,7 +13,6 @@ export type TServiceCard = {
   tags: string[];
 };
 
-
 export interface IApplication {
   name: string;
   email: string;

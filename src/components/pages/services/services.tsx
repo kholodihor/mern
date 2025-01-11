@@ -1,8 +1,8 @@
 "use client";
 
-import SectionTitle from "@/components/shared/section-title";
-import { services } from "@/data/services";
 import { useTranslations } from "next-intl";
+import { services } from "@/data/services";
+import SectionTitle from "@/components/shared/section-title";
 import ServicesCard from "./services-card";
 
 const ServicesPage = () => {
@@ -16,8 +16,7 @@ const ServicesPage = () => {
     >
       <div className="mx-auto max-w-7xl">
         <SectionTitle id="services-title" title={t("title")} />
-        <div className="mt-8 grid grid-cols-1 gap-4 sm:mt-12 
-        sm:grid-cols-2 sm:gap-6 lg:mt-16 lg:grid-cols-3 lg:gap-12">
+        <div className="mt-8 grid grid-cols-1 gap-4 sm:mt-12 sm:grid-cols-2 sm:gap-6 lg:mt-16 lg:grid-cols-3 lg:gap-12">
           {services.length > 0 &&
             services.map((item, index) => (
               <ServicesCard key={index} data={item} />

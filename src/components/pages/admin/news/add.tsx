@@ -1,23 +1,22 @@
 "use client";
 
-import TextArea from "@/components/ui/text-area";
-import TextInput from "@/components/ui/text-input";
-import { useRouter } from "@/i18n/routing";
-import { db } from "@/lib/firebase";
-import { getImageUrlsFromGroup } from "@/utils/imageFetcher";
-import { translateText } from "@/utils/translator";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { addDoc, collection } from "firebase/firestore";
+import dynamic from "next/dynamic";
 import { useEffect, useRef, useState } from "react";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Widget } from "@uploadcare/react-widget";
+import { addDoc, collection } from "firebase/firestore";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
-import { TNewsScheme, newsSchema } from "./schema";
-
+import "react-quill-new/dist/quill.snow.css";
 import { convertToWebp } from "@/helpers/convertToWebp";
 import { getUploadcareUrls } from "@/helpers/getUploadcareUrls";
+import { useRouter } from "@/i18n/routing";
+import { db } from "@/lib/firebase";
 import "@/styles/quill.css";
-import { Widget } from "@uploadcare/react-widget";
-import dynamic from "next/dynamic";
-import "react-quill-new/dist/quill.snow.css";
+import { getImageUrlsFromGroup } from "@/utils/imageFetcher";
+import { translateText } from "@/utils/translator";
+import TextArea from "@/components/ui/text-area";
+import TextInput from "@/components/ui/text-input";
+import { TNewsScheme, newsSchema } from "./schema";
 
 const ReactQuill = dynamic(() => import("react-quill-new"), {
   ssr: false,
@@ -65,8 +64,8 @@ const AddNews = () => {
         throw new Error("Будь ласка, виберіть хоча б одну картинку");
       }
 
-      console.log('Submitting form with values:', values);
-      console.log('Submitting form with images:', values.images);
+      console.log("Submitting form with values:", values);
+      console.log("Submitting form with images:", values.images);
 
       const translatedTitleUA = await translateText(values.title, "uk");
       const translatedDescUA = await translateText(values.short_text, "uk");
@@ -161,7 +160,6 @@ const AddNews = () => {
           )}
         />
 
-
         <Controller
           name="youtubeUrl"
           control={control}
@@ -227,4 +225,3 @@ const AddNews = () => {
 };
 
 export default AddNews;
-

@@ -1,8 +1,8 @@
 "use client";
 
+import Image from "next/image";
 import { useGallery } from "@/hooks/useGallery";
 import { Link } from "@/i18n/routing";
-import Image from "next/image";
 import DeleteButton from "../shared/delete-button";
 
 const Gallery = () => {
@@ -28,8 +28,7 @@ const Gallery = () => {
                 height={208}
                 alt={item.car}
               />
-              <div className="absolute bottom-0 left-0 w-full whitespace-nowrap
-               bg-white/30 p-2 text-center text-sm backdrop-blur-md truncate">
+              <div className="absolute bottom-0 left-0 w-full truncate whitespace-nowrap bg-white/30 p-2 text-center text-sm backdrop-blur-md">
                 {item.car}
               </div>
               <DeleteButton onClick={() => deleteGalleryItem(item.id)} />

@@ -1,8 +1,8 @@
 "use client";
 
+import Image from "next/image";
 import { useNews } from "@/hooks/useNews";
 import { Link } from "@/i18n/routing";
-import Image from "next/image";
 import DeleteButton from "../shared/delete-button";
 
 const News = () => {
@@ -21,7 +21,10 @@ const News = () => {
         </li>
         {newsList &&
           newsList.map((item) => (
-            <li key={item.id} className="relative flex flex-col h-[210px] w-[220px] overflow-hidden">
+            <li
+              key={item.id}
+              className="relative flex h-[210px] w-[220px] flex-col overflow-hidden"
+            >
               <Image
                 src={item.images[0] || "/images/placeholder-news.jpg"}
                 width={250}
@@ -33,7 +36,7 @@ const News = () => {
                   img.src = "/images/placeholder-news.jpg";
                 }}
               />
-              <div className="absolute bottom-0 left-0 w-full bg-white/30 p-2 text-center text-sm backdrop-blur-md truncate">
+              <div className="absolute bottom-0 left-0 w-full truncate bg-white/30 p-2 text-center text-sm backdrop-blur-md">
                 {item.title.ua}
               </div>
               <DeleteButton onClick={() => deleteArticle(item.id)} />
