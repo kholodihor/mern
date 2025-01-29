@@ -1,15 +1,15 @@
-import type { Metadata } from "next";
-import { Open_Sans } from "next/font/google";
-import { notFound } from "next/navigation";
-import { NextIntlClientProvider } from "next-intl";
-import { getMessages } from "next-intl/server";
-import { Locale, routing } from "@/i18n/routing";
-import { PageProps } from "@/types";
 import CookieBanner from "@/components/shared/cookie-banner";
 import Footer from "@/components/shared/footer";
 import GoogleAnalytics from "@/components/shared/google-analytics";
 import Header from "@/components/shared/header";
 import SubHeader from "@/components/shared/sub-header";
+import { Locale, routing } from "@/i18n/routing";
+import { PageProps } from "@/types";
+import type { Metadata } from "next";
+import { NextIntlClientProvider } from "next-intl";
+import { getMessages } from "next-intl/server";
+import { Open_Sans } from "next/font/google";
+import { notFound } from "next/navigation";
 import "../globals.css";
 
 const open_sans = Open_Sans({
@@ -19,29 +19,31 @@ const open_sans = Open_Sans({
   display: "swap",
 });
 
+const baseUrl = new URL("https://mernserwis.com");
+const contactInfo =
+  "+48 509 158 159 | Przyszłość 2A, 05-126 Stanisławów Pierwszy";
+
+const titles = {
+  ua: "Mern Сервіс - Незалежний сервіс BMW | Механік BMW у Варшаві",
+  en: "Mern Service - Independent BMW Service | BMW Mechanic in Warsaw",
+  pl: "Mern Serwis - Niezależny serwis BMW l Mechanik BMW w Warszawie",
+}
+
+const descriptions = {
+  pl: `MERN Serwis to najlepszy serwis dla naprawy twojego BMW, Rolls Royce, Mini Cooper`,
+  en: `MERN Serwis is the best service for repairing your BMW, Rolls Royce, Mini Cooper`,
+  ua: `Автосервіс MERN це найкращий сервіс для ремонту ваших BMW, Rolls Royce, Mini Cooper`,
+};
+
+
+
 export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
   const { locale } = await params;
-  const baseUrl = new URL("https://mernserwis.com");
-  const contactInfo =
-    "+48 509 158 159 | Przyszłość 2A, 05-126 Stanisławów Pierwszy";
-
-  const titles = {
-    ua: "Автосервіс MERN",
-    en: "MERN Service",
-    pl: "MERN Serwis",
-  };
-
-  const descriptions = {
-    pl: `MERN Serwis to najlepszy serwis dla naprawy twojego BMW, Rolls Royce, Mini Cooper`,
-    en: `MERN Serwis is the best service for repairing your BMW, Rolls Royce, Mini Cooper`,
-    ua: `Автосервіс MERN це найкращий сервіс для ремонту ваших BMW, Rolls Royce, Mini Cooper`,
-  };
 
   const defaultTitle = titles[locale] || titles.pl;
   const defaultDescription = descriptions[locale] || descriptions.pl;
-
   return {
     metadataBase: baseUrl,
     alternates: {
@@ -54,7 +56,7 @@ export async function generateMetadata({
     },
     title: {
       default: defaultTitle,
-      template: `%s | MERN Serwis`,
+      template: `%s | Mern Serwis - Niezależny serwis BMW l Mechanik BMW w Warszawie`,
     },
     description: `${baseUrl} | ${contactInfo} | ${defaultDescription}`,
     openGraph: {
@@ -63,7 +65,7 @@ export async function generateMetadata({
       url: baseUrl.toString(),
       title: defaultTitle,
       description: defaultDescription,
-      siteName: "MERN Serwis",
+      siteName: defaultTitle,
       images: [
         {
           url: "/opengraph-image.png",
@@ -117,7 +119,7 @@ export default async function RootLayout({
 
         <meta property="og:url" content="https://mernserwis.com/en" />
         <meta property="og:type" content="website" />
-        <meta property="og:title" content="MERN Service" />
+        <meta property="og:title" content={titles.pl} />
         <meta
           property="og:description"
           content="MERN Serwis is the best service for repairing your BMW, Rolls Royce, Mini Cooper"
@@ -130,7 +132,7 @@ export default async function RootLayout({
         <meta name="twitter:card" content="summary_large_image" />
         <meta property="twitter:domain" content="mernserwis.com" />
         <meta property="twitter:url" content="https://mernserwis.com/en" />
-        <meta name="twitter:title" content="MERN Service" />
+        <meta name="twitter:title" content={titles.pl} />
         <meta
           name="twitter:description"
           content="MERN Serwis is the best service for repairing your BMW, Rolls Royce, Mini Cooper"
