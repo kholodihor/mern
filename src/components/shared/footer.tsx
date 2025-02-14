@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { FaGithub, FaTelegram } from "react-icons/fa";
+import { FaGithub, FaTelegram, FaLinkedin } from "react-icons/fa";
 
 const Footer = () => {
   const pathname = usePathname();
@@ -30,6 +30,13 @@ const Footer = () => {
           rel="noopener noreferrer"
         >
           <FaTelegram />
+        </a>
+        <a
+          href="https://www.linkedin.com/in/ihor-kholod/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <FaLinkedin />
         </a>
       </div>
     </div>

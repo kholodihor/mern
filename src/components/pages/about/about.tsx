@@ -14,7 +14,7 @@ const About = () => {
         <SectionTitle id="about-us-title" title={t("title")} />
 
         <div className="mt-8 flex flex-col gap-8 sm:mt-12 md:flex-row md:gap-12 lg:mt-16 lg:gap-16">
-          <div className="w-full space-y-6 md:w-1/2">
+          <div className="w-full space-y-6 md:w-1/2 flex flex-col justify-center">
             <p className="text-base leading-relaxed text-gray-200 sm:text-lg lg:text-xl">
               {t("content")}
             </p>

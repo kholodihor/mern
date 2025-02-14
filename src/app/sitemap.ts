@@ -1,9 +1,8 @@
-import { MetadataRoute } from "next";
-import { collection, getDocs } from "firebase/firestore";
 import { db } from "@/lib/firebase";
+import { collection, getDocs } from "firebase/firestore";
+import { MetadataRoute } from "next";
 
 const baseUrl = "https://mernserwis.com";
-const locales = ["pl", "en", "ua"];
 
 // List of static routes and their paths
 const staticRoutes = [
@@ -41,23 +40,49 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const sitemapEntries: MetadataRoute.Sitemap = [];
 
-  // Generate entries for each route in each locale
+  // Generate entries for each route
   for (const route of allRoutes) {
-    for (const locale of locales) {
-      sitemapEntries.push({
-        url: `${baseUrl}/${locale}${route.path ? "/" + route.path : ""}`,
-        lastModified: route.lastModified,
-        changeFrequency: "weekly",
-        priority: route.path === "" ? 1 : 0.8,
-        alternates: {
-          languages: {
-            "pl-PL": `${baseUrl}/pl${route.path ? "/" + route.path : ""}`,
-            "en-US": `${baseUrl}/en${route.path ? "/" + route.path : ""}`,
-            "uk-UK": `${baseUrl}/ua${route.path ? "/" + route.path : ""}`,
-          },
-        },
-      });
-    }
+    // Create entries for each locale
+    const plUrl = `${baseUrl}/pl${route.path ? "/" + route.path : ""}`;
+    const enUrl = `${baseUrl}/en${route.path ? "/" + route.path : ""}`;
+    const uaUrl = `${baseUrl}/ua${route.path ? "/" + route.path : ""}`;
+
+    // Common alternates configuration that includes all language variants
+    const alternates = {
+      languages: {
+        "pl-PL": plUrl,
+        "en-US": enUrl,
+        "uk-UA": uaUrl,
+        "x-default": enUrl, // Default to English for unsupported languages
+      },
+    };
+
+    // Add entry for Polish version
+    sitemapEntries.push({
+      url: plUrl,
+      lastModified: route.lastModified,
+      changeFrequency: "weekly",
+      priority: route.path === "" ? 1 : 0.8,
+      alternates,
+    });
+
+    // Add entry for English version
+    sitemapEntries.push({
+      url: enUrl,
+      lastModified: route.lastModified,
+      changeFrequency: "weekly",
+      priority: route.path === "" ? 1 : 0.8,
+      alternates,
+    });
+
+    // Add entry for Ukrainian version
+    sitemapEntries.push({
+      url: uaUrl,
+      lastModified: route.lastModified,
+      changeFrequency: "weekly",
+      priority: route.path === "" ? 1 : 0.8,
+      alternates,
+    });
   }
 
   return sitemapEntries;
