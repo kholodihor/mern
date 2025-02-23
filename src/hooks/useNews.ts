@@ -1,3 +1,6 @@
+import { db } from "@/lib/firebase";
+import { INewsArticle } from "@/types";
+import { deleteUploadcareImages } from "@/utils/uploadcare";
 import {
   collection,
   deleteDoc,
@@ -6,9 +9,6 @@ import {
   getDocs,
 } from "firebase/firestore";
 import useSWR from "swr";
-import { db } from "@/lib/firebase";
-import { INewsArticle } from "@/types";
-import { deleteUploadcareImages } from "@/utils/uploadcare";
 
 const fetchArticles = async () => {
   const applicationsRef = collection(db, "news");
@@ -37,6 +37,14 @@ export const useNews = () => {
     // revalidateOnFocus: true,
   });
 
+  const getArticleBySlug = (slug: string) => {
+    return newsList?.find((article) => article.slug === slug);
+  };
+
+  const getArticleById = (id: string) => {
+    return newsList?.find((article) => article.id === id);
+  };
+
   const deleteArticle = async (id: string) => {
     if (confirm("Ви впевнені, що хочете видалити цю статтю?")) {
       try {
@@ -61,15 +69,12 @@ export const useNews = () => {
     }
   };
 
-  const getArticleById = (id: string) => {
-    return newsList?.find((article) => article.id === id);
-  };
-
   return {
     newsList,
     fetchArticles,
     deleteArticle,
     getArticleById,
+    getArticleBySlug,
     isLoading: !error && !newsList,
     isError: error,
     mutate,

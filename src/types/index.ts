@@ -92,4 +92,5 @@ export interface INewsArticle {
   };
   images: string[];
   youtubeUrl?: string;
+  slug: string;
 }

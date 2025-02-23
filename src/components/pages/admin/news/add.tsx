@@ -8,6 +8,7 @@ import { addDoc, collection } from "firebase/firestore";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import "react-quill-new/dist/quill.snow.css";
 import { convertToWebp } from "@/helpers/convertToWebp";
+import { generateSlug } from "@/helpers/generateSlug";
 import { getUploadcareUrls } from "@/helpers/getUploadcareUrls";
 import { useRouter } from "@/i18n/routing";
 import { db } from "@/lib/firebase";
@@ -77,12 +78,16 @@ const AddNews = () => {
       const images = await getImageUrlsFromGroup(values.images);
       const urls = getUploadcareUrls(images);
 
+      // Generate slug from Polish title (primary language)
+      const slug = generateSlug(values.title);
+
       const data = {
         title: {
           pl: values.title,
           ua: translatedTitleUA,
           en: translatedTitleEN,
         },
+        slug,
         images: convertToWebp(urls),
         youtubeUrl: values.youtubeUrl || "",
         short_text: {

@@ -1,8 +1,8 @@
-import { Metadata } from "next";
+import Article from "@/components/pages/news/article";
 import { baseUrl } from "@/constants";
 import { Locale } from "@/i18n/routing";
 import { PageMetadata } from "@/types";
-import Article from "@/components/pages/news/article";
+import { Metadata } from "next";
 
 const metadata: PageMetadata = {
   pl: {
@@ -34,8 +34,8 @@ export async function generateMetadata({
   };
 }
 
-const NewsArticlePage = ({ params }: { params: { id: string } }) => {
-  return <Article id={params.id} />;
+const NewsArticlePage = ({ params }: { params: { slug: string } }) => {
+  return <Article slug={params.slug} />;
 };
 
 export default NewsArticlePage;

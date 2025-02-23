@@ -35,7 +35,7 @@ const NewsItem = ({ item, index }: { item: INewsArticle; index: number }) => {
         </p>
         <Link
           className="group mt-2 inline-flex items-center text-lg font-medium text-white transition-all duration-300 hover:translate-x-1 hover:text-gray-300"
-          href={`/news/${item.id}`}
+          href={`/news/${item.slug || item.id}`}
         >
           {t("read_more")}
           <span className="ml-1 transition-transform duration-300 group-hover:translate-x-1">

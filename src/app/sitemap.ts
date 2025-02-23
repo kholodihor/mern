@@ -16,10 +16,10 @@ const staticRoutes = [
 
 async function fetchDynamicRoutes() {
   try {
+    // Fetch gallery routes
     const galleryRef = collection(db, "gallery");
     const gallerySnapshot = await getDocs(galleryRef);
-
-    return gallerySnapshot.docs.map((doc) => {
+    const galleryRoutes = gallerySnapshot.docs.map((doc) => {
       const data = doc.data();
       return {
         path: `gallery/${data.slug}`,
@@ -28,6 +28,21 @@ async function fetchDynamicRoutes() {
           : new Date(),
       };
     });
+
+    // Fetch news routes
+    const newsRef = collection(db, "news");
+    const newsSnapshot = await getDocs(newsRef);
+    const newsRoutes = newsSnapshot.docs.map((doc) => {
+      const data = doc.data();
+      return {
+        path: `news/${data.slug}`,
+        lastModified: data.lastModified
+          ? new Date(data.lastModified)
+          : new Date(),
+      };
+    });
+
+    return [...galleryRoutes, ...newsRoutes];
   } catch (error) {
     console.error("Error fetching dynamic routes:", error);
     return [];

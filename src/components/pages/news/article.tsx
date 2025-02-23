@@ -1,17 +1,17 @@
 "use client";
 
-import Image from "next/image";
-import { useEffect } from "react";
-import parse from "html-react-parser";
-import { useLocale } from "next-intl";
-import { formatDate } from "@/helpers/formatDate";
-import { useNews } from "@/hooks/useNews";
-import { Link, useRouter } from "@/i18n/routing";
 import ChevronLeft from "@/components/icons/chevron-left";
 import Loader from "@/components/shared/loader";
 import LoadingError from "@/components/shared/loading-error";
 import SectionTitle from "@/components/shared/section-title";
 import Slider from "@/components/shared/slider/slider";
+import { formatDate } from "@/helpers/formatDate";
+import { useNews } from "@/hooks/useNews";
+import { Link, useRouter } from "@/i18n/routing";
+import parse from "html-react-parser";
+import { useLocale } from "next-intl";
+import Image from "next/image";
+import { useEffect } from "react";
 
 const NewsImage = ({ data }: { data: string }) => {
   return (
@@ -27,12 +27,12 @@ const NewsImage = ({ data }: { data: string }) => {
   );
 };
 
-const Article = ({ id }: { id: string }) => {
+const Article = ({ slug }: { slug: string }) => {
   const locale = useLocale();
   const router = useRouter();
-  const { getArticleById, isLoading, isError } = useNews();
+  const { getArticleBySlug, isLoading, isError } = useNews();
 
-  const newsItem = getArticleById(id);
+  const newsItem = getArticleBySlug(slug);
 
   useEffect(() => {
     if (!newsItem) {
@@ -50,9 +50,9 @@ const Article = ({ id }: { id: string }) => {
 
   return (
     <section
-      id={id}
+      id={slug}
       className="mt-[15vh] min-h-screen w-full px-4 py-12 sm:px-6 sm:py-16 md:mt-[20vh] lg:px-8 lg:py-20"
-      aria-labelledby={`${id}-title`}
+      aria-labelledby={`${slug}}-title`}
     >
       <div className="mx-auto max-w-7xl">
         <div className="relative mb-8 sm:mb-12">
@@ -62,7 +62,7 @@ const Article = ({ id }: { id: string }) => {
           >
             <ChevronLeft className="h-8 w-8 sm:h-10 sm:w-10" />
           </Link>
-          <SectionTitle id={`${id}-title`} title={newsItem.title[locale]} />
+          <SectionTitle id={`${slug}-title`} title={newsItem.title[locale]} />
         </div>
 
         <div className="mt-8 sm:mt-12">

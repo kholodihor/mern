@@ -26,7 +26,7 @@ const contactInfo =
 const titles = {
   ua: "Mern Сервіс - Незалежний сервіс BMW | Механік BMW у Варшаві",
   en: "Mern Service - Independent BMW Service | BMW Mechanic in Warsaw",
-  pl: "Mern Serwis - Niezależny serwis BMW l Mechanik BMW w Warszawie",
+  pl: "Mern Serwis - Niezależny serwis BMW | Mechanik BMW w Warszawie",
 }
 
 const descriptions = {
@@ -56,7 +56,7 @@ export async function generateMetadata({
     },
     title: {
       default: defaultTitle,
-      template: `%s | Mern Serwis - Niezależny serwis BMW l Mechanik BMW w Warszawie`,
+      template: `%s | Mern Serwis - Niezależny serwis BMW | Mechanik BMW w Warszawie`,
     },
     description: `${baseUrl} | ${contactInfo} | ${defaultDescription}`,
     openGraph: {
