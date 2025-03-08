@@ -7,6 +7,7 @@ body {
   background-color: #000;
   overflow-x: hidden;
   max-width: 1920px;
+  min-width: 340px;
   margin: 0 auto;
 }
 

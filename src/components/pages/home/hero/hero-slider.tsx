@@ -64,7 +64,7 @@ const HeroSlider = () => {
       modules={[EffectFade, Autoplay]}
       effect="fade"
       loop
-      className="z-0 mt-[17vh] h-[300px] sm:h-[60vh] md:h-screen"
+      className="z-0 mt-[17vh] h-[400px] sm:h-[60vh] md:h-screen"
       role="region"
       aria-live="polite"
       aria-label="Intro slides"
