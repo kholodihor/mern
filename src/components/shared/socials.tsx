@@ -19,11 +19,9 @@ const Socials = () => {
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Visit us on Instagram"
+          className="inline-flex items-center justify-center p-[3.5px] rounded-full bg-gradient-to-r from-purple-500 via-pink-500 to-yellow-500 transition-transform hover:scale-110"
         >
-          <FaInstagram
-            className="transition-all hover:text-orange-400"
-            aria-hidden="true"
-          />
+          <FaInstagram className="text-white w-6 h-6" aria-hidden="true" />
         </a>
       </li>
       <li>
@@ -34,7 +32,7 @@ const Socials = () => {
           aria-label="Visit us on YouTube"
         >
           <FaYoutube
-            className="transition-all hover:text-red-400"
+            className="transition-all text-red-400 hover:scale-110"
             aria-hidden="true"
           />
         </a>
@@ -47,7 +45,7 @@ const Socials = () => {
           aria-label="Visit us on TikTok"
         >
           <FaTiktok
-            className="transition-all hover:text-purple-400"
+            className="transition-all text-purple-400 hover:scale-110"
             aria-hidden="true"
           />
         </a>
@@ -60,7 +58,7 @@ const Socials = () => {
           aria-label="Visit us on Facebook"
         >
           <FaFacebook
-            className="transition-all hover:text-blue-400"
+            className="transition-all text-blue-400 hover:scale-110"
             aria-hidden="true"
           />
         </a>
@@ -73,7 +71,7 @@ const Socials = () => {
           aria-label="View our location on Google Maps"
         >
           <FaMapMarkerAlt
-            className="transition-all hover:text-yellow-400"
+            className="transition-all text-yellow-400 hover:scale-110"
             aria-hidden="true"
           />
         </a>
@@ -86,7 +84,7 @@ const Socials = () => {
           aria-label="Contact us on WhatsApp"
         >
           <FaWhatsapp
-            className="transition-all hover:text-green-400"
+            className="transition-all text-green-400 hover:scale-110"
             aria-hidden="true"
           />
         </a>

@@ -75,7 +75,8 @@
   "Contacts": {
     "title": "Welcome",
     "title_2": "contact",
-    "social": "Get to know us better"
+    "social": "Get to know us better",
+    "link": "Contact Us"
   },
   "Form": {
     "title": "Write to us",

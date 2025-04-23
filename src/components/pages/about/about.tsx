@@ -1,6 +1,6 @@
-import Image from "next/image";
-import { useTranslations } from "next-intl";
 import SectionTitle from "@/components/shared/section-title";
+import { useTranslations } from "next-intl";
+import Image from "next/image";
 
 const About = () => {
   const t = useTranslations("About");
@@ -10,11 +10,11 @@ const About = () => {
       className="mt-[15vh] min-h-screen w-full px-4 py-12 sm:px-6 sm:py-16 md:mt-[17vh] lg:px-8 lg:py-20"
       aria-labelledby="about-us-title"
     >
-      <div className="mx-auto max-w-7xl">
+      <div className="mx-auto">
         <SectionTitle id="about-us-title" title={t("title")} />
 
-        <div className="mt-8 flex flex-col gap-8 sm:mt-12 md:flex-row md:gap-12 lg:mt-16 lg:gap-16">
-          <div className="w-full space-y-6 md:w-1/2 flex flex-col justify-center">
+        <div className="mt-8 flex flex-col  gap-8 sm:mt-12 md:flex-row md:gap-12 lg:mt-16 lg:gap-16">
+          <div className="w-full space-y-6  flex flex-col justify-center lg:pl-8">
             <p className="text-base leading-relaxed text-gray-200 sm:text-lg lg:text-xl">
               {t("content")}
             </p>
@@ -24,7 +24,7 @@ const About = () => {
           </div>
 
           <div className="flex w-full items-center justify-center md:w-1/2">
-            <div className="relative aspect-square w-full max-w-[500px]">
+            <div className="relative aspect-square w-full max-w-[600px] lg:mr-8">
               <Image
                 src="/about/about.png"
                 alt="Car image"

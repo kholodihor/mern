@@ -1,3 +1,4 @@
+import ContactLink from "@/components/shared/contact-link";
 import CookieBanner from "@/components/shared/cookie-banner";
 import Footer from "@/components/shared/footer";
 import GoogleAnalytics from "@/components/shared/google-analytics";
@@ -147,6 +148,7 @@ export default async function RootLayout({
           GA_MEASUREMENT_ID={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || ""}
         />
         <NextIntlClientProvider locale={locale} messages={messages}>
+          <ContactLink />
           <SubHeader />
           <Header />
           {children}

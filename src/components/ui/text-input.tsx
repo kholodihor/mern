@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { ForwardedRef, InputHTMLAttributes, forwardRef } from "react";
 import clsx from "clsx";
+import { ForwardedRef, InputHTMLAttributes, forwardRef } from "react";
 
 interface TextInputProps extends InputHTMLAttributes<HTMLInputElement> {
   title?: string;
@@ -23,7 +23,7 @@ const TextInput = forwardRef(function TextInput(
 
   return (
     <div
-      className={clsx("w-full min-w-[100px] max-w-[500px]", {
+      className={clsx("w-full min-w-[100px] max-w-[600px]", {
         "text-error": errorText,
         "text-inherit": !errorText,
       })}

@@ -1,5 +1,5 @@
-import { useTranslations } from "next-intl";
 import SectionTitle from "@/components/shared/section-title";
+import { useTranslations } from "next-intl";
 import ApplicationForm from "./application";
 import ContactsLocation from "./location";
 
@@ -11,10 +11,10 @@ const Contacts = () => {
       className="mt-[15vh] min-h-screen w-full px-4 py-12 sm:px-6 sm:py-16 md:mt-[17vh] lg:px-8 lg:py-20"
       aria-labelledby="contacts-title"
     >
-      <div className="mx-auto max-w-7xl">
+      <div className="mx-auto max-w-[90vw]">
         <SectionTitle id="services-title" title={t("title_2")} />
 
-        <div className="mt-8 space-y-12 sm:mt-12 sm:space-y-16 lg:mt-16">
+        <div className="mt-8 space-y-12 sm:mt-12 sm:space-y-16 lg:mt-18">
           <ApplicationForm />
           <ContactsLocation />
         </div>
