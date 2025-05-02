@@ -1,7 +1,7 @@
 "use client";
 
-import { ForwardedRef, InputHTMLAttributes, forwardRef, useState } from "react";
 import clsx from "clsx";
+import { ForwardedRef, InputHTMLAttributes, forwardRef, useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 interface SignInPasswordProps extends InputHTMLAttributes<HTMLInputElement> {
@@ -35,7 +35,7 @@ const SignInPassword = forwardRef(function SignInPassword(
 
   return (
     <div
-      className={clsx("w-full min-w-[100px] max-w-[500px]", {
+      className={clsx("w-full min-w-[100px] max-w-[600px]", {
         "text-error": errorText,
         "text-inherit": !errorText,
       })}

@@ -1,4 +1,4 @@
-import SideBar from "@/components/pages/admin/SideBar";
+import SideBar from "@/components/pages/admin/sidebar";
 
 export default function AdminLayout({
   children,
@@ -6,9 +6,9 @@ export default function AdminLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex bg-black pt-[20vh] text-white">
+    <div className="flex bg-black pt-[15vh] text-white">
       <SideBar />
-      <div className="max-h-[95vh] flex-1 overflow-auto">{children}</div>
+      <div className="max-h-[80vh] flex-1 overflow-auto">{children}</div>
     </div>
   );
 }

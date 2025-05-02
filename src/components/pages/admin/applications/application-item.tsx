@@ -1,14 +1,13 @@
-import { useState } from "react";
-import clsx from "clsx";
-import { doc, updateDoc } from "firebase/firestore";
-import { FaRegTrashAlt } from "react-icons/fa";
-import { FaEye } from "react-icons/fa";
+import { formatDateWithSlashes } from "@/helpers/formatDate";
 import { isOutOf96Hours } from "@/helpers/isOutOf96Hours";
 import { isWithin48Hours } from "@/helpers/isWithin48Hours";
-import { formatDateWithSlashes } from "@/helpers/formatDate";
 import { Link } from "@/i18n/routing";
 import { db } from "@/lib/firebase";
 import { IApplicationResponse } from "@/types";
+import clsx from "clsx";
+import { doc, updateDoc } from "firebase/firestore";
+import { useState } from "react";
+import { FaEye, FaRegTrashAlt } from "react-icons/fa";
 
 type ApplicationItemProps = {
   item: IApplicationResponse;
@@ -32,59 +31,83 @@ const ApplicationItem = ({ item, onDelete }: ApplicationItemProps) => {
   };
 
   return (
-    <li
-      className={clsx("flex w-full gap-4 border-b border-b-slate-700 p-4", {
-        "text-green-400": isWithin48Hours(item.created_at),
-        "text-red-400": isOutOf96Hours(item.created_at),
-      })}
-    >
-      <span className="flex w-1/5 justify-center hover:text-blue-300">
-        <Link
-          href={`/admin/applications/${item.id}`}
-          className="flex items-center gap-2"
-        >
-          {item?.name}
-          <FaEye />
-        </Link>
-      </span>
+    <li className="mb-2 overflow-hidden rounded-lg bg-gray-900 shadow-md transition-all hover:shadow-lg">
+      <div className="flex w-full flex-wrap items-center gap-2 p-4 sm:flex-nowrap sm:gap-4">
+        {/* Name with View Icon */}
+        <div className="w-full sm:w-1/5">
+          <Link
+            href={`/admin/applications/${item.id}`}
+            className="flex items-center gap-2 rounded-md py-2 px-3 text-white transition-colors hover:bg-blue-900/30 hover:text-blue-400"
+          >
+            <span className="font-medium truncate">{item?.name || 'N/A'}</span>
+            <FaEye className="ml-auto text-blue-400" />
+          </Link>
+        </div>
 
-      <span className="flex w-1/5 justify-center">{item?.phone}</span>
+        {/* Phone */}
+        <div className="w-full sm:w-1/5">
+          <div className="rounded-md py-2 px-3">
+            <p className="text-sm text-gray-400">Phone</p>
+            <p className="font-medium">{item?.phone || 'N/A'}</p>
+          </div>
+        </div>
 
-      <span className={`flex w-1/5 justify-center`}>{formatDateWithSlashes(item?.created_at)}</span>
+        {/* Date */}
+        <div className="w-full sm:w-1/5">
+          <div className="rounded-md py-2 px-3">
+            <p className="text-sm text-gray-400">Date</p>
+            <p className={clsx("font-medium", {
+              "text-green-400": isWithin48Hours(item.created_at),
+              "text-red-400": isOutOf96Hours(item.created_at),
+            })}>
+              {formatDateWithSlashes(item?.created_at)}
+            </p>
+          </div>
+        </div>
 
-      <span className={`flex w-1/5 justify-center`}>
-        <select
-          name="status"
-          id="status"
-          defaultValue={item?.status}
-          onChange={(e) => handleStatus(e.target.value)}
-          className={clsx(
-            "flex items-center justify-center rounded-xl border bg-black px-2 text-center uppercase",
-            {
-              "bg-green-200 text-green-700": status === "new",
-              "bg-yellow-200 text-yellow-700": status === "inprocess",
-              "bg-gray-200 text-gray-700":
-                status !== "new" && status !== "inprocess",
-            }
-          )}
-        >
-          <option value="new" className="uppercase">
-            new
-          </option>
-          <option value="inprocess" className="uppercase">
-            in process
-          </option>
-          <option value="done" className="uppercase">
-            done
-          </option>
-        </select>
-      </span>
+        {/* Status */}
+        <div className="w-full sm:w-1/5">
+          <div className="rounded-md py-2 px-3">
+            <p className="text-sm text-gray-400 mb-1">Status</p>
+            <select
+              name="status"
+              id="status"
+              defaultValue={item?.status}
+              onChange={(e) => handleStatus(e.target.value)}
+              className={clsx(
+                "w-full cursor-pointer rounded-md border px-3 py-1 text-center font-medium uppercase transition-colors",
+                {
+                  "border-green-500 bg-green-900/20 text-green-400": status === "new",
+                  "border-yellow-500 bg-yellow-900/20 text-yellow-400": status === "inprocess",
+                  "border-gray-500 bg-gray-900/20 text-gray-400":
+                    status !== "new" && status !== "inprocess",
+                }
+              )}
+            >
+              <option value="new" className="bg-black uppercase">
+                new
+              </option>
+              <option value="inprocess" className="bg-black uppercase">
+                in process
+              </option>
+              <option value="done" className="bg-black uppercase">
+                done
+              </option>
+            </select>
+          </div>
+        </div>
 
-      <span className="flex w-1/5 justify-center">
-        <button className="text-red-500" onClick={() => onDelete(item?.id)}>
-          <FaRegTrashAlt />
-        </button>
-      </span>
+        {/* Delete Button */}
+        <div className="w-full sm:w-1/5 flex justify-center">
+          <button 
+            className="flex items-center justify-center rounded-md p-2 text-gray-400 transition-colors hover:bg-red-900/30 hover:text-red-400" 
+            onClick={() => onDelete(item?.id)}
+            aria-label="Delete application"
+          >
+            <FaRegTrashAlt className="text-lg" />
+          </button>
+        </div>
+      </div>
     </li>
   );
 };
