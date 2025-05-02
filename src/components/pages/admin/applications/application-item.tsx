@@ -5,6 +5,7 @@ import { FaRegTrashAlt } from "react-icons/fa";
 import { FaEye } from "react-icons/fa";
 import { isOutOf96Hours } from "@/helpers/isOutOf96Hours";
 import { isWithin48Hours } from "@/helpers/isWithin48Hours";
+import { formatDateWithSlashes } from "@/helpers/formatDate";
 import { Link } from "@/i18n/routing";
 import { db } from "@/lib/firebase";
 import { IApplicationResponse } from "@/types";
@@ -49,7 +50,7 @@ const ApplicationItem = ({ item, onDelete }: ApplicationItemProps) => {
 
       <span className="flex w-1/5 justify-center">{item?.phone}</span>
 
-      <span className={`flex w-1/5 justify-center`}>{item?.created_at}</span>
+      <span className={`flex w-1/5 justify-center`}>{formatDateWithSlashes(item?.created_at)}</span>
 
       <span className={`flex w-1/5 justify-center`}>
         <select
