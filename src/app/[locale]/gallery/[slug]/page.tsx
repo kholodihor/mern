@@ -31,6 +31,14 @@ export async function generateMetadata({
   return {
     title: `${localeMetadata.title} | ${slug}`,
     description: `${localeMetadata.description} | ${slug}`,
+    alternates: {
+      canonical: `${baseUrl}/${locale}/gallery/${slug}`,
+      languages: {
+        "en-US": `${baseUrl}/en/gallery/${slug}`,
+        "pl-PL": `${baseUrl}/pl/gallery/${slug}`,
+        "uk-UK": `${baseUrl}/ua/gallery/${slug}`,
+      },
+    },
   };
 }
 

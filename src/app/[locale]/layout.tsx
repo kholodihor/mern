@@ -45,10 +45,13 @@ export async function generateMetadata({
 
   const defaultTitle = titles[locale] || titles.pl;
   const defaultDescription = descriptions[locale] || descriptions.pl;
+  // We'll set the canonical URL in each page component instead of the layout
+  // This ensures each page has the correct canonical URL
+  
   return {
     metadataBase: baseUrl,
     alternates: {
-      canonical: `${baseUrl}/pl`,
+      canonical: `${baseUrl}/${locale}`,
       languages: {
         "en-US": `${baseUrl}/en`,
         "pl-PL": `${baseUrl}/pl`,

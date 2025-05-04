@@ -38,6 +38,14 @@ export async function generateMetadata({
   return {
     title: localeMetadata.title,
     description: localeMetadata.description,
+    alternates: {
+      canonical: `${baseUrl}/${locale}/gallery`,
+      languages: {
+        "en-US": `${baseUrl}/en/gallery`,
+        "pl-PL": `${baseUrl}/pl/gallery`,
+        "uk-UK": `${baseUrl}/ua/gallery`,
+      },
+    },
   };
 }
 

@@ -22,15 +22,23 @@ const metadata: PageMetadata = {
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ locale: Locale }>;
+  params: Promise<{ locale: Locale; slug: string }>;
 }): Promise<Metadata> {
-  const { locale } = await params;
+  const { locale, slug } = await params;
 
   const localeMetadata = metadata[locale] || metadata.pl;
 
   return {
-    title: localeMetadata.title,
-    description: localeMetadata.description,
+    title: `${localeMetadata.title} | ${slug}`,
+    description: `${localeMetadata.description} | ${slug}`,
+    alternates: {
+      canonical: `${baseUrl}/${locale}/news/${slug}`,
+      languages: {
+        "en-US": `${baseUrl}/en/news/${slug}`,
+        "pl-PL": `${baseUrl}/pl/news/${slug}`,
+        "uk-UK": `${baseUrl}/ua/news/${slug}`,
+      },
+    },
   };
 }
 

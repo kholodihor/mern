@@ -38,6 +38,14 @@ export async function generateMetadata({
   return {
     title: localeMetadata.title,
     description: localeMetadata.description,
+    alternates: {
+      canonical: `${baseUrl}/${locale}/news`,
+      languages: {
+        "en-US": `${baseUrl}/en/news`,
+        "pl-PL": `${baseUrl}/pl/news`,
+        "uk-UK": `${baseUrl}/ua/news`,
+      },
+    },
   };
 }
 
