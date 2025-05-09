@@ -46,7 +46,7 @@ const Form = () => {
         vin: values.vin,
         message: values.message,
         status: "new",
-        created_at: new Date(Date.now()).toLocaleDateString(),
+        created_at: new Date(Date.now()).toLocaleDateString('en-US', {month: '2-digit', day: '2-digit', year: 'numeric'}),
       };
       const ref = collection(db, "applications");
       await addDoc(ref, data);

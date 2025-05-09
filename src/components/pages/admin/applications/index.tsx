@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect } from "react";
 import { useApplications } from "@/hooks/useApplications";
 import { IApplicationResponse } from "@/types";
+import { useEffect } from "react";
 import ApplicationItem from "./application-item";
 
 const Applications = () => {
