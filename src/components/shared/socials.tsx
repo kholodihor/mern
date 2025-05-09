@@ -15,6 +15,19 @@ const Socials = () => {
     >
       <li>
         <a
+          href="https://wa.me/48509159158"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Contact us on WhatsApp"
+        >
+          <FaWhatsapp
+            className="transition-all text-green-400 hover:scale-110"
+            aria-hidden="true"
+          />
+        </a>
+      </li>
+      <li>
+        <a
           href="https://www.instagram.com/mern.serwis/"
           target="_blank"
           rel="noopener noreferrer"
@@ -24,6 +37,7 @@ const Socials = () => {
           <FaInstagram className="text-white w-6 h-6" aria-hidden="true" />
         </a>
       </li>
+
       <li>
         <a
           href="https://www.youtube.com/@MernSerwis"
@@ -76,19 +90,7 @@ const Socials = () => {
           />
         </a>
       </li>
-      <li>
-        <a
-          href="https://wa.me/48509159158"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Contact us on WhatsApp"
-        >
-          <FaWhatsapp
-            className="transition-all text-green-400 hover:scale-110"
-            aria-hidden="true"
-          />
-        </a>
-      </li>
+
     </ul>
   );
 };
