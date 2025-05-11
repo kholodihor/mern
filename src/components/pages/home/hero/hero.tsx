@@ -2,7 +2,6 @@
 
 import ContactsBubble from "@/components/shared/contacts-bubble";
 import { useTranslations } from "next-intl";
-import { RiScrollToBottomFill } from "react-icons/ri";
 import HeroSlider from "./hero-slider";
 
 const Hero = () => {
@@ -41,12 +40,12 @@ const Hero = () => {
       </header>
 
       {/* Scroll indicator - only visible on mobile */}
-      <RiScrollToBottomFill
+      {/* <RiScrollToBottomFill
         className="absolute bottom-44 left-[48%] animate-bounce z-50 cursor-pointer text-[2.5rem] text-white sm:hidden"
         role="button"
         tabIndex={0}
         aria-label="Scroll down"
-      />
+      /> */}
 
       <ContactsBubble />
     </section>

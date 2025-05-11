@@ -77,7 +77,11 @@ const HeroSlider = () => {
             fill
             className="w-full object-cover grayscale"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/10 to-black"></div>
+          {/* Bottom gradient overlay */}
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-black"></div>
+          {/* Top gradient overlay */}
+          <div className="absolute inset-0 bg-gradient-to-t from-transparent via-black/5 to-black md:hidden"></div>
+
         </SwiperSlide>
       ))}
     </Swiper>
