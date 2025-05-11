@@ -22,7 +22,7 @@ const Hero = () => {
         className="flex w-full flex-col justify-end gap-6 px-6 py-8 text-center sm:absolute sm:bg-transparent sm:py-0 sm:left-0 sm:top-[40%] sm:w-2/3 sm:text-left md:top-[70%] sm:z-10"
       >
         <h1
-          className="mb-4 font-open-sans text-[8vh] font-bold uppercase text-white sm:text-[13vh] md:-mb-4 md:text-[17vh]"
+          className="mb-8 font-open-sans text-[8vh] font-bold uppercase text-white sm:text-[13vh] md:-mb-4 md:text-[17vh]"
         >
           <span aria-hidden="true">MERN</span>
         </h1>
