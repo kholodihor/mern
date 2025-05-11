@@ -10,23 +10,23 @@ import { Swiper, SwiperSlide } from "swiper/react";
 const slides = [
   {
     desktop: "/hero/hero_1.png",
-    mobile: "/hero/mobile_1.png",
+    mobile: "/hero/mobile_1.jpeg",
   },
   {
     desktop: "/hero/hero_2.png",
-    mobile: "/hero/mobile_2.png",
+    mobile: "/hero/mobile_2.jpeg",
   },
   {
     desktop: "/hero/hero_3.png",
-    mobile: "/hero/mobile_3.png",
+    mobile: "/hero/mobile_3.jpeg",
   },
   {
     desktop: "/hero/hero_4.png",
-    mobile: "/hero/mobile_4.png",
+    mobile: "/hero/mobile_4.jpeg",
   },
   {
     desktop: "/hero/hero_5.png",
-    mobile: "/hero/mobile_5.png",
+    mobile: "/hero/mobile_5.jpeg",
   },
 ];
 
@@ -64,7 +64,7 @@ const HeroSlider = () => {
       modules={[EffectFade, Autoplay]}
       effect="fade"
       loop
-      className="z-0 mt-[17vh] h-[400px] sm:h-[60vh] md:h-screen"
+      className="z-0 mt-[17vh] h-[450px] sm:h-[60vh] md:h-screen"
       role="region"
       aria-live="polite"
       aria-label="Intro slides"
@@ -75,9 +75,9 @@ const HeroSlider = () => {
             src={isMobileView ? slide.mobile : slide.desktop}
             alt="A dynamic view of the first slide's content"
             fill
-            className="w-full object-cover"
+            className="w-full object-cover grayscale"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/30 to-black"></div>
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/10 to-black"></div>
         </SwiperSlide>
       ))}
     </Swiper>

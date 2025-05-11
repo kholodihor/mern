@@ -11,11 +11,16 @@ const Hero = () => {
   return (
     <section
       aria-label="Hero Section"
-      className="relative w-full overflow-hidden font-open-sans sm:h-screen"
+      className="relative w-full overflow-hidden font-open-sans flex flex-col sm:block sm:h-screen"
     >
-      <HeroSlider />
+      {/* Slider container */}
+      <div className="w-full">
+        <HeroSlider />
+      </div>
+
+      {/* Text content - stacked on mobile, absolute on desktop */}
       <header
-        className="absolute top-[50%] z-10 flex w-full flex-col justify-end gap-6 px-6 text-center sm:left-0 sm:top-[40%] sm:w-2/3 sm:text-left md:top-[70%]"
+        className="flex w-full flex-col justify-end gap-6 px-6 py-8 text-center sm:absolute sm:bg-transparent sm:py-0 sm:left-0 sm:top-[40%] sm:w-2/3 sm:text-left md:top-[70%] sm:z-10"
       >
         <h1
           className="mb-4 font-open-sans text-[8vh] font-bold uppercase text-white sm:text-[13vh] md:-mb-4 md:text-[17vh]"
@@ -35,8 +40,9 @@ const Hero = () => {
         </section>
       </header>
 
+      {/* Scroll indicator - only visible on mobile */}
       <RiScrollToBottomFill
-        className="absolute bottom-10 left-[45%] animate-bounce cursor-pointer text-[3rem] text-white sm:hidden"
+        className="absolute bottom-44 left-[48%] animate-bounce z-50 cursor-pointer text-[2.5rem] text-white sm:hidden"
         role="button"
         tabIndex={0}
         aria-label="Scroll down"
@@ -44,7 +50,6 @@ const Hero = () => {
 
       <ContactsBubble />
     </section>
-
   );
 };
 
