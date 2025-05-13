@@ -50,8 +50,8 @@ export async function generateMetadata({
   
   return {
     metadataBase: baseUrl,
+    // Remove canonical URL from layout - let individual pages set their own
     alternates: {
-      canonical: `${baseUrl}/${locale}`,
       languages: {
         "en-US": `${baseUrl}/en`,
         "pl-PL": `${baseUrl}/pl`,

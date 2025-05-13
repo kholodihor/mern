@@ -27,10 +27,30 @@ export async function generateMetadata({
   const { locale } = await params;
 
   const localeMetadata = metadata[locale] || metadata.pl;
+  const canonicalUrl = `${baseUrl}/${locale}/services`;
 
   return {
     title: localeMetadata.title,
     description: `${localeMetadata.description} | ${baseUrl}`,
+    metadataBase: new URL(baseUrl),
+    alternates: {
+      canonical: canonicalUrl,
+      languages: {
+        "en-US": `${baseUrl}/en/services`,
+        "pl-PL": `${baseUrl}/pl/services`,
+        "uk-UK": `${baseUrl}/ua/services`,
+      },
+    },
+    openGraph: {
+      type: "website",
+      url: canonicalUrl,
+      title: localeMetadata.title,
+      description: `${localeMetadata.description} | ${baseUrl}`,
+    },
+    robots: {
+      index: true,
+      follow: true,
+    }
   };
 }
 

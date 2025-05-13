@@ -12,16 +12,26 @@ export async function generateMetadata({
   params: Promise<{ locale: Locale }>;
 }): Promise<Metadata> {
   const { locale } = await params;
+  const canonicalUrl = `${baseUrl}/${locale}`;
 
   return {
+    metadataBase: new URL(baseUrl),
     alternates: {
-      canonical: `${baseUrl}/${locale}`,
+      canonical: canonicalUrl,
       languages: {
         "en-US": `${baseUrl}/en`,
         "pl-PL": `${baseUrl}/pl`,
         "uk-UK": `${baseUrl}/ua`,
       },
     },
+    openGraph: {
+      type: "website",
+      url: canonicalUrl,
+    },
+    robots: {
+      index: true,
+      follow: true,
+    }
   };
 }
 
