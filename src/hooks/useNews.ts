@@ -27,7 +27,7 @@ const fetchArticles = async () => {
   });
 };
 
-export const useNews = () => {
+export const useNews = (initialData: INewsArticle | null = null) => {
   const {
     data: newsList,
     error,
@@ -35,6 +35,7 @@ export const useNews = () => {
   } = useSWR<INewsArticle[]>("news", fetchArticles, {
     // refreshInterval: 5000, // Refresh every 5 seconds
     // revalidateOnFocus: true,
+    fallbackData: initialData ? [initialData] : undefined, // Use initialData as fallback for server-side rendering
   });
 
   const getArticleBySlug = (slug: string) => {

@@ -27,10 +27,10 @@ const CarImage = ({ data }: { data: string }) => {
   );
 };
 
-const CarPage = ({ slug }: { slug: string }) => {
+const CarPage = ({ slug, initialData = null }: { slug: string; initialData?: any }) => {
   const t = useTranslations();
   const locale = useLocale();
-  const { carItem, isLoading, isError } = useCar(slug);
+  const { carItem, isLoading, isError } = useCar(slug, initialData);
 
   if (isError) {
     return <LoadingError />;

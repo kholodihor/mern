@@ -18,13 +18,14 @@ const fetchCarBySlug = async (slug: string) => {
   return null;
 };
 
-export const useCar = (slug: string) => {
+export const useCar = (slug: string, initialData: IGalleryItem | null = null) => {
   const { data: carItem, error } = useSWR<IGalleryItem | null>(
     slug ? ["car", slug] : null,
     () => fetchCarBySlug(slug),
     {
       refreshInterval: 5000, // Refresh every 5 seconds
       revalidateOnFocus: true,
+      fallbackData: initialData, // Use initialData as fallback for server-side rendering
     }
   );
 
