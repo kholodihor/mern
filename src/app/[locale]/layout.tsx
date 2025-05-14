@@ -1,16 +1,16 @@
+import type { Metadata } from "next";
+import { Open_Sans } from "next/font/google";
+import { notFound } from "next/navigation";
+import { NextIntlClientProvider } from "next-intl";
+import { getMessages } from "next-intl/server";
+import { Locale, routing } from "@/i18n/routing";
+import { PageProps } from "@/types";
 import ContactLink from "@/components/shared/contact-link";
 import CookieBanner from "@/components/shared/cookie-banner";
 import Footer from "@/components/shared/footer";
 import GoogleAnalytics from "@/components/shared/google-analytics";
 import Header from "@/components/shared/header";
 import SubHeader from "@/components/shared/sub-header";
-import { Locale, routing } from "@/i18n/routing";
-import { PageProps } from "@/types";
-import type { Metadata } from "next";
-import { NextIntlClientProvider } from "next-intl";
-import { getMessages } from "next-intl/server";
-import { Open_Sans } from "next/font/google";
-import { notFound } from "next/navigation";
 import "../globals.css";
 
 const open_sans = Open_Sans({
@@ -28,15 +28,13 @@ const titles = {
   ua: "Mern Сервіс - Незалежний сервіс BMW | Механік BMW у Варшаві",
   en: "Mern Service - Independent BMW Service | BMW Mechanic in Warsaw",
   pl: "Mern Serwis - Niezależny serwis BMW | Mechanik BMW w Warszawie",
-}
+};
 
 const descriptions = {
   pl: `MERN Serwis to najlepszy serwis dla naprawy twojego BMW, Rolls Royce, Mini Cooper`,
   en: `MERN Serwis is the best service for repairing your BMW, Rolls Royce, Mini Cooper`,
   ua: `Автосервіс MERN це найкращий сервіс для ремонту ваших BMW, Rolls Royce, Mini Cooper`,
 };
-
-
 
 export async function generateMetadata({
   params,
@@ -47,7 +45,7 @@ export async function generateMetadata({
   const defaultDescription = descriptions[locale] || descriptions.pl;
   // We'll set the canonical URL in each page component instead of the layout
   // This ensures each page has the correct canonical URL
-  
+
   return {
     metadataBase: baseUrl,
     // Remove canonical URL from layout - let individual pages set their own

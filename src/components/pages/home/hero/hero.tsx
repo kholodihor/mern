@@ -1,7 +1,7 @@
 "use client";
 
-import ContactsBubble from "@/components/shared/contacts-bubble";
 import { useTranslations } from "next-intl";
+import ContactsBubble from "@/components/shared/contacts-bubble";
 import HeroSlider from "./hero-slider";
 
 const Hero = () => {
@@ -10,7 +10,7 @@ const Hero = () => {
   return (
     <section
       aria-label="Hero Section"
-      className="relative w-full overflow-hidden font-open-sans flex flex-col sm:block sm:h-screen"
+      className="relative flex w-full flex-col overflow-hidden font-open-sans sm:block sm:h-screen"
     >
       {/* Slider container */}
       <div className="w-full">
@@ -18,12 +18,8 @@ const Hero = () => {
       </div>
 
       {/* Text content - stacked on mobile, absolute on desktop */}
-      <header
-        className="flex w-full flex-col justify-end gap-6 px-6 py-8 text-center sm:absolute sm:bg-transparent sm:py-0 sm:left-0 sm:top-[40%] sm:w-2/3 sm:text-left md:top-[70%] sm:z-10"
-      >
-        <h1
-          className="mb-8 font-open-sans text-[8vh] font-bold uppercase text-white sm:text-[13vh] md:-mb-4 md:text-[17vh]"
-        >
+      <header className="flex w-full flex-col justify-end gap-6 px-6 py-8 text-center sm:absolute sm:left-0 sm:top-[40%] sm:z-10 sm:w-2/3 sm:bg-transparent sm:py-0 sm:text-left md:top-[70%]">
+        <h1 className="mb-8 font-open-sans text-[8vh] font-bold uppercase text-white sm:text-[13vh] md:-mb-4 md:text-[17vh]">
           <span aria-hidden="true">MERN</span>
         </h1>
 
@@ -38,15 +34,6 @@ const Hero = () => {
           </div>
         </section>
       </header>
-
-      {/* Scroll indicator - only visible on mobile */}
-      {/* <RiScrollToBottomFill
-        className="absolute bottom-44 left-[48%] animate-bounce z-50 cursor-pointer text-[2.5rem] text-white sm:hidden"
-        role="button"
-        tabIndex={0}
-        aria-label="Scroll down"
-      /> */}
-
       <ContactsBubble />
     </section>
   );

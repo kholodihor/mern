@@ -1,5 +1,11 @@
 "use client";
 
+import { useState } from "react";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { addDoc, collection } from "firebase/firestore";
+import { useTranslations } from "next-intl";
+import { Controller, SubmitHandler, useForm } from "react-hook-form";
+import { db } from "@/lib/firebase";
 import SuccessModal from "@/components/modals/SuccessModal";
 import {
   TFormScheme,
@@ -7,12 +13,6 @@ import {
 } from "@/components/pages/contacts/formScheme";
 import TextArea from "@/components/ui/text-area";
 import TextInput from "@/components/ui/text-input";
-import { db } from "@/lib/firebase";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { addDoc, collection } from "firebase/firestore";
-import { useTranslations } from "next-intl";
-import { useState } from "react";
-import { Controller, SubmitHandler, useForm } from "react-hook-form";
 
 const Form = () => {
   const t = useTranslations("Form");
@@ -46,7 +46,11 @@ const Form = () => {
         vin: values.vin,
         message: values.message,
         status: "new",
-        created_at: new Date(Date.now()).toLocaleDateString('en-US', {month: '2-digit', day: '2-digit', year: 'numeric'}),
+        created_at: new Date(Date.now()).toLocaleDateString("en-US", {
+          month: "2-digit",
+          day: "2-digit",
+          year: "numeric",
+        }),
       };
       const ref = collection(db, "applications");
       await addDoc(ref, data);
@@ -61,7 +65,7 @@ const Form = () => {
     <>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="mt-[2rem] flex w-full flex-col items-center justify-center gap-4 space-y-2 md:mt-0 md:w-1/2 "
+        className="mt-[2rem] flex w-full flex-col items-center justify-center gap-4 space-y-2 md:mt-0 md:w-1/2"
       >
         <Controller
           name="name"
@@ -126,7 +130,7 @@ const Form = () => {
           )}
         />
 
-        <div className="space-y-2 text-[13px] text-gray-400 max-w-[600px]">
+        <div className="max-w-[600px] space-y-2 text-[13px] text-gray-400">
           <h5 className="text-[20px] font-semibold">{t("policies.title")}</h5>
           <p>
             {t("policies.paragraph_1")}{" "}

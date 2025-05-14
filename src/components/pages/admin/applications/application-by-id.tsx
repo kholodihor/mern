@@ -41,55 +41,59 @@ const ApplicationById = ({ id }: { id: string }) => {
   }
 
   return (
-    <div className="w-full max-w-4xl mx-auto py-6 px-4">
-      <h2 className="text-2xl font-semibold mb-6 border-b border-gray-700 pb-3">Application Details</h2>
-      
-      <div className="bg-gray-900 rounded-lg shadow-lg overflow-hidden">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-6">
+    <div className="mx-auto w-full max-w-4xl px-4 py-6">
+      <h2 className="mb-6 border-b border-gray-700 pb-3 text-2xl font-semibold">
+        Application Details
+      </h2>
+
+      <div className="overflow-hidden rounded-lg bg-gray-900 shadow-lg">
+        <div className="grid grid-cols-1 gap-6 p-6 md:grid-cols-2">
           <div className="flex items-center gap-3 border-b border-gray-800 pb-3">
-            <FaRegUser className="text-blue-400 text-xl min-w-[1.5rem]" />
+            <FaRegUser className="min-w-[1.5rem] text-xl text-blue-400" />
             <div>
-              <p className="text-gray-400 text-sm">Name</p>
-              <p className="text-xl">{application?.name || 'N/A'}</p>
+              <p className="text-sm text-gray-400">Name</p>
+              <p className="text-xl">{application?.name || "N/A"}</p>
             </div>
           </div>
-          
+
           <div className="flex items-center gap-3 border-b border-gray-800 pb-3">
-            <FaPhoneAlt className="text-green-400 text-xl min-w-[1.5rem]" />
+            <FaPhoneAlt className="min-w-[1.5rem] text-xl text-green-400" />
             <div>
-              <p className="text-gray-400 text-sm">Phone</p>
-              <p className="text-xl">{application?.phone || 'N/A'}</p>
+              <p className="text-sm text-gray-400">Phone</p>
+              <p className="text-xl">{application?.phone || "N/A"}</p>
             </div>
           </div>
-          
+
           <div className="flex items-center gap-3 border-b border-gray-800 pb-3">
-            <IoMdMail className="text-yellow-400 text-xl min-w-[1.5rem]" />
+            <IoMdMail className="min-w-[1.5rem] text-xl text-yellow-400" />
             <div>
-              <p className="text-gray-400 text-sm">Email</p>
-              <p className="text-xl">{application?.email || 'N/A'}</p>
+              <p className="text-sm text-gray-400">Email</p>
+              <p className="text-xl">{application?.email || "N/A"}</p>
             </div>
           </div>
-          
+
           <div className="flex items-center gap-3 border-b border-gray-800 pb-3">
-            <CiBarcode className="text-purple-400 text-xl min-w-[1.5rem]" />
+            <CiBarcode className="min-w-[1.5rem] text-xl text-purple-400" />
             <div>
-              <p className="text-gray-400 text-sm">VIN</p>
-              <p className="text-xl">{application?.vin || 'N/A'}</p>
+              <p className="text-sm text-gray-400">VIN</p>
+              <p className="text-xl">{application?.vin || "N/A"}</p>
             </div>
           </div>
         </div>
-        
-        <div className="p-6 bg-gray-950 border-t border-gray-800">
-          <div className="flex items-center gap-3 mb-4">
-            <FaRegMessage className="text-red-400 text-xl min-w-[1.5rem]" />
+
+        <div className="border-t border-gray-800 bg-gray-950 p-6">
+          <div className="mb-4 flex items-center gap-3">
+            <FaRegMessage className="min-w-[1.5rem] text-xl text-red-400" />
             <h3 className="text-lg font-medium">Message</h3>
           </div>
-          
-          <div className="bg-gray-900 rounded-lg p-5 border border-gray-800 shadow-inner">
+
+          <div className="rounded-lg border border-gray-800 bg-gray-900 p-5 shadow-inner">
             {application?.message ? (
-              <p className="text-lg whitespace-pre-wrap leading-relaxed">{application.message}</p>
+              <p className="whitespace-pre-wrap text-lg leading-relaxed">
+                {application.message}
+              </p>
             ) : (
-              <p className="text-gray-500 italic">No message provided</p>
+              <p className="italic text-gray-500">No message provided</p>
             )}
           </div>
         </div>

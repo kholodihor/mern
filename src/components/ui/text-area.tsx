@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import clsx from "clsx";
 import { ForwardedRef, InputHTMLAttributes, forwardRef } from "react";
+import clsx from "clsx";
 
 interface TextAreaProps extends InputHTMLAttributes<HTMLTextAreaElement> {
   title?: string;

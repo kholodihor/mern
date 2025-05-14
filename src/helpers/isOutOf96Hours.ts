@@ -1,10 +1,10 @@
 export function isOutOf96Hours(dateString: string): boolean {
   let date: Date;
   const currentDate = new Date();
-  
+
   // Check if the date is in DD/MM/YYYY format
-  if (dateString.includes('/')) {
-    const [day, month, year] = dateString.split('/');
+  if (dateString.includes("/")) {
+    const [day, month, year] = dateString.split("/");
     // Note: month is 0-indexed in JavaScript Date
     date = new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
   } else {

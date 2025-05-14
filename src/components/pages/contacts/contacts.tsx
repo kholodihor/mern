@@ -1,5 +1,5 @@
-import SectionTitle from "@/components/shared/section-title";
 import { useTranslations } from "next-intl";
+import SectionTitle from "@/components/shared/section-title";
 import ApplicationForm from "./application";
 import ContactsLocation from "./location";
 
@@ -14,7 +14,7 @@ const Contacts = () => {
       <div className="mx-auto max-w-[90vw]">
         <SectionTitle id="services-title" title={t("title_2")} />
 
-        <div className="mt-8 space-y-12 sm:mt-12 sm:space-y-16 lg:mt-18">
+        <div className="lg:mt-18 mt-8 space-y-12 sm:mt-12 sm:space-y-16">
           <ApplicationForm />
           <ContactsLocation />
         </div>

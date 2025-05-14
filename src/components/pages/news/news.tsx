@@ -1,10 +1,10 @@
 "use client";
 
+import { useTranslations } from "next-intl";
+import { useNews } from "@/hooks/useNews";
 import Loader from "@/components/shared/loader";
 import LoadingError from "@/components/shared/loading-error";
 import SectionTitle from "@/components/shared/section-title";
-import { useNews } from "@/hooks/useNews";
-import { useTranslations } from "next-intl";
 import NewsItem from "./news-item";
 
 const NewsPage = () => {

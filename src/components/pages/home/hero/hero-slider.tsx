@@ -9,24 +9,24 @@ import { Swiper, SwiperSlide } from "swiper/react";
 
 const slides = [
   {
-    desktop: "/hero/hero_1.png",
-    mobile: "/hero/mobile_1.jpeg",
+    desktop: "/hero/hero_1.webp",
+    mobile: "/hero/mobile_1.webp",
   },
   {
-    desktop: "/hero/hero_2.png",
-    mobile: "/hero/mobile_2.jpeg",
+    desktop: "/hero/hero_2.webp",
+    mobile: "/hero/mobile_2.webp",
   },
   {
-    desktop: "/hero/hero_3.png",
-    mobile: "/hero/mobile_3.jpeg",
+    desktop: "/hero/hero_3.webp",
+    mobile: "/hero/mobile_3.webp",
   },
   {
-    desktop: "/hero/hero_4.png",
-    mobile: "/hero/mobile_4.jpeg",
+    desktop: "/hero/hero_4.webp",
+    mobile: "/hero/mobile_4.webp",
   },
   {
-    desktop: "/hero/hero_5.png",
-    mobile: "/hero/mobile_5.jpeg",
+    desktop: "/hero/hero_5.webp",
+    mobile: "/hero/mobile_5.webp",
   },
 ];
 
@@ -81,7 +81,6 @@ const HeroSlider = () => {
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-black"></div>
           {/* Top gradient overlay */}
           <div className="absolute inset-0 bg-gradient-to-t from-transparent via-black/5 to-black md:hidden"></div>
-
         </SwiperSlide>
       ))}
     </Swiper>

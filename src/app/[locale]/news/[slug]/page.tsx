@@ -1,8 +1,8 @@
-import Article from "@/components/pages/news/article";
+import { Metadata } from "next";
 import { baseUrl } from "@/constants";
 import { Locale } from "@/i18n/routing";
 import { PageMetadata } from "@/types";
-import { Metadata } from "next";
+import Article from "@/components/pages/news/article";
 
 const metadata: PageMetadata = {
   pl: {
@@ -50,7 +50,7 @@ export async function generateMetadata({
     robots: {
       index: true,
       follow: true,
-    }
+    },
   };
 }
 

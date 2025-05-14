@@ -1,7 +1,7 @@
+import { useTranslations } from "next-intl";
 import Contacts from "@/components/shared/contacts";
 import MyMap from "@/components/shared/map";
 import SectionTitle from "@/components/shared/section-title";
-import { useTranslations } from "next-intl";
 
 const Location = () => {
   const t = useTranslations("Contacts");

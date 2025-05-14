@@ -1,7 +1,7 @@
-import { Link } from "@/i18n/routing";
-import clsx from "clsx";
 import { usePathname } from "next/navigation";
 import React, { useState } from "react";
+import clsx from "clsx";
+import { Link } from "@/i18n/routing";
 
 interface SideBarItemProps {
   href: string;

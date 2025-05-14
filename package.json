@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "next lint --fix",
     "format": "prettier src/ --write",
     "ts-check": "tsc --project tsconfig.json --pretty --noEmit && echo "
   },

@@ -1,8 +1,8 @@
 "use client";
 
-import SectionTitle from "@/components/shared/section-title";
-import { services } from "@/data/services";
 import { useTranslations } from "next-intl";
+import { services } from "@/data/services";
+import SectionTitle from "@/components/shared/section-title";
 import ServicesCard from "./services-card";
 
 const ServicesPage = () => {
@@ -21,7 +21,7 @@ const ServicesPage = () => {
             services.map((item, index) => (
               <div
                 key={index}
-                className={`${index === services.length - 1 && services.length % 3 === 1 ? 'lg:col-start-2' : ''}`}
+                className={`${index === services.length - 1 && services.length % 3 === 1 ? "lg:col-start-2" : ""}`}
               >
                 <ServicesCard data={item} />
               </div>

@@ -1,6 +1,6 @@
-import SectionTitle from "@/components/shared/section-title";
-import { useTranslations } from "next-intl";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
+import SectionTitle from "@/components/shared/section-title";
 
 const About = () => {
   const t = useTranslations("About");
@@ -13,8 +13,8 @@ const About = () => {
       <div className="mx-auto">
         <SectionTitle id="about-us-title" title={t("title")} />
 
-        <div className="mt-8 flex flex-col  gap-8 sm:mt-12 md:flex-row md:gap-12 lg:mt-16 lg:gap-16">
-          <div className="w-full space-y-6  flex flex-col justify-center lg:pl-8">
+        <div className="mt-8 flex flex-col gap-8 sm:mt-12 md:flex-row md:gap-12 lg:mt-16 lg:gap-16">
+          <div className="flex w-full flex-col justify-center space-y-6 lg:pl-8">
             <p className="text-base leading-relaxed text-gray-200 sm:text-lg lg:text-xl">
               {t("content")}
             </p>

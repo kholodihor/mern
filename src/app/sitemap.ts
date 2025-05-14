@@ -1,6 +1,6 @@
-import { db } from "@/lib/firebase";
-import { collection, getDocs } from "firebase/firestore";
 import { MetadataRoute } from "next";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "@/lib/firebase";
 
 const baseUrl = "https://mernserwis.com";
 

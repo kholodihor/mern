@@ -1,17 +1,17 @@
 "use client";
 
+import Image from "next/image";
+import { useEffect } from "react";
+import parse from "html-react-parser";
+import { useLocale } from "next-intl";
+import { formatDate } from "@/helpers/formatDate";
+import { useNews } from "@/hooks/useNews";
+import { Link, useRouter } from "@/i18n/routing";
 import ChevronLeft from "@/components/icons/chevron-left";
 import Loader from "@/components/shared/loader";
 import LoadingError from "@/components/shared/loading-error";
 import SectionTitle from "@/components/shared/section-title";
 import Slider from "@/components/shared/slider/slider";
-import { formatDate } from "@/helpers/formatDate";
-import { useNews } from "@/hooks/useNews";
-import { Link, useRouter } from "@/i18n/routing";
-import parse from "html-react-parser";
-import { useLocale } from "next-intl";
-import Image from "next/image";
-import { useEffect } from "react";
 
 const NewsImage = ({ data }: { data: string }) => {
   return (
