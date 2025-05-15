@@ -17,7 +17,31 @@ export const useApplications = () => {
             id: doc.id,
           } as IApplicationResponse);
         });
-        setApplications(applicationsData);
+        
+        // Sort applications by date - newer first
+        const sortedApplications = applicationsData.sort((a, b) => {
+          // Parse dates in MM/DD/YYYY format
+          let dateA: Date, dateB: Date;
+          
+          if (a.created_at && typeof a.created_at === 'string' && a.created_at.includes('/')) {
+            const [month, day, year] = a.created_at.split('/');
+            dateA = new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
+          } else {
+            dateA = new Date(0);
+          }
+          
+          if (b.created_at && typeof b.created_at === 'string' && b.created_at.includes('/')) {
+            const [month, day, year] = b.created_at.split('/');
+            dateB = new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
+          } else {
+            dateB = new Date(0);
+          }
+          
+          // Sort descending (newer first)
+          return dateB.getTime() - dateA.getTime();
+        });
+        
+        setApplications(sortedApplications);
       }
     });
 
