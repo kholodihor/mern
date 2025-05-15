@@ -2,11 +2,16 @@ export function isWithin48Hours(dateString: string): boolean {
   let date: Date;
   const currentDate = new Date();
 
-  // Check if the date is in DD/MM/YYYY format
+  // Handle MM/DD/YYYY format from database
   if (dateString.includes("/")) {
-    const [day, month, year] = dateString.split("/");
-    // Note: month is 0-indexed in JavaScript Date
-    date = new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
+    const parts = dateString.split("/");
+    if (parts.length === 3) {
+      const [month, day, year] = parts;
+      // Note: month is 0-indexed in JavaScript Date
+      date = new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
+    } else {
+      date = new Date(dateString);
+    }
   } else {
     // Try the default Date constructor for other formats
     date = new Date(dateString);

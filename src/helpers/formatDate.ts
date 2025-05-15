@@ -27,25 +27,33 @@ export const formatReviewDate = (isoDate: string): string => {
  * @param dateString - The date string to format (can be in various formats)
  * @returns A formatted date string in DD/MM/YYYY format with leading zeros
  */
-export const formatDateWithSlashes = (dateString: string): string => {
+export const formatDateWithSlashes = (dateString: any): string => {
   let date: Date;
 
-  // Check if the date is already in DD/MM/YYYY format
-  if (dateString.includes("/")) {
-    const [day, month, year] = dateString.split("/");
-    // Create a new date with the parsed components
-    date = new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
+  // Handle different date formats
+  if (typeof dateString === 'string' && dateString.includes("/")) {
+    // Handle MM/DD/YYYY format from database (e.g., "05/14/2025")
+    const parts = dateString.split("/");
+    if (parts.length === 3) {
+      const [month, day, year] = parts;
+      date = new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
+    } else {
+      date = new Date(dateString);
+    }
+  } else if (dateString && typeof dateString === 'object' && dateString.seconds) {
+    // Handle Firebase timestamp objects
+    date = new Date(dateString.seconds * 1000);
   } else {
-    // Try the default Date constructor for other formats
+    // Default date parsing for other formats
     date = new Date(dateString);
   }
 
   // Make sure the date is valid
   if (isNaN(date.getTime())) {
-    return dateString; // Return the original string if parsing failed
+    return typeof dateString === 'string' ? dateString : 'Invalid date';
   }
 
-  // Format with leading zeros
+  // Format with leading zeros - always display as DD/MM/YYYY
   const day = date.getDate().toString().padStart(2, "0");
   const month = (date.getMonth() + 1).toString().padStart(2, "0");
   const year = date.getFullYear();
