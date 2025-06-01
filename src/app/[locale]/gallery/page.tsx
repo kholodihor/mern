@@ -14,15 +14,15 @@ const DynamicPage = dynamic(
 const metadata: PageMetadata = {
   pl: {
     title: "Galeria | MERN Serwis",
-    description: `MERN Serwis | ${baseUrl} Galeria`,
+    description: "Przeglądaj nasze prace i projekty serwisowe. Zdjęcia i opisy napraw samochodów wykonanych w naszym warsztacie.",
   },
   en: {
     title: "Gallery | MERN Service",
-    description: `MERN Serwis | ${baseUrl} Gallery`,
+    description: "Browse our work and service projects. Photos and descriptions of car repairs performed in our workshop.",
   },
   ua: {
     title: "Галерея | Автосервіс MERN",
-    description: `MERN Serwis | ${baseUrl} Галерея`,
+    description: "Переглядайте наші роботи та сервісні проекти. Фотографії та описи ремонтів автомобілів, виконаних в нашій майстерні.",
   },
 };
 
@@ -38,12 +38,45 @@ export async function generateMetadata({
   return {
     title: localeMetadata.title,
     description: localeMetadata.description,
+    metadataBase: new URL(baseUrl),
     alternates: {
       canonical: `${baseUrl}/${locale}/gallery`,
       languages: {
         "en-US": `${baseUrl}/en/gallery`,
         "pl-PL": `${baseUrl}/pl/gallery`,
-        "uk-UK": `${baseUrl}/ua/gallery`,
+        "uk-UA": `${baseUrl}/ua/gallery`,
+      },
+    },
+    openGraph: {
+      type: "website",
+      url: `${baseUrl}/${locale}/gallery`,
+      title: localeMetadata.title,
+      description: localeMetadata.description,
+      images: [
+        {
+          url: `${baseUrl}/opengraph-image.png`,
+          width: 1200,
+          height: 630,
+          alt: localeMetadata.title,
+        },
+      ],
+      locale: locale === 'en' ? 'en_US' : locale === 'pl' ? 'pl_PL' : 'uk_UA',
+      siteName: "MERN Serwis",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: localeMetadata.title,
+      description: localeMetadata.description,
+      images: [`${baseUrl}/opengraph-image.png`],
+    },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
       },
     },
   };

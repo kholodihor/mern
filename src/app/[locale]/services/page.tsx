@@ -7,15 +7,15 @@ import ServicesPage from "@/components/pages/services/services";
 const metadata: PageMetadata = {
   pl: {
     title: "Usługi | MERN Serwis",
-    description: "MERN Serwis | Nasze Usługi",
+    description: "Profesjonalne usługi serwisowe dla pojazdów. Naprawa, konserwacja i diagnostyka samochodowa.",
   },
   en: {
     title: "Services | MERN Service",
-    description: "MERN Serwis | Our Services",
+    description: "Professional vehicle service and maintenance. Car repair, maintenance and diagnostics.",
   },
   ua: {
     title: "Послуги | Автосервіс MERN",
-    description: "MERN Serwis | Наші послуги",
+    description: "Професійне обслуговування транспортних засобів. Ремонт, технічне обслуговування та діагностика автомобілів.",
   },
 };
 
@@ -31,25 +31,48 @@ export async function generateMetadata({
 
   return {
     title: localeMetadata.title,
-    description: `${localeMetadata.description} | ${baseUrl}`,
+    description: localeMetadata.description,
     metadataBase: new URL(baseUrl),
     alternates: {
       canonical: canonicalUrl,
       languages: {
         "en-US": `${baseUrl}/en/services`,
         "pl-PL": `${baseUrl}/pl/services`,
-        "uk-UK": `${baseUrl}/ua/services`,
+        "uk-UA": `${baseUrl}/ua/services`, // Fixed Ukrainian language code
       },
     },
     openGraph: {
       type: "website",
       url: canonicalUrl,
       title: localeMetadata.title,
-      description: `${localeMetadata.description} | ${baseUrl}`,
+      description: localeMetadata.description,
+      images: [
+        {
+          url: `${baseUrl}/images/services-og.jpg`, // Add an OG image for better social sharing
+          width: 1200,
+          height: 630,
+          alt: localeMetadata.title,
+        },
+      ],
+      locale: locale === 'en' ? 'en_US' : locale === 'pl' ? 'pl_PL' : 'uk_UA',
+      siteName: "MERN Serwis",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: localeMetadata.title,
+      description: localeMetadata.description,
+      images: [`${baseUrl}/images/services-og.jpg`],
     },
     robots: {
       index: true,
       follow: true,
+      nocache: false,
+      googleBot: {
+        index: true,
+        follow: true,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+      },
     },
   };
 }

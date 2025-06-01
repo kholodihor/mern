@@ -56,7 +56,7 @@ export async function generateMetadata({
     `${localeMetadata.title} | ${slug}`;
     
   const description = carData && carData.desc && carData.desc[locale] ? 
-    `${carData.desc[locale]}` : 
+    carData.desc[locale] : 
     `${localeMetadata.description} | ${slug}`;
 
   return {
@@ -68,7 +68,7 @@ export async function generateMetadata({
       languages: {
         "en-US": `${baseUrl}/en/gallery/${slug}`,
         "pl-PL": `${baseUrl}/pl/gallery/${slug}`,
-        "uk-UK": `${baseUrl}/ua/gallery/${slug}`,
+        "uk-UA": `${baseUrl}/ua/gallery/${slug}`,
       },
     },
     openGraph: {
@@ -79,10 +79,26 @@ export async function generateMetadata({
       images: carData && carData.images && carData.images.length > 0 ? 
         [{ url: carData.images[0], width: 1200, height: 630, alt: carData.car }] : 
         [{ url: '/opengraph-image.png', width: 1200, height: 630, alt: 'MERN Serwis' }],
+      locale: locale === 'en' ? 'en_US' : locale === 'pl' ? 'pl_PL' : 'uk_UA',
+      siteName: "MERN Serwis",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: title,
+      description: description,
+      images: carData && carData.images && carData.images.length > 0 ? 
+        [carData.images[0]] : 
+        ['/opengraph-image.png'],
     },
     robots: {
       index: true,
       follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+      },
     },
   };
 }
