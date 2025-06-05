@@ -28,6 +28,12 @@ export default function robots(): MetadataRoute.Robots {
         ],
       },
     ],
-    sitemap: `${baseUrl}/sitemap.xml`, // Next.js automatically handles locale-based sitemaps
+    // Include both root sitemap and locale-specific sitemaps
+    sitemap: [
+      `${baseUrl}/sitemap.xml`,
+      `${baseUrl}/pl/sitemap.xml`,
+      `${baseUrl}/en/sitemap.xml`,
+      `${baseUrl}/ua/sitemap.xml`,
+    ],
   };
 }

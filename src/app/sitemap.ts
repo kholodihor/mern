@@ -55,6 +55,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const sitemapEntries: MetadataRoute.Sitemap = [];
 
+  // Add the root URL that redirects to a locale
+  sitemapEntries.push({
+    url: baseUrl,
+    lastModified: new Date(),
+    changeFrequency: "weekly",
+    priority: 1,
+  });
+
   // Generate entries for each route
   for (const route of allRoutes) {
     // Create entries for each locale
