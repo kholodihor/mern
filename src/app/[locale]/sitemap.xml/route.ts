@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server';
+import { NextResponse } from "next/server";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 
@@ -57,7 +57,7 @@ async function generateSitemap(locale: string) {
   // Generate entries for this specific locale
   for (const route of allRoutes) {
     const url = `${baseUrl}/${locale}${route.path ? "/" + route.path : ""}`;
-    
+
     // Common alternates configuration
     const alternates = {
       languages: {
@@ -85,25 +85,25 @@ function generateSitemapXml(entries: any[]) {
   let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
   xml += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" ';
   xml += 'xmlns:xhtml="http://www.w3.org/1999/xhtml">\n';
-  
-  entries.forEach(entry => {
-    xml += '  <url>\n';
+
+  entries.forEach((entry) => {
+    xml += "  <url>\n";
     xml += `    <loc>${entry.url}</loc>\n`;
     xml += `    <lastmod>${entry.lastModified.toISOString()}</lastmod>\n`;
     xml += `    <changefreq>${entry.changeFrequency}</changefreq>\n`;
     xml += `    <priority>${entry.priority}</priority>\n`;
-    
+
     // Add language alternates
     if (entry.alternates && entry.alternates.languages) {
       Object.entries(entry.alternates.languages).forEach(([lang, url]) => {
         xml += `    <xhtml:link rel="alternate" hreflang="${lang}" href="${url}" />\n`;
       });
     }
-    
-    xml += '  </url>\n';
+
+    xml += "  </url>\n";
   });
-  
-  xml += '</urlset>';
+
+  xml += "</urlset>";
   return xml;
 }
 
@@ -112,18 +112,18 @@ export async function GET(
   { params }: { params: { locale: string } }
 ) {
   const locale = params.locale;
-  
+
   // Only generate sitemaps for valid locales
-  if (!['pl', 'en', 'ua'].includes(locale)) {
-    return new NextResponse('Not Found', { status: 404 });
+  if (!["pl", "en", "ua"].includes(locale)) {
+    return new NextResponse("Not Found", { status: 404 });
   }
-  
+
   const sitemapEntries = await generateSitemap(locale);
   const xml = generateSitemapXml(sitemapEntries);
-  
+
   return new NextResponse(xml, {
     headers: {
-      'Content-Type': 'application/xml',
+      "Content-Type": "application/xml",
     },
   });
 }

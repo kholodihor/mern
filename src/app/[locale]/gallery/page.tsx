@@ -14,15 +14,18 @@ const DynamicPage = dynamic(
 const metadata: PageMetadata = {
   pl: {
     title: "Galeria | MERN Serwis",
-    description: "Przeglądaj nasze prace i projekty serwisowe. Zdjęcia i opisy napraw samochodów wykonanych w naszym warsztacie.",
+    description:
+      "Przeglądaj nasze prace i projekty serwisowe. Zdjęcia i opisy napraw samochodów wykonanych w naszym warsztacie.",
   },
   en: {
     title: "Gallery | MERN Service",
-    description: "Browse our work and service projects. Photos and descriptions of car repairs performed in our workshop.",
+    description:
+      "Browse our work and service projects. Photos and descriptions of car repairs performed in our workshop.",
   },
   ua: {
     title: "Галерея | Автосервіс MERN",
-    description: "Переглядайте наші роботи та сервісні проекти. Фотографії та описи ремонтів автомобілів, виконаних в нашій майстерні.",
+    description:
+      "Переглядайте наші роботи та сервісні проекти. Фотографії та описи ремонтів автомобілів, виконаних в нашій майстерні.",
   },
 };
 
@@ -60,7 +63,7 @@ export async function generateMetadata({
           alt: localeMetadata.title,
         },
       ],
-      locale: locale === 'en' ? 'en_US' : locale === 'pl' ? 'pl_PL' : 'uk_UA',
+      locale: locale === "en" ? "en_US" : locale === "pl" ? "pl_PL" : "uk_UA",
       siteName: "MERN Serwis",
     },
     twitter: {
@@ -75,8 +78,8 @@ export async function generateMetadata({
       googleBot: {
         index: true,
         follow: true,
-        'max-image-preview': 'large',
-        'max-snippet': -1,
+        "max-image-preview": "large",
+        "max-snippet": -1,
       },
     },
   };

@@ -7,15 +7,18 @@ import ServicesPage from "@/components/pages/services/services";
 const metadata: PageMetadata = {
   pl: {
     title: "Usługi | MERN Serwis",
-    description: "Profesjonalne usługi serwisowe dla pojazdów. Naprawa, konserwacja i diagnostyka samochodowa.",
+    description:
+      "Profesjonalne usługi serwisowe dla pojazdów. Naprawa, konserwacja i diagnostyka samochodowa.",
   },
   en: {
     title: "Services | MERN Service",
-    description: "Professional vehicle service and maintenance. Car repair, maintenance and diagnostics.",
+    description:
+      "Professional vehicle service and maintenance. Car repair, maintenance and diagnostics.",
   },
   ua: {
     title: "Послуги | Автосервіс MERN",
-    description: "Професійне обслуговування транспортних засобів. Ремонт, технічне обслуговування та діагностика автомобілів.",
+    description:
+      "Професійне обслуговування транспортних засобів. Ремонт, технічне обслуговування та діагностика автомобілів.",
   },
 };
 
@@ -54,7 +57,7 @@ export async function generateMetadata({
           alt: localeMetadata.title,
         },
       ],
-      locale: locale === 'en' ? 'en_US' : locale === 'pl' ? 'pl_PL' : 'uk_UA',
+      locale: locale === "en" ? "en_US" : locale === "pl" ? "pl_PL" : "uk_UA",
       siteName: "MERN Serwis",
     },
     twitter: {
@@ -70,8 +73,8 @@ export async function generateMetadata({
       googleBot: {
         index: true,
         follow: true,
-        'max-image-preview': 'large',
-        'max-snippet': -1,
+        "max-image-preview": "large",
+        "max-snippet": -1,
       },
     },
   };

@@ -14,15 +14,18 @@ const DynamicPage = dynamic(
 const metadata: PageMetadata = {
   pl: {
     title: "Aktualności | MERN Serwis",
-    description: "Najnowsze informacje i aktualności z naszego serwisu samochodowego. Sprawdź co nowego w MERN Serwis.",
+    description:
+      "Najnowsze informacje i aktualności z naszego serwisu samochodowego. Sprawdź co nowego w MERN Serwis.",
   },
   en: {
     title: "News | MERN Service",
-    description: "Latest information and news from our car service. Check what's new at MERN Service.",
+    description:
+      "Latest information and news from our car service. Check what's new at MERN Service.",
   },
   ua: {
     title: "Новини | Автосервіс MERN",
-    description: "Найновіша інформація та новини з нашого автосервісу. Перевірте, що нового в Автосервісі MERN.",
+    description:
+      "Найновіша інформація та новини з нашого автосервісу. Перевірте, що нового в Автосервісі MERN.",
   },
 };
 
@@ -61,7 +64,7 @@ export async function generateMetadata({
           alt: localeMetadata.title,
         },
       ],
-      locale: locale === 'en' ? 'en_US' : locale === 'pl' ? 'pl_PL' : 'uk_UA',
+      locale: locale === "en" ? "en_US" : locale === "pl" ? "pl_PL" : "uk_UA",
       siteName: "MERN Serwis",
     },
     twitter: {
@@ -76,8 +79,8 @@ export async function generateMetadata({
       googleBot: {
         index: true,
         follow: true,
-        'max-image-preview': 'large',
-        'max-snippet': -1,
+        "max-image-preview": "large",
+        "max-snippet": -1,
       },
     },
   };

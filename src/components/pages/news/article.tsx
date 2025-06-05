@@ -27,7 +27,13 @@ const NewsImage = ({ data }: { data: string }) => {
   );
 };
 
-const Article = ({ slug, initialData = null }: { slug: string; initialData?: any }) => {
+const Article = ({
+  slug,
+  initialData = null,
+}: {
+  slug: string;
+  initialData?: any;
+}) => {
   const locale = useLocale();
   const router = useRouter();
   const { getArticleBySlug, isLoading, isError } = useNews(initialData);

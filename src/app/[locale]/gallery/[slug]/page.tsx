@@ -2,9 +2,9 @@ import { Metadata } from "next";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { baseUrl } from "@/constants";
 import { Locale } from "@/i18n/routing";
-import { PageMetadata, IGalleryItem } from "@/types";
-import CarPage from "@/components/pages/gallery/car-page";
 import { db } from "@/lib/firebase";
+import { IGalleryItem, PageMetadata } from "@/types";
+import CarPage from "@/components/pages/gallery/car-page";
 
 // Server-side data fetching function
 async function getCarData(slug: string) {
@@ -46,18 +46,19 @@ export async function generateMetadata({
 
   // Fetch car data for enhanced metadata
   const carData = await getCarData(slug);
-  
+
   const localeMetadata = metadata[locale] || metadata.pl;
   const canonicalUrl = `${baseUrl}/${locale}/gallery/${slug}`;
-  
+
   // Create a more descriptive title and description using the car data
-  const title = carData ? 
-    `${carData.car} | ${localeMetadata.title}` : 
-    `${localeMetadata.title} | ${slug}`;
-    
-  const description = carData && carData.desc && carData.desc[locale] ? 
-    carData.desc[locale] : 
-    `${localeMetadata.description} | ${slug}`;
+  const title = carData
+    ? `${carData.car} | ${localeMetadata.title}`
+    : `${localeMetadata.title} | ${slug}`;
+
+  const description =
+    carData && carData.desc && carData.desc[locale]
+      ? carData.desc[locale]
+      : `${localeMetadata.description} | ${slug}`;
 
   return {
     title: title,
@@ -76,19 +77,35 @@ export async function generateMetadata({
       url: canonicalUrl,
       title: title,
       description: description,
-      images: carData && carData.images && carData.images.length > 0 ? 
-        [{ url: carData.images[0], width: 1200, height: 630, alt: carData.car }] : 
-        [{ url: '/opengraph-image.png', width: 1200, height: 630, alt: 'MERN Serwis' }],
-      locale: locale === 'en' ? 'en_US' : locale === 'pl' ? 'pl_PL' : 'uk_UA',
+      images:
+        carData && carData.images && carData.images.length > 0
+          ? [
+              {
+                url: carData.images[0],
+                width: 1200,
+                height: 630,
+                alt: carData.car,
+              },
+            ]
+          : [
+              {
+                url: "/opengraph-image.png",
+                width: 1200,
+                height: 630,
+                alt: "MERN Serwis",
+              },
+            ],
+      locale: locale === "en" ? "en_US" : locale === "pl" ? "pl_PL" : "uk_UA",
       siteName: "MERN Serwis",
     },
     twitter: {
       card: "summary_large_image",
       title: title,
       description: description,
-      images: carData && carData.images && carData.images.length > 0 ? 
-        [carData.images[0]] : 
-        ['/opengraph-image.png'],
+      images:
+        carData && carData.images && carData.images.length > 0
+          ? [carData.images[0]]
+          : ["/opengraph-image.png"],
     },
     robots: {
       index: true,
@@ -96,8 +113,8 @@ export async function generateMetadata({
       googleBot: {
         index: true,
         follow: true,
-        'max-image-preview': 'large',
-        'max-snippet': -1,
+        "max-image-preview": "large",
+        "max-snippet": -1,
       },
     },
   };
@@ -106,19 +123,19 @@ export async function generateMetadata({
 // Helper function to serialize Firebase data
 function serializeData(data: any) {
   if (!data) return null;
-  
+
   // Handle Firestore Timestamp objects
-  if (data.created_at && typeof data.created_at === 'object') {
+  if (data.created_at && typeof data.created_at === "object") {
     return {
       ...data,
       // Convert Firestore timestamp to a simple object
       created_at: {
         seconds: data.created_at.seconds,
-        nanoseconds: data.created_at.nanoseconds
-      }
+        nanoseconds: data.created_at.nanoseconds,
+      },
     };
   }
-  
+
   return data;
 }
 
@@ -126,12 +143,14 @@ function serializeData(data: any) {
 async function Car({ params }: { params: { slug: string } }) {
   // Pre-fetch the data on the server for SEO
   const initialData = await getCarData(params.slug);
-  
+
   // Serialize the data before passing it to the client component
-  const serializedData = initialData ? JSON.parse(JSON.stringify(serializeData(initialData))) : null;
-  
+  const serializedData = initialData
+    ? JSON.parse(JSON.stringify(serializeData(initialData)))
+    : null;
+
   // Pass both the slug and serialized data to the client component
   return <CarPage slug={params.slug} initialData={serializedData} />;
-};
+}
 
 export default Car;

@@ -18,7 +18,10 @@ const fetchCarBySlug = async (slug: string) => {
   return null;
 };
 
-export const useCar = (slug: string, initialData: IGalleryItem | null = null) => {
+export const useCar = (
+  slug: string,
+  initialData: IGalleryItem | null = null
+) => {
   const { data: carItem, error } = useSWR<IGalleryItem | null>(
     slug ? ["car", slug] : null,
     () => fetchCarBySlug(slug),

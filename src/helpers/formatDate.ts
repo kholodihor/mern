@@ -31,7 +31,7 @@ export const formatDateWithSlashes = (dateString: any): string => {
   let date: Date;
 
   // Handle different date formats
-  if (typeof dateString === 'string' && dateString.includes("/")) {
+  if (typeof dateString === "string" && dateString.includes("/")) {
     // Handle MM/DD/YYYY format from database (e.g., "05/14/2025")
     const parts = dateString.split("/");
     if (parts.length === 3) {
@@ -40,7 +40,11 @@ export const formatDateWithSlashes = (dateString: any): string => {
     } else {
       date = new Date(dateString);
     }
-  } else if (dateString && typeof dateString === 'object' && dateString.seconds) {
+  } else if (
+    dateString &&
+    typeof dateString === "object" &&
+    dateString.seconds
+  ) {
     // Handle Firebase timestamp objects
     date = new Date(dateString.seconds * 1000);
   } else {
@@ -50,7 +54,7 @@ export const formatDateWithSlashes = (dateString: any): string => {
 
   // Make sure the date is valid
   if (isNaN(date.getTime())) {
-    return typeof dateString === 'string' ? dateString : 'Invalid date';
+    return typeof dateString === "string" ? dateString : "Invalid date";
   }
 
   // Format with leading zeros - always display as DD/MM/YYYY

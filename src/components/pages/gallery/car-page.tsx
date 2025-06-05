@@ -27,7 +27,13 @@ const CarImage = ({ data }: { data: string }) => {
   );
 };
 
-const CarPage = ({ slug, initialData = null }: { slug: string; initialData?: any }) => {
+const CarPage = ({
+  slug,
+  initialData = null,
+}: {
+  slug: string;
+  initialData?: any;
+}) => {
   const t = useTranslations();
   const locale = useLocale();
   const { carItem, isLoading, isError } = useCar(slug, initialData);

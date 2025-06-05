@@ -1,0 +1,23 @@
+#!/bin/sh
+
+echo "🔍 Running pre-commit checks..."
+
+echo "→ Running TypeScript check..."
+npm run ts-check || {
+  echo "❌ TypeScript check failed"
+  exit 1
+}
+
+echo "→ Running ESLint..."
+npm run lint || {
+  echo "❌ ESLint failed"
+  exit 1
+}
+
+echo "→ Running Prettier..."
+npm run format || {
+  echo "❌ Prettier failed"
+  exit 1
+}
+
+echo "✅ All checks passed! Committing changes..."

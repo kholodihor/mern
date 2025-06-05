@@ -16,11 +16,8 @@ export default function middleware(request: NextRequest) {
     );
 
     // Add Link header with canonical information for search engines
-    const canonicalUrl = new URL('/pl', request.url).toString();
-    response.headers.set(
-      'Link',
-      `<${canonicalUrl}>; rel="canonical"`
-    );
+    const canonicalUrl = new URL("/pl", request.url).toString();
+    response.headers.set("Link", `<${canonicalUrl}>; rel="canonical"`);
 
     return response;
   }
