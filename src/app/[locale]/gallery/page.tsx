@@ -1,15 +1,8 @@
 import { Metadata } from "next";
-import dynamic from "next/dynamic";
 import { baseUrl } from "@/constants";
 import { Locale } from "@/i18n/routing";
 import { PageMetadata } from "@/types";
-import Spiral from "@/components/shared/spiral/Spiral";
-
-const DynamicPage = dynamic(
-  () => import("@/components/pages/gallery/gallery"),
-
-  { ssr: false, loading: () => <Spiral /> }
-);
+import GalleryClient from "@/components/client-wrappers/gallery-client";
 
 const metadata: PageMetadata = {
   pl: {
@@ -86,7 +79,7 @@ export async function generateMetadata({
 }
 
 const GalleryPage = () => {
-  return <DynamicPage />;
+  return <GalleryClient />;
 };
 
 export default GalleryPage;

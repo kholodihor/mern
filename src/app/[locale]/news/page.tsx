@@ -1,15 +1,8 @@
 import { Metadata } from "next";
-import dynamic from "next/dynamic";
 import { baseUrl } from "@/constants";
 import { Locale } from "@/i18n/routing";
 import { PageMetadata } from "@/types";
-import Spiral from "@/components/shared/spiral/Spiral";
-
-const DynamicPage = dynamic(
-  () => import("@/components/pages/news/news"),
-
-  { ssr: false, loading: () => <Spiral /> }
-);
+import NewsClient from "@/components/client-wrappers/news-client";
 
 const metadata: PageMetadata = {
   pl: {
@@ -87,7 +80,7 @@ export async function generateMetadata({
 }
 
 const Page = () => {
-  return <DynamicPage />;
+  return <NewsClient />;
 };
 
 export default Page;

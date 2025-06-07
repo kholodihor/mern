@@ -32,9 +32,9 @@ export interface IUser {
 }
 
 export interface PageProps {
-  params: {
+  params: Promise<{
     locale: "ua" | "en" | "pl";
-  };
+  }>;
 }
 
 export interface ContactInfo {

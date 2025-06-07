@@ -124,9 +124,16 @@ export async function generateMetadata({
 }
 
 // Server component that pre-fetches data
-async function NewsArticlePage({ params }: { params: { slug: string } }) {
+async function NewsArticlePage({
+  params,
+}: {
+  params: Promise<{ locale: Locale; slug: string }>;
+}) {
+  // Resolve the params Promise
+  const resolvedParams = await params;
+
   // Pre-fetch the data on the server for SEO
-  const initialData = await getArticleData(params.slug);
+  const initialData = await getArticleData(resolvedParams.slug);
 
   // Serialize the data before passing it to the client component
   const serializedData = initialData
@@ -134,7 +141,7 @@ async function NewsArticlePage({ params }: { params: { slug: string } }) {
     : null;
 
   // Pass both the slug and serialized data to the client component
-  return <Article slug={params.slug} initialData={serializedData} />;
+  return <Article slug={resolvedParams.slug} initialData={serializedData} />;
 }
 
 export default NewsArticlePage;

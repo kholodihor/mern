@@ -1,11 +1,11 @@
 "use client";
 
-import { useRouter } from "@/i18n/routing";
-import { auth } from "@/lib/firebase";
 import { signOut } from "firebase/auth";
 import { CiLogout } from "react-icons/ci";
 import { IoMdPhotos } from "react-icons/io";
 import { TiMessages } from "react-icons/ti";
+import { useRouter } from "@/i18n/routing";
+import { auth } from "@/lib/firebase";
 import { SideBarItem } from "./sidebar-item";
 
 const SideBar = () => {

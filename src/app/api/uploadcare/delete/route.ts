@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-export async function POST(request: Request) {
+export async function POST(request: Request): Promise<Response> {
   try {
     const { uuid } = await request.json();
 

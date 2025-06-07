@@ -12,7 +12,7 @@ import { db } from "@/lib/firebase";
 // Cache duration in milliseconds (24 hours)
 const CACHE_DURATION = 24 * 60 * 60 * 1000;
 
-export async function GET() {
+export async function GET(): Promise<Response> {
   try {
     // First try to get cached reviews from Firestore
     const reviewsRef = collection(db, "reviews");

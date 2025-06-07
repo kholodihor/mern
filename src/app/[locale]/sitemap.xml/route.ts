@@ -109,9 +109,9 @@ function generateSitemapXml(entries: any[]) {
 
 export async function GET(
   request: Request,
-  { params }: { params: { locale: string } }
-) {
-  const locale = params.locale;
+  { params }: { params: Promise<{ locale: string }> }
+): Promise<Response> {
+  const { locale } = await params;
 
   // Only generate sitemaps for valid locales
   if (!["pl", "en", "ua"].includes(locale)) {

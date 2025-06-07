@@ -140,9 +140,16 @@ function serializeData(data: any) {
 }
 
 // Server component that pre-fetches data
-async function Car({ params }: { params: { slug: string } }) {
+async function Car({
+  params,
+}: {
+  params: Promise<{ locale: Locale; slug: string }>;
+}) {
+  // Resolve the params Promise
+  const resolvedParams = await params;
+
   // Pre-fetch the data on the server for SEO
-  const initialData = await getCarData(params.slug);
+  const initialData = await getCarData(resolvedParams.slug);
 
   // Serialize the data before passing it to the client component
   const serializedData = initialData
@@ -150,7 +157,7 @@ async function Car({ params }: { params: { slug: string } }) {
     : null;
 
   // Pass both the slug and serialized data to the client component
-  return <CarPage slug={params.slug} initialData={serializedData} />;
+  return <CarPage slug={resolvedParams.slug} initialData={serializedData} />;
 }
 
 export default Car;
