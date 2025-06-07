@@ -19,7 +19,11 @@ export const metadata: Metadata = {
 
 // This component will automatically return a 404 status code
 const NotFound = () => {
-  return <Page404 />;
+  return (
+    <div className="min-h-screen flex flex-col items-center justify-center bg-black text-white">
+      <Page404 />
+    </div>
+  );
 };
 
 export default NotFound;
