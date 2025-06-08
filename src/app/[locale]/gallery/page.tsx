@@ -2,7 +2,8 @@ import { Metadata } from "next";
 import { baseUrl } from "@/constants";
 import { Locale } from "@/i18n/routing";
 import { PageMetadata } from "@/types";
-import GalleryClient from "@/components/client-wrappers/gallery-client";
+import GalleryServer from "@/components/pages/gallery/gallery-server";
+import { fetchGalleryItems } from "@/lib/server-data-fetchers";
 
 const metadata: PageMetadata = {
   pl: {
@@ -78,8 +79,11 @@ export async function generateMetadata({
   };
 }
 
-const GalleryPage = () => {
-  return <GalleryClient />;
+const GalleryPage = async () => {
+  // Fetch data server-side for SEO
+  const initialData = await fetchGalleryItems();
+  
+  return <GalleryServer initialData={initialData} />;
 };
 
 export default GalleryPage;

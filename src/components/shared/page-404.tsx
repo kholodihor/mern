@@ -1,7 +1,7 @@
 "use client";
 
-import not_found from "@/animations/not_found.json";
 import Lottie from "lottie-react";
+import not_found from "@/animations/not_found.json";
 
 const Page404 = () => {
   return (

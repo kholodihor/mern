@@ -2,7 +2,8 @@ import { Metadata } from "next";
 import { baseUrl } from "@/constants";
 import { Locale } from "@/i18n/routing";
 import { PageMetadata } from "@/types";
-import NewsClient from "@/components/client-wrappers/news-client";
+import NewsServer from "@/components/pages/news/news-server";
+import { fetchNewsArticles } from "@/lib/server-data-fetchers";
 
 const metadata: PageMetadata = {
   pl: {
@@ -79,8 +80,11 @@ export async function generateMetadata({
   };
 }
 
-const Page = () => {
-  return <NewsClient />;
+const Page = async () => {
+  // Fetch data server-side for SEO
+  const initialData = await fetchNewsArticles();
+  
+  return <NewsServer initialData={initialData} />;
 };
 
 export default Page;
