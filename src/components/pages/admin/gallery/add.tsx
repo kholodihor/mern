@@ -3,19 +3,16 @@
 import dynamic from "next/dynamic";
 import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Widget } from "@uploadcare/react-widget";
 import { addDoc, collection } from "firebase/firestore";
 import { useTranslations } from "next-intl";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import "react-quill-new/dist/quill.snow.css";
 import { CATEGORIES } from "@/constants/categories";
-import { convertToWebp } from "@/helpers/convertToWebp";
-import { getUploadcareUrls } from "@/helpers/getUploadcareUrls";
 import { useRouter } from "@/i18n/routing";
 import { db } from "@/lib/firebase";
 import "@/styles/quill.css";
-import { getImageUrlsFromGroup } from "@/utils/imageFetcher";
 import { translateText } from "@/utils/translator";
+import FirebaseUpload from "@/components/ui/firebase-upload";
 import Multiselect from "@/components/ui/multi-select";
 import TextArea from "@/components/ui/text-area";
 import TextInput from "@/components/ui/text-input";
@@ -64,7 +61,7 @@ const AddGallery = () => {
     try {
       setIsProcessing(true);
 
-      if (!values.images.length) {
+      if (!values.images || values.images.length === 0) {
         throw new Error("Будь ласка, виберіть хоча б одну картинку");
       }
 
@@ -73,9 +70,8 @@ const AddGallery = () => {
       const translatedDescEN = await translateText(values.desc, "en");
       const translatedFullDescEN = await translateText(values.fullDesc, "en");
 
-      const images = await getImageUrlsFromGroup(values.images);
-
-      const urls = getUploadcareUrls(images);
+      // Firebase Storage URLs are already available in values.images
+      const imageUrls = Array.isArray(values.images) ? values.images : [];
 
       const data = {
         car: values.car,
@@ -85,7 +81,7 @@ const AddGallery = () => {
           .replace(/[''`]/g, "")
           .replace(/\s+/g, "-"),
         categories: values.categories,
-        images: convertToWebp(urls),
+        images: imageUrls,
         desc: {
           pl: values.desc,
           ua: translatedDescUA,
@@ -153,19 +149,18 @@ const AddGallery = () => {
           name="images"
           control={control}
           rules={{ required: "File is required" }}
-          render={({ field: { onChange, value, ref } }) => (
+          render={({ field: { onChange, value } }) => (
             <div>
               <label htmlFor="file-upload" className="mr-4 text-sm font-medium">
                 Завантажити фото
               </label>
-              <Widget
-                publicKey="ff76dce7219a0b044f12"
+              <FirebaseUpload
+                folder="gallery"
                 multiple={true}
-                value={value}
-                onChange={(fileInfo) => {
-                  onChange(fileInfo.cdnUrl);
+                value={Array.isArray(value) ? value : value ? [value] : []}
+                onChange={(urls) => {
+                  onChange(urls);
                 }}
-                ref={ref}
               />
               {errors.images && (
                 <span className="text-xs text-red-500">

@@ -3,18 +3,15 @@
 import dynamic from "next/dynamic";
 import { useEffect, useRef, useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Widget } from "@uploadcare/react-widget";
 import { addDoc, collection } from "firebase/firestore";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import "react-quill-new/dist/quill.snow.css";
-import { convertToWebp } from "@/helpers/convertToWebp";
 import { generateSlug } from "@/helpers/generateSlug";
-import { getUploadcareUrls } from "@/helpers/getUploadcareUrls";
 import { useRouter } from "@/i18n/routing";
 import { db } from "@/lib/firebase";
 import "@/styles/quill.css";
-import { getImageUrlsFromGroup } from "@/utils/imageFetcher";
 import { translateText } from "@/utils/translator";
+import FirebaseUpload from "@/components/ui/firebase-upload";
 import TextArea from "@/components/ui/text-area";
 import TextInput from "@/components/ui/text-input";
 import { TNewsScheme, newsSchema } from "./schema";
@@ -61,7 +58,7 @@ const AddNews = () => {
     try {
       setIsProcessing(true);
 
-      if (!values.images.length) {
+      if (!values.images || (Array.isArray(values.images) && values.images.length === 0)) {
         throw new Error("Будь ласка, виберіть хоча б одну картинку");
       }
 
@@ -75,8 +72,8 @@ const AddNews = () => {
       const translatedDescEN = await translateText(values.short_text, "en");
       const translatedFullDescEN = await translateText(values.full_text, "en");
 
-      const images = await getImageUrlsFromGroup(values.images);
-      const urls = getUploadcareUrls(images);
+      // Firebase Storage URLs are already available in values.images
+      const imageUrls = Array.isArray(values.images) ? values.images : [values.images];
 
       // Generate slug from Polish title (primary language)
       const slug = generateSlug(values.title);
@@ -88,7 +85,7 @@ const AddNews = () => {
           en: translatedTitleEN,
         },
         slug,
-        images: convertToWebp(urls),
+        images: imageUrls,
         youtubeUrl: values.youtubeUrl || "",
         short_text: {
           pl: values.short_text,
@@ -142,19 +139,18 @@ const AddNews = () => {
           name="images"
           control={control}
           rules={{ required: "File is required" }}
-          render={({ field: { onChange, value, ref } }) => (
+          render={({ field: { onChange, value } }) => (
             <div>
               <label htmlFor="file-upload" className="mr-4 text-sm font-medium">
                 Завантажити фото
               </label>
-              <Widget
-                publicKey="ff76dce7219a0b044f12"
+              <FirebaseUpload
+                folder="news"
                 multiple={true}
-                value={value}
-                onChange={(fileInfo) => {
-                  onChange(fileInfo.cdnUrl);
+                value={Array.isArray(value) ? value : value ? [value] : []}
+                onChange={(urls) => {
+                  onChange(urls);
                 }}
-                ref={ref}
               />
               {errors.images && (
                 <span className="text-xs text-red-500">
@@ -220,9 +216,9 @@ const AddNews = () => {
         <button
           type="submit"
           disabled={isProcessing}
-          className="mt-4 rounded-md bg-blue-500 px-4 py-2 text-white transition-colors hover:bg-blue-600 disabled:cursor-not-allowed disabled:opacity-50"
+          className={`w-full min-w-[325px] rounded-[1rem] border px-4 py-2 transition-all hover:bg-gray-400/50 md:w-[200px] disabled:cursor-not-allowed disabled:opacity-50`}
         >
-          {isProcessing ? "Обробка..." : "Додати"}
+          {isProcessing ? "Обробка" : "Додати"}
         </button>
       </form>
     </div>

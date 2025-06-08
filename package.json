@@ -10,14 +10,15 @@
     "format": "prettier src/ --write",
     "ts-check": "tsc --project tsconfig.json --pretty --noEmit && echo ",
     "prepare": "husky",
-    "lint-staged": "lint-staged"
+    "lint-staged": "lint-staged",
+    "migrate-images": "node scripts/migrate-images.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
     "@next/third-parties": "^15.0.3",
     "@nextui-org/avatar": "^2.0.33",
     "@smastrom/react-rating": "^1.5.0",
-    "@uploadcare/react-widget": "^2.4.7",
+
     "axios": "^1.7.8",
     "clsx": "^2.1.1",
     "core-js-pure": "^3.42.0",
@@ -55,6 +56,7 @@
     "prettier-plugin-tailwindcss": "^0.6.9",
     "tailwind-scrollbar": "^3.1.0",
     "tailwindcss": "^3.4.1",
+    "ts-node": "^10.9.2",
     "typescript": "^5"
   },
   "lint-staged": {

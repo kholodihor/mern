@@ -7,8 +7,9 @@ import {
 } from "firebase/firestore";
 import useSWR from "swr";
 import { db } from "@/lib/firebase";
+import { deleteFilesFromStorage } from "@/lib/firebase-storage";
 import { INewsArticle } from "@/types";
-import { deleteUploadcareImages } from "@/utils/uploadcare";
+
 
 const fetchArticles = async () => {
   const applicationsRef = collection(db, "news");
@@ -54,9 +55,12 @@ export const useNews = (initialData: INewsArticle | null = null) => {
         const articleSnap = await getDoc(articleRef);
         const article = articleSnap.data() as INewsArticle;
 
-        // Delete images from Uploadcare if they exist
+        // Handle image deletion based on URL pattern
         if (article?.images && article.images.length > 0) {
-          await deleteUploadcareImages(article.images);
+          const images = Array.isArray(article.images) ? article.images : [article.images];
+          
+          // Delete all images from Firebase Storage
+          await deleteFilesFromStorage(images);
         }
 
         // Then delete the document from Firebase

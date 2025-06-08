@@ -8,9 +8,10 @@ import {
 import useSWR from "swr";
 import { CATEGORIES } from "@/constants/categories";
 import { db } from "@/lib/firebase";
+import { deleteFilesFromStorage } from "@/lib/firebase-storage";
 import { useFilters } from "@/stores/useFilters";
 import { IGalleryItem } from "@/types";
-import { deleteUploadcareImages } from "@/utils/uploadcare";
+
 
 const fetchGalleryItems = async () => {
   const applicationsRef = collection(db, "gallery");
@@ -59,9 +60,12 @@ export const useGallery = () => {
         const itemSnap = await getDoc(itemRef);
         const item = itemSnap.data() as IGalleryItem;
 
-        // Delete images from Uploadcare if they exist
+        // Handle image deletion based on URL pattern
         if (item?.images && item.images.length > 0) {
-          await deleteUploadcareImages(item.images);
+          const images = Array.isArray(item.images) ? item.images : [item.images];
+          
+          // Delete all images from Firebase Storage
+          await deleteFilesFromStorage(images);
         }
 
         // Then delete the document from Firebase
@@ -70,7 +74,7 @@ export const useGallery = () => {
         alert("Статтю успішно видалено!");
         window.location.reload();
       } catch (error) {
-        console.error("Пломилка видалення статті:", error);
+        console.error("Помилка видалення статті:", error);
       }
     }
   };
