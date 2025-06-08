@@ -1,7 +1,7 @@
 import { useTranslations } from "next-intl";
 import { IGalleryItem } from "@/types";
-import SectionTitle from "@/components/shared/section-title";
 import GalleryClientWrapper from "@/components/pages/gallery/gallery-client-wrapper";
+import SectionTitle from "@/components/shared/section-title";
 
 interface GalleryServerProps {
   initialData: IGalleryItem[];
@@ -20,7 +20,7 @@ export default function GalleryServer({ initialData }: GalleryServerProps) {
         <div className="mx-auto max-w-7xl">
           <SectionTitle id="gallery-title" title={t("title")} />
         </div>
-        
+
         {/* This part will be hydrated with client-side interactivity */}
         <GalleryClientWrapper initialData={initialData} />
       </div>

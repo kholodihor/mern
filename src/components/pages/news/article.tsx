@@ -73,7 +73,7 @@ const Article = ({
 
         <div className="mt-8 sm:mt-12">
           <Slider
-            data={[...newsItem.images].reverse()}
+            data={newsItem.images}
             Component={NewsImage}
             aria-label="News Images Slider"
             nextElName="nextNews"

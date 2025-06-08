@@ -1,11 +1,11 @@
 "use client";
 
-import { useTranslations } from "next-intl";
 import { useEffect } from "react";
+import { useTranslations } from "next-intl";
 import { CATEGORIES } from "@/constants/categories";
-import { IGalleryItem } from "@/types";
-import { useFilters } from "@/stores/useFilters";
 import { useGallery } from "@/hooks/useGallery";
+import { useFilters } from "@/stores/useFilters";
+import { IGalleryItem } from "@/types";
 import Loader from "@/components/shared/loader";
 import LoadingError from "@/components/shared/loading-error";
 import CustomDropdown from "@/components/ui/select";
@@ -18,7 +18,7 @@ interface GalleryClientWrapperProps {
 const GalleryClientWrapper = ({ initialData }: GalleryClientWrapperProps) => {
   const t = useTranslations("Gallery");
   const { filters } = useFilters();
-  
+
   // Use the initialData for immediate rendering, but allow client-side updates
   const { filteredData, isLoading, isError, mutate } = useGallery();
 
@@ -30,13 +30,18 @@ const GalleryClientWrapper = ({ initialData }: GalleryClientWrapperProps) => {
   }, [initialData, mutate]);
 
   const options = Object.values(CATEGORIES);
-  
+
   // Use initialData until client-side data is loaded
-  const displayData = filteredData.length > 0 ? filteredData : 
-    filters[0] === CATEGORIES.ALL ? initialData : 
-    initialData.filter(item => 
-      item.categories.some((category: string) => filters.includes(CATEGORIES[category]))
-    );
+  const displayData =
+    filteredData.length > 0
+      ? filteredData
+      : filters[0] === CATEGORIES.ALL
+        ? initialData
+        : initialData.filter((item) =>
+            item.categories.some((category: string) =>
+              filters.includes(CATEGORIES[category])
+            )
+          );
 
   if (isError) {
     return <LoadingError />;
@@ -58,9 +63,7 @@ const GalleryClientWrapper = ({ initialData }: GalleryClientWrapperProps) => {
           ))
         ) : (
           <div className="col-span-full flex min-h-[200px] items-center justify-center">
-            <p className="text-lg text-gray-400 sm:text-xl">
-              {t("not_found")}
-            </p>
+            <p className="text-lg text-gray-400 sm:text-xl">{t("not_found")}</p>
           </div>
         )}
       </div>

@@ -1,4 +1,9 @@
-import { deleteObject, getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
+import {
+  deleteObject,
+  getDownloadURL,
+  ref,
+  uploadBytesResumable,
+} from "firebase/storage";
 import { storage } from "./firebase";
 
 /**
@@ -7,20 +12,23 @@ import { storage } from "./firebase";
  * @param path - The path in storage where the file should be stored
  * @returns Promise with the download URL
  */
-export async function uploadFileToStorage(file: File, path: string): Promise<string> {
+export async function uploadFileToStorage(
+  file: File,
+  path: string
+): Promise<string> {
   try {
     // Create a storage reference
     const storageRef = ref(storage, path);
-    
+
     // Upload the file
     const snapshot = await uploadBytesResumable(storageRef, file);
-    console.log('File uploaded successfully');
-    
+    console.log("File uploaded successfully");
+
     // Get the download URL
     const downloadURL = await getDownloadURL(snapshot.ref);
     return downloadURL;
   } catch (error) {
-    console.error('Error uploading file:', error);
+    console.error("Error uploading file:", error);
     throw error;
   }
 }
@@ -34,9 +42,11 @@ export const extractStoragePath = (url: string): string | null => {
   try {
     // Extract the path from the URL
     // Example URL: https://firebasestorage.googleapis.com/v0/b/mern-e9975.appspot.com/o/gallery%2F1749390558267-bg235g.png?alt=media&token=f3fce726-879a-4113-ac1c-060e43ae5a0e
-    const match = url.match(/firebasestorage.googleapis.com\/v0\/b\/[^/]+\/o\/([^?]+)/i);
+    const match = url.match(
+      /firebasestorage.googleapis.com\/v0\/b\/[^/]+\/o\/([^?]+)/i
+    );
     if (!match || !match[1]) return null;
-    
+
     // Decode the URL-encoded path
     return decodeURIComponent(match[1]);
   } catch (error) {
@@ -72,7 +82,7 @@ export const deleteFileByUrl = async (url: string): Promise<void | null> => {
     console.warn(`Not a valid Firebase Storage URL: ${url}`);
     return null;
   }
-  
+
   return deleteFileByPath(path);
 };
 
@@ -83,14 +93,14 @@ export const deleteFileByUrl = async (url: string): Promise<void | null> => {
  */
 export const deleteFilesFromStorage = async (urls: string[]): Promise<void> => {
   try {
-    const deletePromises = urls.map(url => {
+    const deletePromises = urls.map((url) => {
       const path = extractStoragePath(url);
       if (path) {
         return deleteFileByPath(path);
       }
       return Promise.resolve(); // Skip invalid URLs
     });
-    
+
     await Promise.all(deletePromises);
     console.log(`${urls.length} files deleted from Firebase Storage`);
   } catch (error) {
@@ -108,7 +118,7 @@ export const deleteFilesFromStorage = async (urls: string[]): Promise<void> => {
 export function generateFilePath(file: File, folder: string): string {
   const timestamp = Date.now();
   const randomString = Math.random().toString(36).substring(2, 8);
-  const fileExtension = file.name.split('.').pop() || '';
-  
+  const fileExtension = file.name.split(".").pop() || "";
+
   return `${folder}/${timestamp}-${randomString}.${fileExtension}`;
 }

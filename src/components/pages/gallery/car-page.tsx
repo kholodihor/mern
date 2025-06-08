@@ -64,7 +64,7 @@ const CarPage = ({
         </div>
         <div className="mt-8 sm:mt-12">
           <Slider
-            data={[...carItem.images].reverse()}
+            data={carItem.images}
             Component={CarImage}
             aria-label="Cars Slider"
             nextElName="nextCars"

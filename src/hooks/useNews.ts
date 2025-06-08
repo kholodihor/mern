@@ -10,7 +10,6 @@ import { db } from "@/lib/firebase";
 import { deleteFilesFromStorage } from "@/lib/firebase-storage";
 import { INewsArticle } from "@/types";
 
-
 const fetchArticles = async () => {
   const applicationsRef = collection(db, "news");
   const snapshot = await getDocs(applicationsRef);
@@ -57,8 +56,10 @@ export const useNews = (initialData: INewsArticle | null = null) => {
 
         // Handle image deletion based on URL pattern
         if (article?.images && article.images.length > 0) {
-          const images = Array.isArray(article.images) ? article.images : [article.images];
-          
+          const images = Array.isArray(article.images)
+            ? article.images
+            : [article.images];
+
           // Delete all images from Firebase Storage
           await deleteFilesFromStorage(images);
         }

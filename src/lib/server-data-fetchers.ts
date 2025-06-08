@@ -25,7 +25,7 @@ export async function fetchGalleryItems() {
       new Date(a.created_at.seconds).getTime()
     );
   });
-  
+
   // Serialize the data to ensure it's safe to pass to client components
   return serializeData<IGalleryItem[]>(sortedData);
 }
@@ -45,7 +45,7 @@ export async function fetchNewsArticles() {
       new Date(a.created_at.seconds * 1000).getTime()
     );
   });
-  
+
   // Serialize the data to ensure it's safe to pass to client components
   return serializeData<INewsArticle[]>(sortedData);
 }

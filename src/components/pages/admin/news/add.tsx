@@ -58,7 +58,10 @@ const AddNews = () => {
     try {
       setIsProcessing(true);
 
-      if (!values.images || (Array.isArray(values.images) && values.images.length === 0)) {
+      if (
+        !values.images ||
+        (Array.isArray(values.images) && values.images.length === 0)
+      ) {
         throw new Error("Будь ласка, виберіть хоча б одну картинку");
       }
 
@@ -73,7 +76,9 @@ const AddNews = () => {
       const translatedFullDescEN = await translateText(values.full_text, "en");
 
       // Firebase Storage URLs are already available in values.images
-      const imageUrls = Array.isArray(values.images) ? values.images : [values.images];
+      const imageUrls = Array.isArray(values.images)
+        ? values.images
+        : [values.images];
 
       // Generate slug from Polish title (primary language)
       const slug = generateSlug(values.title);
@@ -216,7 +221,7 @@ const AddNews = () => {
         <button
           type="submit"
           disabled={isProcessing}
-          className={`w-full min-w-[325px] rounded-[1rem] border px-4 py-2 transition-all hover:bg-gray-400/50 md:w-[200px] disabled:cursor-not-allowed disabled:opacity-50`}
+          className={`w-full min-w-[325px] rounded-[1rem] border px-4 py-2 transition-all hover:bg-gray-400/50 disabled:cursor-not-allowed disabled:opacity-50 md:w-[200px]`}
         >
           {isProcessing ? "Обробка" : "Додати"}
         </button>

@@ -12,7 +12,6 @@ import { deleteFilesFromStorage } from "@/lib/firebase-storage";
 import { useFilters } from "@/stores/useFilters";
 import { IGalleryItem } from "@/types";
 
-
 const fetchGalleryItems = async () => {
   const applicationsRef = collection(db, "gallery");
   const snapshot = await getDocs(applicationsRef);
@@ -62,8 +61,10 @@ export const useGallery = () => {
 
         // Handle image deletion based on URL pattern
         if (item?.images && item.images.length > 0) {
-          const images = Array.isArray(item.images) ? item.images : [item.images];
-          
+          const images = Array.isArray(item.images)
+            ? item.images
+            : [item.images];
+
           // Delete all images from Firebase Storage
           await deleteFilesFromStorage(images);
         }

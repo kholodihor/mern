@@ -1,9 +1,9 @@
 import { Metadata } from "next";
 import { baseUrl } from "@/constants";
 import { Locale } from "@/i18n/routing";
+import { fetchGalleryItems } from "@/lib/server-data-fetchers";
 import { PageMetadata } from "@/types";
 import GalleryServer from "@/components/pages/gallery/gallery-server";
-import { fetchGalleryItems } from "@/lib/server-data-fetchers";
 
 const metadata: PageMetadata = {
   pl: {
@@ -82,7 +82,7 @@ export async function generateMetadata({
 const GalleryPage = async () => {
   // Fetch data server-side for SEO
   const initialData = await fetchGalleryItems();
-  
+
   return <GalleryServer initialData={initialData} />;
 };
 

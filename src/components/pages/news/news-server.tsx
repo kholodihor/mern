@@ -1,7 +1,7 @@
 import { useTranslations } from "next-intl";
 import { INewsArticle } from "@/types";
-import SectionTitle from "@/components/shared/section-title";
 import NewsClientWrapper from "@/components/pages/news/news-client-wrapper";
+import SectionTitle from "@/components/shared/section-title";
 
 interface NewsServerProps {
   initialData: INewsArticle[];
@@ -18,7 +18,7 @@ export default function NewsServer({ initialData }: NewsServerProps) {
     >
       <div className="mx-auto max-w-[90vw]">
         <SectionTitle id="news-title" title={t("title")} />
-        
+
         {/* This part will be hydrated with client-side interactivity */}
         <NewsClientWrapper initialData={initialData} />
       </div>
