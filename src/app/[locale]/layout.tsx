@@ -1,16 +1,16 @@
-import type { Metadata } from "next";
-import { Open_Sans } from "next/font/google";
-import { notFound } from "next/navigation";
-import { NextIntlClientProvider } from "next-intl";
-import { getMessages } from "next-intl/server";
-import { Locale, routing } from "@/i18n/routing";
-import { PageProps } from "@/types";
-import ContactLink from "@/components/shared/contact-link";
+import ConditionalContactLink from "@/components/shared/conditional-contact-link";
 import CookieBanner from "@/components/shared/cookie-banner";
 import Footer from "@/components/shared/footer";
 import GoogleAnalytics from "@/components/shared/google-analytics";
 import Header from "@/components/shared/header";
 import SubHeader from "@/components/shared/sub-header";
+import { Locale, routing } from "@/i18n/routing";
+import { PageProps } from "@/types";
+import type { Metadata } from "next";
+import { NextIntlClientProvider } from "next-intl";
+import { getMessages } from "next-intl/server";
+import { Open_Sans } from "next/font/google";
+import { notFound } from "next/navigation";
 import "../globals.css";
 
 const open_sans = Open_Sans({
@@ -149,7 +149,7 @@ export default async function RootLayout({
           GA_MEASUREMENT_ID={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || ""}
         />
         <NextIntlClientProvider locale={locale} messages={messages}>
-          <ContactLink />
+          <ConditionalContactLink />
           <SubHeader />
           <Header />
           {children}
