@@ -19,9 +19,9 @@ export async function generateMetadata({
     alternates: {
       canonical: canonicalUrl,
       languages: {
-        "en-US": `${baseUrl}/en`,
-        "pl-PL": `${baseUrl}/pl`,
-        "uk-UK": `${baseUrl}/ua`,
+        en: `${baseUrl}/en`,
+        pl: `${baseUrl}/pl`,
+        uk: `${baseUrl}/ua`,
       },
     },
     openGraph: {

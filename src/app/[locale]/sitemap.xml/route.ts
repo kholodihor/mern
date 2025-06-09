@@ -21,8 +21,14 @@ async function fetchDynamicRoutes() {
     const gallerySnapshot = await getDocs(galleryRef);
     const galleryRoutes = gallerySnapshot.docs.map((doc) => {
       const data = doc.data();
+      // Clean up slug - ensure it doesn't end with a dash
+      const cleanSlug =
+        data.slug && typeof data.slug === "string" && data.slug.endsWith("-")
+          ? data.slug.slice(0, -1)
+          : data.slug;
+
       return {
-        path: `gallery/${data.slug}`,
+        path: `gallery/${cleanSlug}`,
         lastModified: data.lastModified
           ? new Date(data.lastModified)
           : new Date(),
@@ -61,10 +67,10 @@ async function generateSitemap(locale: string) {
     // Common alternates configuration
     const alternates = {
       languages: {
-        "pl-PL": `${baseUrl}/pl${route.path ? "/" + route.path : ""}`,
-        "en-US": `${baseUrl}/en${route.path ? "/" + route.path : ""}`,
-        "uk-UA": `${baseUrl}/ua${route.path ? "/" + route.path : ""}`,
-        "x-default": `${baseUrl}/en${route.path ? "/" + route.path : ""}`,
+        pl: `${baseUrl}/pl${route.path ? "/" + route.path : ""}`,
+        en: `${baseUrl}/en${route.path ? "/" + route.path : ""}`,
+        uk: `${baseUrl}/ua${route.path ? "/" + route.path : ""}`,
+        "x-default": `${baseUrl}/pl${route.path ? "/" + route.path : ""}`,
       },
     };
 

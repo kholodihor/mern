@@ -63,22 +63,29 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale, slug } = await params;
 
+  // Clean up slug for canonical URL - ensure it doesn't end with a dash
+  const cleanSlug = slug.endsWith("-") ? slug.slice(0, -1) : slug;
+
   // Fetch article data for enhanced metadata
-  const articleData = await getArticleData(slug);
+  const articleData = await getArticleData(cleanSlug);
 
   const localeMetadata = metadata[locale] || metadata.pl;
-  const canonicalUrl = `${baseUrl}/${locale}/news/${slug}`;
+  const canonicalUrl = `${baseUrl}/${locale}/news/${cleanSlug}`;
 
   // Create a more descriptive title and description using the article data
   const title =
-    articleData && articleData.title && articleData.title[locale]
-      ? `${articleData.title[locale]} | ${localeMetadata.title}`
-      : `${localeMetadata.title} | ${slug}`;
+    articleData &&
+    articleData.title &&
+    articleData.title[locale as keyof typeof articleData.title]
+      ? `${articleData.title[locale as keyof typeof articleData.title]} | ${localeMetadata.title}`
+      : `${localeMetadata.title} | ${cleanSlug}`;
 
   const description =
-    articleData && articleData.short_text && articleData.short_text[locale]
-      ? `${articleData.short_text[locale]}`
-      : `${localeMetadata.description} | ${slug}`;
+    articleData &&
+    articleData.short_text &&
+    articleData.short_text[locale as keyof typeof articleData.short_text]
+      ? `${articleData.short_text[locale as keyof typeof articleData.short_text]}`
+      : `${localeMetadata.description} | ${cleanSlug}`;
 
   return {
     title: title,
@@ -87,9 +94,9 @@ export async function generateMetadata({
     alternates: {
       canonical: canonicalUrl,
       languages: {
-        "en-US": `${baseUrl}/en/news/${slug}`,
-        "pl-PL": `${baseUrl}/pl/news/${slug}`,
-        "uk-UK": `${baseUrl}/ua/news/${slug}`,
+        en: `${baseUrl}/en/news/${cleanSlug}`,
+        pl: `${baseUrl}/pl/news/${cleanSlug}`,
+        uk: `${baseUrl}/ua/news/${cleanSlug}`,
       },
     },
     openGraph: {
@@ -104,7 +111,9 @@ export async function generateMetadata({
                 url: articleData.images[0],
                 width: 1200,
                 height: 630,
-                alt: articleData.title[locale] || "News article",
+                alt:
+                  articleData.title[locale as keyof typeof articleData.title] ||
+                  "News article",
               },
             ]
           : [
@@ -132,8 +141,13 @@ async function NewsArticlePage({
   // Resolve the params Promise
   const resolvedParams = await params;
 
+  // Clean up slug for canonical URL - ensure it doesn't end with a dash
+  const cleanSlug = resolvedParams.slug.endsWith("-")
+    ? resolvedParams.slug.slice(0, -1)
+    : resolvedParams.slug;
+
   // Pre-fetch the data on the server for SEO
-  const initialData = await getArticleData(resolvedParams.slug);
+  const initialData = await getArticleData(cleanSlug);
 
   // Serialize the data before passing it to the client component
   const serializedData = initialData

@@ -43,34 +43,37 @@ export async function generateMetadata({
 
   const defaultTitle = titles[locale] || titles.pl;
   const defaultDescription = descriptions[locale] || descriptions.pl;
-  // We'll set the canonical URL in each page component instead of the layout
-  // This ensures each page has the correct canonical URL
+
+  // Set the canonical URL for the root page
+  const canonicalUrl = `${baseUrl}/${locale}`;
+
+  // No need for helper functions, we'll use direct string interpolation
 
   return {
     metadataBase: baseUrl,
-    // Remove canonical URL from layout - let individual pages set their own
     alternates: {
+      canonical: canonicalUrl,
       languages: {
-        "en-US": `${baseUrl}/en`,
-        "pl-PL": `${baseUrl}/pl`,
-        "uk-UK": `${baseUrl}/ua`,
+        en: `${baseUrl}/en`,
+        pl: `${baseUrl}/pl`,
+        uk: `${baseUrl}/ua`,
       },
     },
     title: {
       default: defaultTitle,
       template: `%s | Mern Serwis - Niezależny serwis BMW | Mechanik BMW w Warszawie`,
     },
-    description: `${baseUrl} | ${contactInfo} | ${defaultDescription}`,
+    description: `${contactInfo} | ${defaultDescription}`,
     openGraph: {
       type: "website",
-      locale: locale,
-      url: baseUrl.toString(),
+      locale: locale === "en" ? "en_US" : locale === "pl" ? "pl_PL" : "uk_UA",
+      url: canonicalUrl,
       title: defaultTitle,
       description: defaultDescription,
       siteName: defaultTitle,
       images: [
         {
-          url: "/opengraph-image.png",
+          url: `${baseUrl}/opengraph-image.png`,
           width: 1200,
           height: 630,
           alt: "MERN Serwis Samochodowy",
@@ -81,7 +84,7 @@ export async function generateMetadata({
       card: "summary_large_image",
       title: defaultTitle,
       description: defaultDescription,
-      images: ["/opengraph-image.png"],
+      images: [`${baseUrl}/opengraph-image.png`],
     },
     keywords: [
       "MERN",
@@ -114,35 +117,50 @@ export default async function RootLayout({
   return (
     <html lang={locale}>
       <head>
+        {/* Add canonical URL tag */}
+        <link rel="canonical" href={`${baseUrl}/${locale}`} />
+
+        {/* Add hreflang tags for all supported languages */}
+        <link rel="alternate" hrefLang="en" href={`${baseUrl}/en`} />
+        <link rel="alternate" hrefLang="pl" href={`${baseUrl}/pl`} />
+        <link rel="alternate" hrefLang="uk" href={`${baseUrl}/ua`} />
+        <link rel="alternate" hrefLang="x-default" href={`${baseUrl}/pl`} />
+
         <meta
           name="description"
-          content="MERN Serwis is the best service for repairing your BMW, Rolls Royce, Mini Cooper"
+          content={
+            descriptions[locale as keyof typeof descriptions] || descriptions.pl
+          }
         />
 
-        <meta property="og:url" content="https://mernserwis.com/en" />
+        <meta property="og:url" content={`${baseUrl}/${locale}`} />
         <meta property="og:type" content="website" />
-        <meta property="og:title" content={titles.pl} />
+        <meta
+          property="og:title"
+          content={titles[locale as keyof typeof titles] || titles.pl}
+        />
         <meta
           property="og:description"
-          content="MERN Serwis is the best service for repairing your BMW, Rolls Royce, Mini Cooper"
+          content={
+            descriptions[locale as keyof typeof descriptions] || descriptions.pl
+          }
         />
-        <meta
-          property="og:image"
-          content="https://mernserwis.com/opengraph-image.png"
-        />
+        <meta property="og:image" content={`${baseUrl}/opengraph-image.png`} />
 
         <meta name="twitter:card" content="summary_large_image" />
         <meta property="twitter:domain" content="mernserwis.com" />
-        <meta property="twitter:url" content="https://mernserwis.com/en" />
-        <meta name="twitter:title" content={titles.pl} />
+        <meta property="twitter:url" content={`${baseUrl}/${locale}`} />
+        <meta
+          name="twitter:title"
+          content={titles[locale as keyof typeof titles] || titles.pl}
+        />
         <meta
           name="twitter:description"
-          content="MERN Serwis is the best service for repairing your BMW, Rolls Royce, Mini Cooper"
+          content={
+            descriptions[locale as keyof typeof descriptions] || descriptions.pl
+          }
         />
-        <meta
-          name="twitter:image"
-          content="https://mernserwis.com/opengraph-image.png"
-        />
+        <meta name="twitter:image" content={`${baseUrl}/opengraph-image.png`} />
       </head>
       <body className={`min-w-[320px] ${open_sans.variable}`}>
         <GoogleAnalytics

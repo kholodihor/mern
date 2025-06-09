@@ -1,12 +1,14 @@
 "use client";
 
+import Head from "next/head";
 import Image from "next/image";
 import { useEffect } from "react";
 import parse from "html-react-parser";
 import { useLocale } from "next-intl";
+import { baseUrl } from "@/constants";
 import { formatDate } from "@/helpers/formatDate";
 import { useNews } from "@/hooks/useNews";
-import { Link, useRouter } from "@/i18n/routing";
+import { Link, locales, useRouter } from "@/i18n/routing";
 import ChevronLeft from "@/components/icons/chevron-left";
 import Loader from "@/components/shared/loader";
 import LoadingError from "@/components/shared/loading-error";
@@ -38,7 +40,19 @@ const Article = ({
   const router = useRouter();
   const { getArticleBySlug, isLoading, isError } = useNews(initialData);
 
-  const newsItem = getArticleBySlug(slug);
+  // Clean up slug for canonical URL - ensure it doesn't end with a dash
+  const cleanSlug = slug.endsWith("-") ? slug.slice(0, -1) : slug;
+
+  // Generate canonical URL and alternate language URLs
+  const canonicalUrl = `${baseUrl}/${locale}/news/${cleanSlug}`;
+
+  // Generate alternate language URLs
+  const alternateUrls = locales.reduce((acc: Record<string, string>, loc) => {
+    acc[loc] = `${baseUrl}/${loc}/news/${cleanSlug}`;
+    return acc;
+  }, {});
+
+  const newsItem = getArticleBySlug(cleanSlug);
 
   useEffect(() => {
     if (!newsItem) {
@@ -55,72 +69,99 @@ const Article = ({
   }
 
   return (
-    <section
-      id={slug}
-      className="mt-[15vh] min-h-screen w-full px-4 py-12 sm:px-6 sm:py-16 md:mt-[20vh] lg:px-8 lg:py-20"
-      aria-labelledby={`${slug}}-title`}
-    >
-      <div className="mx-auto max-w-7xl">
-        <div className="relative mb-8 sm:mb-12">
-          <Link
-            href="/news"
-            className="absolute left-0 top-1/2 -translate-y-1/2 p-2 text-white transition-colors hover:text-gray-300"
-          >
-            <ChevronLeft className="h-8 w-8 sm:h-10 sm:w-10" />
-          </Link>
-          <SectionTitle id={`${slug}-title`} title={newsItem.title[locale]} />
-        </div>
+    <>
+      {/* Add SEO head tags */}
+      <Head>
+        {/* Canonical URL */}
+        <link rel="canonical" href={canonicalUrl} />
 
-        <div className="mt-8 sm:mt-12">
-          <Slider
-            data={newsItem.images}
-            Component={NewsImage}
-            aria-label="News Images Slider"
-            nextElName="nextNews"
-            prevElName="prevNews"
-            breakpoints={{
-              450: {
-                slidesPerView: 1.2,
-                spaceBetween: 16,
-              },
-              640: {
-                slidesPerView: 2,
-                spaceBetween: 20,
-              },
-              1024: {
-                slidesPerView: 3,
-                spaceBetween: 24,
-              },
-              1280: {
-                slidesPerView: 3.5,
-                spaceBetween: 32,
-              },
-            }}
+        {/* Hreflang tags */}
+        {Object.entries(alternateUrls).map(([lang, url]) => (
+          <link
+            key={lang}
+            rel="alternate"
+            hrefLang={lang === "ua" ? "uk" : lang}
+            href={url}
           />
-        </div>
+        ))}
+        <link rel="alternate" hrefLang="x-default" href={alternateUrls.pl} />
+      </Head>
 
-        <div className="mt-8 space-y-6 sm:mt-12">
-          <div className="text-base leading-relaxed text-gray-300 sm:text-lg">
-            {parse(newsItem.full_text[locale] || "")}
-          </div>
-
-          {newsItem.youtubeUrl && (
-            <a
-              href={newsItem.youtubeUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-8 inline-block text-blue-400 underline transition-colors hover:text-blue-700"
+      <section
+        id={cleanSlug}
+        className="mt-[15vh] min-h-screen w-full px-4 py-12 sm:px-6 sm:py-16 md:mt-[20vh] lg:px-8 lg:py-20"
+        aria-labelledby={`${cleanSlug}-title`}
+      >
+        <div className="mx-auto max-w-7xl">
+          <div className="relative mb-8 sm:mb-12">
+            <Link
+              href="/news"
+              className="absolute left-0 top-1/2 -translate-y-1/2 p-2 text-white transition-colors hover:text-gray-300"
             >
-              {newsItem.youtubeUrl}
-            </a>
-          )}
+              <ChevronLeft className="h-8 w-8 sm:h-10 sm:w-10" />
+            </Link>
+            <SectionTitle
+              id={`${cleanSlug}-title`}
+              title={
+                newsItem.title[locale as keyof typeof newsItem.title] || ""
+              }
+            />
+          </div>
 
-          <div className="text-sm text-gray-400">
-            {formatDate(newsItem.created_at)}
+          <div className="mt-8 sm:mt-12">
+            <Slider
+              data={newsItem.images}
+              Component={NewsImage}
+              aria-label="News Images Slider"
+              nextElName="nextNews"
+              prevElName="prevNews"
+              breakpoints={{
+                450: {
+                  slidesPerView: 1.2,
+                  spaceBetween: 16,
+                },
+                640: {
+                  slidesPerView: 2,
+                  spaceBetween: 20,
+                },
+                1024: {
+                  slidesPerView: 3,
+                  spaceBetween: 24,
+                },
+                1280: {
+                  slidesPerView: 3.5,
+                  spaceBetween: 32,
+                },
+              }}
+            />
+          </div>
+
+          <div className="mt-8 space-y-6 sm:mt-12">
+            <div className="text-base leading-relaxed text-gray-300 sm:text-lg">
+              {parse(
+                newsItem.full_text[locale as keyof typeof newsItem.full_text] ||
+                  ""
+              )}
+            </div>
+
+            {newsItem.youtubeUrl && (
+              <a
+                href={newsItem.youtubeUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-8 inline-block text-blue-400 underline transition-colors hover:text-blue-700"
+              >
+                {newsItem.youtubeUrl}
+              </a>
+            )}
+
+            <div className="text-sm text-gray-400">
+              {formatDate(newsItem.created_at)}
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 };
 

@@ -44,21 +44,24 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale, slug } = await params;
 
+  // Clean up slug for canonical URL - ensure it doesn't end with a dash
+  const cleanSlug = slug.endsWith("-") ? slug.slice(0, -1) : slug;
+
   // Fetch car data for enhanced metadata
-  const carData = await getCarData(slug);
+  const carData = await getCarData(cleanSlug);
 
   const localeMetadata = metadata[locale] || metadata.pl;
-  const canonicalUrl = `${baseUrl}/${locale}/gallery/${slug}`;
+  const canonicalUrl = `${baseUrl}/${locale}/gallery/${cleanSlug}`;
 
   // Create a more descriptive title and description using the car data
   const title = carData
     ? `${carData.car} | ${localeMetadata.title}`
-    : `${localeMetadata.title} | ${slug}`;
+    : `${localeMetadata.title} | ${cleanSlug}`;
 
   const description =
-    carData && carData.desc && carData.desc[locale]
-      ? carData.desc[locale]
-      : `${localeMetadata.description} | ${slug}`;
+    carData && carData.desc && carData.desc[locale as keyof typeof carData.desc]
+      ? carData.desc[locale as keyof typeof carData.desc]
+      : `${localeMetadata.description} | ${cleanSlug}`;
 
   return {
     title: title,
@@ -67,9 +70,9 @@ export async function generateMetadata({
     alternates: {
       canonical: canonicalUrl,
       languages: {
-        "en-US": `${baseUrl}/en/gallery/${slug}`,
-        "pl-PL": `${baseUrl}/pl/gallery/${slug}`,
-        "uk-UA": `${baseUrl}/ua/gallery/${slug}`,
+        en: `${baseUrl}/en/gallery/${cleanSlug}`,
+        pl: `${baseUrl}/pl/gallery/${cleanSlug}`,
+        uk: `${baseUrl}/ua/gallery/${cleanSlug}`,
       },
     },
     openGraph: {
