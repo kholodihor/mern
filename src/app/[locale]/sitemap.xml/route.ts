@@ -1,135 +1,161 @@
-import { NextResponse } from "next/server";
-import { collection, getDocs } from "firebase/firestore";
 import { db } from "@/lib/firebase";
+import { collection, getDocs, Timestamp, DocumentData } from "firebase/firestore";
 
-const baseUrl = "https://mernserwis.com";
+// Set to revalidate every 24 hours
+export const revalidate = 86400;
+
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://mernserwis.com';
+
+// Helper function to convert Firestore Timestamp to ISO string
+const toIsoString = (date: Date | Timestamp | string | undefined): string => {
+  if (!date) return new Date().toISOString();
+  if (date instanceof Date) return date.toISOString();
+  if (date && typeof date === 'object' && 'toDate' in date) {
+    return (date as unknown as { toDate: () => Date }).toDate().toISOString();
+  }
+  return new Date(date).toISOString();
+};
+
+interface SitemapEntry {
+  url: string;
+  lastModified: string;
+  changeFreq?: 'always' | 'hourly' | 'daily' | 'weekly' | 'monthly' | 'yearly' | 'never';
+  priority?: number;
+}
 
 // List of static routes and their paths
 const staticRoutes = [
-  { path: "", lastModified: new Date() },
-  { path: "about", lastModified: new Date() },
-  { path: "services", lastModified: new Date() },
-  { path: "contacts", lastModified: new Date() },
-  { path: "news", lastModified: new Date() },
-  { path: "gallery", lastModified: new Date() },
+  { path: "", lastModified: new Date(), priority: 1.0, changeFreq: 'daily' as const },
+  { path: "about", lastModified: new Date(), priority: 0.8, changeFreq: 'weekly' as const },
+  { path: "services", lastModified: new Date(), priority: 0.8, changeFreq: 'weekly' as const },
+  { path: "contacts", lastModified: new Date(), priority: 0.7, changeFreq: 'monthly' as const },
+  { path: "news", lastModified: new Date(), priority: 0.9, changeFreq: 'daily' as const },
+  { path: "gallery", lastModified: new Date(), priority: 0.8, changeFreq: 'weekly' as const },
 ];
 
-async function fetchDynamicRoutes() {
+async function fetchDynamicRoutes(): Promise<SitemapEntry[]> {
+  const routes: SitemapEntry[] = [];
+
   try {
     // Fetch gallery routes
     const galleryRef = collection(db, "gallery");
     const gallerySnapshot = await getDocs(galleryRef);
-    const galleryRoutes = gallerySnapshot.docs.map((doc) => {
-      const data = doc.data();
-      // Clean up slug - ensure it doesn't end with a dash
-      const cleanSlug =
-        data.slug && typeof data.slug === "string" && data.slug.endsWith("-")
-          ? data.slug.slice(0, -1)
-          : data.slug;
 
-      return {
-        path: `gallery/${cleanSlug}`,
-        lastModified: data.lastModified
-          ? new Date(data.lastModified)
-          : new Date(),
-      };
+    gallerySnapshot.forEach((doc) => {
+      const data = doc.data() as DocumentData;
+      if (!data.slug) return;
+
+      // Clean up slug - ensure it doesn't end with a dash
+      const cleanSlug = typeof data.slug === "string" && data.slug.endsWith("-")
+        ? data.slug.slice(0, -1)
+        : data.slug;
+
+      routes.push({
+        url: `/gallery/${cleanSlug}`,
+        lastModified: toIsoString(data.lastModified),
+        priority: 0.7,
+        changeFreq: 'weekly',
+      });
     });
 
     // Fetch news routes
     const newsRef = collection(db, "news");
     const newsSnapshot = await getDocs(newsRef);
-    const newsRoutes = newsSnapshot.docs.map((doc) => {
-      const data = doc.data();
-      return {
-        path: `news/${data.slug}`,
-        lastModified: data.lastModified
-          ? new Date(data.lastModified)
-          : new Date(),
-      };
-    });
 
-    return [...galleryRoutes, ...newsRoutes];
+    newsSnapshot.forEach((doc) => {
+      const data = doc.data() as DocumentData;
+      if (!data.slug) return;
+
+      routes.push({
+        url: `/news/${data.slug}`,
+        lastModified: toIsoString(data.lastModified || data.updatedAt || data.createdAt || new Date()),
+        priority: 0.8,
+        changeFreq: 'daily',
+      });
+    });
   } catch (error) {
     console.error("Error fetching dynamic routes:", error);
-    return [];
   }
+
+  return routes;
 }
 
-async function generateSitemap(locale: string) {
+async function generateSitemap(locale: string): Promise<SitemapEntry[]> {
   const dynamicRoutes = await fetchDynamicRoutes();
-  const allRoutes = [...staticRoutes, ...dynamicRoutes];
-  const sitemapEntries = [];
+  // Removed unused 'now' variable
 
-  // Generate entries for this specific locale
-  for (const route of allRoutes) {
-    const url = `${baseUrl}/${locale}${route.path ? "/" + route.path : ""}`;
+  // Generate static routes with locale
+  const staticRoutesWithLocale: SitemapEntry[] = staticRoutes.map((route) => ({
+    url: `${baseUrl}/${locale}${route.path ? `/${route.path}` : ""}`,
+    lastModified: toIsoString(route.lastModified),
+    changeFreq: route.changeFreq,
+    priority: route.priority,
+  }));
 
-    // Common alternates configuration
-    const alternates = {
-      languages: {
-        pl: `${baseUrl}/pl${route.path ? "/" + route.path : ""}`,
-        en: `${baseUrl}/en${route.path ? "/" + route.path : ""}`,
-        uk: `${baseUrl}/ua${route.path ? "/" + route.path : ""}`,
-        "x-default": `${baseUrl}/pl${route.path ? "/" + route.path : ""}`,
-      },
-    };
+  // Generate dynamic routes with locale
+  const dynamicRoutesWithLocale: SitemapEntry[] = dynamicRoutes.map(route => ({
+    ...route,
+    url: `${baseUrl}/${locale}${route.url}`,
+  }));
 
-    sitemapEntries.push({
-      url,
-      lastModified: route.lastModified,
-      changeFrequency: "weekly",
-      priority: route.path === "" ? 1 : 0.8,
-      alternates,
-    });
-  }
-
-  return sitemapEntries;
+  return [...staticRoutesWithLocale, ...dynamicRoutesWithLocale];
 }
 
 // Generate XML from sitemap entries
-function generateSitemapXml(entries: any[]) {
+function generateSitemapXml(entries: SitemapEntry[]): string {
   let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
-  xml += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" ';
-  xml += 'xmlns:xhtml="http://www.w3.org/1999/xhtml">\n';
+  xml += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"\n';
+  xml += '        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"\n';
+  xml += '        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9\n';
+  xml += '        http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">\n';
 
-  entries.forEach((entry) => {
-    xml += "  <url>\n";
+  for (const entry of entries) {
+    if (!entry.url) continue;
+
+    xml += '  <url>\n';
     xml += `    <loc>${entry.url}</loc>\n`;
-    xml += `    <lastmod>${entry.lastModified.toISOString()}</lastmod>\n`;
-    xml += `    <changefreq>${entry.changeFrequency}</changefreq>\n`;
-    xml += `    <priority>${entry.priority}</priority>\n`;
 
-    // Add language alternates
-    if (entry.alternates && entry.alternates.languages) {
-      Object.entries(entry.alternates.languages).forEach(([lang, url]) => {
-        xml += `    <xhtml:link rel="alternate" hreflang="${lang}" href="${url}" />\n`;
-      });
+    if (entry.lastModified) {
+      xml += `    <lastmod>${entry.lastModified}</lastmod>\n`;
     }
 
-    xml += "  </url>\n";
-  });
+    if (entry.changeFreq) {
+      xml += `    <changefreq>${entry.changeFreq}</changefreq>\n`;
+    }
 
-  xml += "</urlset>";
+    if (entry.priority !== undefined) {
+      xml += `    <priority>${entry.priority.toFixed(1)}</priority>\n`;
+    }
+
+    xml += '  </url>\n';
+  }
+
+  xml += '</urlset>';
   return xml;
 }
 
-export async function GET(
-  request: Request,
-  { params }: { params: Promise<{ locale: string }> }
-): Promise<Response> {
-  const { locale } = await params;
+export async function GET(request: Request, context: any): Promise<Response> {
+  const { params } = context;
+  try {
+    const locale = params.locale;
+    const sitemapEntries = await generateSitemap(locale);
+    const xml = generateSitemapXml(sitemapEntries);
 
-  // Only generate sitemaps for valid locales
-  if (!["pl", "en", "ua"].includes(locale)) {
-    return new NextResponse("Not Found", { status: 404 });
+    return new Response(xml, {
+      status: 200,
+      headers: {
+        'Content-Type': 'application/xml',
+        'Cache-Control': 'public, s-maxage=86400, stale-while-revalidate=3600',
+        'X-Robots-Tag': 'noindex, follow',
+      },
+    });
+  } catch (error) {
+    console.error('Error generating sitemap:', error);
+    return new Response('Error generating sitemap', {
+      status: 500,
+      headers: {
+        'Content-Type': 'text/plain',
+      },
+    });
   }
-
-  const sitemapEntries = await generateSitemap(locale);
-  const xml = generateSitemapXml(sitemapEntries);
-
-  return new NextResponse(xml, {
-    headers: {
-      "Content-Type": "application/xml",
-    },
-  });
 }

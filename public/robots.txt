@@ -1,0 +1,14 @@
+# Allow all crawlers to access all parts of the site
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://mernserwis.com/sitemap.xml
+
+# Disallow admin and API routes
+Disallow: /admin/
+Disallow: /api/
+Disallow: /*?*
+
+# Set crawl delay if needed
+# Crawl-delay: 10
