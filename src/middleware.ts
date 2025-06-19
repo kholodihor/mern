@@ -5,8 +5,8 @@ import { routing } from "./i18n/routing";
 export default createMiddleware(routing);
 
 export const config = {
-  // Match all paths except static files and API routes
+  // Match all paths except static files, API routes, and robots.txt
   matcher: [
-    "/((?!_next/static|_next/image|favicon.ico|api/|_next/|.*\\.(?:svg|png|jpg|jpeg|gif|webp|css|js|woff2?)$).*)",
+    "/((?!_next/static|_next/image|favicon.ico|robots.txt|api/|_next/|.*\\.(?:svg|png|jpg|jpeg|gif|webp|css|js|woff2?)$).*)",
   ],
 };

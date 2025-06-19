@@ -30,20 +30,7 @@ const nextConfig = {
         destination: '/pl',
         permanent: true,
       },
-      // Ensure consistent trailing slashes for all other paths
-      // Exclude paths that are handled by the internationalization middleware
-      {
-        source: '/:locale((?!_next|api|favicon.ico).*)/',
-        has: [
-          {
-            type: 'header',
-            key: 'x-middleware-rewrite',
-            value: '(?!.*)',
-          }
-        ],
-        destination: '/:locale',
-        permanent: true,
-      },
+      // Let the internationalization middleware handle all other redirects
     ];
   },
 
