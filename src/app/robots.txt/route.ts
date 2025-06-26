@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server';
+import { NextResponse } from "next/server";
 
 export async function GET() {
   const robotsTxt = `# Allow all crawlers to access all parts of the site
@@ -19,8 +19,8 @@ Disallow: /*?*
 
   return new NextResponse(robotsTxt, {
     headers: {
-      'Content-Type': 'text/plain',
-      'Cache-Control': 'public, max-age=86400, stale-while-revalidate=3600',
+      "Content-Type": "text/plain",
+      "Cache-Control": "public, max-age=86400, stale-while-revalidate=3600",
     },
   });
 }

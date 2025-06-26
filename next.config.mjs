@@ -7,6 +7,49 @@ const nextConfig = {
   // Remove trailing slashes from all URLs for consistency
   trailingSlash: false,
   
+  // Configure redirects for www and HTTPS
+  async redirects() {
+    return [
+      // Redirect root to default locale (Polish)
+      {
+        source: '/',
+        destination: '/pl',
+        permanent: true,
+      },
+      // Redirect www to non-www
+      {
+        source: '/:path*',
+        has: [
+          {
+            type: 'host',
+            value: 'www.mernserwis.com',
+          },
+        ],
+        permanent: true,
+        destination: 'https://mernserwis.com/:path*',
+      },
+      // Redirect HTTP to HTTPS
+      {
+        source: '/:path*',
+        has: [
+          {
+            type: 'host',
+            value: '(?<host>.*)',
+          },
+        ],
+        missing: [
+          {
+            type: 'header',
+            key: 'x-forwarded-proto',
+            value: 'https',
+          },
+        ],
+        permanent: true,
+        destination: 'https://mernserwis.com/:path*',
+      },
+    ];
+  },
+  
   // Configure image optimization
   images: {
     remotePatterns: [
