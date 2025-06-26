@@ -15,13 +15,13 @@ const Footer = () => {
   const getCurrentYear = new Date().getFullYear();
   return (
     <div className="flex w-full flex-col items-center justify-center border-t border-[#666] p-[1rem]">
-      <p className="mb-2">&copy; 2023 - {getCurrentYear} Kholod Ihor</p>
+      <p className="mb-2">&copy; {getCurrentYear} Ihor Kholod</p>
       <div className="flex gap-4">
         <a
           href="https://github.com/kholodihor?tab=repositories"
           target="_blank"
           rel="noopener noreferrer"
-          className="hover:scale-110"
+          className="text-xl hover:scale-110"
         >
           <FaGithub />
         </a>
@@ -29,7 +29,7 @@ const Footer = () => {
           href="https://t.me/kholodihor"
           target="_blank"
           rel="noopener noreferrer"
-          className="hover:scale-110"
+          className="text-xl hover:scale-110"
         >
           <FaTelegram />
         </a>
@@ -37,7 +37,7 @@ const Footer = () => {
           href="https://www.linkedin.com/in/ihor-kholod/"
           target="_blank"
           rel="noopener noreferrer"
-          className="hover:scale-110"
+          className="text-xl hover:scale-110"
         >
           <FaLinkedin />
         </a>

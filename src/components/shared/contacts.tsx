@@ -4,7 +4,7 @@ import Socials from "./socials";
 const Contacts = () => {
   return (
     <div className="flex w-full flex-col justify-center px-4 pb-6 sm:text-left lg:w-1/2 xl:px-[4rem]">
-      <ul className="w-full border-l border-gray-500 pl-4" role="list">
+      <ul className="w-full border-gray-500 md:border-l md:pl-4" role="list">
         <li className="my-4 items-center justify-center gap-4 text-[1rem] sm:flex sm:text-[1.2rem]">
           <span className="mb-4 flex w-full justify-center sm:w-[2rem] md:mb-0">
             <FaMapMarkerAlt
