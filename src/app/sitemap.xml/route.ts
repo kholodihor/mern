@@ -7,6 +7,7 @@ export async function GET() {
   try {
     const baseUrl =
       process.env.NEXT_PUBLIC_BASE_URL || "https://mernserwis.com";
+    // Reorder locales to prioritize Polish (pl) as the main language
     const locales = ["pl", "en", "ua"];
     const now = new Date().toISOString();
 
@@ -14,7 +15,7 @@ export async function GET() {
     xml +=
       '<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n';
 
-    // Add entries for each locale sitemap
+    // Add entries for each locale sitemap, with Polish first as the main language
     for (const locale of locales) {
       const sitemapUrl = `${baseUrl}/${locale}/sitemap.xml`;
 
@@ -35,7 +36,7 @@ export async function GET() {
       headers: {
         "Content-Type": "application/xml",
         "Cache-Control": "public, s-maxage=86400, stale-while-revalidate=3600",
-        "X-Robots-Tag": "noindex, follow",
+        // Remove noindex directive to allow search engines to index the sitemap
       },
     });
   } catch (error) {

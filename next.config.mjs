@@ -7,7 +7,7 @@ const nextConfig = {
   // Remove trailing slashes from all URLs for consistency
   trailingSlash: false,
 
-  // Configure redirects for www and HTTPS
+  // Configure redirects for www, HTTPS, and default locale
   async redirects() {
     return [
       // Redirect root to default locale (Polish)
@@ -64,18 +64,7 @@ const nextConfig = {
     ],
   },
 
-  // Add redirects for common patterns
-  async redirects() {
-    return [
-      // Redirect root to default locale (Polish)
-      {
-        source: "/",
-        destination: "/pl",
-        permanent: true,
-      },
-      // Let the internationalization middleware handle all other redirects
-    ];
-  },
+  // Internationalization middleware handles language-specific redirects
 
   async headers() {
     return [

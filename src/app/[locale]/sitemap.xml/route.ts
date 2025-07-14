@@ -40,7 +40,7 @@ const staticRoutes = [
   {
     path: "",
     lastModified: new Date(),
-    priority: 1.0,
+    priority: 1.0, // Highest priority for the main page
     changeFreq: "daily" as const,
   },
   {
@@ -194,7 +194,7 @@ export async function GET(request: Request, context: any): Promise<Response> {
       headers: {
         "Content-Type": "application/xml",
         "Cache-Control": "public, s-maxage=86400, stale-while-revalidate=3600",
-        "X-Robots-Tag": "noindex, follow",
+        // Remove noindex directive to allow search engines to index the sitemap
       },
     });
   } catch (error) {
