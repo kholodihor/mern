@@ -66,6 +66,8 @@ import "./styles.css";
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 interface SliderProps extends SwiperOptions {
   data: any[];
   showArrows?: boolean;
