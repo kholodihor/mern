@@ -1,4 +1,7 @@
+"use client";
+
 import Image from "next/image";
+import { memo } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { CATEGORIES } from "@/constants/categories";
 import { formatDate } from "@/helpers/formatDate";
@@ -10,7 +13,7 @@ type GalleryCardProps = {
   priority?: boolean; // For above-the-fold images
 };
 
-const GalleryCard = ({ data, priority = false }: GalleryCardProps) => {
+const GalleryCard = memo(({ data, priority = false }: GalleryCardProps) => {
   const t = useTranslations();
   const locale = useLocale();
 
@@ -22,12 +25,16 @@ const GalleryCard = ({ data, priority = false }: GalleryCardProps) => {
           alt={data.car}
           fill
           className="object-cover grayscale transition-transform hover:grayscale-0"
-          sizes="(max-width: 768px) 100vw, 350px"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 350px"
           priority={priority}
-          quality={priority ? 85 : 75}
+          quality={priority ? 90 : 75}
           placeholder="blur"
           blurDataURL="data:image/webp;base64,UklGRlIAAABXRUJQVlA4WAoAAAAQAAAACQAAAgAAQUxQSBIAAAABF0AQbQEz/wMz0P8AAFZQOCA+AAAAMAEAnQEqCgADAAJAOCWkAANwAP77+AAA"
           loading={priority ? "eager" : "lazy"}
+          fetchPriority={priority ? "high" : "auto"}
+          decoding="async"
+          unoptimized={priority} // Skip Next.js image optimization for priority images to reduce processing time
+          style={{ transform: "translate3d(0, 0, 0)" }} // Force GPU acceleration
         />
       </div>
 
@@ -77,6 +84,9 @@ const GalleryCard = ({ data, priority = false }: GalleryCardProps) => {
       </div>
     </article>
   );
-};
+});
+
+// Add display name to fix ESLint error
+GalleryCard.displayName = "GalleryCard";
 
 export default GalleryCard;

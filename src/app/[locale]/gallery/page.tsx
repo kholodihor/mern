@@ -79,11 +79,32 @@ export async function generateMetadata({
   };
 }
 
+// Add generateStaticParams to enable static generation for better performance
+export async function generateStaticParams() {
+  return [{ locale: "en" }, { locale: "pl" }, { locale: "ua" }];
+}
+
 const GalleryPage = async () => {
   // Fetch data server-side for SEO
   const initialData = await fetchGalleryItems();
 
-  return <GalleryServer initialData={initialData} />;
+  return (
+    <>
+      {/* Add preload links for critical images */}
+      {initialData.slice(0, 2).map((item, index) => (
+        <link
+          key={`preload-${index}`}
+          rel="preload"
+          href={item.images[0]}
+          as="image"
+          type="image/webp"
+          fetchPriority="high"
+          crossOrigin="anonymous"
+        />
+      ))}
+      <GalleryServer initialData={initialData} />
+    </>
+  );
 };
 
 export default GalleryPage;
