@@ -1,28 +1,33 @@
 import type { Metadata } from "next";
+import dynamic from "next/dynamic";
 import { Open_Sans } from "next/font/google";
 import { notFound } from "next/navigation";
+import { Suspense } from "react";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import { Locale, routing } from "@/i18n/routing";
 import { PageProps } from "@/types";
-import dynamic from "next/dynamic";
-import { Suspense } from "react";
-
 // Import critical components directly
 import ConditionalContactLink from "@/components/shared/conditional-contact-link";
 import Header from "@/components/shared/header";
 import SubHeader from "@/components/shared/sub-header";
+import "../globals.css";
 
 // Dynamically import non-critical components
-const BfCacheHandler = dynamic(() => import("@/components/shared/bfcache-handler"));
-const ScriptOptimizer = dynamic(() => import("@/components/shared/script-optimizer"));
-const GoogleAnalytics = dynamic(() => import("@/components/shared/google-analytics"));
-const CookieBanner = dynamic(() => import("@/components/shared/cookie-banner"), {
-  ssr: false,
-});
+const BfCacheHandler = dynamic(
+  () => import("@/components/shared/bfcache-handler")
+);
+const ScriptOptimizer = dynamic(
+  () => import("@/components/shared/script-optimizer")
+);
+const GoogleAnalytics = dynamic(
+  () => import("@/components/shared/google-analytics")
+);
+// Use client wrapper for components that need ssr: false
+const CookieBannerClient = dynamic(
+  () => import("@/components/client-wrappers/cookie-banner-client")
+);
 const Footer = dynamic(() => import("@/components/shared/footer"));
-
-import "../globals.css";
 
 // Preload critical fonts
 export const fontSans = Open_Sans({
@@ -136,32 +141,39 @@ export default async function RootLayout({
       <head>
         {/* These tags are now handled by Next.js Metadata API in generateMetadata */}
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+        <meta
+          http-equiv="Cache-Control"
+          content="no-cache, no-store, must-revalidate"
+        />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
       </head>
       <body className="min-w-[320px]">
         {/* Performance optimization components */}
         <ScriptOptimizer />
         <BfCacheHandler />
-        
+
         {/* Defer non-critical components */}
         <Suspense fallback={null}>
           <GoogleAnalytics
             GA_MEASUREMENT_ID={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || ""}
           />
         </Suspense>
-        
+
         <NextIntlClientProvider locale={locale} messages={messages}>
           {/* Critical path components */}
           <ConditionalContactLink />
           <SubHeader />
           <Header />
           {children}
-          
+
           {/* Non-critical components */}
           <Suspense fallback={null}>
-            <CookieBanner />
+            <CookieBannerClient />
           </Suspense>
           <Suspense fallback={null}>
             <Footer />

@@ -1,25 +1,25 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import Image from "next/image";
-import { useEffect, useState, memo, useCallback } from "react";
+import { memo, useCallback, useEffect, useState } from "react";
 import clsx from "clsx";
 import { useTranslations } from "next-intl";
 // Import only the specific icons needed
 import { FaBars, FaTimes } from "react-icons/fa";
 import { links } from "@/constants/links";
-import {
-  Link,
-  locales,
-  usePathname,
-  useRouter,
-} from "@/i18n/routing";
-import dynamic from "next/dynamic";
+import { Link, locales, usePathname, useRouter } from "@/i18n/routing";
 
 // Dynamically import MobileMenu with improved loading strategy
-const MobileMenu = dynamic(() => import("./mobile-menu").then(mod => ({ default: mod.default })), {
-  loading: () => <div className="animate-pulse h-[50vh] w-full bg-black/50"></div>,
-  ssr: false, // Disable server-side rendering for the mobile menu
-});
+const MobileMenu = dynamic(
+  () => import("./mobile-menu").then((mod) => ({ default: mod.default })),
+  {
+    loading: () => (
+      <div className="h-[50vh] w-full animate-pulse bg-black/50"></div>
+    ),
+    ssr: false, // Disable server-side rendering for the mobile menu
+  }
+);
 
 // Memoize the component to prevent unnecessary re-renders
 const Header = memo(function Header() {
@@ -41,13 +41,16 @@ const Header = memo(function Header() {
 
   // Use useCallback to prevent function recreation on each render
   const toggleMobileMenu = useCallback(() => {
-    setShowMobileMenu(prev => !prev);
+    setShowMobileMenu((prev) => !prev);
   }, []);
 
   // Use useCallback to prevent function recreation on each render
-  const handleCheckLocale = useCallback((item: string) => {
-    router.replace(pathname, { locale: item });
-  }, [router, pathname]);
+  const handleCheckLocale = useCallback(
+    (item: string) => {
+      router.replace(pathname, { locale: item });
+    },
+    [router, pathname]
+  );
 
   if (pathname.split("/").includes("login")) return null;
 
@@ -66,10 +69,10 @@ const Header = memo(function Header() {
       id="header"
     >
       <Link href="/">
-        <Image 
-          src="/logo.png" 
-          alt="MERN logo" 
-          width={150} 
+        <Image
+          src="/logo.png"
+          alt="MERN logo"
+          width={150}
           height={150}
           priority={true}
           quality={90}
@@ -113,9 +116,7 @@ const Header = memo(function Header() {
                 }
               )}
             >
-              <Link href={link.href}>
-                {t(`${link.name}`)}
-              </Link>
+              <Link href={link.href}>{t(`${link.name}`)}</Link>
             </li>
           ))}
           <ul className="flex gap-[0.5rem] xl:ml-[5rem]">

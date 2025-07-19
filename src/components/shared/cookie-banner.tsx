@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState, memo } from "react";
+import { memo, useEffect, useState } from "react";
 import clsx from "clsx";
 import { getLocalStorage, setLocalStorage } from "@/helpers/storageHelper";
 

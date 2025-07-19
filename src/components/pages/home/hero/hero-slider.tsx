@@ -1,12 +1,13 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState, memo } from "react";
+import { memo, useEffect, useState } from "react";
 // Import only the specific CSS needed
 import "swiper/css/bundle";
+import { Autoplay, EffectFade } from "swiper/modules";
 // Import modules dynamically to reduce initial JS payload
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, EffectFade } from "swiper/modules";
+
 // Register only the modules we need
 
 // Define image dimensions for better optimization
@@ -17,27 +18,27 @@ const slides = [
   {
     desktop: "/hero/hero_1.webp",
     mobile: "/hero/mobile_1.webp",
-    alt: "Hero image showing the main product"
+    alt: "Hero image showing the main product",
   },
   {
     desktop: "/hero/hero_2.webp",
     mobile: "/hero/mobile_2.webp",
-    alt: "Second hero image featuring our services"
+    alt: "Second hero image featuring our services",
   },
   {
     desktop: "/hero/hero_3.webp",
     mobile: "/hero/mobile_3.webp",
-    alt: "Third hero image showcasing our work"
+    alt: "Third hero image showcasing our work",
   },
   {
     desktop: "/hero/hero_4.webp",
     mobile: "/hero/mobile_4.webp",
-    alt: "Fourth hero image highlighting our expertise"
+    alt: "Fourth hero image highlighting our expertise",
   },
   {
     desktop: "/hero/hero_5.webp",
     mobile: "/hero/mobile_5.webp",
-    alt: "Fifth hero image demonstrating our capabilities"
+    alt: "Fifth hero image demonstrating our capabilities",
   },
 ];
 
@@ -45,17 +46,17 @@ const slides = [
 function PreloadImages() {
   return (
     <>
-      <link 
-        rel="preload" 
-        href="/hero/hero_1.webp" 
-        as="image" 
+      <link
+        rel="preload"
+        href="/hero/hero_1.webp"
+        as="image"
         type="image/webp"
       />
-      <link 
-        rel="preload" 
-        href="/hero/mobile_1.webp" 
-        as="image" 
-        type="image/webp" 
+      <link
+        rel="preload"
+        href="/hero/mobile_1.webp"
+        as="image"
+        type="image/webp"
         media="(max-width: 550px)"
       />
     </>
@@ -68,7 +69,7 @@ const HeroSlider = memo(function HeroSlider() {
 
   const handleResize = () => {
     if (typeof window === "undefined") return;
-    
+
     window.requestAnimationFrame(() => {
       setIsMobileView(window.innerWidth < 550);
     });
@@ -77,19 +78,19 @@ const HeroSlider = memo(function HeroSlider() {
   useEffect(() => {
     if (typeof window !== "undefined") {
       setIsMobileView(window.innerWidth < 550);
-      
+
       // Handle resize events
       window.addEventListener("resize", handleResize, { passive: true });
-      
+
       // Handle bfcache restoration
       const handleBfCacheRestore = () => {
         // Re-initialize the component state when restored from bfcache
         setIsMobileView(window.innerWidth < 550);
       };
-      
+
       // Listen for custom bfcache restore event
       window.addEventListener("bfcache:restore", handleBfCacheRestore);
-      
+
       return () => {
         window.removeEventListener("resize", handleResize);
         window.removeEventListener("bfcache:restore", handleBfCacheRestore);
