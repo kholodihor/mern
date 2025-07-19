@@ -46,45 +46,54 @@ const nextConfig = {
 
   // Configure redirects for www, HTTPS, and default locale
   async redirects() {
-    return [
+    // Always apply the root redirect
+    const redirects = [
       // Redirect root to default locale (Polish)
       {
         source: "/",
         destination: "/pl",
         permanent: true,
       },
-      // Redirect www to non-www
-      {
-        source: "/:path*",
-        has: [
-          {
-            type: "host",
-            value: "www.mernserwis.com",
-          },
-        ],
-        permanent: true,
-        destination: "https://mernserwis.com/:path*",
-      },
-      // Redirect HTTP to HTTPS
-      {
-        source: "/:path*",
-        has: [
-          {
-            type: "host",
-            value: "(?<host>.*)",
-          },
-        ],
-        missing: [
-          {
-            type: "header",
-            key: "x-forwarded-proto",
-            value: "https",
-          },
-        ],
-        permanent: true,
-        destination: "https://mernserwis.com/:path*",
-      },
     ];
+
+    // Only add production redirects in production
+    if (process.env.NODE_ENV === "production") {
+      redirects.push(
+        // Redirect www to non-www
+        {
+          source: "/:path*",
+          has: [
+            {
+              type: "host",
+              value: "www.mernserwis.com",
+            },
+          ],
+          permanent: true,
+          destination: "https://mernserwis.com/:path*",
+        },
+        // Redirect HTTP to HTTPS
+        {
+          source: "/:path*",
+          has: [
+            {
+              type: "host",
+              value: "(?<host>.*)",
+            },
+          ],
+          missing: [
+            {
+              type: "header",
+              key: "x-forwarded-proto",
+              value: "https",
+            },
+          ],
+          destination: "https://:host/:path*",
+          permanent: true,
+        }
+      );
+    }
+
+    return redirects;
   },
 
   // Configure image optimization

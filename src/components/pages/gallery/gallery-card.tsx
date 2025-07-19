@@ -1,9 +1,9 @@
-import Image from "next/image";
-import { useLocale, useTranslations } from "next-intl";
 import { CATEGORIES } from "@/constants/categories";
 import { formatDate } from "@/helpers/formatDate";
 import { Link } from "@/i18n/routing";
 import { IGalleryItem } from "@/types";
+import { useLocale, useTranslations } from "next-intl";
+import Image from "next/image";
 
 const GalleryCard = ({ data }: { data: IGalleryItem }) => {
   const t = useTranslations();

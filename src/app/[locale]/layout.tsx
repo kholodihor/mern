@@ -142,7 +142,7 @@ export default async function RootLayout({
         {/* These tags are now handled by Next.js Metadata API in generateMetadata */}
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta
-          http-equiv="Cache-Control"
+          httpEquiv="Cache-Control"
           content="no-cache, no-store, must-revalidate"
         />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
