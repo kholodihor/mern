@@ -1,9 +1,9 @@
-import GalleryServer from "@/components/pages/gallery/gallery-server";
+import { Metadata } from "next";
 import { baseUrl } from "@/constants";
 import { Locale } from "@/i18n/routing";
 import { fetchGalleryItems } from "@/lib/server-data-fetchers";
 import { PageMetadata } from "@/types";
-import { Metadata } from "next";
+import GalleryServer from "@/components/pages/gallery/gallery-server";
 
 const metadata: PageMetadata = {
   pl: {

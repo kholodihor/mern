@@ -1,12 +1,12 @@
 "use client";
 
+import { useTranslations } from "next-intl";
+import { CATEGORIES } from "@/constants/categories";
+import { useGallery } from "@/hooks/useGallery";
 import Loader from "@/components/shared/loader";
 import LoadingError from "@/components/shared/loading-error";
 import SectionTitle from "@/components/shared/section-title";
 import CustomDropdown from "@/components/ui/select";
-import { CATEGORIES } from "@/constants/categories";
-import { useGallery } from "@/hooks/useGallery";
-import { useTranslations } from "next-intl";
 import GalleryCard from "./gallery-card";
 
 const Gallery = () => {
