@@ -1,11 +1,16 @@
+import Image from "next/image";
+import { useLocale, useTranslations } from "next-intl";
 import { CATEGORIES } from "@/constants/categories";
 import { formatDate } from "@/helpers/formatDate";
 import { Link } from "@/i18n/routing";
 import { IGalleryItem } from "@/types";
-import { useLocale, useTranslations } from "next-intl";
-import Image from "next/image";
 
-const GalleryCard = ({ data }: { data: IGalleryItem }) => {
+type GalleryCardProps = {
+  data: IGalleryItem;
+  priority?: boolean; // For above-the-fold images
+};
+
+const GalleryCard = ({ data, priority = false }: GalleryCardProps) => {
   const t = useTranslations();
   const locale = useLocale();
 
@@ -18,6 +23,10 @@ const GalleryCard = ({ data }: { data: IGalleryItem }) => {
           fill
           className="object-cover grayscale transition-transform hover:grayscale-0"
           sizes="(max-width: 768px) 100vw, 350px"
+          priority={priority}
+          quality={priority ? 85 : 75}
+          placeholder="blur"
+          blurDataURL="data:image/webp;base64,UklGRlIAAABXRUJQVlA4WAoAAAAQAAAACQAAAgAAQUxQSBIAAAABF0AQbQEz/wMz0P8AAFZQOCA+AAAAMAEAnQEqCgADAAJAOCWkAANwAP77+AAA"
         />
       </div>
 
