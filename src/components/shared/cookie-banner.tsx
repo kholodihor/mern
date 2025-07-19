@@ -1,11 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useState, memo } from "react";
 import clsx from "clsx";
 import { getLocalStorage, setLocalStorage } from "@/helpers/storageHelper";
 
-export default function CookieBanner() {
+// Memoize the component to prevent unnecessary re-renders
+const CookieBanner = memo(function CookieBanner() {
   const [cookieConsent, setCookieConsent] = useState(false);
 
   useEffect(() => {
@@ -23,8 +24,7 @@ export default function CookieBanner() {
 
     setLocalStorage("cookie_consent", cookieConsent);
 
-    //For Testing
-    console.log("Cookie Consent: ", cookieConsent);
+    // Remove console log in production
   }, [cookieConsent]);
 
   return (
@@ -63,4 +63,6 @@ export default function CookieBanner() {
       </div>
     </div>
   );
-}
+});
+
+export default CookieBanner;

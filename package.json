@@ -10,15 +10,13 @@
     "format": "prettier src/ --write",
     "ts-check": "tsc --project tsconfig.json --pretty --noEmit && echo ",
     "prepare": "husky",
-    "lint-staged": "lint-staged",
-    "migrate-images": "node scripts/migrate-images.mjs"
+    "lint-staged": "lint-staged"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
     "@next/third-parties": "^15.0.3",
     "@nextui-org/avatar": "^2.0.33",
     "@smastrom/react-rating": "^1.5.0",
-
     "axios": "^1.7.8",
     "clsx": "^2.1.1",
     "core-js-pure": "^3.42.0",

@@ -1,21 +1,28 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useState, memo, useCallback } from "react";
 import clsx from "clsx";
 import { useTranslations } from "next-intl";
+// Import only the specific icons needed
 import { FaBars, FaTimes } from "react-icons/fa";
 import { links } from "@/constants/links";
 import {
   Link,
   locales,
-  pathnames,
   usePathname,
   useRouter,
 } from "@/i18n/routing";
-import MobileMenu from "./mobile-menu";
+import dynamic from "next/dynamic";
 
-const Header = () => {
+// Dynamically import MobileMenu with improved loading strategy
+const MobileMenu = dynamic(() => import("./mobile-menu").then(mod => ({ default: mod.default })), {
+  loading: () => <div className="animate-pulse h-[50vh] w-full bg-black/50"></div>,
+  ssr: false, // Disable server-side rendering for the mobile menu
+});
+
+// Memoize the component to prevent unnecessary re-renders
+const Header = memo(function Header() {
   const router = useRouter();
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const t = useTranslations("Menu");
@@ -32,13 +39,15 @@ const Header = () => {
     }
   }, [pathname, previousPathname]);
 
-  const toggleMobileMenu = () => {
-    setShowMobileMenu(!showMobileMenu);
-  };
+  // Use useCallback to prevent function recreation on each render
+  const toggleMobileMenu = useCallback(() => {
+    setShowMobileMenu(prev => !prev);
+  }, []);
 
-  const handleCheckLocale = (item: string) => {
+  // Use useCallback to prevent function recreation on each render
+  const handleCheckLocale = useCallback((item: string) => {
     router.replace(pathname, { locale: item });
-  };
+  }, [router, pathname]);
 
   if (pathname.split("/").includes("login")) return null;
 
@@ -57,7 +66,14 @@ const Header = () => {
       id="header"
     >
       <Link href="/">
-        <Image src="/logo.png" alt="MERN logo" width={150} height={150} />
+        <Image 
+          src="/logo.png" 
+          alt="MERN logo" 
+          width={150} 
+          height={150}
+          priority={true}
+          quality={90}
+        />
       </Link>
       <button
         type="button"
@@ -97,7 +113,7 @@ const Header = () => {
                 }
               )}
             >
-              <Link href={{ pathname: link.href as keyof typeof pathnames }}>
+              <Link href={link.href}>
                 {t(`${link.name}`)}
               </Link>
             </li>
@@ -119,6 +135,6 @@ const Header = () => {
       </nav>
     </header>
   );
-};
+});
 
 export default Header;

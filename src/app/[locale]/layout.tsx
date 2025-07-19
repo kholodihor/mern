@@ -5,20 +5,36 @@ import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import { Locale, routing } from "@/i18n/routing";
 import { PageProps } from "@/types";
+import dynamic from "next/dynamic";
+import { Suspense } from "react";
+
+// Import critical components directly
 import ConditionalContactLink from "@/components/shared/conditional-contact-link";
-import CookieBanner from "@/components/shared/cookie-banner";
-import Footer from "@/components/shared/footer";
-import GoogleAnalytics from "@/components/shared/google-analytics";
 import Header from "@/components/shared/header";
 import SubHeader from "@/components/shared/sub-header";
+
+// Dynamically import non-critical components
+const BfCacheHandler = dynamic(() => import("@/components/shared/bfcache-handler"));
+const ScriptOptimizer = dynamic(() => import("@/components/shared/script-optimizer"));
+const GoogleAnalytics = dynamic(() => import("@/components/shared/google-analytics"));
+const CookieBanner = dynamic(() => import("@/components/shared/cookie-banner"), {
+  ssr: false,
+});
+const Footer = dynamic(() => import("@/components/shared/footer"));
+
 import "../globals.css";
 
-const open_sans = Open_Sans({
-  weight: ["400", "700"],
+// Preload critical fonts
+export const fontSans = Open_Sans({
   subsets: ["latin", "cyrillic"],
   variable: "--font-open-sans",
   display: "swap",
+  preload: true,
+  weight: ["400", "700"],
+  fallback: ["system-ui", "arial"],
 });
+
+// Font is now defined at the top level for better performance
 
 const baseUrl = new URL("https://mernserwis.com");
 const contactInfo =
@@ -116,64 +132,40 @@ export default async function RootLayout({
   const messages = await getMessages();
 
   return (
-    <html lang={locale}>
+    <html lang={locale} className={fontSans.variable}>
       <head>
-        {/* Add canonical URL tag */}
-        <link rel="canonical" href={`${baseUrl}/${locale}`} />
-
-        {/* Add hreflang tags for all supported languages */}
-        <link rel="alternate" hrefLang="en" href={`${baseUrl}/en`} />
-        <link rel="alternate" hrefLang="pl" href={`${baseUrl}/pl`} />
-        <link rel="alternate" hrefLang="uk" href={`${baseUrl}/ua`} />
-        <link rel="alternate" hrefLang="x-default" href={`${baseUrl}/pl`} />
-
-        <meta
-          name="description"
-          content={
-            descriptions[locale as keyof typeof descriptions] || descriptions.pl
-          }
-        />
-
-        <meta property="og:url" content={`${baseUrl}/${locale}`} />
-        <meta property="og:type" content="website" />
-        <meta
-          property="og:title"
-          content={titles[locale as keyof typeof titles] || titles.pl}
-        />
-        <meta
-          property="og:description"
-          content={
-            descriptions[locale as keyof typeof descriptions] || descriptions.pl
-          }
-        />
-        <meta property="og:image" content={`${baseUrl}/opengraph-image.png`} />
-
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta property="twitter:domain" content="mernserwis.com" />
-        <meta property="twitter:url" content={`${baseUrl}/${locale}`} />
-        <meta
-          name="twitter:title"
-          content={titles[locale as keyof typeof titles] || titles.pl}
-        />
-        <meta
-          name="twitter:description"
-          content={
-            descriptions[locale as keyof typeof descriptions] || descriptions.pl
-          }
-        />
-        <meta name="twitter:image" content={`${baseUrl}/opengraph-image.png`} />
+        {/* These tags are now handled by Next.js Metadata API in generateMetadata */}
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
-      <body className={`min-w-[320px] ${open_sans.variable}`}>
-        <GoogleAnalytics
-          GA_MEASUREMENT_ID={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || ""}
-        />
+      <body className="min-w-[320px]">
+        {/* Performance optimization components */}
+        <ScriptOptimizer />
+        <BfCacheHandler />
+        
+        {/* Defer non-critical components */}
+        <Suspense fallback={null}>
+          <GoogleAnalytics
+            GA_MEASUREMENT_ID={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || ""}
+          />
+        </Suspense>
+        
         <NextIntlClientProvider locale={locale} messages={messages}>
+          {/* Critical path components */}
           <ConditionalContactLink />
           <SubHeader />
           <Header />
           {children}
-          <CookieBanner />
-          <Footer />
+          
+          {/* Non-critical components */}
+          <Suspense fallback={null}>
+            <CookieBanner />
+          </Suspense>
+          <Suspense fallback={null}>
+            <Footer />
+          </Suspense>
         </NextIntlClientProvider>
       </body>
     </html>
