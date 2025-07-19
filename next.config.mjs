@@ -13,9 +13,9 @@ const nextConfig = {
   },
 
   // Configure webpack for better JavaScript performance
-  webpack: (config, { dev, isServer }) => {
+  webpack: (config, { dev, isServer: _isServer }) => {
     // Add module optimization
-    if (!dev && !isServer) {
+    if (!dev && !_isServer) {
       // Split chunks more aggressively for production
       config.optimization.splitChunks = {
         chunks: "all",
@@ -112,7 +112,9 @@ const nextConfig = {
     formats: ["image/avif", "image/webp"],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-    minimumCacheTTL: 60,
+    minimumCacheTTL: 3600, // 1 hour cache for better performance
+    dangerouslyAllowSVG: true, // Allow SVG images for better performance
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
 
   // Enable static compression
@@ -177,6 +179,16 @@ const nextConfig = {
             key: "Cache-Control",
             value: "public, s-maxage=86400, stale-while-revalidate=3600",
           },
+        ],
+      },
+      {
+        // Add cache headers for static assets
+        source: "/_next/static/:path*",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
+          }
         ],
       },
     ];
