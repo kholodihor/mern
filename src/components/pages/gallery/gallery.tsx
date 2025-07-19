@@ -1,13 +1,30 @@
 "use client";
 
+import { useTranslations } from "next-intl";
+import { CATEGORIES } from "@/constants/categories";
+import { useGallery } from "@/hooks/useGallery";
 import Loader from "@/components/shared/loader";
 import LoadingError from "@/components/shared/loading-error";
 import SectionTitle from "@/components/shared/section-title";
 import CustomDropdown from "@/components/ui/select";
-import { CATEGORIES } from "@/constants/categories";
-import { useGallery } from "@/hooks/useGallery";
-import { useTranslations } from "next-intl";
 import GalleryCard from "./gallery-card";
+
+// Component to preload critical gallery images
+function PreloadGalleryImages({ images }: { images: string[] }) {
+  return (
+    <>
+      {images.slice(0, 2).map((src, index) => (
+        <link
+          key={index}
+          rel="preload"
+          href={src}
+          as="image"
+          type="image/webp"
+        />
+      ))}
+    </>
+  );
+}
 
 const Gallery = () => {
   const t = useTranslations("Gallery");
@@ -38,11 +55,22 @@ const Gallery = () => {
             </div>
             <div className="grid grid-cols-1 gap-6 sm:gap-8 md:grid-cols-2 lg:gap-10 xl:grid-cols-3 2xl:grid-cols-4">
               {filteredData.length > 0 ? (
-                filteredData.map((item, index) => (
-                  <div key={index} className="flex justify-center">
-                    <GalleryCard data={item} />
-                  </div>
-                ))
+                <>
+                  {/* Preload the first two images for better LCP */}
+                  <PreloadGalleryImages
+                    images={filteredData
+                      .slice(0, 2)
+                      .map((item) => item.images[0])}
+                  />
+                  {filteredData.map((item, index) => (
+                    <div key={index} className="flex justify-center">
+                      <GalleryCard
+                        data={item}
+                        priority={index < 2} // Only prioritize first 2 images for better LCP
+                      />
+                    </div>
+                  ))}
+                </>
               ) : (
                 <div className="col-span-full flex min-h-[200px] items-center justify-center">
                   <p className="text-lg text-gray-400 sm:text-xl">

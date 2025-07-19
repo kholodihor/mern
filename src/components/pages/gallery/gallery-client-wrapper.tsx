@@ -11,6 +11,24 @@ import LoadingError from "@/components/shared/loading-error";
 import CustomDropdown from "@/components/ui/select";
 import GalleryCard from "./gallery-card";
 
+// Component to preload critical gallery images
+function PreloadGalleryImages({ images }: { images: string[] }) {
+  return (
+    <>
+      {images.slice(0, 2).map((src, index) => (
+        <link
+          key={index}
+          rel="preload"
+          href={src}
+          as="image"
+          type="image/webp"
+          fetchPriority="high"
+        />
+      ))}
+    </>
+  );
+}
+
 interface GalleryClientWrapperProps {
   initialData: IGalleryItem[];
 }
@@ -56,11 +74,20 @@ const GalleryClientWrapper = ({ initialData }: GalleryClientWrapperProps) => {
         {isLoading ? (
           <Loader />
         ) : displayData.length > 0 ? (
-          displayData.map((item, index) => (
-            <div key={index} className="flex justify-center">
-              <GalleryCard data={item} />
-            </div>
-          ))
+          <>
+            {/* Preload the first two images for better LCP */}
+            <PreloadGalleryImages
+              images={displayData.slice(0, 2).map((item) => item.images[0])}
+            />
+            {displayData.map((item, index) => (
+              <div key={index} className="flex justify-center">
+                <GalleryCard
+                  data={item}
+                  priority={index < 2} // Only prioritize first 2 images for better LCP
+                />
+              </div>
+            ))}
+          </>
         ) : (
           <div className="col-span-full flex min-h-[200px] items-center justify-center">
             <p className="text-lg text-gray-400 sm:text-xl">{t("not_found")}</p>
