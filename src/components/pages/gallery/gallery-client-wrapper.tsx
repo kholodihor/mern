@@ -42,7 +42,7 @@ const GalleryClientWrapper = ({ initialData }: GalleryClientWrapperProps) => {
   const { filters } = useFilters();
   const [imagesLoaded, setImagesLoaded] = useState(false);
   const [showSkeleton, setShowSkeleton] = useState(true);
-  
+
   // Use a ref to track if this is the first render to avoid unnecessary work
   const isFirstRender = useRef(true);
 
@@ -60,28 +60,29 @@ const GalleryClientWrapper = ({ initialData }: GalleryClientWrapperProps) => {
   useEffect(() => {
     if (isFirstRender.current) {
       isFirstRender.current = false;
-      
+
       // Use requestIdleCallback to defer non-critical work until the browser is idle
       // This helps reduce main-thread blocking during initial render
-      const idleCallback = window.requestIdleCallback || ((cb) => setTimeout(cb, 50));
-      
+      const idleCallback =
+        window.requestIdleCallback || ((cb) => setTimeout(cb, 50));
+
       idleCallback(() => {
         // Simulate image loading with a minimum display time for skeleton
         // This prevents flickering if images load too quickly
         const timer = setTimeout(() => {
           setImagesLoaded(true);
-          
+
           // Hide skeleton after a minimum display time
           if (!isLoading) {
             setShowSkeleton(false);
           }
         }, 800); // Minimum skeleton display time
-        
+
         return () => clearTimeout(timer);
       });
     }
   }, [isLoading]);
-  
+
   // Hide skeleton when images are loaded
   useEffect(() => {
     if (imagesLoaded) {
@@ -89,7 +90,7 @@ const GalleryClientWrapper = ({ initialData }: GalleryClientWrapperProps) => {
       const timer = setTimeout(() => {
         setShowSkeleton(false);
       }, 100);
-      
+
       return () => clearTimeout(timer);
     }
   }, [imagesLoaded]);
@@ -159,7 +160,11 @@ const GalleryClientWrapper = ({ initialData }: GalleryClientWrapperProps) => {
               />
               {displayData.map((item, index) => (
                 <div key={index} className="flex justify-center">
-                  <Suspense fallback={<div className="w-full h-48 bg-gray-700/20 rounded-2xl animate-pulse"></div>}>
+                  <Suspense
+                    fallback={
+                      <div className="h-48 w-full animate-pulse rounded-2xl bg-gray-700/20"></div>
+                    }
+                  >
                     <GalleryCard
                       data={item}
                       priority={index === 0} // Only prioritize the very first image for better LCP
