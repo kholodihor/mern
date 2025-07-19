@@ -76,13 +76,13 @@ const GalleryClientWrapper = ({ initialData }: GalleryClientWrapperProps) => {
         ) : displayData.length > 0 ? (
           <>
             {/* Preload the first two images for better LCP */}
-            <PreloadGalleryImages 
-              images={displayData.slice(0, 2).map(item => item.images[0])} 
+            <PreloadGalleryImages
+              images={displayData.slice(0, 2).map((item) => item.images[0])}
             />
             {displayData.map((item, index) => (
               <div key={index} className="flex justify-center">
-                <GalleryCard 
-                  data={item} 
+                <GalleryCard
+                  data={item}
                   priority={index < 2} // Only prioritize first 2 images for better LCP
                 />
               </div>
