@@ -27,6 +27,7 @@ const GalleryCard = ({ data, priority = false }: GalleryCardProps) => {
           quality={priority ? 85 : 75}
           placeholder="blur"
           blurDataURL="data:image/webp;base64,UklGRlIAAABXRUJQVlA4WAoAAAAQAAAACQAAAgAAQUxQSBIAAAABF0AQbQEz/wMz0P8AAFZQOCA+AAAAMAEAnQEqCgADAAJAOCWkAANwAP77+AAA"
+          loading={priority ? "eager" : "lazy"}
         />
       </div>
 
