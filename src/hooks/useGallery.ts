@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import {
   collection,
   deleteDoc,
@@ -5,7 +6,6 @@ import {
   getDoc,
   getDocs,
 } from "firebase/firestore";
-import { useMemo } from "react";
 import useSWR from "swr";
 import { CATEGORIES } from "@/constants/categories";
 import { db } from "@/lib/firebase";
@@ -40,23 +40,25 @@ export const useGallery = () => {
     mutate,
   } = useSWR<IGalleryItem[]>("gallery", fetchGalleryItems, {
     // Performance optimizations
-    revalidateIfStale: false,  // Don't revalidate on stale data
-    revalidateOnFocus: false,  // Don't revalidate when window gets focus
+    revalidateIfStale: false, // Don't revalidate on stale data
+    revalidateOnFocus: false, // Don't revalidate when window gets focus
     revalidateOnReconnect: false, // Don't revalidate on reconnect
-    dedupingInterval: 60000,   // Dedupe requests within 1 minute
+    dedupingInterval: 60000, // Dedupe requests within 1 minute
   });
 
   // Memoize filtered data calculation to reduce main-thread work
   const filteredData = useMemo(() => {
-    return galleryList?.filter((item) => {
-      // Fast path for "All" category
-      if (filters[0] === CATEGORIES.ALL) return true;
-      
-      // Use some() for early termination when a match is found
-      return item.categories.some((category: string) =>
-        filters.includes(CATEGORIES[category])
-      );
-    }) || [];
+    return (
+      galleryList?.filter((item) => {
+        // Fast path for "All" category
+        if (filters[0] === CATEGORIES.ALL) return true;
+
+        // Use some() for early termination when a match is found
+        return item.categories.some((category: string) =>
+          filters.includes(CATEGORIES[category])
+        );
+      }) || []
+    );
   }, [galleryList, filters]);
 
   const deleteGalleryItem = async (id: string) => {

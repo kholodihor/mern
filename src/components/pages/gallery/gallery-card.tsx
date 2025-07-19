@@ -1,7 +1,7 @@
 "use client";
 
-import { memo } from "react";
 import Image from "next/image";
+import { memo } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { CATEGORIES } from "@/constants/categories";
 import { formatDate } from "@/helpers/formatDate";
@@ -34,7 +34,7 @@ const GalleryCard = memo(({ data, priority = false }: GalleryCardProps) => {
           fetchPriority={priority ? "high" : "auto"}
           decoding="async"
           unoptimized={priority} // Skip Next.js image optimization for priority images to reduce processing time
-          style={{ transform: 'translate3d(0, 0, 0)' }} // Force GPU acceleration
+          style={{ transform: "translate3d(0, 0, 0)" }} // Force GPU acceleration
         />
       </div>
 
@@ -87,6 +87,6 @@ const GalleryCard = memo(({ data, priority = false }: GalleryCardProps) => {
 });
 
 // Add display name to fix ESLint error
-GalleryCard.displayName = 'GalleryCard';
+GalleryCard.displayName = "GalleryCard";
 
 export default GalleryCard;

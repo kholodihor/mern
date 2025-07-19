@@ -1,7 +1,7 @@
 "use client";
 
-import clsx from "clsx";
 import { FC, useRef } from "react";
+import clsx from "clsx";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -10,7 +10,6 @@ import { Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { SwiperOptions } from "swiper/types";
 import "./styles.css";
-
 
 interface SliderProps extends SwiperOptions {
   data: any[];

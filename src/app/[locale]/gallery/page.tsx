@@ -81,7 +81,7 @@ export async function generateMetadata({
 
 // Add generateStaticParams to enable static generation for better performance
 export async function generateStaticParams() {
-  return [{ locale: 'en' }, { locale: 'pl' }, { locale: 'ua' }];
+  return [{ locale: "en" }, { locale: "pl" }, { locale: "ua" }];
 }
 
 const GalleryPage = async () => {
