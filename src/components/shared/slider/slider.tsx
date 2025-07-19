@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import { FC, useRef } from "react";
 import clsx from "clsx";
+import { FC, useRef } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -11,8 +11,6 @@ import { Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { SwiperOptions } from "swiper/types";
 import "./styles.css";
-
-/* eslint-disable @typescript-eslint/no-explicit-any */
 
 interface SliderProps extends SwiperOptions {
   data: any[];
