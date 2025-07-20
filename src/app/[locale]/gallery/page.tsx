@@ -37,7 +37,7 @@ export async function generateMetadata({
     description: localeMetadata.description,
     metadataBase: new URL(baseUrl),
     alternates: {
-      canonical: `${baseUrl}/${locale}/gallery`,
+      canonical: new URL(`/${locale}/gallery`, baseUrl).toString(),
       languages: {
         en: `${baseUrl}/en/gallery`,
         pl: `${baseUrl}/pl/gallery`,
@@ -46,7 +46,7 @@ export async function generateMetadata({
     },
     openGraph: {
       type: "website",
-      url: `${baseUrl}/${locale}/gallery`,
+      url: new URL(`/${locale}/gallery`, baseUrl).toString(),
       title: localeMetadata.title,
       description: localeMetadata.description,
       images: [
