@@ -70,7 +70,10 @@ export async function generateMetadata({
   const articleData = await getArticleData(cleanSlug);
 
   const localeMetadata = metadata[locale] || metadata.pl;
-  const canonicalUrl = `${baseUrl}/${locale}/news/${cleanSlug}`;
+  // Create a new URL object to avoid duplicate locale segments
+  const canonicalUrlObj = new URL(baseUrl);
+  canonicalUrlObj.pathname = `/${locale}/news/${cleanSlug}`;
+  const canonicalUrl = canonicalUrlObj.toString();
 
   // Create a more descriptive title and description using the article data
   const title =

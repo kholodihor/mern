@@ -40,11 +40,10 @@ const Article = ({
   const router = useRouter();
   const { getArticleBySlug, isLoading, isError } = useNews(initialData);
 
-  // Clean up slug for canonical URL - ensure it doesn't end with a dash
+  // Clean up slug for URL paths - ensure it doesn't end with a dash
   const cleanSlug = slug.endsWith("-") ? slug.slice(0, -1) : slug;
 
-  // Generate canonical URL and alternate language URLs
-  const canonicalUrl = `${baseUrl}/${locale}/news/${cleanSlug}`;
+  // Generate alternate language URLs
 
   // Generate alternate language URLs
   const alternateUrls = locales.reduce((acc: Record<string, string>, loc) => {
@@ -72,8 +71,7 @@ const Article = ({
     <>
       {/* Add SEO head tags */}
       <Head>
-        {/* Canonical URL */}
-        <link rel="canonical" href={canonicalUrl} />
+        {/* Canonical URL is now handled by Next.js Metadata API */}
 
         {/* Hreflang tags */}
         {Object.entries(alternateUrls).map(([lang, url]) => (

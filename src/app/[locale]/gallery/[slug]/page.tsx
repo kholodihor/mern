@@ -51,7 +51,10 @@ export async function generateMetadata({
   const carData = await getCarData(cleanSlug);
 
   const localeMetadata = metadata[locale] || metadata.pl;
-  const canonicalUrl = `${baseUrl}/${locale}/gallery/${cleanSlug}`;
+  // Create a new URL object to avoid duplicate locale segments
+  const canonicalUrlObj = new URL(baseUrl);
+  canonicalUrlObj.pathname = `/${locale}/gallery/${cleanSlug}`;
+  const canonicalUrl = canonicalUrlObj.toString();
 
   // Create a more descriptive title and description using the car data
   const title = carData

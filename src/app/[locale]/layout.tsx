@@ -65,14 +65,16 @@ export async function generateMetadata({
   const defaultTitle = titles[locale] || titles.pl;
   const defaultDescription = descriptions[locale] || descriptions.pl;
 
-  // Set the canonical URL for the root page
-  baseUrl.pathname = `/${locale}`;
-  const canonicalUrl = baseUrl.toString();
+  // Set the canonical URL for the root page - ensure we don't duplicate the locale
+  // Create a new URL object to avoid modifying the original baseUrl
+  const canonicalUrlObj = new URL(baseUrl);
+  canonicalUrlObj.pathname = `/${locale}`;
+  const canonicalUrl = canonicalUrlObj.toString();
 
   // No need for helper functions, we'll use direct string interpolation
 
   return {
-    metadataBase: baseUrl,
+    metadataBase: new URL(baseUrl),
     alternates: {
       canonical: canonicalUrl,
       languages: {
