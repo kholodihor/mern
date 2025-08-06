@@ -8,6 +8,7 @@ import { useTranslations } from "next-intl";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import "react-quill-new/dist/quill.snow.css";
 import { CATEGORIES } from "@/constants/categories";
+import { generateSlug } from "@/helpers/generateSlug";
 import { useRouter } from "@/i18n/routing";
 import { db } from "@/lib/firebase";
 import "@/styles/quill.css";
@@ -75,11 +76,7 @@ const AddGallery = () => {
 
       const data = {
         car: values.car,
-        slug: values.car
-          .toLowerCase()
-          .replace(/[é]/g, "e")
-          .replace(/[''`]/g, "")
-          .replace(/\s+/g, "-"),
+        slug: generateSlug(values.car),
         categories: values.categories,
         images: imageUrls,
         desc: {
