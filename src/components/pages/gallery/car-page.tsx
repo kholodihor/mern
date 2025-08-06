@@ -2,7 +2,6 @@
 
 import Head from "next/head";
 import Image from "next/image";
-// No need for usePathname
 import parse from "html-react-parser";
 import { useLocale, useTranslations } from "next-intl";
 import { baseUrl } from "@/constants";
@@ -10,6 +9,7 @@ import { CATEGORIES } from "@/constants/categories";
 import { formatDate } from "@/helpers/formatDate";
 import { useCar } from "@/hooks/useCar";
 import { Link, locales } from "@/i18n/routing";
+// No need for usePathname
 import ChevronLeft from "@/components/icons/chevron-left";
 import Loader from "@/components/shared/loader";
 import LoadingError from "@/components/shared/loading-error";
@@ -52,6 +52,8 @@ const CarPage = ({
     acc[loc] = `${baseUrl}/${loc}/gallery/${cleanSlug}`;
     return acc;
   }, {});
+
+  console.log(carItem);
 
   if (isError) {
     return <LoadingError />;
