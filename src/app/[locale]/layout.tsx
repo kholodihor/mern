@@ -83,6 +83,18 @@ export async function generateMetadata({
         uk: `${baseUrl}/ua`,
       },
     },
+    // Add explicit robots meta for indexing
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        'max-video-preview': -1,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+      },
+    },
     title: {
       default: defaultTitle,
       template: `%s | Mern Serwis - Niezależny serwis BMW | Mechanik BMW w Warszawie`,
@@ -147,6 +159,8 @@ export default async function RootLayout({
           httpEquiv="Cache-Control"
           content="no-cache, no-store, must-revalidate"
         />
+        {/* Force HTTPS for SEO - helps with canonical URL issues */}
+        <meta httpEquiv="Content-Security-Policy" content="upgrade-insecure-requests" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
           rel="preconnect"
