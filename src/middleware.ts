@@ -1,5 +1,5 @@
-import createMiddleware from "next-intl/middleware";
 import { NextRequest, NextResponse } from "next/server";
+import createMiddleware from "next-intl/middleware";
 import { routing } from "./i18n/routing";
 
 // Create the intl middleware with our routing configuration
@@ -7,15 +7,19 @@ const intlMiddleware = createMiddleware(routing);
 
 export default function middleware(request: NextRequest) {
   const { pathname, search } = request.nextUrl;
-  const host = request.headers.get('host') || '';
-  const protocol = request.headers.get('x-forwarded-proto') || 'https';
-  
+  const host = request.headers.get("host") || "";
+  const protocol = request.headers.get("x-forwarded-proto") || "https";
+
+  // Only apply redirects in production environment and not for localhost
+  const isProduction = process.env.NODE_ENV === "production";
+  const isLocalhost = host.includes("localhost") || host.includes("127.0.0.1");
+
   // Handle HTTP to HTTPS and www to non-www redirects for specific pages
-  if (protocol === 'http' || host.startsWith('www.')) {
+  if (isProduction && !isLocalhost && (protocol === "http" || host.startsWith("www."))) {
     const url = new URL(`https://mernserwis.com${pathname}${search}`);
     return NextResponse.redirect(url, 301);
   }
-  
+
   // Continue with intl middleware
   return intlMiddleware(request);
 }

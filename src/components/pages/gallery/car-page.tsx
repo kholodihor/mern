@@ -1,14 +1,14 @@
 "use client";
 
-import Head from "next/head";
-import Image from "next/image";
-import parse from "html-react-parser";
-import { useLocale, useTranslations } from "next-intl";
 import { baseUrl } from "@/constants";
 import { CATEGORIES } from "@/constants/categories";
 import { formatDate } from "@/helpers/formatDate";
 import { useCar } from "@/hooks/useCar";
 import { Link, locales } from "@/i18n/routing";
+import parse from "html-react-parser";
+import { useLocale, useTranslations } from "next-intl";
+import Head from "next/head";
+import Image from "next/image";
 // No need for usePathname
 import ChevronLeft from "@/components/icons/chevron-left";
 import Loader from "@/components/shared/loader";
@@ -46,6 +46,7 @@ const CarPage = ({
   const cleanSlug = slug.endsWith("-") ? slug.slice(0, -1) : slug;
 
   // Generate alternate language URLs
+
 
   // Generate alternate language URLs
   const alternateUrls = locales.reduce((acc: Record<string, string>, loc) => {
@@ -103,6 +104,7 @@ const CarPage = ({
               aria-label="Cars Slider"
               nextElName="nextCars"
               prevElName="prevCars"
+              speed={500}
               breakpoints={{
                 450: {
                   slidesPerView: 1.2,

@@ -1,12 +1,13 @@
+import { Locale, routing } from "@/i18n/routing";
+import { PageProps } from "@/types";
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import type { Metadata } from "next";
+import { NextIntlClientProvider } from "next-intl";
+import { getMessages } from "next-intl/server";
 import dynamic from "next/dynamic";
 import { Open_Sans } from "next/font/google";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
-import { NextIntlClientProvider } from "next-intl";
-import { getMessages } from "next-intl/server";
-import { Locale, routing } from "@/i18n/routing";
-import { PageProps } from "@/types";
 // Import critical components directly
 import ConditionalContactLink from "@/components/shared/conditional-contact-link";
 import Header from "@/components/shared/header";
@@ -90,9 +91,9 @@ export async function generateMetadata({
       googleBot: {
         index: true,
         follow: true,
-        'max-video-preview': -1,
-        'max-image-preview': 'large',
-        'max-snippet': -1,
+        "max-video-preview": -1,
+        "max-image-preview": "large",
+        "max-snippet": -1,
       },
     },
     title: {
@@ -160,7 +161,10 @@ export default async function RootLayout({
           content="no-cache, no-store, must-revalidate"
         />
         {/* Force HTTPS for SEO - helps with canonical URL issues */}
-        <meta httpEquiv="Content-Security-Policy" content="upgrade-insecure-requests" />
+        <meta
+          httpEquiv="Content-Security-Policy"
+          content="upgrade-insecure-requests"
+        />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
           rel="preconnect"
@@ -186,7 +190,7 @@ export default async function RootLayout({
           <SubHeader />
           <Header />
           {children}
-
+          <SpeedInsights />
           {/* Non-critical components */}
           <Suspense fallback={null}>
             <CookieBannerClient />
