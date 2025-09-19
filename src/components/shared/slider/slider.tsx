@@ -1,7 +1,7 @@
 "use client";
 
-import { FC, useRef } from "react";
 import clsx from "clsx";
+import { FC, useRef } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -55,11 +55,11 @@ const Slider: FC<SliderProps> = ({
             aria-controls="slider"
             disabled={!sliderRef.current}
             className={clsx(
-              "button-prev duration-300 hover:text-gray-500 disabled:opacity-40",
+              "button-prev duration-300 hover:scale-125 disabled:opacity-40",
               prevElName
             )}
           >
-            <FaChevronLeft aria-hidden="true" />
+            <FaChevronLeft aria-hidden="true" className="w-6 h-6" />
           </button>
           <button
             onClick={handleNext}
@@ -67,11 +67,11 @@ const Slider: FC<SliderProps> = ({
             aria-controls="slider"
             disabled={!sliderRef.current}
             className={clsx(
-              "button-next duration-300 hover:text-gray-500 disabled:opacity-40",
+              "button-next duration-300 hover:scale-125 disabled:opacity-40",
               nextElName
             )}
           >
-            <FaChevronRight aria-hidden="true" />
+            <FaChevronRight aria-hidden="true" className="w-6 h-6" />
           </button>
         </div>
       </nav>
