@@ -139,6 +139,10 @@ const nextConfig = {
         protocol: "https",
         hostname: "vsewr2yc7vc2psmw.public.blob.vercel-storage.com",
       },
+      {
+        protocol: "https",
+        hostname: "res.cloudinary.com",
+      },
     ],
     // Improve image loading performance
     formats: ["image/avif", "image/webp"],

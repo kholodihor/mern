@@ -1,21 +1,21 @@
 "use client";
 
+import Head from "next/head";
+import Image from "next/image";
+import { useState } from "react";
+import parse from "html-react-parser";
+import { useLocale, useTranslations } from "next-intl";
+import { FaChevronLeft } from "react-icons/fa6";
 import { baseUrl } from "@/constants";
 import { CATEGORIES } from "@/constants/categories";
 import { formatDate } from "@/helpers/formatDate";
 import { useCar } from "@/hooks/useCar";
 import { Link, locales } from "@/i18n/routing";
-import parse from "html-react-parser";
-import { useLocale, useTranslations } from "next-intl";
-import Head from "next/head";
-import Image from "next/image";
-import { useState } from "react";
 // No need for usePathname
 import Loader from "@/components/shared/loader";
 import LoadingError from "@/components/shared/loading-error";
 import SectionTitle from "@/components/shared/section-title";
 import Slider from "@/components/shared/slider/slider";
-import { FaChevronLeft } from "react-icons/fa6";
 
 // Component to preload critical car images
 function PreloadCarImages({ images }: { images: string[] }) {
@@ -59,8 +59,9 @@ const CarImage = ({ data, index }: { data: string; index?: number }) => {
         src={data}
         alt="Car image"
         fill
-        className={`object-cover transition-all duration-300 hover:scale-105 ${imageLoaded ? "opacity-100" : "opacity-0"
-          }`}
+        className={`object-cover transition-all duration-300 hover:scale-105 ${
+          imageLoaded ? "opacity-100" : "opacity-0"
+        }`}
         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         priority={isPriority}
         quality={isPriority ? 90 : 75}
@@ -98,7 +99,6 @@ const CarPage = ({
     return acc;
   }, {});
 
-
   if (isError) {
     return <LoadingError />;
   }
@@ -134,7 +134,7 @@ const CarPage = ({
           <div className="relative mb-4 sm:mb-12">
             <Link
               href="/gallery"
-              className="absolute -left-2 sm:left-0 -top-8 sm:top-1/2 -translate-y-1/2 p-2 text-white font-bold transition-colors hover:text-gray-300"
+              className="absolute -left-2 -top-8 -translate-y-1/2 p-2 font-bold text-white transition-colors hover:text-gray-300 sm:left-0 sm:top-1/2"
             >
               <FaChevronLeft className="h-6 w-6 sm:h-10 sm:w-10" />
             </Link>
