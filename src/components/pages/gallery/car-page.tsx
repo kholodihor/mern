@@ -1,14 +1,14 @@
 "use client";
 
+import Head from "next/head";
+import Image from "next/image";
+import parse from "html-react-parser";
+import { useLocale, useTranslations } from "next-intl";
 import { baseUrl } from "@/constants";
 import { CATEGORIES } from "@/constants/categories";
 import { formatDate } from "@/helpers/formatDate";
 import { useCar } from "@/hooks/useCar";
 import { Link, locales } from "@/i18n/routing";
-import parse from "html-react-parser";
-import { useLocale, useTranslations } from "next-intl";
-import Head from "next/head";
-import Image from "next/image";
 // No need for usePathname
 import ChevronLeft from "@/components/icons/chevron-left";
 import Loader from "@/components/shared/loader";
@@ -16,7 +16,32 @@ import LoadingError from "@/components/shared/loading-error";
 import SectionTitle from "@/components/shared/section-title";
 import Slider from "@/components/shared/slider/slider";
 
-const CarImage = ({ data }: { data: string }) => {
+// Component to preload critical car images
+function PreloadCarImages({ images }: { images: string[] }) {
+  return (
+    <>
+      {images.slice(0, 3).map((src, index) => (
+        <link
+          key={index}
+          rel="preload"
+          href={src}
+          as="image"
+          type="image/webp"
+        />
+      ))}
+    </>
+  );
+}
+
+const CarImage = ({ 
+  data, 
+  index 
+}: { 
+  data: string; 
+  index?: number; 
+}) => {
+  const isPriority = (index !== undefined && index < 3); // Prioritize first 3 images
+  
   return (
     <div className="relative aspect-[4/3] overflow-hidden rounded-xl">
       <Image
@@ -25,6 +50,14 @@ const CarImage = ({ data }: { data: string }) => {
         fill
         className="object-cover transition-transform hover:scale-105"
         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+        priority={isPriority}
+        quality={isPriority ? 90 : 75}
+        placeholder="blur"
+        blurDataURL="data:image/webp;base64,UklGRlIAAABXRUJQVlA4WAoAAAAQAAAACQAAAgAAQUxQSBIAAAABF0AQbQEz/wMz0P8AAFZQOCA+AAAAMAEAnQEqCgADAAJAOCWkAANwAP77+AAA"
+        loading={isPriority ? "eager" : "lazy"}
+        fetchPriority={isPriority ? "high" : "auto"}
+        decoding="async"
+        style={{ transform: "translate3d(0, 0, 0)" }} // Force GPU acceleration
       />
     </div>
   );
@@ -46,7 +79,6 @@ const CarPage = ({
   const cleanSlug = slug.endsWith("-") ? slug.slice(0, -1) : slug;
 
   // Generate alternate language URLs
-
 
   // Generate alternate language URLs
   const alternateUrls = locales.reduce((acc: Record<string, string>, loc) => {
@@ -98,6 +130,9 @@ const CarPage = ({
             <SectionTitle id={`${carItem.car}-title`} title={carItem.car} />
           </div>
           <div className="mt-8 sm:mt-12">
+            {/* Preload the first three images for better performance */}
+            <PreloadCarImages images={carItem.images} />
+            
             <Slider
               data={carItem.images}
               Component={CarImage}

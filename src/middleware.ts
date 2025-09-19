@@ -15,7 +15,11 @@ export default function middleware(request: NextRequest) {
   const isLocalhost = host.includes("localhost") || host.includes("127.0.0.1");
 
   // Handle HTTP to HTTPS and www to non-www redirects for specific pages
-  if (isProduction && !isLocalhost && (protocol === "http" || host.startsWith("www."))) {
+  if (
+    isProduction &&
+    !isLocalhost &&
+    (protocol === "http" || host.startsWith("www."))
+  ) {
     const url = new URL(`https://mernserwis.com${pathname}${search}`);
     return NextResponse.redirect(url, 301);
   }

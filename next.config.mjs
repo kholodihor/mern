@@ -135,6 +135,10 @@ const nextConfig = {
         protocol: "https",
         hostname: "firebasestorage.googleapis.com",
       },
+      {
+        protocol: "https",
+        hostname: "vsewr2yc7vc2psmw.public.blob.vercel-storage.com",
+      },
     ],
     // Improve image loading performance
     formats: ["image/avif", "image/webp"],

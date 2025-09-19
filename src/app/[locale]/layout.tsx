@@ -1,6 +1,6 @@
 import { Locale, routing } from "@/i18n/routing";
 import { PageProps } from "@/types";
-import { SpeedInsights } from '@vercel/speed-insights/next';
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata } from "next";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
