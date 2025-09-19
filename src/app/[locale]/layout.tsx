@@ -1,13 +1,13 @@
-import { Locale, routing } from "@/i18n/routing";
-import { PageProps } from "@/types";
-import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata } from "next";
-import { NextIntlClientProvider } from "next-intl";
-import { getMessages } from "next-intl/server";
 import dynamic from "next/dynamic";
 import { Open_Sans } from "next/font/google";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
+// import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Locale, routing } from "@/i18n/routing";
+import { PageProps } from "@/types";
+import { NextIntlClientProvider } from "next-intl";
+import { getMessages } from "next-intl/server";
 // Import critical components directly
 import ConditionalContactLink from "@/components/shared/conditional-contact-link";
 import Header from "@/components/shared/header";
@@ -190,7 +190,7 @@ export default async function RootLayout({
           <SubHeader />
           <Header />
           {children}
-          <SpeedInsights />
+          {/* <SpeedInsights /> */}
           {/* Non-critical components */}
           <Suspense fallback={null}>
             <CookieBannerClient />
