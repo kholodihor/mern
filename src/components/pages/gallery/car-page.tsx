@@ -16,7 +16,32 @@ import LoadingError from "@/components/shared/loading-error";
 import SectionTitle from "@/components/shared/section-title";
 import Slider from "@/components/shared/slider/slider";
 
-const CarImage = ({ data }: { data: string }) => {
+// Component to preload critical car images
+function PreloadCarImages({ images }: { images: string[] }) {
+  return (
+    <>
+      {images.slice(0, 3).map((src, index) => (
+        <link
+          key={index}
+          rel="preload"
+          href={src}
+          as="image"
+          type="image/webp"
+        />
+      ))}
+    </>
+  );
+}
+
+const CarImage = ({ 
+  data, 
+  index 
+}: { 
+  data: string; 
+  index?: number; 
+}) => {
+  const isPriority = (index !== undefined && index < 3); // Prioritize first 3 images
+  
   return (
     <div className="relative aspect-[4/3] overflow-hidden rounded-xl">
       <Image
@@ -25,6 +50,14 @@ const CarImage = ({ data }: { data: string }) => {
         fill
         className="object-cover transition-transform hover:scale-105"
         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+        priority={isPriority}
+        quality={isPriority ? 90 : 75}
+        placeholder="blur"
+        blurDataURL="data:image/webp;base64,UklGRlIAAABXRUJQVlA4WAoAAAAQAAAACQAAAgAAQUxQSBIAAAABF0AQbQEz/wMz0P8AAFZQOCA+AAAAMAEAnQEqCgADAAJAOCWkAANwAP77+AAA"
+        loading={isPriority ? "eager" : "lazy"}
+        fetchPriority={isPriority ? "high" : "auto"}
+        decoding="async"
+        style={{ transform: "translate3d(0, 0, 0)" }} // Force GPU acceleration
       />
     </div>
   );
@@ -97,12 +130,16 @@ const CarPage = ({
             <SectionTitle id={`${carItem.car}-title`} title={carItem.car} />
           </div>
           <div className="mt-8 sm:mt-12">
+            {/* Preload the first three images for better performance */}
+            <PreloadCarImages images={carItem.images} />
+            
             <Slider
               data={carItem.images}
               Component={CarImage}
               aria-label="Cars Slider"
               nextElName="nextCars"
               prevElName="prevCars"
+              speed={500}
               breakpoints={{
                 450: {
                   slidesPerView: 1.2,

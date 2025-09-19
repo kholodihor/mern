@@ -9,5 +9,6 @@
   },
   "typescript.tsdk": "node_modules/typescript/lib",
   "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "git.ignoreLimitWarning": true
+  "git.ignoreLimitWarning": true,
+  "kiroAgent.configureMCP": "Disabled"
 }
