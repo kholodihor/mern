@@ -1,7 +1,7 @@
 "use client";
 
-import clsx from "clsx";
 import { FC, useRef } from "react";
+import clsx from "clsx";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -45,7 +45,7 @@ const Slider: FC<SliderProps> = ({
   return (
     <div className="flex w-full flex-col items-center justify-center">
       <nav
-        className="hidden relative mx-auto mb-6 sm:flex h-fit w-full items-center justify-center py-4 pr-4 text-white"
+        className="relative mx-auto mb-6 hidden h-fit w-full items-center justify-center py-4 pr-4 text-white sm:flex"
         aria-label="Slider navigation"
       >
         <div className="absolute right-6 top-0 hidden h-full items-center justify-center gap-4 text-white md:flex">
@@ -59,7 +59,7 @@ const Slider: FC<SliderProps> = ({
               prevElName
             )}
           >
-            <FaChevronLeft aria-hidden="true" className="w-6 h-6" />
+            <FaChevronLeft aria-hidden="true" className="h-6 w-6" />
           </button>
           <button
             onClick={handleNext}
@@ -71,7 +71,7 @@ const Slider: FC<SliderProps> = ({
               nextElName
             )}
           >
-            <FaChevronRight aria-hidden="true" className="w-6 h-6" />
+            <FaChevronRight aria-hidden="true" className="h-6 w-6" />
           </button>
         </div>
       </nav>
