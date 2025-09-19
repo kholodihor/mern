@@ -3,11 +3,11 @@
 import { useTranslations } from "next-intl";
 import { CATEGORIES } from "@/constants/categories";
 import { useGallery } from "@/hooks/useGallery";
-import Loader from "@/components/shared/loader";
 import LoadingError from "@/components/shared/loading-error";
 import SectionTitle from "@/components/shared/section-title";
 import CustomDropdown from "@/components/ui/select";
 import GalleryCard from "./gallery-card";
+import GallerySkeleton from "./gallery-skeleton";
 
 // Component to preload critical gallery images
 function PreloadGalleryImages({ images }: { images: string[] }) {
@@ -47,7 +47,13 @@ const Gallery = () => {
           <SectionTitle id="gallery-title" title={t("title")} />
         </div>
         {isLoading ? (
-          <Loader />
+          <div className="mt-8 sm:mt-12">
+            <div className="mx-auto my-8 w-full max-w-[400px] sm:my-12 md:mx-0">
+              {/* Dropdown skeleton */}
+              <div className="h-12 w-full animate-pulse rounded-lg bg-gray-700"></div>
+            </div>
+            <GallerySkeleton />
+          </div>
         ) : (
           <div className="mt-8 sm:mt-12">
             <div className="mx-auto my-8 w-full max-w-[400px] sm:my-12 md:mx-0">

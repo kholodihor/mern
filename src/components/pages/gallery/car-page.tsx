@@ -1,14 +1,15 @@
 "use client";
 
-import Head from "next/head";
-import Image from "next/image";
-import parse from "html-react-parser";
-import { useLocale, useTranslations } from "next-intl";
 import { baseUrl } from "@/constants";
 import { CATEGORIES } from "@/constants/categories";
 import { formatDate } from "@/helpers/formatDate";
 import { useCar } from "@/hooks/useCar";
 import { Link, locales } from "@/i18n/routing";
+import parse from "html-react-parser";
+import { useLocale, useTranslations } from "next-intl";
+import Head from "next/head";
+import Image from "next/image";
+import { useState } from "react";
 // No need for usePathname
 import ChevronLeft from "@/components/icons/chevron-left";
 import Loader from "@/components/shared/loader";
@@ -33,22 +34,33 @@ function PreloadCarImages({ images }: { images: string[] }) {
   );
 }
 
-const CarImage = ({ 
-  data, 
-  index 
-}: { 
-  data: string; 
-  index?: number; 
-}) => {
-  const isPriority = (index !== undefined && index < 3); // Prioritize first 3 images
-  
+const CarImage = ({ data, index }: { data: string; index?: number }) => {
+  const [imageLoaded, setImageLoaded] = useState(false);
+  const [imageError, setImageError] = useState(false);
+  const isPriority = index !== undefined && index < 3; // Prioritize first 3 images
+
   return (
-    <div className="relative aspect-[4/3] overflow-hidden rounded-xl">
+    <div className="relative aspect-[4/3] overflow-hidden rounded-xl bg-gray-800/50">
+      {/* Loading placeholder */}
+      {!imageLoaded && !imageError && (
+        <div className="absolute inset-0 flex items-center justify-center bg-gray-800/50 backdrop-blur-sm">
+          <div className="h-8 w-8 animate-spin rounded-full border-2 border-white border-t-transparent"></div>
+        </div>
+      )}
+
+      {/* Error state */}
+      {imageError && (
+        <div className="absolute inset-0 flex items-center justify-center bg-gray-800/50 text-white">
+          <span className="text-sm">Failed to load image</span>
+        </div>
+      )}
+
       <Image
         src={data}
         alt="Car image"
         fill
-        className="object-cover transition-transform hover:scale-105"
+        className={`object-cover transition-all duration-300 hover:scale-105 ${imageLoaded ? 'opacity-100' : 'opacity-0'
+          }`}
         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         priority={isPriority}
         quality={isPriority ? 90 : 75}
@@ -57,6 +69,8 @@ const CarImage = ({
         loading={isPriority ? "eager" : "lazy"}
         fetchPriority={isPriority ? "high" : "auto"}
         decoding="async"
+        onLoad={() => setImageLoaded(true)}
+        onError={() => setImageError(true)}
         style={{ transform: "translate3d(0, 0, 0)" }} // Force GPU acceleration
       />
     </div>
@@ -77,8 +91,6 @@ const CarPage = ({
 
   // Clean up slug for URL paths - ensure it doesn't end with a dash
   const cleanSlug = slug.endsWith("-") ? slug.slice(0, -1) : slug;
-
-  // Generate alternate language URLs
 
   // Generate alternate language URLs
   const alternateUrls = locales.reduce((acc: Record<string, string>, loc) => {
@@ -132,7 +144,7 @@ const CarPage = ({
           <div className="mt-8 sm:mt-12">
             {/* Preload the first three images for better performance */}
             <PreloadCarImages images={carItem.images} />
-            
+
             <Slider
               data={carItem.images}
               Component={CarImage}
