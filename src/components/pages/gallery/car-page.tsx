@@ -43,8 +43,8 @@ const CarImage = ({ data, index }: { data: string; index?: number }) => {
     <div className="relative aspect-[4/3] overflow-hidden rounded-xl bg-gray-800/50">
       {/* Loading placeholder */}
       {!imageLoaded && !imageError && (
-        <div className="absolute inset-0 flex items-center justify-center bg-gray-800/50 backdrop-blur-sm">
-          <div className="h-8 w-8 animate-spin rounded-full border-2 border-white border-t-transparent"></div>
+        <div className="relative h-48 w-full animate-pulse overflow-hidden bg-gradient-to-r from-gray-700 to-gray-500">
+          <div className="shimmer absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent"></div>
         </div>
       )}
 
@@ -59,7 +59,7 @@ const CarImage = ({ data, index }: { data: string; index?: number }) => {
         src={data}
         alt="Car image"
         fill
-        className={`object-cover transition-all duration-300 hover:scale-105 ${imageLoaded ? 'opacity-100' : 'opacity-0'
+        className={`object-cover transition-all duration-300 hover:scale-105 ${imageLoaded ? "opacity-100" : "opacity-0"
           }`}
         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         priority={isPriority}
@@ -98,7 +98,6 @@ const CarPage = ({
     return acc;
   }, {});
 
-  console.log(carItem);
 
   if (isError) {
     return <LoadingError />;
@@ -151,7 +150,7 @@ const CarPage = ({
               aria-label="Cars Slider"
               nextElName="nextCars"
               prevElName="prevCars"
-              speed={500}
+              speed={100}
               breakpoints={{
                 450: {
                   slidesPerView: 1.2,
