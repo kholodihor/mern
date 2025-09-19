@@ -11,23 +11,23 @@ import Head from "next/head";
 import Image from "next/image";
 import { useState } from "react";
 // No need for usePathname
-import ChevronLeft from "@/components/icons/chevron-left";
 import Loader from "@/components/shared/loader";
 import LoadingError from "@/components/shared/loading-error";
 import SectionTitle from "@/components/shared/section-title";
 import Slider from "@/components/shared/slider/slider";
+import { FaChevronLeft } from "react-icons/fa6";
 
 // Component to preload critical car images
 function PreloadCarImages({ images }: { images: string[] }) {
   return (
     <>
-      {images.slice(0, 3).map((src, index) => (
+      {images.slice(0, 6).map((src, index) => (
         <link
           key={index}
           rel="preload"
           href={src}
           as="image"
-          type="image/webp"
+          type="image/webp,image/jpeg,image/png"
         />
       ))}
     </>
@@ -43,7 +43,7 @@ const CarImage = ({ data, index }: { data: string; index?: number }) => {
     <div className="relative aspect-[4/3] overflow-hidden rounded-xl bg-gray-800/50">
       {/* Loading placeholder */}
       {!imageLoaded && !imageError && (
-        <div className="relative h-48 w-full animate-pulse overflow-hidden bg-gradient-to-r from-gray-700 to-gray-500">
+        <div className="relative h-52 w-full animate-pulse overflow-hidden bg-gradient-to-r from-gray-700 to-gray-500">
           <div className="shimmer absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent"></div>
         </div>
       )}
@@ -131,16 +131,16 @@ const CarPage = ({
         aria-labelledby={`${carItem.car}-title`}
       >
         <div className="mx-auto max-w-7xl">
-          <div className="relative mb-8 sm:mb-12">
+          <div className="relative mb-4 sm:mb-12">
             <Link
               href="/gallery"
-              className="absolute left-0 top-1/2 -translate-y-1/2 p-2 text-white transition-colors hover:text-gray-300"
+              className="absolute -left-2 sm:left-0 -top-8 sm:top-1/2 -translate-y-1/2 p-2 text-white font-bold transition-colors hover:text-gray-300"
             >
-              <ChevronLeft className="h-8 w-8 sm:h-10 sm:w-10" />
+              <FaChevronLeft className="h-6 w-6 sm:h-10 sm:w-10" />
             </Link>
             <SectionTitle id={`${carItem.car}-title`} title={carItem.car} />
           </div>
-          <div className="mt-8 sm:mt-12">
+          <div className="mt-0 sm:mt-12">
             {/* Preload the first three images for better performance */}
             <PreloadCarImages images={carItem.images} />
 
@@ -150,7 +150,7 @@ const CarPage = ({
               aria-label="Cars Slider"
               nextElName="nextCars"
               prevElName="prevCars"
-              speed={100}
+              speed={200}
               breakpoints={{
                 450: {
                   slidesPerView: 1.2,
