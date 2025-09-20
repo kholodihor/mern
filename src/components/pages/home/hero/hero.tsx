@@ -1,7 +1,7 @@
 "use client";
 
-import { useTranslations } from "next-intl";
 import ContactsBubble from "@/components/shared/contacts-bubble";
+import { useTranslations } from "next-intl";
 import HeroSlider from "./hero-slider";
 
 const Hero = () => {
@@ -18,7 +18,7 @@ const Hero = () => {
       </div>
 
       {/* Text content - stacked on mobile, absolute on desktop */}
-      <header className="flex w-full flex-col justify-end gap-6 px-6 py-8 text-center sm:absolute sm:left-0 sm:top-[40%] sm:z-10 sm:w-2/3 sm:bg-transparent sm:py-0 sm:text-left md:top-[70%]">
+      <header className="flex w-full flex-col justify-end gap-6 px-6 py-8 text-center sm:absolute sm:left-4 sm:top-[40%] sm:z-10 sm:w-2/3 sm:bg-transparent sm:py-0 sm:text-left md:top-[68%]">
         <h1 className="mb-8 font-open-sans text-[8vh] font-bold uppercase text-white sm:text-[13vh] md:-mb-4 md:text-[17vh]">
           <span aria-hidden="true">MERN</span>
         </h1>
