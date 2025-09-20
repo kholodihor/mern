@@ -1,21 +1,23 @@
 "use client";
 
-import Head from "next/head";
-import Image from "next/image";
-import { useState } from "react";
-import parse from "html-react-parser";
-import { useLocale, useTranslations } from "next-intl";
-import { FaChevronLeft } from "react-icons/fa6";
 import { baseUrl } from "@/constants";
 import { CATEGORIES } from "@/constants/categories";
 import { formatDate } from "@/helpers/formatDate";
 import { useCar } from "@/hooks/useCar";
 import { Link, locales } from "@/i18n/routing";
+import parse from "html-react-parser";
+import { useLocale, useTranslations } from "next-intl";
+import Head from "next/head";
+import Image from "next/image";
+import { useState } from "react";
+import { FaChevronLeft } from "react-icons/fa6";
 // No need for usePathname
 import Loader from "@/components/shared/loader";
 import LoadingError from "@/components/shared/loading-error";
 import SectionTitle from "@/components/shared/section-title";
 import Slider from "@/components/shared/slider/slider";
+
+
 
 // Component to preload critical car images
 function PreloadCarImages({ images }: { images: string[] }) {
@@ -27,7 +29,7 @@ function PreloadCarImages({ images }: { images: string[] }) {
           rel="preload"
           href={src}
           as="image"
-          type="image/webp,image/jpeg,image/png"
+          type="image/*"
         />
       ))}
     </>
@@ -38,13 +40,12 @@ const CarImage = ({ data, index }: { data: string; index?: number }) => {
   const [imageLoaded, setImageLoaded] = useState(false);
   const [imageError, setImageError] = useState(false);
   const isPriority = index !== undefined && index < 3; // Prioritize first 3 images
-
   return (
     <div className="relative aspect-[4/3] overflow-hidden rounded-xl bg-gray-800/50">
       {/* Loading placeholder */}
       {!imageLoaded && !imageError && (
-        <div className="relative h-52 w-full animate-pulse overflow-hidden bg-gradient-to-r from-gray-700 to-gray-500">
-          <div className="shimmer absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent"></div>
+        <div className="absolute inset-0 z-10 h-full w-full animate-pulse overflow-hidden bg-gradient-to-r from-gray-700 to-gray-500">
+          <div className="shimmer absolute inset-0 bg-transparent"></div>
         </div>
       )}
 
@@ -59,9 +60,8 @@ const CarImage = ({ data, index }: { data: string; index?: number }) => {
         src={data}
         alt="Car image"
         fill
-        className={`object-cover transition-all duration-300 hover:scale-105 ${
-          imageLoaded ? "opacity-100" : "opacity-0"
-        }`}
+        className={`object-cover transition-all duration-300 hover:scale-105 ${imageLoaded ? "opacity-100" : "opacity-0"
+          }`}
         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         priority={isPriority}
         quality={isPriority ? 90 : 75}
