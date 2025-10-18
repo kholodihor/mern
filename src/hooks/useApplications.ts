@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { collection, deleteDoc, doc, onSnapshot } from "firebase/firestore";
-import { db } from "@/lib/firebase";
+import { auth, db } from "@/lib/firebase";
 import { IApplicationResponse } from "@/types";
 
 export const useApplications = () => {
@@ -65,6 +65,12 @@ export const useApplications = () => {
   };
 
   const deleteApplication = async (id: string) => {
+    // Check authentication before proceeding
+    if (!auth.currentUser) {
+      alert("Ви повинні бути авторизовані для виконання цієї дії!");
+      return;
+    }
+
     if (confirm("Ви впевнені, що хочете видалити цю заявку?")) {
       try {
         const itemRef = doc(db, "applications", id);
@@ -73,6 +79,7 @@ export const useApplications = () => {
         window.location.reload();
       } catch (error) {
         console.error("Error deleting application:", error);
+        alert("Помилка при видаленні заявки. Можливо, у вас немає прав доступу.");
       }
     }
   };

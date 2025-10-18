@@ -6,7 +6,7 @@ import { formatDateWithSlashes } from "@/helpers/formatDate";
 import { isOutOf96Hours } from "@/helpers/isOutOf96Hours";
 import { isWithin48Hours } from "@/helpers/isWithin48Hours";
 import { Link } from "@/i18n/routing";
-import { db } from "@/lib/firebase";
+import { auth, db } from "@/lib/firebase";
 import { IApplicationResponse } from "@/types";
 
 type ApplicationItemProps = {
@@ -18,6 +18,12 @@ const ApplicationItem = ({ item, onDelete }: ApplicationItemProps) => {
   const [status, setStatus] = useState(item.status);
 
   const handleStatus = async (value: string) => {
+    // Check authentication before proceeding
+    if (!auth.currentUser) {
+      alert("Ви повинні бути авторизовані для виконання цієї дії!");
+      return;
+    }
+
     try {
       setStatus(value);
       if (value !== item.status) {
@@ -27,6 +33,7 @@ const ApplicationItem = ({ item, onDelete }: ApplicationItemProps) => {
       }
     } catch (error) {
       console.error("Error updating status:", error);
+      alert("Помилка при оновленні статусу. Можливо, у вас немає прав доступу.");
     }
   };
 

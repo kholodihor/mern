@@ -6,7 +6,7 @@ import {
   getDocs,
 } from "firebase/firestore";
 import useSWR from "swr";
-import { db } from "@/lib/firebase";
+import { auth, db } from "@/lib/firebase";
 import { deleteFilesFromStorage } from "@/lib/firebase-storage";
 import { INewsArticle } from "@/types";
 
@@ -47,6 +47,12 @@ export const useNews = (initialData: INewsArticle | null = null) => {
   };
 
   const deleteArticle = async (id: string) => {
+    // Check authentication before proceeding
+    if (!auth.currentUser) {
+      alert("Ви повинні бути авторизовані для виконання цієї дії!");
+      return;
+    }
+
     if (confirm("Ви впевнені, що хочете видалити цю статтю?")) {
       try {
         // First get the article to access its images
@@ -71,6 +77,7 @@ export const useNews = (initialData: INewsArticle | null = null) => {
         window.location.reload();
       } catch (error) {
         console.error("Помилка видалення статті:", error);
+        alert("Помилка при видаленні статті. Можливо, у вас немає прав доступу.");
       }
     }
   };

@@ -5,7 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { addDoc, collection } from "firebase/firestore";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { useRouter } from "@/i18n/routing";
-import { db } from "@/lib/firebase";
+import { auth, db } from "@/lib/firebase";
 import TextArea from "@/components/ui/text-area";
 import TextInput from "@/components/ui/text-input";
 import { TestimonialScheme, testimonialScheme } from "./schema";
@@ -30,6 +30,12 @@ const AddTestimonial = () => {
   });
 
   const onSubmit: SubmitHandler<TestimonialScheme> = async (values) => {
+    // Check authentication before proceeding
+    if (!auth.currentUser) {
+      alert("Ви повинні бути авторизовані для виконання цієї дії!");
+      return;
+    }
+
     try {
       setIsProcessing(true);
 

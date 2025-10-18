@@ -8,7 +8,7 @@ import {
 } from "firebase/firestore";
 import useSWR from "swr";
 import { CATEGORIES } from "@/constants/categories";
-import { db } from "@/lib/firebase";
+import { auth, db } from "@/lib/firebase";
 import { deleteFilesFromStorage } from "@/lib/firebase-storage";
 import { useFilters } from "@/stores/useFilters";
 import { IGalleryItem } from "@/types";
@@ -62,6 +62,12 @@ export const useGallery = () => {
   }, [galleryList, filters]);
 
   const deleteGalleryItem = async (id: string) => {
+    // Check authentication before proceeding
+    if (!auth.currentUser) {
+      alert("Ви повинні бути авторизовані для виконання цієї дії!");
+      return;
+    }
+
     if (confirm("Ви впевнені, що хочете видалити цю статтю?")) {
       try {
         // First get the item to access its images
@@ -86,6 +92,7 @@ export const useGallery = () => {
         window.location.reload();
       } catch (error) {
         console.error("Помилка видалення статті:", error);
+        alert("Помилка при видаленні статті. Можливо, у вас немає прав доступу.");
       }
     }
   };

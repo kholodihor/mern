@@ -1,7 +1,7 @@
 "use client";
 
-import ContactsBubble from "@/components/shared/contacts-bubble";
 import { useTranslations } from "next-intl";
+import ContactsBubble from "@/components/shared/contacts-bubble";
 import HeroSlider from "./hero-slider";
 
 const Hero = () => {
