@@ -77,7 +77,9 @@ export const useNews = (initialData: INewsArticle | null = null) => {
         window.location.reload();
       } catch (error) {
         console.error("Помилка видалення статті:", error);
-        alert("Помилка при видаленні статті. Можливо, у вас немає прав доступу.");
+        alert(
+          "Помилка при видаленні статті. Можливо, у вас немає прав доступу."
+        );
       }
     }
   };

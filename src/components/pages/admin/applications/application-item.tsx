@@ -33,7 +33,9 @@ const ApplicationItem = ({ item, onDelete }: ApplicationItemProps) => {
       }
     } catch (error) {
       console.error("Error updating status:", error);
-      alert("Помилка при оновленні статусу. Можливо, у вас немає прав доступу.");
+      alert(
+        "Помилка при оновленні статусу. Можливо, у вас немає прав доступу."
+      );
     }
   };
 

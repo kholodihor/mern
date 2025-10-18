@@ -79,7 +79,9 @@ export const useApplications = () => {
         window.location.reload();
       } catch (error) {
         console.error("Error deleting application:", error);
-        alert("Помилка при видаленні заявки. Можливо, у вас немає прав доступу.");
+        alert(
+          "Помилка при видаленні заявки. Можливо, у вас немає прав доступу."
+        );
       }
     }
   };
