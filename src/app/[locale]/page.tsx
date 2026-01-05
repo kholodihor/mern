@@ -1,10 +1,10 @@
-import { Metadata } from "next";
-import { baseUrl } from "@/constants";
-import { Locale } from "@/i18n/routing";
 import Hero from "@/components/pages/home/hero/hero";
 import Location from "@/components/pages/home/location/location";
 import Reviews from "@/components/pages/home/reviews/reviews";
 import Services from "@/components/pages/home/services/services";
+import { baseUrl } from "@/constants";
+import { Locale } from "@/i18n/routing";
+import { Metadata } from "next";
 
 export async function generateMetadata({
   params,
@@ -12,19 +12,11 @@ export async function generateMetadata({
   params: Promise<{ locale: Locale }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  // Use baseUrl without adding locale again since it will be added by the layout
-  const canonicalUrl = baseUrl;
+  // Set canonical URL to the correct locale-specific path
+  const canonicalUrl = `${baseUrl}/${locale}`;
 
   return {
     metadataBase: new URL(baseUrl),
-    alternates: {
-      canonical: canonicalUrl,
-      languages: {
-        en: `${baseUrl}/en`,
-        pl: `${baseUrl}/pl`,
-        uk: `${baseUrl}/ua`,
-      },
-    },
     openGraph: {
       type: "website",
       url: canonicalUrl,
