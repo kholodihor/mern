@@ -1,10 +1,10 @@
+import { Metadata } from "next";
+import { baseUrl } from "@/constants";
+import { Locale } from "@/i18n/routing";
 import Hero from "@/components/pages/home/hero/hero";
 import Location from "@/components/pages/home/location/location";
 import Reviews from "@/components/pages/home/reviews/reviews";
 import Services from "@/components/pages/home/services/services";
-import { baseUrl } from "@/constants";
-import { Locale } from "@/i18n/routing";
-import { Metadata } from "next";
 
 export async function generateMetadata({
   params,

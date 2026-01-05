@@ -52,7 +52,7 @@ const nextConfig = {
       {
         source: "/",
         destination: "/pl",
-        permanent: true,
+        permanent: process.env.NODE_ENV === "production",
       },
     ];
 
