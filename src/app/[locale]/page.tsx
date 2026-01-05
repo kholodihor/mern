@@ -12,19 +12,11 @@ export async function generateMetadata({
   params: Promise<{ locale: Locale }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  // Use baseUrl without adding locale again since it will be added by the layout
-  const canonicalUrl = baseUrl;
+  // Set canonical URL to the correct locale-specific path
+  const canonicalUrl = `${baseUrl}/${locale}`;
 
   return {
     metadataBase: new URL(baseUrl),
-    alternates: {
-      canonical: canonicalUrl,
-      languages: {
-        en: `${baseUrl}/en`,
-        pl: `${baseUrl}/pl`,
-        uk: `${baseUrl}/ua`,
-      },
-    },
     openGraph: {
       type: "website",
       url: canonicalUrl,
