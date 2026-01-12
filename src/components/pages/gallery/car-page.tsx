@@ -22,13 +22,7 @@ function PreloadCarImages({ images }: { images: string[] }) {
   return (
     <>
       {images.slice(0, 6).map((src, index) => (
-        <link
-          key={index}
-          rel="preload"
-          href={src}
-          as="image"
-          type="image/webp,image/jpeg,image/png"
-        />
+        <link key={index} rel="preload" href={src} as="image" type="image/*" />
       ))}
     </>
   );
@@ -38,13 +32,12 @@ const CarImage = ({ data, index }: { data: string; index?: number }) => {
   const [imageLoaded, setImageLoaded] = useState(false);
   const [imageError, setImageError] = useState(false);
   const isPriority = index !== undefined && index < 3; // Prioritize first 3 images
-
   return (
     <div className="relative aspect-[4/3] overflow-hidden rounded-xl bg-gray-800/50">
       {/* Loading placeholder */}
       {!imageLoaded && !imageError && (
-        <div className="relative h-52 w-full animate-pulse overflow-hidden bg-gradient-to-r from-gray-700 to-gray-500">
-          <div className="shimmer absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent"></div>
+        <div className="absolute inset-0 z-10 h-full w-full animate-pulse overflow-hidden bg-gradient-to-r from-gray-700 to-gray-500">
+          <div className="shimmer absolute inset-0 bg-transparent"></div>
         </div>
       )}
 

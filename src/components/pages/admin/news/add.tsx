@@ -8,7 +8,7 @@ import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import "react-quill-new/dist/quill.snow.css";
 import { generateSlug } from "@/helpers/generateSlug";
 import { useRouter } from "@/i18n/routing";
-import { db } from "@/lib/firebase";
+import { auth, db } from "@/lib/firebase";
 import "@/styles/quill.css";
 import { translateText } from "@/utils/translator";
 import FirebaseUpload from "@/components/ui/firebase-upload";
@@ -53,6 +53,12 @@ const AddNews = () => {
   });
 
   const onSubmit: SubmitHandler<TNewsScheme> = async (values) => {
+    // Check authentication before proceeding
+    if (!auth.currentUser) {
+      alert("Ви повинні бути авторизовані для виконання цієї дії!");
+      return;
+    }
+
     if (isProcessing) return;
 
     try {

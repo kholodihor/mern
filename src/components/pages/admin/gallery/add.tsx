@@ -10,7 +10,7 @@ import "react-quill-new/dist/quill.snow.css";
 import { CATEGORIES } from "@/constants/categories";
 import { generateSlug } from "@/helpers/generateSlug";
 import { useRouter } from "@/i18n/routing";
-import { db } from "@/lib/firebase";
+import { auth, db } from "@/lib/firebase";
 import "@/styles/quill.css";
 import { translateText } from "@/utils/translator";
 import FirebaseUpload from "@/components/ui/firebase-upload";
@@ -59,6 +59,12 @@ const AddGallery = () => {
   });
 
   const onSubmit: SubmitHandler<TGalleryScheme> = async (values) => {
+    // Check authentication before proceeding
+    if (!auth.currentUser) {
+      alert("Ви повинні бути авторизовані для виконання цієї дії!");
+      return;
+    }
+
     try {
       setIsProcessing(true);
 
