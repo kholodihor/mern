@@ -1,12 +1,12 @@
 "use client";
 
 import clsx from "clsx";
+import { useTranslations } from "next-intl";
 import dynamic from "next/dynamic";
 import Image from "next/image";
-import { useTranslations } from "next-intl";
 import { memo, useCallback, useEffect, useState } from "react";
-// Import only the specific icons needed
 import { FaBars, FaTimes } from "react-icons/fa";
+// Import only the specific icons needed
 import { links } from "@/constants/links";
 import { Link, locales, usePathname, useRouter } from "@/i18n/navigation";
 
@@ -51,6 +51,11 @@ const Header = memo(function Header() {
     },
     [router, pathname],
   );
+
+  // Prefetch gallery data when hovering over gallery link
+  const handleGalleryHover = useCallback(() => {
+    prefetchGallery();
+  }, []);
 
   if (pathname.split("/").includes("login")) return null;
 

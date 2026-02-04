@@ -53,7 +53,7 @@ const Gallery = () => {
             <div className="mx-auto my-8 w-full max-w-[400px] sm:my-12 md:mx-0">
               <CustomDropdown options={options} />
             </div>
-            <div className="grid grid-cols-1 gap-6 sm:gap-8 md:grid-cols-2 lg:gap-10 xl:grid-cols-3 2xl:grid-cols-4">
+            <div className="grid grid-cols-1 gap-6 sm:gap-6 md:grid-cols-2 lg:gap-8 xl:grid-cols-3 2xl:grid-cols-4">
               {filteredData.length > 0 ? (
                 <>
                   {/* Preload the first two images for better LCP */}

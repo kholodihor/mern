@@ -1,6 +1,22 @@
 "use client";
 
+import { useEffect, useState } from "react";
+
 const MyMap = () => {
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  if (!isClient) {
+    return (
+      <div className="relative flex w-full max-w-[800px] h-[400px] flex-col items-center justify-center pb-6 text-center sm:text-left lg:w-1/2">
+        <div className="w-full h-full bg-gray-200 animate-pulse rounded-lg"></div>
+      </div>
+    );
+  }
+
   return (
     <div className="relative flex w-full max-w-[800px] flex-col items-center justify-center pb-6 text-center sm:text-left lg:w-1/2">
       <iframe
@@ -11,6 +27,7 @@ const MyMap = () => {
         style={{ border: 0 }}
         loading="lazy"
         referrerPolicy="no-referrer-when-downgrade"
+        suppressHydrationWarning={true}
       ></iframe>
     </div>
   );

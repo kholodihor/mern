@@ -1,10 +1,5 @@
 "use client";
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { addDoc, collection } from "firebase/firestore";
-import { useTranslations } from "next-intl";
-import { useState } from "react";
-import { Controller, type SubmitHandler, useForm } from "react-hook-form";
 import {
   formValidation,
   type TFormScheme,
@@ -13,6 +8,11 @@ import SuccessModal from "@/components/modals/SuccessModal";
 import TextArea from "@/components/ui/text-area";
 import TextInput from "@/components/ui/text-input";
 import { db } from "@/lib/firebase";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { addDoc, collection } from "firebase/firestore";
+import { useTranslations } from "next-intl";
+import { useState } from "react";
+import { Controller, type SubmitHandler, useForm } from "react-hook-form";
 
 const Form = () => {
   const t = useTranslations("Form");

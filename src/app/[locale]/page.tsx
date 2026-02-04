@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import Hero from "@/components/home/hero/hero";
 import Location from "@/components/home/location/location";
 import Reviews from "@/components/home/reviews/reviews";
@@ -11,6 +10,7 @@ import {
   TITLES,
 } from "@/config/seo-config";
 import type { Locale } from "@/i18n/routing";
+import type { Metadata } from "next";
 
 export async function generateMetadata({
   params,

@@ -1,7 +1,7 @@
-import Image from "next/image";
-import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import type { INewsArticle } from "@/types";
+import { useLocale, useTranslations } from "next-intl";
+import Image from "next/image";
 
 const NewsItem = ({ item }: { item: INewsArticle }) => {
   const t = useTranslations("News");
@@ -18,6 +18,8 @@ const NewsItem = ({ item }: { item: INewsArticle }) => {
             className="object-cover transition-transform duration-300 hover:scale-105"
             sizes="(max-width: 768px) 100vw, 33vw"
             priority={false}
+            quality={85}
+            loading="lazy"
             onError={(e) => {
               const img = e.target as HTMLImageElement;
               img.src = "/images/placeholder-news.jpg";

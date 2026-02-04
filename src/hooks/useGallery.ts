@@ -1,17 +1,17 @@
-import { useMemo } from "react";
-import {
-  collection,
-  deleteDoc,
-  doc,
-  getDoc,
-  getDocs,
-} from "firebase/firestore";
-import useSWR from "swr";
 import { CATEGORIES } from "@/constants/categories";
 import { db } from "@/lib/firebase";
 import { deleteFilesFromStorage } from "@/lib/firebase-storage";
 import { useFilters } from "@/stores/useFilters";
-import { IGalleryItem } from "@/types";
+import type { IGalleryItem } from "@/types";
+import {
+    collection,
+    deleteDoc,
+    doc,
+    getDoc,
+    getDocs,
+} from "firebase/firestore";
+import { useMemo } from "react";
+import useSWR from "swr";
 
 const fetchGalleryItems = async () => {
   const applicationsRef = collection(db, "gallery");
@@ -55,7 +55,7 @@ export const useGallery = () => {
 
         // Use some() for early termination when a match is found
         return item.categories.some((category: string) =>
-          filters.includes(CATEGORIES[category])
+          filters.includes(CATEGORIES[category]),
         );
       }) || []
     );
@@ -97,4 +97,17 @@ export const useGallery = () => {
     deleteGalleryItem,
     mutate,
   };
+};
+
+// Export prefetch function for critical data
+export const prefetchGallery = () => {
+  // Simple prefetch - just trigger the fetch
+  fetchGalleryItems()
+    .then((data) => {
+      // Store in SWR cache via a component
+      console.log("Gallery data prefetched:", data.length);
+    })
+    .catch((err) => {
+      console.warn("Failed to prefetch gallery:", err);
+    });
 };

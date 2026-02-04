@@ -1,8 +1,7 @@
-import Image from "next/image";
-import { useTranslations } from "next-intl";
 import { useRouter } from "@/i18n/navigation";
 import { useFilters } from "@/stores/useFilters";
 import type { TServiceCard } from "@/types";
+import { useTranslations } from "next-intl";
 
 const ServicesCard = ({ data: card }: { data: TServiceCard }) => {
   const t = useTranslations("Services");
@@ -30,17 +29,15 @@ const ServicesCard = ({ data: card }: { data: TServiceCard }) => {
       className="group relative flex h-[420px] w-full cursor-pointer flex-col overflow-hidden rounded-xl border border-gray-300 bg-black/20 transition-all duration-300 hover:bg-black/30 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
       aria-label={`${t(`${card.title}`)} - ${t(`${card.text}`)}`}
     >
-      <div className="relative h-52 w-full sm:h-72 shrink-0">
-        <Image
+      <div className="relative h-48 w-full sm:h-64 shrink-0">
+        <img
           src={card.image || "/placeholder.jpg"}
           alt={t(`${card.title}`)}
-          fill
-          className="object-cover opacity-60 transition-transform duration-300 group-hover:scale-105"
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          className="h-full w-full object-cover opacity-60 transition-transform duration-300 group-hover:scale-105"
         />
       </div>
 
-      <div className="flex grow flex-col items-center justify-center p-6">
+      <div className="flex grow flex-col items-center justify-center py-2 px-4 sm:py-4 sm:px-6">
         <h4 className="mb-3 text-center text-xl font-bold sm:text-2xl">
           {t(`${card.title}`)}
         </h4>

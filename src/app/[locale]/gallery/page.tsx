@@ -1,9 +1,8 @@
-import type { Metadata } from "next";
-import GalleryServer from "@/components/gallery/gallery-server";
+import Gallery from "@/components/gallery/gallery";
 import { baseUrl } from "@/constants";
 import type { Locale } from "@/i18n/routing";
-import { fetchGalleryItems } from "@/lib/server-data-fetchers";
 import type { PageMetadata } from "@/types";
+import type { Metadata } from "next";
 
 const metadata: PageMetadata = {
   pl: {
@@ -84,27 +83,9 @@ export async function generateStaticParams() {
   return [{ locale: "en" }, { locale: "pl" }, { locale: "ua" }];
 }
 
-const GalleryPage = async () => {
-  // Fetch data server-side for SEO
-  const initialData = await fetchGalleryItems();
-
-  return (
-    <>
-      {/* Add preload links for critical images */}
-      {initialData.slice(0, 2).map((item) => (
-        <link
-          key={`preload-${item.id}`}
-          rel="preload"
-          href={item.images[0]}
-          as="image"
-          type="image/webp"
-          fetchPriority="high"
-          crossOrigin="anonymous"
-        />
-      ))}
-      <GalleryServer initialData={initialData} />
-    </>
-  );
+const GalleryPage = () => {
+  console.log("GalleryPage rendering with Gallery component");
+  return <Gallery />;
 };
 
 export default GalleryPage;
