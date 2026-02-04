@@ -9,7 +9,7 @@
     "lint": "biome lint",
     "format": "biome format --write",
     "ts-check": "tsc --project tsconfig.json --pretty --noEmit && echo ",
-    "prepare": "husky",
+    "prepare": "is-ci || husky install",
     "lint-staged": "lint-staged"
   },
   "dependencies": {
@@ -25,6 +25,7 @@
     "next-intl": "^4.8.1",
     "react": "19.2.3",
     "react-dom": "19.2.3",
+    "react-hook-form": "^7.71.1",
     "react-icons": "^5.5.0",
     "react-quill-new": "^3.8.3",
     "react-select": "^5.10.2",
@@ -39,6 +40,9 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "husky": "^9.1.7",
+    "is-ci": "^4.1.0",
+    "lint-staged": "^15.4.3",
     "tailwindcss": "^4",
     "typescript": "^5"
   }
