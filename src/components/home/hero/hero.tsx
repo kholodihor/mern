@@ -1,11 +1,18 @@
 "use client";
 
-import { useTranslations } from "next-intl";
 import ContactsBubble from "@/components/shared/contacts-bubble";
+import { prefetchGallery } from "@/hooks/useGallery";
+import { useTranslations } from "next-intl";
+import { useEffect } from "react";
 import HeroSlider from "./hero-slider";
 
 const Hero = () => {
   const t = useTranslations("Menu");
+
+  // Prefetch gallery data when hero component mounts
+  useEffect(() => {
+    prefetchGallery();
+  }, []);
 
   return (
     <section

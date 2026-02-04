@@ -52,11 +52,6 @@ const Header = memo(function Header() {
     [router, pathname],
   );
 
-  // Prefetch gallery data when hovering over gallery link
-  const handleGalleryHover = useCallback(() => {
-    prefetchGallery();
-  }, []);
-
   if (pathname.split("/").includes("login")) return null;
 
   return (
