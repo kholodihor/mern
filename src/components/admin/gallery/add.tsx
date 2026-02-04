@@ -1,22 +1,22 @@
 "use client";
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { addDoc, collection } from "firebase/firestore";
-import dynamic from "next/dynamic";
-import { useTranslations } from "next-intl";
-import { useState } from "react";
-import { Controller, type SubmitHandler, useForm } from "react-hook-form";
-import "react-quill-new/dist/quill.snow.css";
+import FirebaseUpload from "@/components/ui/firebase-upload";
+import Multiselect from "@/components/ui/multi-select";
+import TextArea from "@/components/ui/text-area";
+import TextInput from "@/components/ui/text-input";
 import { CATEGORIES } from "@/constants/categories";
 import { generateSlug } from "@/helpers/generateSlug";
 import { useRouter } from "@/i18n/navigation";
 import { db } from "@/lib/firebase";
 import "@/styles/quill.css";
-import FirebaseUpload from "@/components/ui/firebase-upload";
-import Multiselect from "@/components/ui/multi-select";
-import TextArea from "@/components/ui/text-area";
-import TextInput from "@/components/ui/text-input";
 import { translateText } from "@/utils/translator";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { addDoc, collection } from "firebase/firestore";
+import { useTranslations } from "next-intl";
+import dynamic from "next/dynamic";
+import { useState } from "react";
+import { Controller, type SubmitHandler, useForm } from "react-hook-form";
+import "react-quill-new/dist/quill.snow.css";
 import { gallerySchema, type TGalleryScheme } from "./schema";
 
 const ReactQuill = dynamic(() => import("react-quill-new"), {
