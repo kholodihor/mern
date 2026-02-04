@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { ForwardedRef, InputHTMLAttributes, forwardRef } from "react";
+
 import clsx from "clsx";
+import { type ForwardedRef, forwardRef, type InputHTMLAttributes } from "react";
 
 interface TextInputProps extends InputHTMLAttributes<HTMLInputElement> {
   title?: string;
@@ -9,7 +10,7 @@ interface TextInputProps extends InputHTMLAttributes<HTMLInputElement> {
 
 const TextInput = forwardRef(function TextInput(
   { title, errorText, value = "", ...rest }: TextInputProps,
-  _ref: ForwardedRef<HTMLInputElement>
+  _ref: ForwardedRef<HTMLInputElement>,
 ) {
   const inputClassName = clsx(
     "w-full outline-none rounded-[0.7rem] border py-2 px-4 placeholder:text-sm bg-black",
@@ -18,7 +19,7 @@ const TextInput = forwardRef(function TextInput(
       "border-red-500 caret-error outline-red-500 focus:outline-red-500":
         errorText,
       "border-lightgrey focus:outline-none": !errorText,
-    }
+    },
   );
 
   return (

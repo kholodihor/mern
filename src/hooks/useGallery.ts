@@ -83,7 +83,6 @@ export const useGallery = () => {
         await deleteDoc(itemRef);
         await mutate();
         alert("Статтю успішно видалено!");
-        window.location.reload();
       } catch (error) {
         console.error("Помилка видалення статті:", error);
       }

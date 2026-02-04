@@ -27,7 +27,7 @@ export const formatReviewDate = (isoDate: string): string => {
  * @param dateString - The date string to format (can be in various formats)
  * @returns A formatted date string in DD/MM/YYYY format with leading zeros
  */
-export const formatDateWithSlashes = (dateString: any): string => {
+export const formatDateWithSlashes = (dateString: string | { seconds: number } | Date): string => {
   let date: Date;
 
   // Handle different date formats
@@ -36,24 +36,24 @@ export const formatDateWithSlashes = (dateString: any): string => {
     const parts = dateString.split("/");
     if (parts.length === 3) {
       const [month, day, year] = parts;
-      date = new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
+      date = new Date(parseInt(year, 10), parseInt(month, 10) - 1, parseInt(day, 10));
     } else {
-      date = new Date(dateString);
+      date = new Date(dateString as string);
     }
   } else if (
     dateString &&
     typeof dateString === "object" &&
-    dateString.seconds
+    "seconds" in dateString
   ) {
     // Handle Firebase timestamp objects
     date = new Date(dateString.seconds * 1000);
   } else {
     // Default date parsing for other formats
-    date = new Date(dateString);
+    date = new Date(dateString as Date | string);
   }
 
   // Make sure the date is valid
-  if (isNaN(date.getTime())) {
+  if (Number.isNaN(date.getTime())) {
     return typeof dateString === "string" ? dateString : "Invalid date";
   }
 

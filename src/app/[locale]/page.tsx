@@ -1,10 +1,16 @@
-import { Metadata } from "next";
-import { baseUrl } from "@/constants";
-import { Locale } from "@/i18n/routing";
-import Hero from "@/components/pages/home/hero/hero";
-import Location from "@/components/pages/home/location/location";
-import Reviews from "@/components/pages/home/reviews/reviews";
-import Services from "@/components/pages/home/services/services";
+import type { Metadata } from "next";
+import Hero from "@/components/home/hero/hero";
+import Location from "@/components/home/location/location";
+import Reviews from "@/components/home/reviews/reviews";
+import Services from "@/components/home/services/services";
+import {
+  DESCRIPTIONS,
+  OG_LOCALES,
+  ROBOTS_CONFIG,
+  SEO_CONFIG,
+  TITLES,
+} from "@/config/seo-config";
+import type { Locale } from "@/i18n/routing";
 
 export async function generateMetadata({
   params,
@@ -12,20 +18,45 @@ export async function generateMetadata({
   params: Promise<{ locale: Locale }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  // Set canonical URL to the correct locale-specific path
-  const canonicalUrl = `${baseUrl}/${locale}`;
+  const canonicalUrl = `${SEO_CONFIG.BASE_URL}/${locale}`;
+  const title = TITLES[locale] || TITLES.pl;
+  const description = DESCRIPTIONS[locale] || DESCRIPTIONS.pl;
 
   return {
-    metadataBase: new URL(baseUrl),
+    title,
+    description: `${SEO_CONFIG.CONTACT_INFO} | ${description}`,
+    metadataBase: new URL(SEO_CONFIG.BASE_URL),
+    alternates: {
+      canonical: canonicalUrl,
+      languages: {
+        en: `${SEO_CONFIG.BASE_URL}/en`,
+        pl: `${SEO_CONFIG.BASE_URL}/pl`,
+        uk: `${SEO_CONFIG.BASE_URL}/ua`,
+      },
+    },
     openGraph: {
       type: "website",
       url: canonicalUrl,
-      locale: locale === "en" ? "en_US" : locale === "pl" ? "pl_PL" : "uk_UA",
+      title,
+      description,
+      siteName: title,
+      images: [
+        {
+          url: `${SEO_CONFIG.BASE_URL}${SEO_CONFIG.OG_IMAGE_PATH}`,
+          width: 1200,
+          height: 630,
+          alt: title,
+        },
+      ],
+      locale: OG_LOCALES[locale] || OG_LOCALES.pl,
     },
-    robots: {
-      index: true,
-      follow: true,
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [`${SEO_CONFIG.BASE_URL}${SEO_CONFIG.OG_IMAGE_PATH}`],
     },
+    robots: ROBOTS_CONFIG,
   };
 }
 

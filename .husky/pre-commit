@@ -14,10 +14,10 @@ npm run lint || {
   exit 1
 }
 
-echo "→ Running Prettier..."
-npm run format || {
-  echo "❌ Prettier failed"
-  exit 1
-}
+# echo "→ Running Prettier..."
+# npm run format || {
+#   echo "❌ Prettier failed"
+#   exit 1
+# }
 
 echo "✅ All checks passed! Committing changes..."

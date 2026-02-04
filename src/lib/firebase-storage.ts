@@ -76,14 +76,15 @@ export const deleteFileByPath = async (path: string): Promise<void> => {
  * @param url The Firebase Storage URL of the file
  * @returns A promise that resolves when the file is deleted, or null if the URL is not a valid Firebase Storage URL
  */
-export const deleteFileByUrl = async (url: string): Promise<void | null> => {
+export const deleteFileByUrl = async (url: string): Promise<undefined | null> => {
   const path = extractStoragePath(url);
   if (!path) {
     console.warn(`Not a valid Firebase Storage URL: ${url}`);
     return null;
   }
 
-  return deleteFileByPath(path);
+  await deleteFileByPath(path);
+  return undefined;
 };
 
 /**

@@ -1,9 +1,9 @@
-import { Metadata } from "next";
+import type { Metadata } from "next";
+import GalleryServer from "@/components/gallery/gallery-server";
 import { baseUrl } from "@/constants";
-import { Locale } from "@/i18n/routing";
+import type { Locale } from "@/i18n/routing";
 import { fetchGalleryItems } from "@/lib/server-data-fetchers";
-import { PageMetadata } from "@/types";
-import GalleryServer from "@/components/pages/gallery/gallery-server";
+import type { PageMetadata } from "@/types";
 
 const metadata: PageMetadata = {
   pl: {
@@ -91,9 +91,9 @@ const GalleryPage = async () => {
   return (
     <>
       {/* Add preload links for critical images */}
-      {initialData.slice(0, 2).map((item, index) => (
+      {initialData.slice(0, 2).map((item) => (
         <link
-          key={`preload-${index}`}
+          key={`preload-${item.id}`}
           rel="preload"
           href={item.images[0]}
           as="image"

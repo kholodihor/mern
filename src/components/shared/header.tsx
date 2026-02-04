@@ -1,14 +1,14 @@
 "use client";
 
+import clsx from "clsx";
 import dynamic from "next/dynamic";
 import Image from "next/image";
-import { memo, useCallback, useEffect, useState } from "react";
-import clsx from "clsx";
 import { useTranslations } from "next-intl";
+import { memo, useCallback, useEffect, useState } from "react";
 // Import only the specific icons needed
 import { FaBars, FaTimes } from "react-icons/fa";
 import { links } from "@/constants/links";
-import { Link, locales, usePathname, useRouter } from "@/i18n/routing";
+import { Link, locales, usePathname, useRouter } from "@/i18n/navigation";
 
 // Dynamically import MobileMenu with improved loading strategy
 const MobileMenu = dynamic(
@@ -18,7 +18,7 @@ const MobileMenu = dynamic(
       <div className="h-[50vh] w-full animate-pulse bg-black/50"></div>
     ),
     ssr: false, // Disable server-side rendering for the mobile menu
-  }
+  },
 );
 
 // Memoize the component to prevent unnecessary re-renders
@@ -49,7 +49,7 @@ const Header = memo(function Header() {
     (item: string) => {
       router.replace(pathname, { locale: item });
     },
-    [router, pathname]
+    [router, pathname],
   );
 
   if (pathname.split("/").includes("login")) return null;
@@ -64,7 +64,7 @@ const Header = memo(function Header() {
           "lg:top-0": pathname.split("/").includes("admin"),
           "bg-black": showMobileMenu,
           "bg-black/50": !showMobileMenu,
-        }
+        },
       )}
       id="header"
     >
@@ -83,7 +83,7 @@ const Header = memo(function Header() {
         aria-expanded={showMobileMenu}
         aria-controls="mobile-menu"
         onClick={toggleMobileMenu}
-        className="mr-[1.5rem] block border-none bg-none text-white md:hidden"
+        className="mr-6 block border-none bg-none text-white md:hidden"
       >
         {showMobileMenu ? (
           <FaTimes className="text-[2rem] transition-all" />
@@ -94,14 +94,14 @@ const Header = memo(function Header() {
 
       {showMobileMenu && <MobileMenu links={links} />}
 
-      <nav className="hidden md:block" role="navigation" aria-label="Main Menu">
+      <nav className="hidden md:block" aria-label="Main Menu">
         <ul
           className="m-0 flex items-center justify-around gap-4 p-2"
           id="links"
         >
-          {links.map((link, index) => (
+          {links.map((link) => (
             <li
-              key={index}
+              key={link.href}
               aria-current={link.href === pathname ? "page" : undefined}
               className={clsx(
                 "relative whitespace-nowrap text-xs uppercase transition-all hover:text-blue-400 lg:text-[16px]",
@@ -113,16 +113,17 @@ const Header = memo(function Header() {
                     link.href !== "/" &&
                     pathname.split("/").includes(link.href.replace(/\//g, ""))
                   ),
-                }
+                },
               )}
             >
               <Link href={link.href}>{t(`${link.name}`)}</Link>
             </li>
           ))}
-          <ul className="flex gap-[0.5rem] xl:ml-[5rem]">
-            {locales.map((lang, i) => (
-              <li key={i}>
+          <ul className="flex gap-2 xl:ml-20">
+            {locales.map((lang) => (
+              <li key={lang}>
                 <button
+                  type="button"
                   onClick={() => handleCheckLocale(lang)}
                   aria-label={`Change language to ${lang}`}
                   className="hover:text-blue-400 hover:underline"

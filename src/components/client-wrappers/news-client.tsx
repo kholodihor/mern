@@ -1,9 +1,9 @@
 "use client";
 
+import Spiral from "@/components/shared/spiral/spiral";
 import dynamic from "next/dynamic";
-import Spiral from "@/components/shared/spiral/Spiral";
 
-const DynamicNews = dynamic(() => import("@/components/pages/news/news"), {
+const DynamicNews = dynamic(() => import("@/components/news/news"), {
   ssr: false,
   loading: () => <Spiral />,
 });

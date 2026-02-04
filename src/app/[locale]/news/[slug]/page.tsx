@@ -1,10 +1,10 @@
-import { Metadata } from "next";
 import { collection, getDocs, query, where } from "firebase/firestore";
+import type { Metadata } from "next";
+import Article from "@/components/news/article";
 import { baseUrl } from "@/constants";
-import { Locale } from "@/i18n/routing";
+import type { Locale } from "@/i18n/routing";
 import { db } from "@/lib/firebase";
-import { INewsArticle, PageMetadata } from "@/types";
-import Article from "@/components/pages/news/article";
+import type { INewsArticle, PageMetadata } from "@/types";
 
 // Server-side data fetching function
 async function getArticleData(slug: string) {
@@ -23,7 +23,7 @@ async function getArticleData(slug: string) {
 }
 
 // Helper function to serialize Firebase data
-function serializeData(data: any) {
+function serializeData(data: INewsArticle | null) {
   if (!data) return null;
 
   // Handle Firestore Timestamp objects
@@ -76,19 +76,15 @@ export async function generateMetadata({
   const canonicalUrl = canonicalUrlObj.toString();
 
   // Create a more descriptive title and description using the article data
-  const title =
-    articleData &&
-    articleData.title &&
-    articleData.title[locale as keyof typeof articleData.title]
-      ? `${articleData.title[locale as keyof typeof articleData.title]} | ${localeMetadata.title}`
-      : `${localeMetadata.title} | ${cleanSlug}`;
+  const title = articleData?.title?.[locale as keyof typeof articleData.title]
+    ? `${articleData.title[locale as keyof typeof articleData.title]} | ${localeMetadata.title}`
+    : `${localeMetadata.title} | ${cleanSlug}`;
 
-  const description =
-    articleData &&
-    articleData.short_text &&
-    articleData.short_text[locale as keyof typeof articleData.short_text]
-      ? `${articleData.short_text[locale as keyof typeof articleData.short_text]}`
-      : `${localeMetadata.description} | ${cleanSlug}`;
+  const description = articleData?.short_text?.[
+    locale as keyof typeof articleData.short_text
+  ]
+    ? `${articleData.short_text[locale as keyof typeof articleData.short_text]}`
+    : `${localeMetadata.description} | ${cleanSlug}`;
 
   return {
     title: title,
@@ -107,30 +103,37 @@ export async function generateMetadata({
       url: canonicalUrl,
       title: title,
       description: description,
-      images:
-        articleData && articleData.images && articleData.images.length > 0
-          ? [
-              {
-                url: articleData.images[0],
-                width: 1200,
-                height: 630,
-                alt:
-                  articleData.title[locale as keyof typeof articleData.title] ||
-                  "News article",
-              },
-            ]
-          : [
-              {
-                url: "/opengraph-image.png",
-                width: 1200,
-                height: 630,
-                alt: "MERN Serwis",
-              },
-            ],
+      images: articleData?.images?.length
+        ? [
+            {
+              url: articleData.images[0],
+              width: 1200,
+              height: 630,
+              alt:
+                articleData.title[locale as keyof typeof articleData.title] ||
+                "News article",
+            },
+          ]
+        : [
+            {
+              url: "/opengraph-image.png",
+              width: 1200,
+              height: 630,
+              alt: "MERN Serwis",
+            },
+          ],
     },
     robots: {
       index: true,
       follow: true,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: title,
+      description: description,
+      images: articleData?.images?.length
+        ? [articleData.images[0]]
+        : ["/opengraph-image.png"],
     },
   };
 }

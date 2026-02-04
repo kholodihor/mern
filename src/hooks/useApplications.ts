@@ -70,7 +70,8 @@ export const useApplications = () => {
         const itemRef = doc(db, "applications", id);
         await deleteDoc(itemRef);
         alert("Заявку успішно видалено!");
-        window.location.reload();
+        // Remove from local state immediately for better UX
+        setApplications((prev) => prev.filter((app) => app.id !== id));
       } catch (error) {
         console.error("Error deleting application:", error);
       }

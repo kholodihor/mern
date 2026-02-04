@@ -1,6 +1,6 @@
 "use client";
 
-import { SVGProps } from "react";
+import type { SVGProps } from "react";
 
 const ChevronLeft = ({ className, ...props }: SVGProps<SVGSVGElement>) => {
   return (
@@ -9,6 +9,7 @@ const ChevronLeft = ({ className, ...props }: SVGProps<SVGSVGElement>) => {
       viewBox="0 0 65 123"
       fill="none"
       className={`transition-colors ${className}`}
+      aria-hidden="true"
       {...props}
     >
       <path

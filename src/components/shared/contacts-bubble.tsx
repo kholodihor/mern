@@ -2,8 +2,8 @@ import { FaEnvelope, FaMapMarkerAlt, FaPhone } from "react-icons/fa";
 
 const ContactsBubble = () => {
   return (
-    <div
-      className="absolute right-[2rem] top-[18vh] z-[9999] hidden aspect-video h-[20vw] rounded-md bg-black text-white sm:w-[40vw] md:block lg:hidden"
+    <section
+      className="absolute right-8 top-[18vh] z-9999 hidden aspect-video h-[20vw] rounded-md bg-black text-white sm:w-[40vw] md:block lg:hidden"
       aria-labelledby="contact-info-heading"
     >
       <div className="sr-only" id="contact-info-heading">
@@ -49,7 +49,7 @@ const ContactsBubble = () => {
         </dd>
       </dl>
       <div className="absolute -right-[1.8rem] top-[10%] h-0 w-0 rotate-90 border-b-[2rem] border-l-[1rem] border-r-[1rem] border-b-black border-l-transparent border-r-transparent"></div>
-    </div>
+    </section>
   );
 };
 

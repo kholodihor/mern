@@ -1,10 +1,10 @@
-import { Metadata } from "next";
 import { collection, getDocs, query, where } from "firebase/firestore";
+import type { Metadata } from "next";
+import CarPage from "@/components/gallery/car-page";
 import { baseUrl } from "@/constants";
-import { Locale } from "@/i18n/routing";
+import type { Locale } from "@/i18n/routing";
 import { db } from "@/lib/firebase";
-import { IGalleryItem, PageMetadata } from "@/types";
-import CarPage from "@/components/pages/gallery/car-page";
+import type { IGalleryItem, PageMetadata } from "@/types";
 
 // Server-side data fetching function
 async function getCarData(slug: string) {
@@ -62,9 +62,8 @@ export async function generateMetadata({
     : `${localeMetadata.title} | ${cleanSlug}`;
 
   const description =
-    carData && carData.desc && carData.desc[locale as keyof typeof carData.desc]
-      ? carData.desc[locale as keyof typeof carData.desc]
-      : `${localeMetadata.description} | ${cleanSlug}`;
+    carData?.desc?.[locale as keyof typeof carData.desc] ??
+    `${localeMetadata.description} | ${cleanSlug}`;
 
   return {
     title: title,
@@ -83,24 +82,23 @@ export async function generateMetadata({
       url: canonicalUrl,
       title: title,
       description: description,
-      images:
-        carData && carData.images && carData.images.length > 0
-          ? [
-              {
-                url: carData.images[0],
-                width: 1200,
-                height: 630,
-                alt: carData.car,
-              },
-            ]
-          : [
-              {
-                url: "/opengraph-image.png",
-                width: 1200,
-                height: 630,
-                alt: "MERN Serwis",
-              },
-            ],
+      images: carData?.images?.length
+        ? [
+            {
+              url: carData.images[0],
+              width: 1200,
+              height: 630,
+              alt: carData.car,
+            },
+          ]
+        : [
+            {
+              url: "/opengraph-image.png",
+              width: 1200,
+              height: 630,
+              alt: "MERN Serwis",
+            },
+          ],
       locale: locale === "en" ? "en_US" : locale === "pl" ? "pl_PL" : "uk_UA",
       siteName: "MERN Serwis",
     },
@@ -108,10 +106,9 @@ export async function generateMetadata({
       card: "summary_large_image",
       title: title,
       description: description,
-      images:
-        carData && carData.images && carData.images.length > 0
-          ? [carData.images[0]]
-          : ["/opengraph-image.png"],
+      images: carData?.images?.length
+        ? [carData.images[0]]
+        : ["/opengraph-image.png"],
     },
     robots: {
       index: true,
@@ -127,7 +124,7 @@ export async function generateMetadata({
 }
 
 // Helper function to serialize Firebase data
-function serializeData(data: any) {
+function serializeData(data: IGalleryItem | null) {
   if (!data) return null;
 
   // Handle Firestore Timestamp objects

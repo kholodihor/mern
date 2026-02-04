@@ -1,7 +1,12 @@
 "use client";
 
-import { ForwardedRef, InputHTMLAttributes, forwardRef, useState } from "react";
 import clsx from "clsx";
+import {
+  type ForwardedRef,
+  forwardRef,
+  type InputHTMLAttributes,
+  useState,
+} from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 interface SignInPasswordProps extends InputHTMLAttributes<HTMLInputElement> {
@@ -12,7 +17,7 @@ interface SignInPasswordProps extends InputHTMLAttributes<HTMLInputElement> {
 
 const SignInPassword = forwardRef(function SignInPassword(
   { title, errorText, value = "", isRequired, ...rest }: SignInPasswordProps,
-  ref: ForwardedRef<HTMLInputElement>
+  ref: ForwardedRef<HTMLInputElement>,
 ) {
   const [isEditing, setIsEditing] = useState(false);
   const inputType = isEditing ? "text" : "password";
@@ -30,7 +35,7 @@ const SignInPassword = forwardRef(function SignInPassword(
       "border-red-500 caret-error outline-red-500 focus:outline-red-500":
         errorText, // Apply error styles when errorText exists
       "border-lightgrey focus:outline-none": !errorText, // Apply light grey border and no outline focus when no error
-    }
+    },
   );
 
   return (

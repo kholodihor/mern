@@ -1,4 +1,4 @@
-import Applications from "@/components/pages/admin/applications";
+import Applications from "@/components/admin/applications";
 
 const ApplicationsPage = () => {
   return <Applications />;

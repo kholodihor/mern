@@ -9,10 +9,7 @@ import {
 
 const Socials = () => {
   return (
-    <ul
-      className="mt-8 flex items-center justify-center gap-6 text-3xl sm:justify-start"
-      role="list"
-    >
+    <ul className="mt-8 flex items-center justify-center gap-6 text-3xl sm:justify-start">
       <li>
         <a
           href="https://wa.me/48509159158"
@@ -32,7 +29,7 @@ const Socials = () => {
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Visit us on Instagram"
-          className="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-purple-500 via-pink-500 to-yellow-500 p-[3.5px] transition-transform hover:scale-110"
+          className="inline-flex items-center justify-center rounded-full bg-linear-to-r from-purple-500 via-pink-500 to-yellow-500 p-[3.5px] transition-transform hover:scale-110"
         >
           <FaInstagram className="h-6 w-6 text-white" aria-hidden="true" />
         </a>

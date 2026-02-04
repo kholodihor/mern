@@ -1,4 +1,4 @@
-import News from "@/components/pages/admin/news";
+import News from "@/components/admin/news";
 
 const NewsPage = () => {
   return <News />;

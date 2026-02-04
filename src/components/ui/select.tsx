@@ -1,7 +1,8 @@
 "use client";
 
-import React, { useState } from "react";
 import { useTranslations } from "next-intl";
+import type React from "react";
+import { useState } from "react";
 import { useFilters } from "@/stores/useFilters";
 
 interface CustomDropdownProps {
@@ -22,9 +23,12 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({ options }) => {
 
   return (
     <div className="relative w-full">
-      <div
-        className="flex cursor-pointer items-center justify-between rounded-lg border border-white/20 bg-black/80 px-4 py-3 text-sm text-white backdrop-blur-sm transition-all duration-200 ease-in-out hover:border-white/40"
+      <button
+        type="button"
+        className="flex w-full cursor-pointer items-center justify-between rounded-lg border border-white/20 bg-black/80 px-4 py-3 text-sm text-white backdrop-blur-sm transition-all duration-200 ease-in-out hover:border-white/40"
         onClick={toggleDropdown}
+        aria-expanded={isOpen}
+        aria-haspopup="listbox"
       >
         <span className="font-medium">{t(`categories.${filters[0]}`)}</span>
         <span
@@ -34,14 +38,21 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({ options }) => {
         >
           ▼
         </span>
-      </div>
+      </button>
       {isOpen && (
         <ul className="absolute left-0 right-0 z-10 mt-2 max-h-60 overflow-y-auto rounded-lg border border-white/20 bg-black/90 shadow-lg backdrop-blur-sm transition-all duration-200 ease-in-out scrollbar-thin scrollbar-track-transparent scrollbar-thumb-white/20 hover:scrollbar-thumb-white/40">
           {options.map((option, index) => (
             <li
-              key={index}
+              key={option}
               className={`cursor-pointer px-4 py-3 text-sm transition-colors duration-200 hover:bg-white/10 ${filters[0] === option ? "bg-white/5" : ""}`}
               onClick={() => handleOptionClick(option)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  handleOptionClick(option);
+                }
+              }}
+              tabIndex={index === 0 ? 0 : -1}
             >
               {t(`categories.${option}`)}
             </li>

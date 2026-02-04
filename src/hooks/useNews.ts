@@ -68,7 +68,6 @@ export const useNews = (initialData: INewsArticle | null = null) => {
         await deleteDoc(articleRef);
         await mutate();
         alert("Статтю успішно видалено!");
-        window.location.reload();
       } catch (error) {
         console.error("Помилка видалення статті:", error);
       }

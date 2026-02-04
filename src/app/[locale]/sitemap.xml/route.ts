@@ -1,15 +1,13 @@
 import {
-  DocumentData,
-  Timestamp,
   collection,
+  type DocumentData,
   getDocs,
+  type Timestamp,
 } from "firebase/firestore";
+import { SEO_CONFIG, SITEMAP_CONFIG } from "@/config/seo-config";
 import { db } from "@/lib/firebase";
 
-// Set to revalidate every 24 hours
-export const revalidate = 86400;
-
-const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://mernserwis.com";
+export const revalidate = SITEMAP_CONFIG.REVALIDATE_TIME;
 
 // Helper function to convert Firestore Timestamp to ISO string
 const toIsoString = (date: Date | Timestamp | string | undefined): string => {
@@ -34,46 +32,6 @@ interface SitemapEntry {
     | "never";
   priority?: number;
 }
-
-// List of static routes and their paths
-const staticRoutes = [
-  {
-    path: "",
-    lastModified: new Date(),
-    priority: 1.0, // Highest priority for the main page
-    changeFreq: "daily" as const,
-  },
-  {
-    path: "about",
-    lastModified: new Date(),
-    priority: 0.8,
-    changeFreq: "weekly" as const,
-  },
-  {
-    path: "services",
-    lastModified: new Date(),
-    priority: 0.8,
-    changeFreq: "weekly" as const,
-  },
-  {
-    path: "contacts",
-    lastModified: new Date(),
-    priority: 0.7,
-    changeFreq: "monthly" as const,
-  },
-  {
-    path: "news",
-    lastModified: new Date(),
-    priority: 0.9,
-    changeFreq: "daily" as const,
-  },
-  {
-    path: "gallery",
-    lastModified: new Date(),
-    priority: 0.8,
-    changeFreq: "weekly" as const,
-  },
-];
 
 async function fetchDynamicRoutes(): Promise<SitemapEntry[]> {
   const routes: SitemapEntry[] = [];
@@ -112,7 +70,7 @@ async function fetchDynamicRoutes(): Promise<SitemapEntry[]> {
       routes.push({
         url: `/news/${data.slug}`,
         lastModified: toIsoString(
-          data.lastModified || data.updatedAt || data.createdAt || new Date()
+          data.lastModified || data.updatedAt || data.createdAt || new Date(),
         ),
         priority: 0.8,
         changeFreq: "daily",
@@ -127,22 +85,23 @@ async function fetchDynamicRoutes(): Promise<SitemapEntry[]> {
 
 async function generateSitemap(locale: string): Promise<SitemapEntry[]> {
   const dynamicRoutes = await fetchDynamicRoutes();
-  // Removed unused 'now' variable
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || SEO_CONFIG.BASE_URL;
 
   // Generate static routes with locale
-  const staticRoutesWithLocale: SitemapEntry[] = staticRoutes.map((route) => ({
-    url: `${baseUrl}/${locale}${route.path ? `/${route.path}` : ""}`,
-    lastModified: toIsoString(route.lastModified),
-    changeFreq: route.changeFreq,
-    priority: route.priority,
-  }));
+  const staticRoutesWithLocale: SitemapEntry[] =
+    SITEMAP_CONFIG.STATIC_ROUTES.map((route) => ({
+      url: `${baseUrl}/${locale}${route.path ? `/${route.path}` : ""}`,
+      lastModified: toIsoString(new Date()),
+      changeFreq: route.changeFreq,
+      priority: route.priority,
+    }));
 
   // Generate dynamic routes with locale
   const dynamicRoutesWithLocale: SitemapEntry[] = dynamicRoutes.map(
     (route) => ({
       ...route,
       url: `${baseUrl}/${locale}${route.url}`,
-    })
+    }),
   );
 
   return [...staticRoutesWithLocale, ...dynamicRoutesWithLocale];
@@ -182,10 +141,13 @@ function generateSitemapXml(entries: SitemapEntry[]): string {
   return xml;
 }
 
-export async function GET(request: Request, context: any): Promise<Response> {
+export async function GET(
+  _request: Request,
+  context: { params: Promise<{ locale: string }> },
+): Promise<Response> {
   const { params } = context;
   try {
-    const locale = params.locale;
+    const { locale } = await params;
     const sitemapEntries = await generateSitemap(locale);
     const xml = generateSitemapXml(sitemapEntries);
 
@@ -193,8 +155,7 @@ export async function GET(request: Request, context: any): Promise<Response> {
       status: 200,
       headers: {
         "Content-Type": "application/xml",
-        "Cache-Control": "public, s-maxage=86400, stale-while-revalidate=3600",
-        // Remove noindex directive to allow search engines to index the sitemap
+        "Cache-Control": SITEMAP_CONFIG.CACHE_CONTROL,
       },
     });
   } catch (error) {

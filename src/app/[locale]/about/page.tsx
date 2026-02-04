@@ -1,23 +1,7 @@
-import { Metadata } from "next";
-import { baseUrl } from "@/constants";
-import { Locale } from "@/i18n/routing";
-import { PageMetadata } from "@/types";
-import About from "@/components/pages/about/about";
-
-const metadata: PageMetadata = {
-  pl: {
-    title: "O Nas | MERN Serwis",
-    description: `MERN Serwis | ${baseUrl} | Informacja o nas`,
-  },
-  en: {
-    title: "About Us | MERN Service",
-    description: `MERN Serwis | ${baseUrl} | Information about us`,
-  },
-  ua: {
-    title: "Про нас | Автосервіс MERN",
-    description: `MERN Serwis | ${baseUrl} | Інформація про нас`,
-  },
-};
+import type { Metadata } from "next";
+import About from "@/components/about/about";
+import { createPageMetadata } from "@/config/seo-config";
+import type { Locale } from "@/i18n/routing";
 
 export async function generateMetadata({
   params,
@@ -25,36 +9,7 @@ export async function generateMetadata({
   params: Promise<{ locale: Locale }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-
-  const localeMetadata = metadata[locale] || metadata.pl;
-  // Create a new URL object to avoid duplicate locale segments
-  const canonicalUrlObj = new URL(baseUrl);
-  canonicalUrlObj.pathname = `/${locale}/about`;
-  const canonicalUrl = canonicalUrlObj.toString();
-
-  return {
-    title: localeMetadata.title,
-    description: localeMetadata.description,
-    metadataBase: new URL(baseUrl),
-    alternates: {
-      canonical: canonicalUrl,
-      languages: {
-        "en-US": `${baseUrl}/en/about`,
-        "pl-PL": `${baseUrl}/pl/about`,
-        "uk-UK": `${baseUrl}/ua/about`,
-      },
-    },
-    openGraph: {
-      type: "website",
-      url: canonicalUrl,
-      title: localeMetadata.title,
-      description: localeMetadata.description,
-    },
-    robots: {
-      index: true,
-      follow: true,
-    },
-  };
+  return createPageMetadata("about", locale, "about");
 }
 
 const AboutPage = () => {

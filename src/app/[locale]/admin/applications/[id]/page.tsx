@@ -1,5 +1,5 @@
-import { Locale } from "@/i18n/routing";
-import ApplicationById from "@/components/pages/admin/applications/application-by-id";
+import ApplicationById from "@/components/admin/applications/application-by-id";
+import type { Locale } from "@/i18n/routing";
 
 type ApplicationPageParams = {
   params: Promise<{

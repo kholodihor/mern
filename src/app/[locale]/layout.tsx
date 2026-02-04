@@ -1,36 +1,48 @@
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata } from "next";
 import dynamic from "next/dynamic";
 import { Open_Sans } from "next/font/google";
 import { notFound } from "next/navigation";
+import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { Suspense } from "react";
-import { SpeedInsights } from "@vercel/speed-insights/next";
-import { NextIntlClientProvider } from "next-intl";
-import { getMessages } from "next-intl/server";
-import { Locale, routing } from "@/i18n/routing";
-import { PageProps } from "@/types";
-// Import critical components directly
 import ConditionalContactLink from "@/components/shared/conditional-contact-link";
 import Header from "@/components/shared/header";
 import SubHeader from "@/components/shared/sub-header";
+import { routing } from "@/i18n/routing";
 import "../globals.css";
+import {
+  DESCRIPTIONS,
+  KEYWORDS,
+  OG_LOCALES,
+  PRECONNECT_URLS,
+  ROBOTS_CONFIG,
+  SEO_CONFIG,
+  TITLES,
+} from "@/config/seo-config";
+import type { PageProps } from "@/types";
 
-// Dynamically import non-critical components
+// ============================================================================
+// Dynamic Imports (non-critical components)
+// ============================================================================
+
 const BfCacheHandler = dynamic(
-  () => import("@/components/shared/bfcache-handler")
+  () => import("@/components/shared/bfcache-handler"),
 );
 const ScriptOptimizer = dynamic(
-  () => import("@/components/shared/script-optimizer")
+  () => import("@/components/shared/script-optimizer"),
 );
 const GoogleAnalytics = dynamic(
-  () => import("@/components/shared/google-analytics")
+  () => import("@/components/shared/google-analytics"),
 );
-// Use client wrapper for components that need ssr: false
 const CookieBannerClient = dynamic(
-  () => import("@/components/client-wrappers/cookie-banner-client")
+  () => import("@/components/client-wrappers/cookie-banner-client"),
 );
 const Footer = dynamic(() => import("@/components/shared/footer"));
 
-// Preload critical fonts
+// ============================================================================
+// Font Configuration
+// ============================================================================
+
 export const fontSans = Open_Sans({
   subsets: ["latin", "cyrillic"],
   variable: "--font-open-sans",
@@ -40,77 +52,59 @@ export const fontSans = Open_Sans({
   fallback: ["system-ui", "arial"],
 });
 
-// Font is now defined at the top level for better performance
+// ============================================================================
+// Helper Functions
+// ============================================================================
 
-const baseUrl = new URL("https://mernserwis.com");
-const contactInfo =
-  "+48 509 158 159 | Przyszłość 2A, 05-126 Stanisławów Pierwszy";
+const getLocalizedValue = <T,>(
+  map: Record<string, T>,
+  locale: string,
+  fallback: string = SEO_CONFIG.DEFAULT_LOCALE,
+): T => map[locale] || map[fallback];
 
-const titles = {
-  ua: "Mern Сервіс - Незалежний сервіс BMW | Механік BMW у Варшаві",
-  en: "Mern Service - Independent BMW Service | BMW Mechanic in Warsaw",
-  pl: "Mern Serwis - Niezależny serwis BMW | Mechanik BMW w Warszawie",
-};
+const buildCanonicalUrl = (locale: string): string =>
+  `${SEO_CONFIG.BASE_URL}/${locale}`;
 
-const descriptions = {
-  pl: `MERN Serwis to najlepszy serwis dla naprawy twojego BMW, Rolls Royce, Mini Cooper`,
-  en: `MERN Serwis is the best service for repairing your BMW, Rolls Royce, Mini Cooper`,
-  ua: `Автосервіс MERN це найкращий сервіс для ремонту ваших BMW, Rolls Royce, Mini Cooper`,
-};
+// ============================================================================
+// Metadata Generation
+// ============================================================================
 
 export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
   const { locale } = await params;
 
-  const defaultTitle = titles[locale] || titles.pl;
-  const defaultDescription = descriptions[locale] || descriptions.pl;
-
-  // Set the canonical URL for the root page - ensure we don't duplicate the locale
-  // Create a new URL object to avoid modifying the original baseUrl
-  const canonicalUrlObj = new URL(baseUrl);
-  canonicalUrlObj.pathname = `/${locale}`;
-  const canonicalUrl = canonicalUrlObj.toString();
-
-  // No need for helper functions, we'll use direct string interpolation
+  const title = getLocalizedValue(TITLES, locale);
+  const description = getLocalizedValue(DESCRIPTIONS, locale);
+  const canonicalUrl = buildCanonicalUrl(locale);
+  const ogImageUrl = `${SEO_CONFIG.BASE_URL}${SEO_CONFIG.OG_IMAGE_PATH}`;
 
   return {
-    metadataBase: new URL(baseUrl),
+    metadataBase: new URL(SEO_CONFIG.BASE_URL),
     alternates: {
       canonical: canonicalUrl,
       languages: {
-        en: `${baseUrl}/en`,
-        pl: `${baseUrl}/pl`,
-        uk: `${baseUrl}/ua`,
+        en: `${SEO_CONFIG.BASE_URL}/en`,
+        pl: `${SEO_CONFIG.BASE_URL}/pl`,
+        uk: `${SEO_CONFIG.BASE_URL}/ua`,
       },
     },
-    // Add explicit robots meta for indexing
-    robots: {
-      index: true,
-      follow: true,
-      googleBot: {
-        index: true,
-        follow: true,
-        "max-video-preview": -1,
-        "max-image-preview": "large",
-        "max-snippet": -1,
-      },
-    },
+    robots: ROBOTS_CONFIG,
     title: {
-      default: defaultTitle,
-      template: `%s | Mern Serwis - Niezależny serwis BMW | Mechanik BMW w Warszawie`,
+      default: title,
+      template: `%s | ${TITLES[SEO_CONFIG.DEFAULT_LOCALE]}`,
     },
-    description: `${contactInfo} | ${defaultDescription}`,
+    description: `${SEO_CONFIG.CONTACT_INFO} | ${description}`,
     openGraph: {
       type: "website",
-      locale: locale === "en" ? "en_US" : locale === "pl" ? "pl_PL" : "uk_UA",
+      locale: getLocalizedValue(OG_LOCALES, locale),
       url: canonicalUrl,
-      title: defaultTitle,
-      description: defaultDescription,
-      siteName: defaultTitle,
+      title,
+      description,
+      siteName: title,
       images: [
         {
-          url: `${baseUrl}/opengraph-image.png`,
+          url: ogImageUrl,
           width: 1200,
           height: 630,
           alt: "MERN Serwis Samochodowy",
@@ -119,58 +113,44 @@ export async function generateMetadata({
     },
     twitter: {
       card: "summary_large_image",
-      title: defaultTitle,
-      description: defaultDescription,
-      images: [`${baseUrl}/opengraph-image.png`],
+      title,
+      description,
+      images: [ogImageUrl],
     },
-    keywords: [
-      "MERN",
-      "BMW",
-      "Serwis Samochodowy",
-      "Автосервіс",
-      "Варшава",
-      "Rolls Royce",
-      "Mini Cooper",
-      "Warszawa",
-    ],
+    keywords: KEYWORDS,
   };
 }
 
-export default async function RootLayout({
-  children,
-  params,
-}: {
+type Props = {
   children: React.ReactNode;
   params: Promise<{ locale: string }>;
-}) {
-  const { locale } = await params;
+};
 
-  if (!routing.locales.includes(locale as Locale)) {
+export default async function RootLayout({ children, params }: Props) {
+  const { locale } = await params;
+  if (!hasLocale(routing.locales, locale)) {
     notFound();
   }
-
-  const messages = await getMessages();
-
   return (
     <html lang={locale} className={fontSans.variable}>
       <head>
-        {/* These tags are now handled by Next.js Metadata API in generateMetadata */}
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta
           httpEquiv="Cache-Control"
           content="no-cache, no-store, must-revalidate"
         />
-        {/* Force HTTPS for SEO - helps with canonical URL issues */}
         <meta
           httpEquiv="Content-Security-Policy"
           content="upgrade-insecure-requests"
         />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="anonymous"
-        />
+        {PRECONNECT_URLS.map(({ href, crossOrigin }) => (
+          <link
+            key={href}
+            rel="preconnect"
+            href={href}
+            crossOrigin={crossOrigin}
+          />
+        ))}
       </head>
       <body className="min-w-[320px]">
         {/* Performance optimization components */}
@@ -184,7 +164,7 @@ export default async function RootLayout({
           />
         </Suspense>
 
-        <NextIntlClientProvider locale={locale} messages={messages}>
+        <NextIntlClientProvider>
           {/* Critical path components */}
           <ConditionalContactLink />
           <SubHeader />

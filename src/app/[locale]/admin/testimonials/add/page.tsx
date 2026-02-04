@@ -1,4 +1,4 @@
-import AddTestimonial from "@/components/pages/admin/testimonials/add";
+import AddTestimonial from "@/components/admin/testimonials/add";
 
 const AddTestimonialPage = () => {
   return <AddTestimonial />;

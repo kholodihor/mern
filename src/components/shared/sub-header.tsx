@@ -1,7 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { usePathname } from "@/i18n/routing";
+import { usePathname } from "@/i18n/navigation";
 
 const SubHeader = () => {
   const t = useTranslations("Menu");

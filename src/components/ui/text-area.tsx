@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { ForwardedRef, InputHTMLAttributes, forwardRef } from "react";
+
 import clsx from "clsx";
+import { type ForwardedRef, forwardRef, type InputHTMLAttributes } from "react";
 
 interface TextAreaProps extends InputHTMLAttributes<HTMLTextAreaElement> {
   title?: string;
@@ -9,7 +10,7 @@ interface TextAreaProps extends InputHTMLAttributes<HTMLTextAreaElement> {
 
 const TextArea = forwardRef(function TextArea(
   { title, errorText, value = "", ...rest }: TextAreaProps,
-  _ref: ForwardedRef<HTMLInputElement>
+  _ref: ForwardedRef<HTMLInputElement>,
 ) {
   const inputClassName = clsx(
     "w-full outline-none rounded-[0.7rem] border min-h-[150px] py-2 px-4 placeholder:text-sm bg-black",
@@ -17,7 +18,7 @@ const TextArea = forwardRef(function TextArea(
       "border-red-500 caret-error outline-red-500 focus:outline-red-500":
         errorText, // Apply error styles when errorText exists
       "border-lightgrey focus:outline-none": !errorText, // Apply light grey border and no outline focus when no error
-    }
+    },
   );
 
   return (

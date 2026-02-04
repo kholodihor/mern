@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { ForwardedRef, forwardRef, useEffect, useState } from "react";
+
 import clsx from "clsx";
-import Select, { MultiValue } from "react-select";
+import { type ForwardedRef, forwardRef, useEffect, useState } from "react";
+import Select, { type MultiValue, type StylesConfig } from "react-select";
 
 interface MultiselectProps {
   options: { value: string; label: string }[];
@@ -14,7 +15,7 @@ interface MultiselectProps {
 
 const Multiselect = forwardRef(function Multiselect(
   { options, value, onChange, errorText, placeholder, title }: MultiselectProps,
-  _ref: ForwardedRef<HTMLDivElement>
+  _ref: ForwardedRef<HTMLDivElement>,
 ) {
   const [mounted, setMounted] = useState(false);
 
@@ -26,8 +27,8 @@ const Multiselect = forwardRef(function Multiselect(
     return null; // Don't render the Select on the server side
   }
 
-  const customStyles = {
-    control: (base: any, state: any) => ({
+  const customStyles: StylesConfig<{ value: string; label: string }, true> = {
+    control: (base, state) => ({
       ...base,
       border: state.isFocused
         ? "1px solid #ffffff" // White border when focused
@@ -40,11 +41,11 @@ const Multiselect = forwardRef(function Multiselect(
       backgroundColor: "#000000", // Black background for control
       padding: "2px",
     }),
-    menu: (base: any) => ({
+    menu: (base) => ({
       ...base,
       backgroundColor: "#000000", // Black background for dropdown menu
     }),
-    option: (base: any, state: any) => ({
+    option: (base, state) => ({
       ...base,
       backgroundColor: state.isFocused ? "#333333" : "#000000", // Darker gray on hover, black otherwise
       color: state.isFocused ? "#ffffff" : "#cccccc", // White text on hover, light gray otherwise
@@ -52,21 +53,21 @@ const Multiselect = forwardRef(function Multiselect(
         backgroundColor: "#444444", // Even darker gray when active
       },
     }),
-    placeholder: (base: any) => ({
+    placeholder: (base) => ({
       ...base,
       fontSize: "14px",
       color: "#aaaaaa",
     }),
-    multiValue: (base: any) => ({
+    multiValue: (base) => ({
       ...base,
       backgroundColor: "#333333",
       borderRadius: "0.5rem",
     }),
-    multiValueLabel: (base: any) => ({
+    multiValueLabel: (base) => ({
       ...base,
       color: "#ffffff",
     }),
-    multiValueRemove: (base: any) => ({
+    multiValueRemove: (base) => ({
       ...base,
       color: "#ffffff",
       "&:hover": {

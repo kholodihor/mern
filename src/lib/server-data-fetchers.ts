@@ -1,14 +1,13 @@
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "@/lib/firebase";
-import { IGalleryItem, INewsArticle } from "@/types";
+import type { IGalleryItem, INewsArticle } from "@/types";
 
 // Helper function to serialize Firestore data
-function serializeData<T>(obj: any): T {
+function serializeData<T>(obj: T): T {
   return JSON.parse(JSON.stringify(obj));
 }
 
 // Server-side data fetchers for improved SEO
-
 export async function fetchGalleryItems() {
   const applicationsRef = collection(db, "gallery");
   const snapshot = await getDocs(applicationsRef);

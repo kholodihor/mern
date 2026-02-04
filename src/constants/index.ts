@@ -1,6 +1,7 @@
-export const baseUrl = "https://mernserwis.com";
-export const contactInfo =
-  "+48 509 158 159 | Przyszłość 2A, 05-126 Stanisławów Pierwszy";
+import { SEO_CONFIG } from "@/config/seo-config";
+
+export const baseUrl = SEO_CONFIG.BASE_URL;
+export const contactInfo = SEO_CONFIG.CONTACT_INFO;
 
 export const colors = [
   "#8B4513", // Saddle brown

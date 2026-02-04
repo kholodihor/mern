@@ -1,22 +1,14 @@
 import { createNavigation } from "next-intl/navigation";
 import { defineRouting } from "next-intl/routing";
 
-export type Locale = "pl" | "en" | "ua";
-
-export const locales: Locale[] = ["pl", "en", "ua"];
-
-export const pathnames = {
-  "/": "/",
-  "/about": "/about",
-  "/news": "/news",
-  "/contacts": "/contacts",
-  "/services": "/services",
-};
-
 export const routing = defineRouting({
-  locales,
+  // A list of all locales that are supported
+  locales: ["pl", "en", "ua"],
   defaultLocale: "pl",
+  localePrefix: "never",
 });
 
-export const { Link, redirect, usePathname, useRouter, getPathname } =
+export const { Link, redirect, usePathname, useRouter } =
   createNavigation(routing);
+
+export type Locale = "pl" | "en" | "ua";

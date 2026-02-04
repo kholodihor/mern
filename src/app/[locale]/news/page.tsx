@@ -1,9 +1,9 @@
-import { Metadata } from "next";
+import type { Metadata } from "next";
+import NewsServer from "@/components/news/news-server";
 import { baseUrl } from "@/constants";
-import { Locale } from "@/i18n/routing";
+import type { Locale } from "@/i18n/routing";
 import { fetchNewsArticles } from "@/lib/server-data-fetchers";
-import { PageMetadata } from "@/types";
-import NewsServer from "@/components/pages/news/news-server";
+import type { PageMetadata } from "@/types";
 
 const metadata: PageMetadata = {
   pl: {

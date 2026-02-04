@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { ChangeEvent, DragEvent, useRef, useState } from "react";
+import { type ChangeEvent, type DragEvent, useRef, useState } from "react";
 import { uploadFileToStorage } from "@/lib/firebase-storage";
 
 interface FirebaseUploadProps {
@@ -74,7 +74,7 @@ const FirebaseUpload = ({
   const removeImage = (indexToRemove: number) => {
     if (confirm("Are you sure you want to remove this image?")) {
       const newUrls = uploadedFiles.filter(
-        (_, index) => index !== indexToRemove
+        (_, index) => index !== indexToRemove,
       );
       setUploadedFiles(newUrls);
       onChange(newUrls);
@@ -127,6 +127,7 @@ const FirebaseUpload = ({
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
+                aria-hidden="true"
               >
                 <circle
                   className="opacity-25"
@@ -152,6 +153,7 @@ const FirebaseUpload = ({
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
+                aria-hidden="true"
               >
                 <path
                   strokeLinecap="round"
@@ -201,12 +203,14 @@ const FirebaseUpload = ({
           <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
             {uploadedFiles.map((url, index) => (
               <div
-                key={index}
+                key={url}
+                role="img"
                 className={`group relative ${draggedItem === index ? "scale-105 opacity-50" : ""} ${draggedOverItem === index ? "rounded-md ring-2 ring-blue-500" : ""}`}
                 draggable
                 onDragStart={() => handleDragStart(index)}
                 onDragOver={(e) => handleDragOver(e, index)}
                 onDragEnd={handleDragEnd}
+                aria-label={`Uploaded image ${index + 1}, draggable to reorder`}
               >
                 {/* Drag handle */}
                 <div className="absolute -left-1 -top-1 z-10 flex h-5 w-5 cursor-move items-center justify-center rounded-full bg-gray-100 text-gray-500 opacity-0 shadow-sm transition-opacity group-hover:opacity-100">
@@ -216,6 +220,7 @@ const FirebaseUpload = ({
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
+                    aria-hidden="true"
                   >
                     <path
                       strokeLinecap="round"
@@ -237,7 +242,7 @@ const FirebaseUpload = ({
                       console.error(`Error loading image: ${url}`);
                       // Fallback to a placeholder if image fails to load
                       e.currentTarget.src =
-                        'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"%3E%3Cpath fill="%23ccc" d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/%3E%3C/svg%3E';
+                        'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"%3E%3Cpath fill="%23ccc" d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/%3E%3C/svg%3E';
                     }}
                   />
                 </div>
@@ -255,6 +260,7 @@ const FirebaseUpload = ({
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
+                    aria-hidden="true"
                   >
                     <path
                       strokeLinecap="round"

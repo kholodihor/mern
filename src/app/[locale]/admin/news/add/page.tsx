@@ -1,4 +1,4 @@
-import AddNews from "@/components/pages/admin/news/add";
+import AddNews from "@/components/admin/news/add";
 
 const NewsAddPage = () => {
   return <AddNews />;

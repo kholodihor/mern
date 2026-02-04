@@ -9,7 +9,7 @@ interface FiltersState {
 export const useFilters = create<FiltersState>((set) => ({
   filters: [CATEGORIES.ALL],
 
-  setFilters: (query) => {
+  setFilters: (query: string[]) => {
     set({ filters: query });
   },
 }));

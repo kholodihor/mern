@@ -3,10 +3,10 @@ import Socials from "./socials";
 
 const Contacts = () => {
   return (
-    <div className="flex w-full flex-col justify-center px-4 pb-6 sm:text-left lg:w-1/2 xl:px-[4rem]">
-      <ul className="w-full border-gray-500 md:border-l md:pl-4" role="list">
+    <div className="flex w-full flex-col justify-center px-4 pb-6 sm:text-left lg:w-1/2 xl:px-16">
+      <ul className="w-full border-gray-500 md:border-l md:pl-4">
         <li className="my-4 items-center justify-center gap-4 text-[1rem] sm:flex sm:text-[1.2rem]">
-          <span className="mb-4 flex w-full justify-center sm:w-[2rem] md:mb-0">
+          <span className="mb-4 flex w-full justify-center sm:w-8 md:mb-0">
             <FaMapMarkerAlt
               className="text-[24px] text-yellow-500 sm:mr-2 sm:text-[28px]"
               aria-hidden="true"
@@ -17,7 +17,7 @@ const Contacts = () => {
           </span>
         </li>
         <li className="my-4 items-center justify-start gap-4 text-center text-[1rem] sm:flex sm:text-[1.2rem]">
-          <span className="mb-4 flex w-full justify-center sm:w-[2rem] md:mb-0">
+          <span className="mb-4 flex w-full justify-center sm:w-8 md:mb-0">
             <FaPhone
               className="text-[24px] text-green-500 sm:mr-2 sm:text-[28px]"
               aria-hidden="true"
@@ -28,7 +28,7 @@ const Contacts = () => {
           </span>
         </li>
         <li className="my-4 items-center justify-start gap-4 text-center text-[1rem] sm:flex sm:text-[1.2rem]">
-          <span className="mb-4 flex w-full justify-center sm:w-[2rem] md:mb-0">
+          <span className="mb-4 flex w-full justify-center sm:w-8 md:mb-0">
             <FaEnvelope
               className="text-[24px] text-teal-500 sm:mr-2 sm:text-[28px]"
               aria-hidden="true"

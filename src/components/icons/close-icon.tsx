@@ -1,5 +1,3 @@
-import React from "react";
-
 interface IconProps {
   fill?: string;
 }
@@ -12,6 +10,7 @@ const CloseIcon = ({ fill }: IconProps) => {
       viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
     >
       <g clipPath="url(#clip0_2849_7047)">
         <path
