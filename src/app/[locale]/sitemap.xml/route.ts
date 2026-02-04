@@ -1,13 +1,11 @@
-import {
-  collection,
-  type DocumentData,
-  getDocs,
-  type Timestamp,
-} from "firebase/firestore";
 import { SEO_CONFIG, SITEMAP_CONFIG } from "@/config/seo-config";
 import { db } from "@/lib/firebase";
-
-export const revalidate = SITEMAP_CONFIG.REVALIDATE_TIME;
+import {
+    collection,
+    type DocumentData,
+    getDocs,
+    type Timestamp,
+} from "firebase/firestore";
 
 // Helper function to convert Firestore Timestamp to ISO string
 const toIsoString = (date: Date | Timestamp | string | undefined): string => {

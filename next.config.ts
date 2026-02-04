@@ -1,13 +1,13 @@
+import {
+    CACHE,
+    configureWebpack,
+    createHttpsPattern,
+    getHeaders,
+    getRedirects,
+    IMAGE_HOSTNAMES,
+} from "@/constants/next-config";
 import type { NextConfig } from "next";
 import createNextIntlPlugin from "next-intl/plugin";
-import {
-  CACHE,
-  configureWebpack,
-  createHttpsPattern,
-  getHeaders,
-  getRedirects,
-  IMAGE_HOSTNAMES,
-} from "@/constants/next-config";
 
 const withNextIntl = createNextIntlPlugin();
 

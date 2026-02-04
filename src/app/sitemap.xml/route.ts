@@ -1,8 +1,5 @@
-import { NextResponse } from "next/server";
 import { SEO_CONFIG, SITEMAP_CONFIG } from "@/config/seo-config";
-
-export const dynamic = "force-dynamic";
-export const revalidate = SITEMAP_CONFIG.REVALIDATE_TIME;
+import { NextResponse } from "next/server";
 
 export async function GET() {
   try {
