@@ -1,16 +1,16 @@
-import { collection, getDocs, query, where } from "firebase/firestore";
-import type { Metadata } from "next";
 import Article from "@/components/news/article";
 import { baseUrl } from "@/constants";
 import type { Locale } from "@/i18n/routing";
-import { db } from "@/lib/firebase";
+import { getDb } from "@/lib/firebase-db";
 import type { INewsArticle, PageMetadata } from "@/types";
+import { collection, getDocs, query, where } from "firebase/firestore";
+import type { Metadata } from "next";
 
 // Server-side data fetching function
 async function getArticleData(slug: string) {
   if (!slug) return null;
 
-  const ref = collection(db, "news");
+  const ref = collection(getDb(), "news");
   const slugQuery = query(ref, where("slug", "==", slug));
   const snapshot = await getDocs(slugQuery);
 

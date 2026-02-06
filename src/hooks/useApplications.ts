@@ -1,13 +1,13 @@
-import { useState } from "react";
+import { getDb } from "@/lib/firebase-db";
+import type { IApplicationResponse } from "@/types";
 import { collection, deleteDoc, doc, onSnapshot } from "firebase/firestore";
-import { db } from "@/lib/firebase";
-import { IApplicationResponse } from "@/types";
+import { useState } from "react";
 
 export const useApplications = () => {
   const [applications, setApplications] = useState<IApplicationResponse[]>([]);
 
   const fetchApplications = () => {
-    const applicationsRef = collection(db, "applications");
+    const applicationsRef = collection(getDb(), "applications");
     const unsubscribe = onSnapshot(applicationsRef, (snapshot) => {
       if (!snapshot.empty) {
         const applicationsData: IApplicationResponse[] = [];
@@ -32,7 +32,7 @@ export const useApplications = () => {
             dateA = new Date(
               parseInt(year),
               parseInt(month) - 1,
-              parseInt(day)
+              parseInt(day),
             );
           } else {
             dateA = new Date(0);
@@ -47,7 +47,7 @@ export const useApplications = () => {
             dateB = new Date(
               parseInt(year),
               parseInt(month) - 1,
-              parseInt(day)
+              parseInt(day),
             );
           } else {
             dateB = new Date(0);
@@ -67,7 +67,7 @@ export const useApplications = () => {
   const deleteApplication = async (id: string) => {
     if (confirm("Ви впевнені, що хочете видалити цю заявку?")) {
       try {
-        const itemRef = doc(db, "applications", id);
+        const itemRef = doc(getDb(), "applications", id);
         await deleteDoc(itemRef);
         alert("Заявку успішно видалено!");
         // Remove from local state immediately for better UX

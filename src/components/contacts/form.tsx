@@ -7,7 +7,7 @@ import {
 import SuccessModal from "@/components/modals/SuccessModal";
 import TextArea from "@/components/ui/text-area";
 import TextInput from "@/components/ui/text-input";
-import { db } from "@/lib/firebase";
+import { getDb } from "@/lib/firebase-db";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { addDoc, collection } from "firebase/firestore";
 import { useTranslations } from "next-intl";
@@ -53,7 +53,7 @@ const Form = () => {
           year: "numeric",
         }),
       };
-      const ref = collection(db, "applications");
+      const ref = collection(getDb(), "applications");
       await addDoc(ref, data);
       setIsModalOpen(true);
       reset();

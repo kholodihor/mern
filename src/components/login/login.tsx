@@ -4,7 +4,7 @@ import PasswordInput from "@/components/ui/password-input";
 import TextInput from "@/components/ui/text-input";
 import { useAuth } from "@/hooks/useAuth";
 import { useRouter } from "@/i18n/routing";
-import { auth } from "@/lib/firebase";
+import { getAuthInstance } from "@/lib/firebase-auth";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useEffect, useState } from "react";
@@ -43,7 +43,7 @@ const Login = () => {
     try {
       const { email, password } = values;
       setIsProcessing(true);
-      signInWithEmailAndPassword(auth, email, password).then(
+      signInWithEmailAndPassword(getAuthInstance(), email, password).then(
         (userCredential) => {
           console.log(userCredential);
           setIsProcessing(false);

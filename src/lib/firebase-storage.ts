@@ -1,10 +1,21 @@
 import {
-  deleteObject,
-  getDownloadURL,
-  ref,
-  uploadBytesResumable,
+    deleteObject,
+    type FirebaseStorage,
+    getDownloadURL,
+    getStorage,
+    ref,
+    uploadBytesResumable,
 } from "firebase/storage";
-import { storage } from "./firebase";
+import { getFirebaseApp } from "./firebase";
+
+let _storage: FirebaseStorage | null = null;
+
+const getStorageInstance = (): FirebaseStorage => {
+  if (!_storage) {
+    _storage = getStorage(getFirebaseApp());
+  }
+  return _storage;
+};
 
 /**
  * Uploads a file to Firebase Storage
@@ -14,11 +25,11 @@ import { storage } from "./firebase";
  */
 export async function uploadFileToStorage(
   file: File,
-  path: string
+  path: string,
 ): Promise<string> {
   try {
     // Create a storage reference
-    const storageRef = ref(storage, path);
+    const storageRef = ref(getStorageInstance(), path);
 
     // Upload the file
     const snapshot = await uploadBytesResumable(storageRef, file);
@@ -43,7 +54,7 @@ export const extractStoragePath = (url: string): string | null => {
     // Extract the path from the URL
     // Example URL: https://firebasestorage.googleapis.com/v0/b/mern-e9975.appspot.com/o/gallery%2F1749390558267-bg235g.png?alt=media&token=f3fce726-879a-4113-ac1c-060e43ae5a0e
     const match = url.match(
-      /firebasestorage.googleapis.com\/v0\/b\/[^/]+\/o\/([^?]+)/i
+      /firebasestorage.googleapis.com\/v0\/b\/[^/]+\/o\/([^?]+)/i,
     );
     if (!match || !match[1]) return null;
 
@@ -62,7 +73,7 @@ export const extractStoragePath = (url: string): string | null => {
  */
 export const deleteFileByPath = async (path: string): Promise<void> => {
   try {
-    const fileRef = ref(storage, path);
+    const fileRef = ref(getStorageInstance(), path);
     await deleteObject(fileRef);
     console.log(`File at path ${path} deleted successfully`);
   } catch (error) {
@@ -76,7 +87,9 @@ export const deleteFileByPath = async (path: string): Promise<void> => {
  * @param url The Firebase Storage URL of the file
  * @returns A promise that resolves when the file is deleted, or null if the URL is not a valid Firebase Storage URL
  */
-export const deleteFileByUrl = async (url: string): Promise<undefined | null> => {
+export const deleteFileByUrl = async (
+  url: string,
+): Promise<undefined | null> => {
   const path = extractStoragePath(url);
   if (!path) {
     console.warn(`Not a valid Firebase Storage URL: ${url}`);

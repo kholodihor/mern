@@ -1,5 +1,5 @@
 import { SEO_CONFIG, SITEMAP_CONFIG } from "@/config/seo-config";
-import { db } from "@/lib/firebase";
+import { getDb } from "@/lib/firebase-db";
 import {
     collection,
     type DocumentData,
@@ -36,7 +36,7 @@ async function fetchDynamicRoutes(): Promise<SitemapEntry[]> {
 
   try {
     // Fetch gallery routes
-    const galleryRef = collection(db, "gallery");
+    const galleryRef = collection(getDb(), "gallery");
     const gallerySnapshot = await getDocs(galleryRef);
 
     gallerySnapshot.forEach((doc) => {
@@ -58,7 +58,7 @@ async function fetchDynamicRoutes(): Promise<SitemapEntry[]> {
     });
 
     // Fetch news routes
-    const newsRef = collection(db, "news");
+    const newsRef = collection(getDb(), "news");
     const newsSnapshot = await getDocs(newsRef);
 
     newsSnapshot.forEach((doc) => {

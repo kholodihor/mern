@@ -1,6 +1,6 @@
-import { collection, getDocs } from "firebase/firestore";
-import { db } from "@/lib/firebase";
+import { getDb } from "@/lib/firebase-db";
 import type { IGalleryItem, INewsArticle } from "@/types";
+import { collection, getDocs } from "firebase/firestore";
 
 // Helper function to serialize Firestore data
 function serializeData<T>(obj: T): T {
@@ -9,7 +9,7 @@ function serializeData<T>(obj: T): T {
 
 // Server-side data fetchers for improved SEO
 export async function fetchGalleryItems() {
-  const applicationsRef = collection(db, "gallery");
+  const applicationsRef = collection(getDb(), "gallery");
   const snapshot = await getDocs(applicationsRef);
   const galleryDataList: IGalleryItem[] = [];
 
@@ -30,7 +30,7 @@ export async function fetchGalleryItems() {
 }
 
 export async function fetchNewsArticles() {
-  const applicationsRef = collection(db, "news");
+  const applicationsRef = collection(getDb(), "news");
   const snapshot = await getDocs(applicationsRef);
   const newsDataList: INewsArticle[] = [];
 

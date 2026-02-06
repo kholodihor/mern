@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "@/i18n/routing";
-import { auth } from "@/lib/firebase";
+import { getAuthInstance } from "@/lib/firebase-auth";
 import { signOut } from "firebase/auth";
 import { CiLogout } from "react-icons/ci";
 import { IoMdPhotos } from "react-icons/io";
@@ -13,7 +13,7 @@ const SideBar = () => {
 
   const handleSignOut = async () => {
     try {
-      await signOut(auth);
+      await signOut(getAuthInstance());
       alert("User signed out successfully!");
       router.push("/");
     } catch (error) {

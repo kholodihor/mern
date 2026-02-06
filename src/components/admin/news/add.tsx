@@ -1,19 +1,19 @@
 "use client";
 
+import FirebaseUpload from "@/components/ui/firebase-upload";
+import TextArea from "@/components/ui/text-area";
+import TextInput from "@/components/ui/text-input";
+import { generateSlug } from "@/helpers/generateSlug";
+import { useRouter } from "@/i18n/navigation";
+import { getDb } from "@/lib/firebase-db";
+import "@/styles/quill.css";
+import { translateText } from "@/utils/translator";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { addDoc, collection } from "firebase/firestore";
 import dynamic from "next/dynamic";
 import { useEffect, useRef, useState } from "react";
 import { Controller, type SubmitHandler, useForm } from "react-hook-form";
 import "react-quill-new/dist/quill.snow.css";
-import { generateSlug } from "@/helpers/generateSlug";
-import { useRouter } from "@/i18n/navigation";
-import { db } from "@/lib/firebase";
-import "@/styles/quill.css";
-import FirebaseUpload from "@/components/ui/firebase-upload";
-import TextArea from "@/components/ui/text-area";
-import TextInput from "@/components/ui/text-input";
-import { translateText } from "@/utils/translator";
 import { newsSchema, type TNewsScheme } from "./schema";
 
 const ReactQuill = dynamic(() => import("react-quill-new"), {
@@ -105,7 +105,7 @@ const AddNews = () => {
         created_at: new Date(Date.now()),
       };
 
-      const ref = collection(db, "news");
+      const ref = collection(getDb(), "news");
       await addDoc(ref, data);
       alert("Статтю успішно додано!");
       reset();

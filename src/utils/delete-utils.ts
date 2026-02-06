@@ -1,4 +1,4 @@
-import { db } from "@/lib/firebase";
+import { getDb } from "@/lib/firebase-db";
 import { deleteFilesFromStorage } from "@/lib/firebase-storage";
 import { deleteDoc, doc, getDoc } from "firebase/firestore";
 
@@ -17,7 +17,7 @@ export const deleteItemWithImages = async ({
 }: DeleteItemWithImagesParams) => {
   try {
     // First get the item to access its images
-    const itemRef = doc(db, collection, id);
+    const itemRef = doc(getDb(), collection, id);
     const itemSnap = await getDoc(itemRef);
     const item = itemSnap.data();
 

@@ -1,12 +1,13 @@
-import { NextResponse } from "next/server";
+import { getFirebaseApp } from "@/lib/firebase";
+import { getDb } from "@/lib/firebase-db";
 import axios from "axios";
 import { collection, doc, getDocs, updateDoc } from "firebase/firestore";
-import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 import fs from "fs";
 import { mkdir } from "fs/promises";
+import { NextResponse } from "next/server";
 import path from "path";
 import { promisify } from "util";
-import { db, storage } from "@/lib/firebase";
 
 const writeFileAsync = promisify(fs.writeFile);
 const unlinkAsync = promisify(fs.unlink);
@@ -40,11 +41,11 @@ const downloadImage = async (url: string, filePath: string): Promise<void> => {
 // Function to upload an image to Firebase Storage
 const uploadToFirebaseStorage = async (
   filePath: string,
-  storagePath: string
+  storagePath: string,
 ): Promise<string> => {
   try {
     const fileBuffer = fs.readFileSync(filePath);
-    const storageRef = ref(storage, storagePath);
+    const storageRef = ref(getStorage(getFirebaseApp()), storagePath);
     await uploadBytes(storageRef, fileBuffer);
     const downloadURL = await getDownloadURL(storageRef);
     console.log(`Uploaded to Firebase Storage: ${downloadURL}`);
@@ -61,7 +62,7 @@ const processImage = async (
   index: number,
   collectionName: string,
   docId: string,
-  tempDir: string
+  tempDir: string,
 ): Promise<string> => {
   if (!isUploadcareUrl(imageUrl)) {
     console.log(`Image ${imageUrl} is not from Uploadcare, skipping...`);
@@ -95,10 +96,10 @@ const processDocumentImages = async (
   collectionName: string,
   docId: string,
   images: string[],
-  tempDir: string
+  tempDir: string,
 ): Promise<string[]> => {
   console.log(
-    `Processing ${images.length} images for ${collectionName}/${docId}`
+    `Processing ${images.length} images for ${collectionName}/${docId}`,
   );
 
   // Process images sequentially to maintain order
@@ -113,7 +114,7 @@ const processDocumentImages = async (
       i,
       collectionName,
       docId,
-      tempDir
+      tempDir,
     );
     newImages.push(newUrl);
 
@@ -128,7 +129,7 @@ const migrateImages = async (tempDir: string) => {
   try {
     // Process gallery collection
     console.log("Starting migration of gallery images...");
-    const gallerySnapshot = await getDocs(collection(db, "gallery"));
+    const gallerySnapshot = await getDocs(collection(getDb(), "gallery"));
 
     let galleryCount = 0;
     for (const galleryDoc of gallerySnapshot.docs) {
@@ -142,11 +143,11 @@ const migrateImages = async (tempDir: string) => {
           "gallery",
           galleryDoc.id,
           galleryData.images,
-          tempDir
+          tempDir,
         );
 
         // Update the document with new image URLs
-        await updateDoc(doc(db, "gallery", galleryDoc.id), {
+        await updateDoc(doc(getDb(), "gallery", galleryDoc.id), {
           images: newImages,
         });
 
@@ -157,7 +158,7 @@ const migrateImages = async (tempDir: string) => {
 
     // Process news collection
     console.log("Starting migration of news images...");
-    const newsSnapshot = await getDocs(collection(db, "news"));
+    const newsSnapshot = await getDocs(collection(getDb(), "news"));
 
     let newsCount = 0;
     for (const newsDoc of newsSnapshot.docs) {
@@ -171,11 +172,11 @@ const migrateImages = async (tempDir: string) => {
           "news",
           newsDoc.id,
           newsData.images,
-          tempDir
+          tempDir,
         );
 
         // Update the document with new image URLs
-        await updateDoc(doc(db, "news", newsDoc.id), {
+        await updateDoc(doc(getDb(), "news", newsDoc.id), {
           images: newImages,
         });
 
@@ -222,7 +223,7 @@ export async function GET() {
         success: false,
         error: (error as Error).message,
       },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

@@ -7,7 +7,7 @@ import TextInput from "@/components/ui/text-input";
 import { CATEGORIES } from "@/constants/categories";
 import { generateSlug } from "@/helpers/generateSlug";
 import { useRouter } from "@/i18n/navigation";
-import { db } from "@/lib/firebase";
+import { getDb } from "@/lib/firebase-db";
 import "@/styles/quill.css";
 import { translateText } from "@/utils/translator";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -92,7 +92,7 @@ const AddGallery = () => {
         youtubeUrl: values.youtubeUrl,
         created_at: new Date(Date.now()),
       };
-      const ref = collection(db, "gallery");
+      const ref = collection(getDb(), "gallery");
       await addDoc(ref, data);
       alert("Статтю успішно додано!");
       reset();

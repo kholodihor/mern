@@ -1,5 +1,5 @@
 import { CATEGORIES } from "@/constants/categories";
-import { db } from "@/lib/firebase";
+import { getDb } from "@/lib/firebase-db";
 import { deleteFilesFromStorage } from "@/lib/firebase-storage";
 import { useFilters } from "@/stores/useFilters";
 import type { IGalleryItem } from "@/types";
@@ -14,7 +14,7 @@ import { useMemo } from "react";
 import useSWR from "swr";
 
 const fetchGalleryItems = async () => {
-  const applicationsRef = collection(db, "gallery");
+  const applicationsRef = collection(getDb(), "gallery");
   const snapshot = await getDocs(applicationsRef);
   const galleryDataList: IGalleryItem[] = [];
 
@@ -65,7 +65,7 @@ export const useGallery = () => {
     if (confirm("Ви впевнені, що хочете видалити цю статтю?")) {
       try {
         // First get the item to access its images
-        const itemRef = doc(db, "gallery", id);
+        const itemRef = doc(getDb(), "gallery", id);
         const itemSnap = await getDoc(itemRef);
         const item = itemSnap.data() as IGalleryItem;
 

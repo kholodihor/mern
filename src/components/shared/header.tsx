@@ -72,10 +72,11 @@ const Header = memo(function Header() {
         <Image
           src="/logo.png"
           alt="MERN logo"
-          width={150}
-          height={150}
+          width={86}
+          height={56}
+          sizes="86px"
           priority={true}
-          quality={90}
+          quality={75}
         />
       </Link>
       <button

@@ -1,9 +1,9 @@
 "use client";
 
-import { Rating } from "@smastrom/react-rating";
 import { formatDate } from "@/helpers/formatDate";
 import { Link } from "@/i18n/navigation";
-import { db } from "@/lib/firebase";
+import { getDb } from "@/lib/firebase-db";
+import { Rating } from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
 import { collection, deleteDoc, doc, onSnapshot } from "firebase/firestore";
 import { useEffect, useState } from "react";
@@ -30,7 +30,7 @@ const TestimonialsPage = () => {
   const [testimonials, setTestimonials] = useState<any[]>([]);
 
   useEffect(() => {
-    const ref = collection(db, "testimonials");
+    const ref = collection(getDb(), "testimonials");
     const unsubscribe = onSnapshot(ref, (snapshot) => {
       if (!snapshot.empty) {
         const testimonialsData: any[] = [];
@@ -47,7 +47,7 @@ const TestimonialsPage = () => {
   const deleteReview = async (id: string) => {
     if (confirm("Ви впевнені, що хочете видалити відгук?")) {
       try {
-        const itemRef = doc(db, "testimonials", id);
+        const itemRef = doc(getDb(), "testimonials", id);
         await deleteDoc(itemRef);
         alert("Відгук успішно видалено!");
         window.location.reload();

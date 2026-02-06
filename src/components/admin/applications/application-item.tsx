@@ -1,13 +1,13 @@
-import clsx from "clsx";
-import { doc, updateDoc } from "firebase/firestore";
-import { useState } from "react";
-import { FaEye, FaRegTrashAlt } from "react-icons/fa";
 import { formatDateWithSlashes } from "@/helpers/formatDate";
 import { isOutOf96Hours } from "@/helpers/isOutOf96Hours";
 import { isWithin48Hours } from "@/helpers/isWithin48Hours";
 import { Link } from "@/i18n/navigation";
-import { db } from "@/lib/firebase";
+import { getDb } from "@/lib/firebase-db";
 import type { IApplicationResponse } from "@/types";
+import clsx from "clsx";
+import { doc, updateDoc } from "firebase/firestore";
+import { useState } from "react";
+import { FaEye, FaRegTrashAlt } from "react-icons/fa";
 
 type ApplicationItemProps = {
   item: IApplicationResponse;
@@ -21,7 +21,7 @@ const ApplicationItem = ({ item, onDelete }: ApplicationItemProps) => {
     try {
       setStatus(value);
       if (value !== item.status) {
-        const itemRef = doc(db, "applications", item.id);
+        const itemRef = doc(getDb(), "applications", item.id);
         await updateDoc(itemRef, { status: value });
         console.log("Status updated successfully!");
       }

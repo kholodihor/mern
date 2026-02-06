@@ -1,13 +1,13 @@
 "use client";
 
+import TextArea from "@/components/ui/text-area";
+import TextInput from "@/components/ui/text-input";
+import { useRouter } from "@/i18n/navigation";
+import { getDb } from "@/lib/firebase-db";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { addDoc, collection } from "firebase/firestore";
 import { useState } from "react";
 import { Controller, type SubmitHandler, useForm } from "react-hook-form";
-import TextArea from "@/components/ui/text-area";
-import TextInput from "@/components/ui/text-input";
-import { useRouter } from "@/i18n/navigation";
-import { db } from "@/lib/firebase";
 import { type TestimonialScheme, testimonialScheme } from "./schema";
 
 const AddTestimonial = () => {
@@ -40,7 +40,7 @@ const AddTestimonial = () => {
         created_at: new Date(Date.now()),
       };
 
-      const ref = collection(db, "testimonials");
+      const ref = collection(getDb(), "testimonials");
       await addDoc(ref, data);
       alert("Відгук успішно додано!");
       reset();

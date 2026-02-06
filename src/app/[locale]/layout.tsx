@@ -1,25 +1,24 @@
-import { SpeedInsights } from "@vercel/speed-insights/next";
-import type { Metadata } from "next";
-import dynamic from "next/dynamic";
-import { Open_Sans } from "next/font/google";
-import { notFound } from "next/navigation";
-import { hasLocale, NextIntlClientProvider } from "next-intl";
-import { Suspense } from "react";
 import ConditionalContactLink from "@/components/shared/conditional-contact-link";
 import Header from "@/components/shared/header";
 import SubHeader from "@/components/shared/sub-header";
-import { routing } from "@/i18n/routing";
-import "../globals.css";
 import {
   DESCRIPTIONS,
   KEYWORDS,
   OG_LOCALES,
-  PRECONNECT_URLS,
   ROBOTS_CONFIG,
   SEO_CONFIG,
   TITLES,
 } from "@/config/seo-config";
+import { routing } from "@/i18n/routing";
 import type { PageProps } from "@/types";
+import { SpeedInsights } from "@vercel/speed-insights/next";
+import type { Metadata } from "next";
+import { hasLocale, NextIntlClientProvider } from "next-intl";
+import dynamic from "next/dynamic";
+import { Open_Sans } from "next/font/google";
+import { notFound } from "next/navigation";
+import { Suspense } from "react";
+import "../globals.css";
 
 // ============================================================================
 // Dynamic Imports (non-critical components)
@@ -143,14 +142,6 @@ export default async function RootLayout({ children, params }: Props) {
           httpEquiv="Content-Security-Policy"
           content="upgrade-insecure-requests"
         />
-        {PRECONNECT_URLS.map(({ href, crossOrigin }) => (
-          <link
-            key={href}
-            rel="preconnect"
-            href={href}
-            crossOrigin={crossOrigin}
-          />
-        ))}
       </head>
       <body className="min-w-[320px]">
         {/* Performance optimization components */}

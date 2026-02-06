@@ -1,17 +1,17 @@
+import { getDb } from "@/lib/firebase-db";
+import { deleteFilesFromStorage } from "@/lib/firebase-storage";
+import type { INewsArticle } from "@/types";
 import {
-  collection,
-  deleteDoc,
-  doc,
-  getDoc,
-  getDocs,
+    collection,
+    deleteDoc,
+    doc,
+    getDoc,
+    getDocs,
 } from "firebase/firestore";
 import useSWR from "swr";
-import { db } from "@/lib/firebase";
-import { deleteFilesFromStorage } from "@/lib/firebase-storage";
-import { INewsArticle } from "@/types";
 
 const fetchArticles = async () => {
-  const applicationsRef = collection(db, "news");
+  const applicationsRef = collection(getDb(), "news");
   const snapshot = await getDocs(applicationsRef);
   const newsDataList: INewsArticle[] = [];
 
@@ -50,7 +50,7 @@ export const useNews = (initialData: INewsArticle | null = null) => {
     if (confirm("Ви впевнені, що хочете видалити цю статтю?")) {
       try {
         // First get the article to access its images
-        const articleRef = doc(db, "news", id);
+        const articleRef = doc(getDb(), "news", id);
         const articleSnap = await getDoc(articleRef);
         const article = articleSnap.data() as INewsArticle;
 

@@ -1,12 +1,7 @@
-// Import the functions you need from the SDKs you need
-import { getAnalytics } from "firebase/analytics";
-import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
-import { getFirestore } from "firebase/firestore";
-import { getStorage } from "firebase/storage";
-
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+// Import only the core Firebase app SDK — other services are split into
+// separate modules (firebase-db.ts, firebase-auth.ts, firebase-storage.ts)
+// so they are only loaded by the pages that actually need them.
+import { getApp, getApps, initializeApp } from "firebase/app";
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -20,12 +15,10 @@ const firebaseConfig = {
   measurementId: "G-MLT4ZC78B4",
 };
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-export const analytics =
-  typeof window !== "undefined" ? getAnalytics(app) : null;
-export const auth = getAuth(app);
-export const db = getFirestore(app);
-export const storage = getStorage(app);
-
-export default app;
+// Lazy singleton — the app is only initialized on first access
+export const getFirebaseApp = () => {
+  if (getApps().length === 0) {
+    return initializeApp(firebaseConfig);
+  }
+  return getApp();
+};

@@ -1,16 +1,16 @@
-import { collection, getDocs, query, where } from "firebase/firestore";
-import type { Metadata } from "next";
 import CarPage from "@/components/gallery/car-page";
 import { baseUrl } from "@/constants";
 import type { Locale } from "@/i18n/routing";
-import { db } from "@/lib/firebase";
+import { getDb } from "@/lib/firebase-db";
 import type { IGalleryItem, PageMetadata } from "@/types";
+import { collection, getDocs, query, where } from "firebase/firestore";
+import type { Metadata } from "next";
 
 // Server-side data fetching function
 async function getCarData(slug: string) {
   if (!slug) return null;
 
-  const ref = collection(db, "gallery");
+  const ref = collection(getDb(), "gallery");
   const slugQuery = query(ref, where("slug", "==", slug));
   const snapshot = await getDocs(slugQuery);
 

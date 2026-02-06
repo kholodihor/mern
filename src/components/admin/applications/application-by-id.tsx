@@ -1,12 +1,12 @@
 "use client";
 
+import { getDb } from "@/lib/firebase-db";
 import { collection, onSnapshot, query, where } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { CiBarcode } from "react-icons/ci";
 import { FaPhoneAlt, FaRegUser } from "react-icons/fa";
 import { FaRegMessage } from "react-icons/fa6";
 import { IoMdMail } from "react-icons/io";
-import { db } from "@/lib/firebase";
 
 const ApplicationById = ({ id }: { id: string }) => {
   const [application, setApplication] = useState<any>(null);
@@ -14,7 +14,7 @@ const ApplicationById = ({ id }: { id: string }) => {
   useEffect(() => {
     if (!id) return;
 
-    const ref = collection(db, "applications");
+    const ref = collection(getDb(), "applications");
     const slugQuery = query(ref, where("__name__", "==", id));
 
     const unsubscribe = onSnapshot(slugQuery, (snapshot) => {

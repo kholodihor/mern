@@ -1,13 +1,13 @@
-import { NextResponse } from "next/server";
+import { getDb } from "@/lib/firebase-db";
 import {
-  addDoc,
-  collection,
-  getDocs,
-  limit,
-  orderBy,
-  query,
+    addDoc,
+    collection,
+    getDocs,
+    limit,
+    orderBy,
+    query,
 } from "firebase/firestore";
-import { db } from "@/lib/firebase";
+import { NextResponse } from "next/server";
 
 // Cache duration in milliseconds (24 hours)
 const CACHE_DURATION = 24 * 60 * 60 * 1000;
@@ -15,7 +15,7 @@ const CACHE_DURATION = 24 * 60 * 60 * 1000;
 export async function GET(): Promise<Response> {
   try {
     // First try to get cached reviews from Firestore
-    const reviewsRef = collection(db, "reviews");
+    const reviewsRef = collection(getDb(), "reviews");
     const q = query(reviewsRef, orderBy("fetchedAt", "desc"), limit(1));
     const snapshot = await getDocs(q);
 
@@ -44,7 +44,7 @@ export async function GET(): Promise<Response> {
         headers: {
           "Content-Type": "application/json",
         },
-      }
+      },
     );
 
     if (!response.ok) {
@@ -84,7 +84,7 @@ export async function GET(): Promise<Response> {
     console.error("Failed to fetch reviews:", error);
     return NextResponse.json(
       { error: "Failed to fetch reviews" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

@@ -10,10 +10,6 @@ import { Swiper, SwiperSlide } from "swiper/react";
 
 // Register only the modules we need
 
-// Define image dimensions for better optimization
-const DESKTOP_WIDTH = 1920;
-const MOBILE_WIDTH = 640;
-
 const slides = [
   {
     id: "hero-1",
@@ -122,12 +118,11 @@ const HeroSlider = memo(function HeroSlider() {
                 src={isMobileView ? slide.mobile : slide.desktop}
                 alt={slide.alt}
                 fill
-                sizes={
-                  isMobileView ? `${MOBILE_WIDTH}px` : `${DESKTOP_WIDTH}px`
-                }
+                sizes="100vw"
                 priority={index < 2}
+                fetchPriority={index === 0 ? "high" : undefined}
                 className="w-full object-cover grayscale"
-                quality={index === 0 ? 90 : 75}
+                quality={index === 0 ? 85 : 70}
                 placeholder="blur"
                 blurDataURL="data:image/webp;base64,UklGRlIAAABXRUJQVlA4WAoAAAAQAAAACQAAAgAAQUxQSBIAAAABF0AQbQEz/wMz0P8AAFZQOCA+AAAAMAEAnQEqCgADAAJAOCWkAANwAP77+AAA"
               />

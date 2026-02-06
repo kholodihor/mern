@@ -1,12 +1,12 @@
+import { getAuthInstance } from "@/lib/firebase-auth";
+import { onAuthStateChanged, type User } from "firebase/auth";
 import { useEffect, useState } from "react";
-import { User, onAuthStateChanged } from "firebase/auth";
-import { auth } from "@/lib/firebase";
 
 export const useAuth = () => {
   const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
+    const unsubscribe = onAuthStateChanged(getAuthInstance(), (user) => {
       if (user) {
         setUser(user);
       } else {
