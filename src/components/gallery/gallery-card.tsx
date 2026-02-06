@@ -24,9 +24,9 @@ const GalleryCard = ({ data, priority = false }: GalleryCardProps) => {
           alt={data.car}
           fill
           className="object-cover grayscale transition-transform hover:grayscale-0"
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 350px"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 400px"
           priority={priority}
-          quality={priority ? 90 : 85}
+          quality={90}
           placeholder="blur"
           blurDataURL="data:image/webp;base64,UklGRlIAAABXRUJQVlA4WAoAAAAQAAAACQAAAgAAQUxQSBIAAAABF0AQbQEz/wMz0P8AAFZQOCA+AAAAMAEAnQEqCgADAAJAOCWkAANwAP77+AAA"
           loading={priority ? "eager" : "lazy"}
