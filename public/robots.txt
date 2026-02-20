@@ -8,6 +8,7 @@ Sitemap: https://mernserwis.com/sitemap.xml
 # Disallow admin and API routes
 Disallow: /admin/
 Disallow: /api/
+Allow: /favicon.ico
 Disallow: /*?*
 
 # Set crawl delay if needed

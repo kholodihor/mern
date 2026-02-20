@@ -1,5 +1,5 @@
-import { NextResponse } from "next/server";
 import { SEO_CONFIG } from "@/config/seo-config";
+import { NextResponse } from "next/server";
 
 export async function GET() {
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || SEO_CONFIG.BASE_URL;
@@ -15,6 +15,7 @@ Sitemap: ${baseUrl}/sitemap.xml
 Disallow: /admin/
 Disallow: /api/
 Disallow: /login/
+Allow: /favicon.ico
 Disallow: /*?*
 
 # Set crawl delay if needed
