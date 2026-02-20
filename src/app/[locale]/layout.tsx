@@ -143,7 +143,7 @@ export default async function RootLayout({ children, params }: Props) {
           content="upgrade-insecure-requests"
         />
       </head>
-      <body className="min-w-[320px]">
+      <body className="min-w-[320px] bg-background text-foreground">
         {/* Performance optimization components */}
         <ScriptOptimizer />
         <BfCacheHandler />
