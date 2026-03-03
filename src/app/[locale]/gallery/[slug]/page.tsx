@@ -1,10 +1,11 @@
+import { collection, getDocs, query, where } from "firebase/firestore";
+import type { Metadata } from "next";
 import CarPage from "@/components/gallery/car-page";
+import { JsonLd } from "@/components/shared/json-ld";
 import { baseUrl } from "@/constants";
 import type { Locale } from "@/i18n/routing";
 import { getDb } from "@/lib/firebase-db";
 import type { IGalleryItem, PageMetadata } from "@/types";
-import { collection, getDocs, query, where } from "firebase/firestore";
-import type { Metadata } from "next";
 
 // Server-side data fetching function
 async function getCarData(slug: string) {
@@ -25,15 +26,18 @@ async function getCarData(slug: string) {
 const metadata: PageMetadata = {
   pl: {
     title: "Galeria | MERN Serwis",
-    description: `MERN Serwis | ${baseUrl} Galeria `,
+    description:
+      "Zdjęcia i szczegóły napraw samochodów wykonanych w warsztacie MERN Serwis",
   },
   en: {
     title: "Gallery | MERN Service",
-    description: `MERN Serwis | ${baseUrl} Gallery `,
+    description:
+      "Photos and details of car repairs performed at MERN Service workshop",
   },
   ua: {
     title: "Галерея | Автосервіс MERN",
-    description: `MERN Serwis | ${baseUrl} Галерея `,
+    description:
+      "Фотографії та деталі ремонтів автомобілів, виконаних в автосервісі MERN",
   },
 };
 
@@ -123,6 +127,30 @@ export async function generateMetadata({
   };
 }
 
+// Generate static params for all gallery items across all locales
+export async function generateStaticParams() {
+  const locales = ["pl", "en", "ua"];
+  const ref = collection(getDb(), "gallery");
+  const snapshot = await getDocs(ref);
+
+  const params: { locale: string; slug: string }[] = [];
+
+  snapshot.forEach((doc) => {
+    const data = doc.data();
+    if (!data.slug) return;
+    const cleanSlug =
+      typeof data.slug === "string" && data.slug.endsWith("-")
+        ? data.slug.slice(0, -1)
+        : data.slug;
+
+    for (const locale of locales) {
+      params.push({ locale, slug: cleanSlug });
+    }
+  });
+
+  return params;
+}
+
 // Helper function to serialize Firebase data
 function serializeData(data: IGalleryItem | null) {
   if (!data) return null;
@@ -150,17 +178,51 @@ async function Car({
 }) {
   // Resolve the params Promise
   const resolvedParams = await params;
+  const { locale, slug } = resolvedParams;
+
+  // Clean up slug
+  const cleanSlug = slug.endsWith("-") ? slug.slice(0, -1) : slug;
 
   // Pre-fetch the data on the server for SEO
-  const initialData = await getCarData(resolvedParams.slug);
+  const initialData = await getCarData(cleanSlug);
 
   // Serialize the data before passing it to the client component
   const serializedData = initialData
     ? JSON.parse(JSON.stringify(serializeData(initialData)))
     : null;
 
-  // Pass both the slug and serialized data to the client component
-  return <CarPage slug={resolvedParams.slug} initialData={serializedData} />;
+  // Build JSON-LD structured data for SEO
+  const jsonLd = initialData
+    ? {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        headline: initialData.car,
+        description:
+          initialData.desc?.[locale as keyof typeof initialData.desc] ||
+          initialData.car,
+        image: initialData.images?.length ? initialData.images : undefined,
+        url: `${baseUrl}/${locale}/gallery/${cleanSlug}`,
+        datePublished: initialData.created_at?.seconds
+          ? new Date(initialData.created_at.seconds * 1000).toISOString()
+          : undefined,
+        publisher: {
+          "@type": "Organization",
+          name: "MERN Serwis",
+          url: baseUrl,
+        },
+        mainEntityOfPage: {
+          "@type": "WebPage",
+          "@id": `${baseUrl}/${locale}/gallery/${cleanSlug}`,
+        },
+      }
+    : null;
+
+  return (
+    <>
+      {jsonLd && <JsonLd data={jsonLd} />}
+      <CarPage slug={cleanSlug} initialData={serializedData} />
+    </>
+  );
 }
 
 export default Car;

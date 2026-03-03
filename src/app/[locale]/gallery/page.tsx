@@ -1,8 +1,9 @@
+import type { Metadata } from "next";
 import Gallery from "@/components/gallery/gallery";
 import { baseUrl } from "@/constants";
 import type { Locale } from "@/i18n/routing";
+import { fetchGalleryItems } from "@/lib/server-data-fetchers";
 import type { PageMetadata } from "@/types";
-import type { Metadata } from "next";
 
 const metadata: PageMetadata = {
   pl: {
@@ -83,9 +84,38 @@ export async function generateStaticParams() {
   return [{ locale: "en" }, { locale: "pl" }, { locale: "ua" }];
 }
 
-const GalleryPage = () => {
-  console.log("GalleryPage rendering with Gallery component");
-  return <Gallery />;
+const GalleryPage = async ({
+  params,
+}: {
+  params: Promise<{ locale: Locale }>;
+}) => {
+  const { locale } = await params;
+
+  // Server-side fetch for SEO: render crawlable links for Googlebot
+  let galleryItems: Awaited<ReturnType<typeof fetchGalleryItems>> = [];
+  try {
+    galleryItems = await fetchGalleryItems();
+  } catch (error) {
+    console.error("Failed to fetch gallery items for SSR:", error);
+  }
+
+  return (
+    <>
+      <Gallery />
+      {/* Server-rendered crawlable links for SEO — hidden visually but discoverable by search engines */}
+      <nav aria-label="Gallery items" className="sr-only">
+        <ul>
+          {galleryItems.map((item) => (
+            <li key={item.id}>
+              <a href={`/${locale}/gallery/${item.slug}`}>
+                {item.car} — {item.desc?.[locale] || item.car}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </>
+  );
 };
 
 export default GalleryPage;

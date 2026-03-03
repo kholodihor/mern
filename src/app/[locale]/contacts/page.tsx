@@ -12,6 +12,10 @@ export async function generateMetadata({
   return createPageMetadata("contacts", locale, "contacts");
 }
 
+export async function generateStaticParams() {
+  return [{ locale: "en" }, { locale: "pl" }, { locale: "ua" }];
+}
+
 const ContactsPage = () => {
   return <Contacts />;
 };

@@ -1,13 +1,13 @@
-import {
-    CACHE,
-    configureWebpack,
-    createHttpsPattern,
-    getHeaders,
-    getRedirects,
-    IMAGE_HOSTNAMES,
-} from "@/constants/next-config";
 import type { NextConfig } from "next";
 import createNextIntlPlugin from "next-intl/plugin";
+import {
+  CACHE,
+  configureWebpack,
+  createHttpsPattern,
+  getHeaders,
+  getRedirects,
+  IMAGE_HOSTNAMES,
+} from "@/constants/next-config";
 
 const withNextIntl = createNextIntlPlugin();
 
@@ -41,7 +41,7 @@ const nextConfig: NextConfig = {
     minimumCacheTTL: CACHE.IMAGE_MIN_TTL,
     dangerouslyAllowSVG: true,
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
-    qualities: [75, 85, 90],
+    qualities: [70, 75, 85, 90],
   },
 
   compress: true,

@@ -12,6 +12,10 @@ export async function generateMetadata({
   return createPageMetadata("services", locale, "services");
 }
 
+export async function generateStaticParams() {
+  return [{ locale: "en" }, { locale: "pl" }, { locale: "ua" }];
+}
+
 const Services = () => {
   return <ServicesPage />;
 };

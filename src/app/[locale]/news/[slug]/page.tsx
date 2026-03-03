@@ -1,10 +1,11 @@
+import { collection, getDocs, query, where } from "firebase/firestore";
+import type { Metadata } from "next";
 import Article from "@/components/news/article";
+import { JsonLd } from "@/components/shared/json-ld";
 import { baseUrl } from "@/constants";
 import type { Locale } from "@/i18n/routing";
 import { getDb } from "@/lib/firebase-db";
 import type { INewsArticle, PageMetadata } from "@/types";
-import { collection, getDocs, query, where } from "firebase/firestore";
-import type { Metadata } from "next";
 
 // Server-side data fetching function
 async function getArticleData(slug: string) {
@@ -20,6 +21,26 @@ async function getArticleData(slug: string) {
   }
 
   return null;
+}
+
+// Generate static params for all news articles across all locales
+export async function generateStaticParams() {
+  const locales = ["pl", "en", "ua"];
+  const ref = collection(getDb(), "news");
+  const snapshot = await getDocs(ref);
+
+  const params: { locale: string; slug: string }[] = [];
+
+  snapshot.forEach((doc) => {
+    const data = doc.data();
+    if (!data.slug) return;
+
+    for (const locale of locales) {
+      params.push({ locale, slug: data.slug });
+    }
+  });
+
+  return params;
 }
 
 // Helper function to serialize Firebase data
@@ -44,15 +65,16 @@ function serializeData(data: INewsArticle | null) {
 const metadata: PageMetadata = {
   pl: {
     title: "Aktualności | MERN Serwis",
-    description: `MERN Serwis | ${baseUrl} Aktualności`,
+    description:
+      "Najnowsze informacje i aktualności z serwisu samochodowego MERN Serwis",
   },
   en: {
     title: "News | MERN Service",
-    description: `MERN Serwis | ${baseUrl} News`,
+    description: "Latest information and news from MERN Service car workshop",
   },
   ua: {
     title: "Новини | Автосервіс MERN",
-    description: `MERN Serwis | ${baseUrl} Новини`,
+    description: "Найновіша інформація та новини з автосервісу MERN",
   },
 };
 
@@ -146,11 +168,10 @@ async function NewsArticlePage({
 }) {
   // Resolve the params Promise
   const resolvedParams = await params;
+  const { locale, slug } = resolvedParams;
 
   // Clean up slug for canonical URL - ensure it doesn't end with a dash
-  const cleanSlug = resolvedParams.slug.endsWith("-")
-    ? resolvedParams.slug.slice(0, -1)
-    : resolvedParams.slug;
+  const cleanSlug = slug.endsWith("-") ? slug.slice(0, -1) : slug;
 
   // Pre-fetch the data on the server for SEO
   const initialData = await getArticleData(cleanSlug);
@@ -160,8 +181,41 @@ async function NewsArticlePage({
     ? JSON.parse(JSON.stringify(serializeData(initialData)))
     : null;
 
-  // Pass both the slug and serialized data to the client component
-  return <Article slug={resolvedParams.slug} initialData={serializedData} />;
+  // Build JSON-LD structured data for SEO
+  const jsonLd = initialData
+    ? {
+        "@context": "https://schema.org",
+        "@type": "NewsArticle",
+        headline:
+          initialData.title?.[locale as keyof typeof initialData.title] ||
+          cleanSlug,
+        description:
+          initialData.short_text?.[
+            locale as keyof typeof initialData.short_text
+          ] || "",
+        image: initialData.images?.length ? initialData.images : undefined,
+        url: `${baseUrl}/${locale}/news/${cleanSlug}`,
+        datePublished: initialData.created_at?.seconds
+          ? new Date(initialData.created_at.seconds * 1000).toISOString()
+          : undefined,
+        publisher: {
+          "@type": "Organization",
+          name: "MERN Serwis",
+          url: baseUrl,
+        },
+        mainEntityOfPage: {
+          "@type": "WebPage",
+          "@id": `${baseUrl}/${locale}/news/${cleanSlug}`,
+        },
+      }
+    : null;
+
+  return (
+    <>
+      {jsonLd && <JsonLd data={jsonLd} />}
+      <Article slug={cleanSlug} initialData={serializedData} />
+    </>
+  );
 }
 
 export default NewsArticlePage;
