@@ -1,11 +1,11 @@
-import { collection, getDocs, query, where } from "firebase/firestore";
-import type { Metadata } from "next";
 import CarPage from "@/components/gallery/car-page";
 import { JsonLd } from "@/components/shared/json-ld";
 import { baseUrl } from "@/constants";
 import type { Locale } from "@/i18n/routing";
 import { getDb } from "@/lib/firebase-db";
 import type { IGalleryItem, PageMetadata } from "@/types";
+import { collection, getDocs, query, where } from "firebase/firestore";
+import type { Metadata } from "next";
 
 // Server-side data fetching function
 async function getCarData(slug: string) {
@@ -61,6 +61,7 @@ export async function generateMetadata({
   const canonicalUrl = canonicalUrlObj.toString();
 
   // Create a more descriptive title and description using the car data
+  // Use absolute title to prevent layout template from appending the long site name
   const title = carData
     ? `${carData.car} | ${localeMetadata.title}`
     : `${localeMetadata.title} | ${cleanSlug}`;
@@ -70,7 +71,7 @@ export async function generateMetadata({
     `${localeMetadata.description} | ${cleanSlug}`;
 
   return {
-    title: title,
+    title: { absolute: title },
     description: description,
     metadataBase: new URL(baseUrl),
     alternates: {

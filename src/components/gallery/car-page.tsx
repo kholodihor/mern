@@ -1,9 +1,9 @@
 "use client";
 
 import parse from "html-react-parser";
-import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
-import { useState } from "react";
+import Image from "next/image";
+import { useMemo, useState } from "react";
 import { FaChevronLeft } from "react-icons/fa6";
 // No need for usePathname
 import Loader from "@/components/shared/loader";
@@ -32,7 +32,15 @@ function PreloadCarImages({ images }: { images: string[] }) {
   );
 }
 
-const CarImage = ({ data, index }: { data: string; index?: number }) => {
+const CarImage = ({
+  data,
+  index,
+  carName,
+}: {
+  data: string;
+  index?: number;
+  carName?: string;
+}) => {
   const [imageLoaded, setImageLoaded] = useState(false);
   const [imageError, setImageError] = useState(false);
   const isPriority = index !== undefined && index < 3; // Prioritize first 3 images
@@ -55,7 +63,7 @@ const CarImage = ({ data, index }: { data: string; index?: number }) => {
 
       <Image
         src={data}
-        alt="Car image"
+        alt={carName ? `${carName} - photo ${(index ?? 0) + 1}` : "Car image"}
         fill
         className={`object-cover transition-all duration-300 hover:scale-105 ${
           imageLoaded ? "opacity-100" : "opacity-0"
@@ -88,6 +96,20 @@ const CarPage = ({
   // No need for pathname variable
   const { carItem, isLoading, isError } = useCar(slug, initialData);
 
+  const CarImageWithName = useMemo(
+    () =>
+      function CarImageWrapper({
+        data,
+        index,
+      }: {
+        data: string;
+        index?: number;
+      }) {
+        return <CarImage data={data} index={index} carName={carItem?.car} />;
+      },
+    [carItem?.car],
+  );
+
   if (isError) {
     return <LoadingError />;
   }
@@ -110,7 +132,11 @@ const CarPage = ({
           >
             <FaChevronLeft className="h-6 w-6 sm:h-10 sm:w-10" />
           </Link>
-          <SectionTitle id={`${carItem.car}-title`} title={carItem.car} />
+          <SectionTitle
+            id={`${carItem.car}-title`}
+            title={carItem.car}
+            as="h1"
+          />
         </div>
         <div className="mt-0 sm:mt-12">
           {/* Preload the first three images for better performance */}
@@ -118,7 +144,7 @@ const CarPage = ({
 
           <Slider
             data={carItem.images}
-            Component={CarImage}
+            Component={CarImageWithName}
             aria-label="Cars Slider"
             nextElName="nextCars"
             prevElName="prevCars"

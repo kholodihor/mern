@@ -1,11 +1,11 @@
-import { collection, getDocs, query, where } from "firebase/firestore";
-import type { Metadata } from "next";
 import Article from "@/components/news/article";
 import { JsonLd } from "@/components/shared/json-ld";
 import { baseUrl } from "@/constants";
 import type { Locale } from "@/i18n/routing";
 import { getDb } from "@/lib/firebase-db";
 import type { INewsArticle, PageMetadata } from "@/types";
+import { collection, getDocs, query, where } from "firebase/firestore";
+import type { Metadata } from "next";
 
 // Server-side data fetching function
 async function getArticleData(slug: string) {
@@ -109,7 +109,7 @@ export async function generateMetadata({
     : `${localeMetadata.description} | ${cleanSlug}`;
 
   return {
-    title: title,
+    title: { absolute: title },
     description: description,
     metadataBase: new URL(baseUrl),
     alternates: {

@@ -9,7 +9,10 @@ Sitemap: https://mernserwis.com/sitemap.xml
 Disallow: /admin/
 Disallow: /api/
 Allow: /favicon.ico
-Disallow: /*?*
+Disallow: /*?utm_*
+Disallow: /*?fbclid=*
+Disallow: /*?gclid=*
+Disallow: /*?ref=*
 
 # Set crawl delay if needed
 # Crawl-delay: 10

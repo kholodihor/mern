@@ -135,10 +135,6 @@ export default async function RootLayout({ children, params }: Props) {
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta
-          httpEquiv="Cache-Control"
-          content="no-cache, no-store, must-revalidate"
-        />
-        <meta
           httpEquiv="Content-Security-Policy"
           content="upgrade-insecure-requests"
         />
