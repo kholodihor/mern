@@ -1,9 +1,12 @@
-import type { Metadata } from "next";
 import Gallery from "@/components/gallery/gallery";
 import { baseUrl } from "@/constants";
 import type { Locale } from "@/i18n/routing";
 import { fetchGalleryItems } from "@/lib/server-data-fetchers";
 import type { PageMetadata } from "@/types";
+import type { Metadata } from "next";
+
+// ISR: revalidate every 60 seconds for fresh content without full redeploy
+export const revalidate = 60;
 
 const metadata: PageMetadata = {
   pl: {

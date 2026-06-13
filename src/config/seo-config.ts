@@ -2,12 +2,21 @@
 // SEO Configuration Constants
 // ============================================================================
 
+export const CONTACT_PHONE = "+48509158159";
+
 export const SEO_CONFIG = {
   BASE_URL: "https://mernserwis.com",
-  CONTACT_INFO: "+48 509 158 159 | Przyszłość 2A, 05-126 Stanisławów Pierwszy",
+  CONTACT_INFO: `${CONTACT_PHONE.replace(/(\+\d{2})(\d{3})(\d{3})(\d{3})/, "$1 $2 $3 $4")} | Przyszłość 2A, 05-126 Stanisławów Pierwszy`,
   OG_IMAGE_PATH: "/opengraph-image.png",
   DEFAULT_LOCALE: "pl",
 } as const;
+
+export const SOCIAL_LINKS = [
+  "https://www.facebook.com/mern.serwis/",
+  "https://www.instagram.com/mern.serwis/",
+  "https://www.youtube.com/@MernSerwis",
+  "https://www.tiktok.com/@mern.serwis",
+] as const;
 
 export const TITLES: Record<string, string> = {
   ua: "Mern Сервіс - Незалежний сервіс BMW | Механік BMW у Варшаві",

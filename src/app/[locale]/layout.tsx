@@ -1,12 +1,15 @@
 import ConditionalContactLink from "@/components/shared/conditional-contact-link";
 import Header from "@/components/shared/header";
+import { JsonLd } from "@/components/shared/json-ld";
 import SubHeader from "@/components/shared/sub-header";
 import {
+  CONTACT_PHONE,
   DESCRIPTIONS,
   KEYWORDS,
   OG_LOCALES,
   ROBOTS_CONFIG,
   SEO_CONFIG,
+  SOCIAL_LINKS,
   TITLES,
 } from "@/config/seo-config";
 import { routing } from "@/i18n/routing";
@@ -140,6 +143,45 @@ export default async function RootLayout({ children, params }: Props) {
         />
       </head>
       <body className="min-w-[320px] bg-background text-foreground">
+        <JsonLd
+          data={{
+            "@context": "https://schema.org",
+            "@type": "AutoRepair",
+            name: "MERN Serwis",
+            url: SEO_CONFIG.BASE_URL,
+            logo: `${SEO_CONFIG.BASE_URL}${SEO_CONFIG.OG_IMAGE_PATH}`,
+            image: `${SEO_CONFIG.BASE_URL}${SEO_CONFIG.OG_IMAGE_PATH}`,
+            telephone: CONTACT_PHONE,
+            address: {
+              "@type": "PostalAddress",
+              streetAddress: "Przyszłość 2A",
+              addressLocality: "Stanisławów Pierwszy",
+              postalCode: "05-126",
+              addressCountry: "PL",
+            },
+            geo: {
+              "@type": "GeoCoordinates",
+              latitude: 52.3545,
+              longitude: 21.1685,
+            },
+            openingHoursSpecification: [
+              {
+                "@type": "OpeningHoursSpecification",
+                dayOfWeek: [
+                  "Monday",
+                  "Tuesday",
+                  "Wednesday",
+                  "Thursday",
+                  "Friday",
+                  "Saturday",
+                ],
+                opens: "08:00",
+                closes: "18:00",
+              },
+            ],
+            sameAs: SOCIAL_LINKS,
+          }}
+        />
         {/* Performance optimization components */}
         <ScriptOptimizer />
         <BfCacheHandler />

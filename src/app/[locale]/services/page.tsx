@@ -1,7 +1,7 @@
-import type { Metadata } from "next";
 import ServicesPage from "@/components/services/services";
 import { createPageMetadata } from "@/config/seo-config";
 import type { Locale } from "@/i18n/routing";
+import type { Metadata } from "next";
 
 export async function generateMetadata({
   params,

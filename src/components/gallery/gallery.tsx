@@ -9,17 +9,6 @@ import { useTranslations } from "next-intl";
 import GalleryCard from "./gallery-card";
 import GallerySkeleton from "./gallery-skeleton";
 
-// Component to preload critical gallery images
-function PreloadGalleryImages({ images }: { images: string[] }) {
-  return (
-    <>
-      {images.slice(0, 2).map((src) => (
-        <link key={src} rel="preload" href={src} as="image" type="image/webp" />
-      ))}
-    </>
-  );
-}
-
 const Gallery = () => {
   const t = useTranslations("Gallery");
   const { filteredData, isLoading, isError } = useGallery();
@@ -55,22 +44,14 @@ const Gallery = () => {
             </div>
             <div className="grid grid-cols-1 gap-6 sm:gap-6 md:grid-cols-2 lg:gap-8 xl:grid-cols-3 2xl:grid-cols-4">
               {filteredData.length > 0 ? (
-                <>
-                  {/* Preload the first two images for better LCP */}
-                  <PreloadGalleryImages
-                    images={filteredData
-                      .slice(0, 2)
-                      .map((item) => item.images[0])}
-                  />
-                  {filteredData.map((item, index) => (
-                    <div key={item.id} className="flex justify-center">
-                      <GalleryCard
-                        data={item}
-                        priority={index < 2} // Only prioritize first 2 images for better LCP
-                      />
-                    </div>
-                  ))}
-                </>
+                filteredData.map((item, index) => (
+                  <div key={item.id} className="flex justify-center">
+                    <GalleryCard
+                      data={item}
+                      priority={index < 2} // Only prioritize first 2 images for better LCP
+                    />
+                  </div>
+                ))
               ) : (
                 <div className="col-span-full flex min-h-[200px] items-center justify-center">
                   <p className="text-lg text-gray-400 sm:text-xl">

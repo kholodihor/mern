@@ -1,9 +1,5 @@
 "use client";
 
-import parse from "html-react-parser";
-import Image from "next/image";
-import { useLocale } from "next-intl";
-import { useEffect } from "react";
 import ChevronLeft from "@/components/icons/chevron-left";
 import Loader from "@/components/shared/loader";
 import LoadingError from "@/components/shared/loading-error";
@@ -12,16 +8,50 @@ import Slider from "@/components/shared/slider/slider";
 import { formatDate } from "@/helpers/formatDate";
 import { useNews } from "@/hooks/useNews";
 import { Link, useRouter } from "@/i18n/navigation";
+import parse from "html-react-parser";
+import { useLocale } from "next-intl";
+import NextImage from "next/image";
+import { useEffect, useMemo, useState } from "react";
 
-const NewsImage = ({ data }: { data: string }) => {
+const NewsImage = ({ data, index }: { data: string; index?: number }) => {
+  const [imageLoaded, setImageLoaded] = useState(false);
+  const [imageError, setImageError] = useState(false);
+  const isPriority = index !== undefined && index < 3;
+
   return (
     <div className="relative aspect-4/3 overflow-hidden rounded-xl">
-      <Image
+      {/* Loading placeholder with shimmer effect */}
+      {!imageLoaded && !imageError && (
+        <div className="absolute inset-0 animate-pulse overflow-hidden bg-linear-to-r from-gray-700 to-gray-500">
+          <div className="shimmer absolute inset-0 bg-linear-to-r from-transparent via-white/5 to-transparent"></div>
+        </div>
+      )}
+
+      {/* Error state */}
+      {imageError && (
+        <div className="absolute inset-0 flex items-center justify-center bg-gray-800/50 text-white">
+          <span className="text-sm">Failed to load image</span>
+        </div>
+      )}
+
+      <NextImage
         src={data}
         alt="News image"
         fill
-        className="object-cover transition-transform hover:scale-105"
+        className={`object-cover transition-transform hover:scale-105 ${
+          imageLoaded ? "opacity-100" : "opacity-0"
+        }`}
         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+        priority={isPriority}
+        quality={isPriority ? 90 : 75}
+        placeholder="blur"
+        blurDataURL="data:image/webp;base64,UklGRlIAAABXRUJQVlA4WAoAAAAQAAAACQAAAgAAQUxQSBIAAAABF0AQbQEz/wMz0P8AAFZQOCA+AAAAMAEAnQEqCgADAAJAOCWkAANwAP77+AAA"
+        loading={isPriority ? "eager" : "lazy"}
+        fetchPriority={isPriority ? "high" : "auto"}
+        decoding="async"
+        onLoad={() => setImageLoaded(true)}
+        onError={() => setImageError(true)}
+        style={{ transform: "translate3d(0, 0, 0)" }}
       />
     </div>
   );
@@ -42,6 +72,20 @@ const Article = ({
   const cleanSlug = slug.endsWith("-") ? slug.slice(0, -1) : slug;
 
   const newsItem = getArticleBySlug(cleanSlug);
+
+  const NewsImageWithIndex = useMemo(
+    () =>
+      function NewsImageWrapper({
+        data,
+        index,
+      }: {
+        data: string;
+        index?: number;
+      }) {
+        return <NewsImage data={data} index={index} />;
+      },
+    [],
+  );
 
   useEffect(() => {
     if (!newsItem) {
@@ -80,7 +124,7 @@ const Article = ({
         <div className="mt-8 sm:mt-12">
           <Slider
             data={newsItem.images}
-            Component={NewsImage}
+            Component={NewsImageWithIndex}
             aria-label="News Images Slider"
             nextElName="nextNews"
             prevElName="prevNews"

@@ -7,6 +7,9 @@ import type { IGalleryItem, PageMetadata } from "@/types";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import type { Metadata } from "next";
 
+// ISR: revalidate every 60 seconds for fresh content without full redeploy
+export const revalidate = 60;
+
 // Server-side data fetching function
 async function getCarData(slug: string) {
   if (!slug) return null;
