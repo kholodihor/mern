@@ -33,13 +33,13 @@ export async function uploadFileToStorage(
 
     // Upload the file
     const snapshot = await uploadBytesResumable(storageRef, file);
-    console.log("File uploaded successfully");
+    console.log("Файл успішно завантажено");
 
     // Get the download URL
     const downloadURL = await getDownloadURL(snapshot.ref);
     return downloadURL;
   } catch (error) {
-    console.error("Error uploading file:", error);
+    console.error("Помилка завантаження файлу:", error);
     throw error;
   }
 }
@@ -61,7 +61,7 @@ export const extractStoragePath = (url: string): string | null => {
     // Decode the URL-encoded path
     return decodeURIComponent(match[1]);
   } catch (error) {
-    console.error("Error extracting storage path:", error);
+    console.error("Помилка отримання шляху сховища:", error);
     return null;
   }
 };
@@ -75,9 +75,9 @@ export const deleteFileByPath = async (path: string): Promise<void> => {
   try {
     const fileRef = ref(getStorageInstance(), path);
     await deleteObject(fileRef);
-    console.log(`File at path ${path} deleted successfully`);
+    console.log(`Файл за шляхом ${path} успішно видалено`);
   } catch (error) {
-    console.error(`Error deleting file at path ${path}:`, error);
+    console.error(`Помилка видалення файлу за шляхом ${path}:`, error);
     throw error;
   }
 };
@@ -92,7 +92,7 @@ export const deleteFileByUrl = async (
 ): Promise<undefined | null> => {
   const path = extractStoragePath(url);
   if (!path) {
-    console.warn(`Not a valid Firebase Storage URL: ${url}`);
+    console.warn(`Некоректна URL-адреса Firebase Storage: ${url}`);
     return null;
   }
 
@@ -116,9 +116,9 @@ export const deleteFilesFromStorage = async (urls: string[]): Promise<void> => {
     });
 
     await Promise.all(deletePromises);
-    console.log(`${urls.length} files deleted from Firebase Storage`);
+    console.log(`${urls.length} файлів видалено з Firebase Storage`);
   } catch (error) {
-    console.error("Error deleting files from Firebase Storage:", error);
+    console.error("Помилка видалення файлів з Firebase Storage:", error);
     throw error;
   }
 };

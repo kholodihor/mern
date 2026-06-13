@@ -10,7 +10,7 @@ export const useAuth = () => {
       if (user) {
         setUser(user);
       } else {
-        console.log("There`s no user");
+        console.log("Користувача не знайдено");
       }
     });
 

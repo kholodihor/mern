@@ -18,12 +18,12 @@ export function isWithin48Hours(dateString: string): boolean {
   }
 
   if (Number.isNaN(date.getTime())) {
-    throw new Error(`Invalid date string provided: ${dateString}`);
+    throw new Error(`Некоректний рядок дати: ${dateString}`);
   }
 
   const diffInMilliseconds = currentDate.getTime() - date.getTime();
 
   const diffInHours = diffInMilliseconds / (1000 * 60 * 60);
 
-  return Math.abs(diffInHours) <= 48;
+  return diffInHours <= 48;
 }

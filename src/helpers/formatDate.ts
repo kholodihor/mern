@@ -54,7 +54,7 @@ export const formatDateWithSlashes = (dateString: string | { seconds: number } |
 
   // Make sure the date is valid
   if (Number.isNaN(date.getTime())) {
-    return typeof dateString === "string" ? dateString : "Invalid date";
+    return typeof dateString === "string" ? dateString : "Некоректна дата";
   }
 
   // Format with leading zeros - always display as DD/MM/YYYY

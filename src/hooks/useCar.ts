@@ -26,7 +26,6 @@ export const useCar = (
     slug ? ["car", slug] : null,
     () => fetchCarBySlug(slug),
     {
-      refreshInterval: 5000, // Refresh every 5 seconds
       revalidateOnFocus: true,
       fallbackData: initialData, // Use initialData as fallback for server-side rendering
     },

@@ -20,8 +20,8 @@ export async function fetchGalleryItems() {
 
   const sortedData = galleryDataList.sort((a, b) => {
     return (
-      new Date(b.created_at.seconds).getTime() -
-      new Date(a.created_at.seconds).getTime()
+      new Date(b.created_at.seconds * 1000).getTime() -
+      new Date(a.created_at.seconds * 1000).getTime()
     );
   });
 

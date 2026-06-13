@@ -35,10 +35,10 @@ export const translateText = async (
     if (data?.data?.translations?.length > 0) {
       return data.data.translations[0].translatedText; // Return the translated text
     } else {
-      throw new Error("Translation failed: No translated text available.");
+      throw new Error("Помилка перекладу: перекладений текст недоступний.");
     }
   } catch (error) {
-    console.error("Error during translation:", error);
-    throw new Error("Translation failed.");
+    console.error("Помилка під час перекладу:", error);
+    throw new Error("Помилка перекладу.");
   }
 };

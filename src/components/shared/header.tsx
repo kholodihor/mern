@@ -4,7 +4,7 @@ import clsx from "clsx";
 import { useTranslations } from "next-intl";
 import dynamic from "next/dynamic";
 import Image from "next/image";
-import { memo, useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
 // Import only the specific icons needed
 import { links } from "@/constants/links";
@@ -21,8 +21,7 @@ const MobileMenu = dynamic(
   },
 );
 
-// Memoize the component to prevent unnecessary re-renders
-const Header = memo(function Header() {
+const Header = function Header() {
   const router = useRouter();
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const t = useTranslations("Menu");
@@ -57,8 +56,8 @@ const Header = memo(function Header() {
   return (
     <header
       className={clsx(
-        "backdrop-brightness-10 fixed left-0 top-0 z-50 flex h-[15vh] w-full items-center justify-between px-6 py-4 backdrop-blur-sm",
-        "md:h-[14vh]",
+        "backdrop-brightness-10 fixed left-0 top-0 z-50 flex h-[18vh] w-full items-center justify-between px-6 py-4 backdrop-blur-sm",
+        "md:h-[16vh]",
         {
           "lg:top-[4vh]": !pathname.split("/").includes("admin"),
           "lg:top-0": pathname.split("/").includes("admin"),
@@ -68,15 +67,16 @@ const Header = memo(function Header() {
       )}
       id="header"
     >
-      <Link href="/">
+      <Link href="/" className="flex items-center">
         <Image
           src="/logo.png"
           alt="MERN logo"
-          width={86}
-          height={56}
-          sizes="86px"
+          width={110}
+          height={70}
+          sizes="110px"
           priority={true}
-          quality={75}
+          quality={90}
+          className="object-contain"
         />
       </Link>
       <button
@@ -97,7 +97,7 @@ const Header = memo(function Header() {
 
       <nav className="hidden md:block" aria-label="Main Menu">
         <ul
-          className="m-0 flex items-center justify-around gap-4 p-2"
+          className="m-0 flex items-center justify-around gap-6 p-2"
           id="links"
         >
           {links.map((link) => (
@@ -105,7 +105,7 @@ const Header = memo(function Header() {
               key={link.href}
               aria-current={link.href === pathname ? "page" : undefined}
               className={clsx(
-                "relative whitespace-nowrap text-xs uppercase transition-all hover:text-blue-400 lg:text-[16px]",
+                "relative whitespace-nowrap text-sm font-medium uppercase transition-all hover:text-blue-400 lg:text-base",
                 {
                   "text-blue-400 underline":
                     link.href !== "/" &&
@@ -120,14 +120,14 @@ const Header = memo(function Header() {
               <Link href={link.href}>{t(`${link.name}`)}</Link>
             </li>
           ))}
-          <ul className="flex gap-2 xl:ml-20">
+          <ul className="flex gap-3 border-l border-white/20 pl-6">
             {locales.map((lang) => (
               <li key={lang}>
                 <button
                   type="button"
                   onClick={() => handleCheckLocale(lang)}
                   aria-label={`Change language to ${lang}`}
-                  className="hover:text-blue-400 hover:underline"
+                  className="rounded px-2 py-1 text-sm font-medium transition-all hover:bg-white/10 hover:text-blue-400"
                 >
                   {lang.toUpperCase()}
                 </button>
@@ -138,6 +138,6 @@ const Header = memo(function Header() {
       </nav>
     </header>
   );
-});
+};
 
 export default Header;
