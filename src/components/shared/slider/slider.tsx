@@ -12,14 +12,12 @@ import type { SwiperOptions } from "swiper/types";
 import "./styles.css";
 
 interface SliderProps extends SwiperOptions {
-  // biome-ignore lint/suspicious/noExplicitAny: Generic slider component needs to accept any data type
   data: any[];
   showArrows?: boolean;
   title?: string;
   titleClassName?: string;
   nextElName?: string; // назва кнопки next !! Має бути унікальна для секції
   prevElName?: string; // назва кнопки prev !! Має бути унікальна для секції
-  // biome-ignore lint/suspicious/noExplicitAny: Component needs to accept any data type for generic usage
   Component: FC<{ data: any; index?: number }>;
 }
 
@@ -34,14 +32,12 @@ const Slider: FC<SliderProps> = ({
 
   const handlePrev = () => {
     if (sliderRef.current) {
-      // biome-ignore lint/suspicious/noExplicitAny: Swiper type requires any for method calls
       (sliderRef.current as any).slidePrev();
     }
   };
 
   const handleNext = () => {
     if (sliderRef.current) {
-      // biome-ignore lint/suspicious/noExplicitAny: Swiper type requires any for method calls
       (sliderRef.current as any).slideNext();
     }
   };
@@ -95,11 +91,9 @@ const Slider: FC<SliderProps> = ({
         }}
         loop
         onSwiper={(swiper) => {
-          // biome-ignore lint/suspicious/noExplicitAny: Swiper type requires any for ref assignment
           (sliderRef.current as any) = swiper;
         }}
       >
-        {/* biome-ignore lint/suspicious/noExplicitAny: Generic slider component needs to accept any data type */}
         {data?.map((item: any, i: number) => (
           <SwiperSlide
             key={`slide-${i}-${JSON.stringify(item).slice(0, 20)}`}

@@ -35,7 +35,7 @@ const AddTestimonial = () => {
 
       const data = {
         name: values.name,
-        rating: parseInt(values.rating),
+        rating: parseInt(values.rating, 10),
         review: values.review,
         created_at: new Date(Date.now()),
       };
@@ -57,7 +57,7 @@ const AddTestimonial = () => {
       <h1 className="mb-[24px] text-3xl font-bold">Додати відгук</h1>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="mt-[2rem] flex w-full flex-col items-start justify-start gap-4 space-y-2 md:mt-0"
+        className="mt-8 flex w-full flex-col items-start justify-start gap-4 space-y-2 md:mt-0"
       >
         <Controller
           name="name"
@@ -96,7 +96,7 @@ const AddTestimonial = () => {
         />
 
         <button
-          className={`w-full min-w-[325px] rounded-[1rem] border px-4 py-2 transition-all hover:bg-gray-400/50 md:w-[200px]`}
+          className={`w-full min-w-[325px] rounded-2xl border px-4 py-2 transition-all hover:bg-gray-400/50 md:w-[200px]`}
           type="submit"
         >
           {isProcessing ? "Обробка" : "Додати"}

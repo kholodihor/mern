@@ -30,9 +30,9 @@ export const useApplications = () => {
           ) {
             const [month, day, year] = a.created_at.split("/");
             dateA = new Date(
-              parseInt(year),
-              parseInt(month) - 1,
-              parseInt(day),
+              parseInt(year, 10),
+              parseInt(month, 10) - 1,
+              parseInt(day, 10),
             );
           } else {
             dateA = new Date(0);
@@ -45,9 +45,9 @@ export const useApplications = () => {
           ) {
             const [month, day, year] = b.created_at.split("/");
             dateB = new Date(
-              parseInt(year),
-              parseInt(month) - 1,
-              parseInt(day),
+              parseInt(year, 10),
+              parseInt(month, 10) - 1,
+              parseInt(day, 10),
             );
           } else {
             dateB = new Date(0);

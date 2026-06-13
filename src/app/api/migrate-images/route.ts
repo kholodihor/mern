@@ -3,11 +3,11 @@ import { getDb } from "@/lib/firebase-db";
 import axios from "axios";
 import { collection, doc, getDocs, updateDoc } from "firebase/firestore";
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
-import fs from "fs";
-import { mkdir } from "fs/promises";
 import { NextResponse } from "next/server";
-import path from "path";
-import { promisify } from "util";
+import fs from "node:fs";
+import { mkdir } from "node:fs/promises";
+import path from "node:path";
+import { promisify } from "node:util";
 
 const writeFileAsync = promisify(fs.writeFile);
 const unlinkAsync = promisify(fs.unlink);
