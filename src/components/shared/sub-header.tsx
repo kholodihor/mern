@@ -1,7 +1,7 @@
 "use client";
 
-import { useTranslations } from "next-intl";
 import { usePathname } from "@/i18n/navigation";
+import { useTranslations } from "next-intl";
 
 const SubHeader = () => {
   const t = useTranslations("Menu");
@@ -24,9 +24,6 @@ const SubHeader = () => {
       </address>
       <a href="mailto:mern.serwis@gmail.com" className="underline">
         mern.serwis@gmail.com
-      </a>
-      <a href="tel:+48509158159" className="underline">
-        509 158 159
       </a>
       <a href="tel:+48509159158" className="underline">
         509 159 158

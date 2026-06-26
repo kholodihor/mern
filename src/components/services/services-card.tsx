@@ -68,9 +68,9 @@ const ServicesCard = ({ data: card }: { data: TServiceCard }) => {
       </div>
 
       <div className="flex grow flex-col items-center justify-center py-2 px-4 sm:py-4 sm:px-6">
-        <h4 className="mb-3 text-center text-xl font-bold sm:text-2xl">
+        <h3 className="mb-3 text-center text-xl font-bold sm:text-2xl">
           {t(`${card.title}`)}
-        </h4>
+        </h3>
         <p className="text-center text-sm text-gray-200 opacity-90 sm:text-base">
           {t(`${card.text}`)}
         </p>

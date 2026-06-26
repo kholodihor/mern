@@ -34,15 +34,6 @@ const ContactsBubble = () => {
             className="text-blue-400 sm:mr-2"
             aria-hidden="true" /* Decorative icon */
           />
-          <a href="tel:+48509158159" className="underline">
-            509 158 159
-          </a>
-        </dd>
-        <dd className="flex gap-2">
-          <FaPhone
-            className="text-blue-400 sm:mr-2"
-            aria-hidden="true" /* Decorative icon */
-          />
           <a href="tel:+48509159158" className="underline">
             509 159 158
           </a>

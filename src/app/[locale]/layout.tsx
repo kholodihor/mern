@@ -3,14 +3,13 @@ import Header from "@/components/shared/header";
 import { JsonLd } from "@/components/shared/json-ld";
 import SubHeader from "@/components/shared/sub-header";
 import {
-  CONTACT_PHONE,
-  DESCRIPTIONS,
-  KEYWORDS,
-  OG_LOCALES,
-  ROBOTS_CONFIG,
-  SEO_CONFIG,
-  SOCIAL_LINKS,
-  TITLES,
+    DESCRIPTIONS,
+    KEYWORDS,
+    OG_LOCALES,
+    ROBOTS_CONFIG,
+    SEO_CONFIG,
+    SOCIAL_LINKS,
+    TITLES,
 } from "@/config/seo-config";
 import { routing } from "@/i18n/routing";
 import type { PageProps } from "@/types";
@@ -151,7 +150,6 @@ export default async function RootLayout({ children, params }: Props) {
             url: SEO_CONFIG.BASE_URL,
             logo: `${SEO_CONFIG.BASE_URL}${SEO_CONFIG.OG_IMAGE_PATH}`,
             image: `${SEO_CONFIG.BASE_URL}${SEO_CONFIG.OG_IMAGE_PATH}`,
-            telephone: CONTACT_PHONE,
             address: {
               "@type": "PostalAddress",
               streetAddress: "Przyszłość 2A",

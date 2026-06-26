@@ -2,11 +2,9 @@
 // SEO Configuration Constants
 // ============================================================================
 
-export const CONTACT_PHONE = "+48509158159";
-
 export const SEO_CONFIG = {
   BASE_URL: "https://mernserwis.com",
-  CONTACT_INFO: `${CONTACT_PHONE.replace(/(\+\d{2})(\d{3})(\d{3})(\d{3})/, "$1 $2 $3 $4")} | Przyszłość 2A, 05-126 Stanisławów Pierwszy`,
+  CONTACT_INFO: "Przyszłość 2A, 05-126 Stanisławów Pierwszy",
   OG_IMAGE_PATH: "/opengraph-image.png",
   DEFAULT_LOCALE: "pl",
 } as const;
@@ -19,15 +17,15 @@ export const SOCIAL_LINKS = [
 ] as const;
 
 export const TITLES: Record<string, string> = {
-  ua: "Mern Сервіс - Незалежний сервіс BMW | Механік BMW у Варшаві",
-  en: "Mern Service - Independent BMW Service | BMW Mechanic in Warsaw",
-  pl: "Mern Serwis - Niezależny serwis BMW | Mechanik BMW w Warszawie",
+  ua: "Mern Сервіс - Автосервіс BMW, Rolls-Royce та MINI",
+  en: "Mern Service - Car repair shop BMW, Rolls-Royce and MINI",
+  pl: "Mern Serwis - Warsztat samochodowy BMW, Rolls-Royce i MINI",
 };
 
 export const DESCRIPTIONS: Record<string, string> = {
-  pl: "MERN Serwis to najlepszy serwis dla naprawy twojego BMW, Rolls Royce, Mini Cooper",
-  en: "MERN Serwis is the best service for repairing your BMW, Rolls Royce, Mini Cooper",
-  ua: "Автосервіс MERN це найкращий сервіс для ремонту ваших BMW, Rolls Royce, Mini Cooper",
+  pl: "Szukasz sprawdzonego warsztatu samochodowego? Mern Serwis w Stanisławowie Pierwszym oferuje profesjonalny serwis, diagnostykę i naprawę BMW, MINI i Rolls-Royce.",
+  en: "Looking for a reliable car repair shop? Mern Serwis in Stanisławów Pierwszy offers professional service, diagnostics, and repair for BMW, MINI, and Rolls-Royce.",
+  ua: "Шукаєте перевірений автосервіс? Mern Serwis у Станіславові Першому пропонує професійний сервіс, діагностику та ремонт BMW, MINI та Rolls-Royce.",
 };
 
 export const OG_LOCALES: Record<string, string> = {
