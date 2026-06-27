@@ -1,11 +1,12 @@
-import {
-  collection,
-  type DocumentData,
-  getDocs,
-  type Timestamp,
-} from "firebase/firestore";
 import { SEO_CONFIG, SITEMAP_CONFIG } from "@/config/seo-config";
+import { services } from "@/data/services";
 import { getDb } from "@/lib/firebase-db";
+import {
+    collection,
+    type DocumentData,
+    getDocs,
+    type Timestamp,
+} from "firebase/firestore";
 
 // Helper function to convert Firestore Timestamp to ISO string
 const toIsoString = (date: Date | Timestamp | string | undefined): string => {
@@ -70,6 +71,16 @@ async function fetchDynamicRoutes(): Promise<SitemapEntry[]> {
         lastModified: toIsoString(data.lastModified || data.created_at),
         priority: 0.8,
         changeFreq: "daily",
+      });
+    });
+
+    // Add service detail pages
+    services.forEach((service: { title: string }) => {
+      routes.push({
+        url: `/services/${service.title}`,
+        lastModified: toIsoString(new Date()),
+        priority: 0.6,
+        changeFreq: "monthly",
       });
     });
   } catch (error) {

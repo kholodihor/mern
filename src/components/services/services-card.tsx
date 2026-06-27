@@ -13,8 +13,16 @@ const ServicesCard = ({ data: card }: { data: TServiceCard }) => {
   const [imageError, setImageError] = useState(false);
 
   const handleRedirect = () => {
-    setFilters(card.tags);
-    router.push("/gallery");
+    if (card.link && card.link !== "#") {
+      if (card.link.startsWith("http")) {
+        window.open(card.link, "_blank");
+      } else {
+        router.push(card.link);
+      }
+    } else {
+      setFilters(card.tags);
+      router.push("/gallery");
+    }
   };
 
   const handleKeyDown = (event: React.KeyboardEvent) => {
@@ -30,10 +38,10 @@ const ServicesCard = ({ data: card }: { data: TServiceCard }) => {
       onClick={handleRedirect}
       onKeyDown={handleKeyDown}
       id={card.title}
-      className="group relative flex h-[420px] w-full cursor-pointer flex-col overflow-hidden rounded-xl border border-gray-300 bg-black/20 transition-all duration-300 hover:bg-black/30 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+      className="group relative flex h-[400px] w-full cursor-pointer flex-col overflow-hidden rounded-xl border border-gray-300 bg-black/20 transition-all duration-300 hover:bg-black/30 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 sm:h-[450px]"
       aria-label={`${t(`${card.title}`)} - ${t(`${card.text}`)}`}
     >
-      <div className="relative h-48 w-full sm:h-64 shrink-0">
+      <div className="relative h-40 w-full sm:h-56 shrink-0">
         {/* Loading placeholder with shimmer effect */}
         {!imageLoaded && !imageError && (
           <div className="absolute inset-0 animate-pulse overflow-hidden bg-linear-to-r from-gray-700 to-gray-500">
@@ -68,10 +76,10 @@ const ServicesCard = ({ data: card }: { data: TServiceCard }) => {
       </div>
 
       <div className="flex grow flex-col items-center justify-center py-2 px-4 sm:py-4 sm:px-6">
-        <h3 className="mb-3 text-center text-xl font-bold sm:text-2xl">
+        <h3 className="mb-3 text-center font-bold text-[20px]">
           {t(`${card.title}`)}
         </h3>
-        <p className="text-center text-sm text-gray-200 opacity-90 sm:text-base">
+        <p className="text-center text-[14px] text-gray-200 opacity-90">
           {t(`${card.text}`)}
         </p>
       </div>

@@ -3,13 +3,13 @@ import Header from "@/components/shared/header";
 import { JsonLd } from "@/components/shared/json-ld";
 import SubHeader from "@/components/shared/sub-header";
 import {
-    DESCRIPTIONS,
-    KEYWORDS,
-    OG_LOCALES,
-    ROBOTS_CONFIG,
-    SEO_CONFIG,
-    SOCIAL_LINKS,
-    TITLES,
+  DESCRIPTIONS,
+  KEYWORDS,
+  OG_LOCALES,
+  ROBOTS_CONFIG,
+  SEO_CONFIG,
+  SOCIAL_LINKS,
+  TITLES,
 } from "@/config/seo-config";
 import { routing } from "@/i18n/routing";
 import type { PageProps } from "@/types";

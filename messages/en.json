@@ -65,7 +65,19 @@
     "accessoires": "Accessories assembly and service",
     "accesoires_text": "Installation of original BMW accessories, including towbars, audio systems, reversing cameras and much more",
     "pricing": "Individual repair quote based on VIN number",
-    "pricing_text": "We tailor each quote individually to your vehicle. The quote is created using AIR (Aftersales Information Research). Repairs are entered into the BMW electronic book."
+    "pricing_text": "We tailor each quote individually to your vehicle. The quote is created using AIR (Aftersales Information Research). Repairs are entered into the BMW electronic book.",
+    "detail": {
+      "brakes_service": "We offer professional brake service for BMW, Rolls-Royce and MINI. Our team of specialists performs comprehensive diagnostics of the brake system, replacement of brake pads, discs, brake fluid and other components. We use original parts and high-quality replacements to ensure maximum safety and braking performance.",
+      "computer_diagnostics": "We perform precise computer diagnostics for BMW, Rolls-Royce and MINI using ISTA software. Our advanced diagnostic tools allow for quick fault detection, error code reading and system resets. Diagnostics covers all systems: engine, transmission, brakes, suspension, electronics and many more.",
+      "mechanical_electrical_service": "We provide comprehensive mechanical and electrical service for BMW, Rolls-Royce and MINI. We repair chassis, drivetrains, electrical and electronic installations. We use original parts and high-quality replacements. Our experienced team ensures professional service and warranty on performed work.",
+      "inspections": "We conduct regular technical and service inspections for BMW, Rolls-Royce and MINI in accordance with manufacturer recommendations. Comprehensive vehicle condition check includes inspection of all key systems and components. Regular inspections ensure safety, performance and long vehicle life.",
+      "engine_service": "We specialize in engine service for BMW, Rolls-Royce and MINI. We offer professional repairs, regeneration and maintenance of petrol and diesel engines. Our team has years of experience working with BMW power units, allowing us to solve even the most difficult problems.",
+      "coding": "We offer professional BMW coding and programming. We perform software updates for controllers, module coding and function personalization according to the latest BMW standards. Our coding services allow unlocking additional features and optimizing vehicle system performance.",
+      "painting": "We provide professional bodywork and painting services for BMW, Rolls-Royce and MINI. We offer post-accident repair, polishing, detailing and painting according to original manufacturer specifications. We use high-quality materials and modern techniques to ensure perfect visual results.",
+      "conditioning": "We offer full air conditioning service for BMW, Rolls-Royce and MINI. Inspection, disinfection, refilling and repair of air conditioning systems. Regular AC service ensures driving comfort, passenger health and proper system performance. We use professional equipment and certified chemicals.",
+      "accessoires": "We offer professional installation of original BMW, Rolls-Royce and MINI accessories. We install towbars, audio systems, reversing cameras, navigation, parking systems and many more. All accessories are original and compliant with manufacturer specifications, ensuring perfect compatibility and performance.",
+      "pricing": "We offer individual repair quotes based on VIN number. Each quote is tailored individually to your vehicle using AIR (Aftersales Information Research). The quote is transparent and includes all necessary work and parts. Repairs are entered into the BMW electronic book, confirming proper service and increasing vehicle value."
+    }
   },
   "Reviews": {
     "title": "Reviews",
