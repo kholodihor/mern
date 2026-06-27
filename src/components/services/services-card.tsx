@@ -15,7 +15,7 @@ const ServicesCard = ({ data: card }: { data: TServiceCard }) => {
   const handleRedirect = () => {
     if (card.link && card.link !== "#") {
       if (card.link.startsWith("http")) {
-        window.open(card.link, "_blank");
+        window.open(card.link, "_blank", "noopener,noreferrer");
       } else {
         router.push(card.link);
       }
@@ -79,7 +79,7 @@ const ServicesCard = ({ data: card }: { data: TServiceCard }) => {
         <h3 className="mb-3 text-center font-bold text-[20px]">
           {t(`${card.title}`)}
         </h3>
-        <p className="text-center text-[14px] text-gray-200 opacity-90">
+        <p className="text-center text-[14  px] text-gray-200 opacity-90">
           {t(`${card.text}`)}
         </p>
       </div>
