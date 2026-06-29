@@ -1,0 +1,157 @@
+# MERN Serwis
+
+> MERN Serwis is an independent BMW service center located in Stanisławów Pierwszy at ul. Przyszłość 2A, Poland. Specializing exclusively in BMW, MINI and Rolls-Royce vehicles, the service provides comprehensive repairs and maintenance according to manufacturer procedures. Regularly serving clients from Warsaw (Białołęka, Żoliborz, Targówek), Marki, Nieporęt, Legionowo, Wołomin, Ząbki, Zielonka, Kobyłka, Radzymin and other locations in the Masovian Voivodeship.
+
+## What Makes MERN Serwis Different
+
+### Specialization
+Exclusively focused on BMW, MINI and Rolls-Royce vehicles, allowing for deep expertise and specialized knowledge:
+- **BMW Specialist**: Comprehensive knowledge of BMW systems, procedures, and common issues
+- **MINI Expertise**: Specialized experience with MINI models and their unique requirements
+- **Rolls-Royce Service**: High-end service for luxury vehicles with manufacturer-level care
+- **Manufacturer Procedures**: All repairs performed according to BMW/MINI/Rolls-Royce official procedures
+
+### Key Differentiators
+- **Exclusive BMW focus**: Unlike general repair shops, we only work on BMW, MINI and Rolls-Royce
+- **ISTA Diagnostics**: Professional BMW ISTA computer diagnostics for accurate fault detection
+- **AIR System**: Individual quotes based on VIN using BMW AOS (Aftersales Information Research)
+- **Electronic Service Book**: Official entries in BMW electronic service book after service
+- **Original Parts**: Use of original BMW parts and high-quality replacements
+- **Convenient Location**: Just 10-15 minutes from north-eastern Warsaw
+
+## Services
+
+### Computer Diagnostics
+- ISTA computer diagnostics for BMW, MINI and Rolls-Royce
+- Accurate fault detection and system analysis
+- Real-time data reading from vehicle modules
+- Software updates and programming
+
+### Mechanical & Electrical Service
+- Engine repairs and maintenance
+- Automatic transmission service and repairs
+- Suspension repairs and upgrades
+- Electrical system diagnostics and repairs
+- Use of original parts and high-quality replacements
+
+### Oil Service & Maintenance
+- Comprehensive oil service with BMW-approved oils
+- Filter replacements
+- Fluid level checks and top-ups
+- Manufacturer-recommended maintenance intervals
+
+### Timing Belt/Chain Service
+- Timing belt and chain replacements
+- Tensioner and pulley replacements
+- Water pump replacement when required
+- Preventive maintenance to avoid engine damage
+
+### Anti-Corrosion Protection
+- Professional anti-corrosion treatments
+- Rust prevention and protection
+- Underbody protection
+- Cavity wax treatments
+
+### Post-Accident Repairs
+- Comprehensive post-accident damage assessment
+- Bodywork repairs
+- Mechanical repairs after accidents
+- Insurance coordination
+
+### VIN-Based Quoting
+- Individual quotes based on VIN number
+- AIR system (BMW AOS) for accurate part identification
+- Transparent pricing with part numbers
+- No hidden costs - client knows exact price before service starts
+
+## Location & Service Area
+
+### Primary Location
+- **Address**: ul. Przyszłość 2A, 05-126 Stanisławów Pierwszy, Poland
+- **Service Area**: Masovian Voivodeship (Województwo mazowieckie)
+
+### Served Areas
+- **Warsaw Districts**: Białołęka, Żoliborz, Targówek
+- **Nearby Cities**: Marki, Nieporęt, Legionowo, Wołomin, Ząbki, Zielonka, Kobyłka, Radzymin
+- **Travel Time**: 10-15 minutes from north-eastern Warsaw
+- **Accessibility**: Easy access from Warsaw ring road
+
+## SEO Keywords
+
+### Primary Keywords (Polish)
+- Warsztat BMW Warszawa
+- Serwis BMW Warszawa
+- Mechanik BMW Warszawa
+- Warsztat samochodowy BMW
+- Serwis BMW Stanisławów Pierwszy
+- Niezależny serwis BMW
+- Diagnostyka BMW ISTA
+- Serwis MINI Warszawa
+- Serwis Rolls-Royce Warszawa
+
+### Primary Keywords (English)
+- BMW Service Warsaw
+- BMW Workshop Warsaw
+- BMW Mechanic Warsaw
+- Independent BMW Service Poland
+- BMW Service Stanisławów Pierwszy
+- BMW ISTA Diagnostics
+- MINI Service Warsaw
+- Rolls-Royce Service Warsaw
+
+### Primary Keywords (Ukrainian)
+- Автосервіс BMW Варшава
+- Механік BMW Варшава
+- Незалежний сервіс BMW
+- Сервіс BMW Польща
+- Діагностика BMW ISTA
+- Сервіс MINI Варшава
+
+## Company
+
+- **Company Name**: MERN sp. z o.o.
+- **Business Name**: MERN Serwis
+- **Founded**: Independent BMW service center
+- **Location**: Stanisławów Pierwszy, Poland
+- **Languages**: Polish, English, Ukrainian
+- **Website**: (domain name to be added)
+
+## Service Philosophy
+
+- **Quality**: Focus on manufacturer-level quality for all repairs
+- **Transparency**: Clear pricing with VIN-based quotes before service
+- **Expertise**: Specialized knowledge of BMW, MINI, Rolls-Royce systems
+- **Customer Service**: Individual approach to each client
+- **Documentation**: Official entries in BMW electronic service book
+
+## Pages
+
+- [Homepage](/)
+- [About Us](/about)
+- [Services](/services)
+- [Gallery](/gallery)
+- [News](/news)
+- [Contact](/contacts)
+
+## Service Categories
+
+- **Computer Diagnostics**: Diagnostyka komputerowa / Computer diagnostics / Комп'ютерна діагностика
+- **Mechanical Service**: Serwis mechaniczny / Mechanical service / Механічний сервіс
+- **Electrical Service**: Serwis elektryczny / Electrical service / Електричний сервіс
+- **Inspections**: Przeglądy / Inspections / Перевірки
+- **Engine Service**: Naprawy silników / Engine repairs / Ремонт двигунів
+- **Brake Service**: Naprawy hamulców / Brake repairs / Ремонт гальм
+- **Suspension Service**: Naprawy zawieszenia / Suspension repairs / Ремонт підвіски
+
+## Technical Information
+
+### Diagnostic Systems
+- **ISTA**: BMW Integrated Service Technical Application
+- **AIR**: Aftersales Information Research (BMW AOS)
+- **Electronic Service Book**: BMW digital service documentation
+
+### Service Procedures
+- All repairs according to BMW/MINI/Rolls-Royce procedures
+- Original parts and high-quality replacements
+- Manufacturer-recommended maintenance intervals
+- VIN-based parts identification and ordering
