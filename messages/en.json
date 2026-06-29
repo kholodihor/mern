@@ -12,11 +12,13 @@
   },
   "About": {
     "title": "about us",
-    "content": "The company Mern sp. Z o. o. was created out of passion for the BMW brand. Currently, we mainly deal with mechanics and diagnostics of cars such as BMW, Mini and Rolls Royce. Our experience and the experience of our employees allow us to provide services at the highest level. We have professional equipment that allows us to do our work efficiently and precisely. We use original parts and high-quality spare parts to repair vehicles. We approach each customer individually.",
-    "call": "We invite you to contact us!"
+    "title_with_location": "about us - BMW, Rolls-Royce and MINI Car Service Warsaw",
+    "content": "Mern Serwis is an Independent BMW service center located in Stanisławów Pierwszy at ul. Przyszłość 2A. We specialize exclusively in BMW, MINI and Rolls-Royce cars, so our clients can count on expertise, experience and repairs performed according to manufacturer procedures.\n\nBMW owners from Warsaw (Białołęka, Żoliborz, Targówek), Marki, Nieporęt, Legionowo, Wołomin, Ząbki, Zielonka, Kobyłka, Radzymin and other locations in the Masovian Voivodeship regularly visit our service. The convenient location means the drive takes just a few minutes from the north-eastern part of Warsaw.\n\nWe perform comprehensive BMW service – from ISTA computer diagnostics, through oil service, timing belt replacement, engine repairs, automatic transmission and suspension repairs, to anti-corrosion protection and post-accident repairs.\n\nEach quote is prepared individually based on the VIN number using the AIR system (BMW AOS). Thanks to this, the client receives an accurate cost estimate with part numbers even before the repair begins. After the service, we can also make an entry in the BMW electronic service book.\n\nIf you are looking for a proven BMW service in Stanisławów Pierwszy or a professional BMW mechanic near Warsaw, we invite you to Mern Serwis. We focus on quality, transparency and attention to every detail, which is why BMW owners from all over Masovia and other cities in Poland choose our services.\n\nWe cordially invite you to contact us!",
+    "call": "We sincerely invite you to contact us!"
   },
   "Gallery": {
     "title": "GALLERY",
+    "title_with_location": "GALLERY - BMW, Rolls-Royce and MINI Car Service Warsaw",
     "not_found": "No auto by this category",
     "BMWII3Rex": {
       "desc": "Seat wiring harness repair, diagnostics, replacement of front brake pads, recording in the BMW electronic book for safety and comfort.",
@@ -46,6 +48,7 @@
   },
   "Services": {
     "title": "Services",
+    "title_with_location": "Services - BMW, Rolls-Royce and MINI Car Service Warsaw",
     "computer_diagnostics": "Computer diagnostics",
     "diagnostics_text": "Precise diagnostics for BMW, Rolls-Royce and Mini using ISTA software",
     "mechanical_electrical_service": "Mechanical and electrical service",
@@ -86,6 +89,7 @@
   },
   "Contacts": {
     "title": "Welcome",
+    "title_with_location": "Welcome - BMW, Rolls-Royce and MINI Car Service Warsaw",
     "title_2": "contact",
     "social": "Get to know us better",
     "link": "Contact Us"
@@ -133,6 +137,7 @@
   },
   "News": {
     "title": "Actual information",
+    "title_with_location": "Actual information - BMW, Rolls-Royce and MINI Car Service Warsaw",
     "read_more": "Find out more"
   },
   "Filters": {

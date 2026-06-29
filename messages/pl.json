@@ -12,11 +12,13 @@
   },
   "About": {
     "title": "o nas",
-    "content": "Firma Mern sp. Z o.o. powstała z zamiłowania do marki BMW. W chwili obecnej zajmujemy się głównie mechaniką i diagnostyką takich samochodów jak BMW, Mini i Rolls Royce. Nasze doświadczenie zarówno jak i doświadczenie naszych pracowników pozwala nam świadczyć usługi na najwyższym poziomie. Dysponujemy profesjonalnym sprzętem co pozwala nam zrobić swoją pracę sprawnie i precyzyjnie. Do naprawy pojazdów używamy oryginalnych części oraz części zamiennych wysokiej jakości. Do każdego klienta podchodzimy indywidualnie.",
-    "call": "Zapraszamy do kontaktu!"
+    "title_with_location": "o nas - Warsztat samochodowy BMW, Rolls-Royce i MINI Warszawa",
+    "content": "Mern Serwis to Niezależny serwis BMW zlokalizowany w Stanisławowie Pierwszym przy ul. Przyszłość 2A. Specjalizujemy się wyłącznie w samochodach BMW, MINI oraz Rolls-Royce, dzięki czemu nasi klienci mogą liczyć na wiedzę, doświadczenie oraz naprawy wykonywane zgodnie z procedurami producenta.\n\nDo naszego serwisu regularnie przyjeżdżają właściciele BMW z Warszawy (Białołęka, Żoliborz, Targówek) Marek, Nieporętu, Legionowa, Wołomina, Ząbek, Zielonki, Kobyłki, Radzymina i innych miejscowości województwa mazowieckiego. Dogodna lokalizacja sprawia, że dojazd zajmuje zaledwie kilkanaście minut z północno-wschodniej części Warszawy.\n\nWykonujemy kompleksowy serwis BMW – od diagnostyki komputerowej ISTA, przez serwis olejowy, wymianę rozrządów, naprawy silników, automatycznych skrzyń biegów i zawieszenia, aż po zabezpieczenia antykorozyjne oraz naprawy powypadkowe.\n\nKażdą wycenę przygotowujemy indywidualnie na podstawie numeru VIN z wykorzystaniem systemu AIR (BMW AOS). Dzięki temu klient otrzymuje dokładny kosztorys z numerami części jeszcze przed rozpoczęciem naprawy. Po wykonaniu serwisu możemy również wykonać wpis do elektronicznej książki serwisowej BMW.\n\nJeżeli szukasz sprawdzonego serwisu BMW w Stanisławowie Pierwszym lub profesjonalnego mechanika BMW niedaleko Warszawy, zapraszamy do Mern Serwis. Stawiamy na jakość, transparentność i dbałość o każdy detal, dlatego nasze usługi wybierają właściciele BMW nie tylko z całego Mazowsza, ale też z innych miast Polski.\n\nZapraszamy serdecznie do kontaktu!",
+    "call": "Zapraszamy serdecznie do kontaktu!"
   },
   "Gallery": {
     "title": "GALERIA",
+    "title_with_location": "GALERIA - Warsztat samochodowy BMW, Rolls-Royce i MINI Warszawa",
     "not_found": "Brak auta w tej kategorii",
     "BMWII3Rex": {
       "desc": "Naprawa wiązki przewodów fotela, diagnostyka, wymiana przednich klocków hamulcowych, zapis w elektronicznej książce BMW dla bezpieczeństwa i komfortu.",
@@ -46,6 +48,7 @@
   },
   "Services": {
     "title": "USŁUGI",
+    "title_with_location": "USŁUGI - Warsztat samochodowy BMW, Rolls-Royce i MINI Warszawa",
     "computer_diagnostics": "Diagnostyka komputerowa",
     "diagnostics_text": "Precyzyjna diagnostyka BMW, Rolls-Royce i Mini z wykorzystaniem  oprogramowania ISTA",
     "mechanical_electrical_service": "Serwis mechaniczny i elektryczny",
@@ -82,10 +85,11 @@
   "Reviews": {
     "title": "Opinie",
     "subtitle1": "Na podstawie ",
-    "subtitle2": " opinij"
+    "subtitle2": " opinii"
   },
   "Contacts": {
     "title": "Zapraszamy",
+    "title_with_location": "Zapraszamy - Warsztat samochodowy BMW, Rolls-Royce i MINI Warszawa",
     "title_2": "kontakt",
     "social": "Poznaj nas bliżej",
     "link": "Skontaktuj się \n z nami"
@@ -133,6 +137,7 @@
   },
   "News": {
     "title": "Aktualności",
+    "title_with_location": "Aktualności - Warsztat samochodowy BMW, Rolls-Royce i MINI Warszawa",
     "read_more": "Dowiedź się więcej"
   },
   "Filters": {

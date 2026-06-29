@@ -17,14 +17,14 @@ const ServicesCard = ({ data: card }: { data: TServiceCard }) => {
             rel="noreferrer"
             className="transition-transform group-hover:scale-105"
           >
-            <h4 className="text-center text-2xl font-semibold group-hover:text-white/90">
+            <h3 className="text-center text-2xl font-semibold group-hover:text-white/90">
               {t(`${card.title}`)}
-            </h4>
+            </h3>
           </a>
         ) : (
-          <h4 className="text-center text-2xl font-semibold">
+          <h3 className="text-center text-2xl font-semibold">
             {t(`${card.title}`)}
-          </h4>
+          </h3>
         )}
 
         <p className="max-w-[90%] text-center text-base leading-relaxed text-gray-300">

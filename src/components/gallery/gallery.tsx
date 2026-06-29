@@ -27,7 +27,11 @@ const Gallery = () => {
     >
       <div className="mx-auto max-w-[1920px]">
         <div className="mx-auto max-w-7xl">
-          <SectionTitle id="gallery-title" title={t("title")} />
+          <SectionTitle
+            id="gallery-title"
+            title={t("title")}
+            titleWithLocation={t("title_with_location")}
+          />
         </div>
         {isLoading ? (
           <div className="mt-8 sm:mt-12">

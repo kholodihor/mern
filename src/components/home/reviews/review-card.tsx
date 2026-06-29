@@ -1,6 +1,6 @@
-import { Rating } from "@smastrom/react-rating";
 import { formatReviewDate } from "@/helpers/formatDate";
 import type { Review } from "@/types/reviews";
+import { Rating } from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
 
 const SimpleAvatar = ({ name, size = 48 }: { name: string; size?: number }) => {
@@ -30,7 +30,7 @@ const ReviewCard = ({ data: card }: { data: Review }) => {
       <header className="mb-3 flex items-center gap-3">
         <SimpleAvatar name={card.name} size={48} />
         <div className="min-w-0 flex-1">
-          <h4 className="truncate text-lg font-semibold">{card.name}</h4>
+          <h3 className="truncate text-lg font-semibold">{card.name}</h3>
           <time className="text-sm text-gray-300">
             {formatReviewDate(card.created_at)}
           </time>

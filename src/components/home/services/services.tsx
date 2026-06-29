@@ -21,7 +21,11 @@ const Services = () => {
         />
       ))}
       <section className="px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
-        <SectionTitle id="services-title" title={t("title")} />
+        <SectionTitle
+          id="services-title"
+          title={t("title")}
+          titleWithLocation={t("title_with_location")}
+        />
         <Slider
           data={services}
           Component={ServicesCard}

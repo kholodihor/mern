@@ -1,7 +1,7 @@
-import { useTranslations } from "next-intl";
 import Contacts from "@/components/shared/contacts";
 import MyMap from "@/components/shared/map";
 import SectionTitle from "@/components/shared/section-title";
+import { useTranslations } from "next-intl";
 
 const Location = () => {
   const t = useTranslations("Contacts");
@@ -11,7 +11,7 @@ const Location = () => {
       className="my-[10vh] flex w-full flex-col p-2"
       aria-labelledby="contacts-title"
     >
-      <SectionTitle id="services-title" title={t("title")} />
+      <SectionTitle id="services-title" title={t("title")} titleWithLocation={t("title_with_location")} />
       <div className="mt-[10vh] flex w-full flex-col items-center justify-center lg:flex-row">
         <Contacts />
         <MyMap />

@@ -1,10 +1,10 @@
 "use client";
 
-import { useTranslations } from "next-intl";
 import Loader from "@/components/shared/loader";
 import LoadingError from "@/components/shared/loading-error";
 import SectionTitle from "@/components/shared/section-title";
 import { useNews } from "@/hooks/useNews";
+import { useTranslations } from "next-intl";
 import NewsItem from "./news-item";
 
 const NewsPage = () => {
@@ -22,7 +22,7 @@ const NewsPage = () => {
       aria-labelledby="news-title"
     >
       <div className="mx-auto max-w-[90vw]">
-        <SectionTitle id="news-title" title={t("title")} />
+        <SectionTitle id="news-title" title={t("title")} titleWithLocation={t("title_with_location")} />
         <div className="mt-8 space-y-12 sm:mt-12 sm:space-y-16 lg:mt-16">
           {isLoading ? (
             <Loader />

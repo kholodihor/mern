@@ -1,12 +1,12 @@
 "use client";
 
-import { Rating } from "@smastrom/react-rating";
-import Image from "next/image";
-import { useEffect, useState } from "react";
-import "@smastrom/react-rating/style.css";
-import { useTranslations } from "next-intl";
 import SectionTitle from "@/components/shared/section-title";
 import Slider from "@/components/shared/slider/slider";
+import { Rating } from "@smastrom/react-rating";
+import "@smastrom/react-rating/style.css";
+import { useTranslations } from "next-intl";
+import Image from "next/image";
+import { useEffect, useState } from "react";
 import ReviewCard from "./review-card";
 
 interface ReviewsResponse {
@@ -83,11 +83,11 @@ const Reviews = () => {
           readOnly
           className="mx-auto"
         />
-        <h6 className="text-center text-2xl font-medium sm:text-3xl lg:text-4xl">
+        <p className="text-center text-2xl font-medium sm:text-3xl lg:text-4xl">
           {t("subtitle1")}
           {totalReviews}
           {t("subtitle2")}
-        </h6>
+        </p>
         <Image
           src="/google.svg"
           alt="Google logo"

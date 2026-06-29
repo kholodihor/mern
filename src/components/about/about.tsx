@@ -1,6 +1,6 @@
-import Image from "next/image";
-import { useTranslations } from "next-intl";
 import SectionTitle from "@/components/shared/section-title";
+import { useTranslations } from "next-intl";
+import Image from "next/image";
 
 const About = () => {
   const t = useTranslations("About");
@@ -11,13 +11,21 @@ const About = () => {
       aria-labelledby="about-us-title"
     >
       <div className="mx-auto">
-        <SectionTitle id="about-us-title" title={t("title")} />
+        <SectionTitle
+          id="about-us-title"
+          title={t("title")}
+          titleWithLocation={t("title_with_location")}
+        />
 
         <div className="mt-8 flex flex-col gap-8 sm:mt-12 md:flex-row md:gap-12 lg:mt-16 lg:gap-16">
           <div className="flex w-full flex-col justify-center space-y-6 lg:pl-8">
-            <p className="text-base leading-relaxed text-gray-200 sm:text-lg lg:text-xl">
-              {t("content")}
-            </p>
+            <div className="space-y-4 text-base leading-relaxed text-gray-200 sm:text-lg lg:text-xl">
+              {t("content")
+                .split("\n\n")
+                .map((paragraph) => (
+                  <p key={paragraph.slice(0, 50)}>{paragraph}</p>
+                ))}
+            </div>
             <h5 className="text-lg font-semibold text-white sm:text-xl lg:text-2xl">
               {t("call")}
             </h5>
