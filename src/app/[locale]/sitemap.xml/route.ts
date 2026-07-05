@@ -44,11 +44,17 @@ async function fetchDynamicRoutes(): Promise<SitemapEntry[]> {
       const data = doc.data() as DocumentData;
       if (!data.slug) return;
 
-      // Clean up slug - ensure it doesn't end with a dash
-      const cleanSlug =
-        typeof data.slug === "string" && data.slug.endsWith("-")
-          ? data.slug.slice(0, -1)
-          : data.slug;
+      // Clean up slug - ensure it doesn't start or end with a dash
+      let cleanSlug = data.slug;
+      if (typeof cleanSlug === "string") {
+        cleanSlug = cleanSlug.replace(/^-+/, "").replace(/-+$/, "");
+      }
+
+      // Skip invalid slugs
+      if (!cleanSlug || cleanSlug.length === 0) {
+        console.warn(`Skipping invalid gallery slug: ${data.slug}`);
+        return;
+      }
 
       routes.push({
         url: `/gallery/${cleanSlug}`,
@@ -66,8 +72,20 @@ async function fetchDynamicRoutes(): Promise<SitemapEntry[]> {
       const data = doc.data() as DocumentData;
       if (!data.slug) return;
 
+      // Clean up slug - ensure it doesn't start or end with a dash
+      let cleanSlug = data.slug;
+      if (typeof cleanSlug === "string") {
+        cleanSlug = cleanSlug.replace(/^-+/, "").replace(/-+$/, "");
+      }
+
+      // Skip invalid slugs
+      if (!cleanSlug || cleanSlug.length === 0) {
+        console.warn(`Skipping invalid news slug: ${data.slug}`);
+        return;
+      }
+
       routes.push({
-        url: `/news/${data.slug}`,
+        url: `/news/${cleanSlug}`,
         lastModified: toIsoString(data.lastModified || data.created_at),
         priority: 0.8,
         changeFreq: "daily",

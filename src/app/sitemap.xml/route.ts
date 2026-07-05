@@ -33,6 +33,11 @@ export async function GET() {
     });
   } catch (error) {
     console.error("Error generating sitemap index:", error);
-    return new NextResponse("Error generating sitemap", { status: 500 });
+    return new NextResponse("Error generating sitemap", {
+      status: 500,
+      headers: {
+        "Content-Type": "text/plain",
+      },
+    });
   }
 }
