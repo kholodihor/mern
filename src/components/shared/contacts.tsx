@@ -1,4 +1,4 @@
-import { FaEnvelope, FaMapMarkerAlt } from "react-icons/fa";
+import { FaEnvelope, FaMapMarkerAlt, FaPhone } from "react-icons/fa";
 import Socials from "./socials";
 
 const Contacts = () => {
@@ -14,6 +14,17 @@ const Contacts = () => {
           </span>
           <span className="mx-auto inline-block w-full whitespace-nowrap text-center text-gray-500 sm:text-left">
             Przyszłość 2A, 05-126 Stanisławów Pierwszy
+          </span>
+        </li>
+        <li className="my-4 items-center justify-start gap-4 text-center text-[1rem] sm:flex sm:text-[1.2rem]">
+          <span className="mb-4 flex w-full justify-center sm:w-8 md:mb-0">
+            <FaPhone
+              className="text-[24px] text-green-500 sm:mr-2 sm:text-[28px]"
+              aria-hidden="true"
+            />
+          </span>
+          <span className="text-center text-gray-500">
+            <a href="tel:+48509159158">+48 509 159 158</a>
           </span>
         </li>
         <li className="my-4 items-center justify-start gap-4 text-center text-[1rem] sm:flex sm:text-[1.2rem]">

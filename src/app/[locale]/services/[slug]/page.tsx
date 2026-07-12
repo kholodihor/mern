@@ -1,3 +1,4 @@
+import { SEO_CONFIG } from "@/config/seo-config";
 import { services } from "@/data/services";
 import ServiceDetailContent from "./service-detail-content";
 
@@ -135,9 +136,56 @@ export async function generateMetadata({
     ua: `Професійний сервіс ${slug} в Mern Сервіс`,
   };
 
+  const title = titles[locale] || titles.pl;
+  const description = descriptions[locale] || descriptions.pl;
+  const canonicalUrl = `${SEO_CONFIG.BASE_URL}/${locale}/services/${slug}`;
+  const ogImageUrl = `${SEO_CONFIG.BASE_URL}${SEO_CONFIG.OG_IMAGE_PATH}`;
+
   return {
-    title: titles[locale] || titles.pl,
-    description: descriptions[locale] || descriptions.pl,
+    title,
+    description,
+    metadataBase: new URL(SEO_CONFIG.BASE_URL),
+    alternates: {
+      canonical: canonicalUrl,
+      languages: {
+        en: `${SEO_CONFIG.BASE_URL}/en/services/${slug}`,
+        pl: `${SEO_CONFIG.BASE_URL}/pl/services/${slug}`,
+        uk: `${SEO_CONFIG.BASE_URL}/ua/services/${slug}`,
+        "x-default": `${SEO_CONFIG.BASE_URL}/pl/services/${slug}`,
+      },
+    },
+    openGraph: {
+      type: "website",
+      url: canonicalUrl,
+      title,
+      description,
+      siteName: "MERN Serwis",
+      images: [
+        {
+          url: ogImageUrl,
+          width: 1200,
+          height: 630,
+          alt: title,
+        },
+      ],
+      locale: locale === "en" ? "en_US" : locale === "pl" ? "pl_PL" : "uk_UA",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [ogImageUrl],
+    },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+      },
+    },
   };
 }
 

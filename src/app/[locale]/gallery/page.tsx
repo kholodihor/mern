@@ -45,6 +45,7 @@ export async function generateMetadata({
         en: `${baseUrl}/en/gallery`,
         pl: `${baseUrl}/pl/gallery`,
         uk: `${baseUrl}/ua/gallery`,
+        "x-default": `${baseUrl}/pl/gallery`,
       },
     },
     openGraph: {

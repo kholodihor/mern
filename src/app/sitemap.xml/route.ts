@@ -4,20 +4,18 @@ import { NextResponse } from "next/server";
 export async function GET() {
   try {
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || SEO_CONFIG.BASE_URL;
-    const now = new Date().toISOString();
 
     let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
     xml +=
       '<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n';
 
     // Add entries for each locale sitemap, with Polish first as the main language
+    // No lastmod — always-fresh timestamps reduce Google's trust in the sitemap
     for (const locale of SITEMAP_CONFIG.LOCALES) {
       const sitemapUrl = `${baseUrl}/${locale}/sitemap.xml`;
-      const lastMod = now;
 
       xml += "<sitemap>\n";
       xml += `<loc>${sitemapUrl}</loc>\n`;
-      xml += `<lastmod>${lastMod}</lastmod>\n`;
       xml += "</sitemap>\n";
     }
 

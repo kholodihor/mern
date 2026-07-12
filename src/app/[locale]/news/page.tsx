@@ -49,6 +49,7 @@ export async function generateMetadata({
         en: `${baseUrl}/en/news`,
         pl: `${baseUrl}/pl/news`,
         uk: `${baseUrl}/ua/news`,
+        "x-default": `${baseUrl}/pl/news`,
       },
     },
     openGraph: {

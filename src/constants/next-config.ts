@@ -62,24 +62,22 @@ export const getRedirects = () => {
 
   if (IS_PRODUCTION) {
     redirects.push(
+      // Redirect www root directly to non-www default locale (avoids chain)
+      createRedirect(`/`, `${HTTPS_URL}/${DEFAULT_LOCALE}`, [
+        hostCondition(WWW_DOMAIN),
+      ]),
+      // Redirect www to non-www (covers both HTTP and HTTPS)
+      createRedirect("/:path*", `${HTTPS_URL}/:path*`, [
+        hostCondition(WWW_DOMAIN),
+      ]),
+      // Redirect HTTP root directly to HTTPS default locale (avoids chain)
+      createRedirect(`/`, `${HTTPS_URL}/${DEFAULT_LOCALE}`, [
+        httpProtoCondition(),
+      ]),
+      // Redirect HTTP to HTTPS
+      createRedirect("/:path*", `${HTTPS_URL}/:path*`, [httpProtoCondition()]),
       // Redirect root to default locale (Polish)
-      createRedirect("/", `/${DEFAULT_LOCALE}`, [], true),
-      // Redirect www to non-www (HTTPS)
-      createRedirect("/:path*", `${HTTPS_URL}/:path*`, [
-        hostCondition(WWW_DOMAIN),
-      ]),
-      // Redirect HTTP www to HTTPS non-www
-      createRedirect("/:path*", `${HTTPS_URL}/:path*`, [
-        hostCondition(WWW_DOMAIN),
-        httpProtoCondition(),
-      ]),
-      // Redirect HTTP to HTTPS for non-www
-      createRedirect("/:path*", `${HTTPS_URL}/:path*`, [
-        hostCondition(DOMAIN),
-        httpProtoCondition(),
-      ]),
-      // Catch-all for any other HTTP requests
-      createRedirect("/:path*", `${HTTPS_URL}/:path*`, [httpProtoCondition()])
+      createRedirect("/", `/${DEFAULT_LOCALE}`, [], true)
     );
   }
 
@@ -104,6 +102,15 @@ export const getHeaders = () => [
     createHeader("X-Robots-Tag", "index, follow"),
     createHeader("Cache-Control", "public, max-age=0, must-revalidate"),
     createHeader("X-Content-Type-Options", "nosniff"),
+  ]),
+  // Prevent indexing of admin and login pages
+  createHeaderRule("/:locale/admin/:path*", [
+    createHeader("X-Robots-Tag", "noindex, nofollow"),
+    createHeader("Cache-Control", "private, no-cache, no-store, must-revalidate"),
+  ]),
+  createHeaderRule("/:locale/login", [
+    createHeader("X-Robots-Tag", "noindex, nofollow"),
+    createHeader("Cache-Control", "private, no-cache, no-store, must-revalidate"),
   ]),
   // Sitemap headers
   createHeaderRule("/sitemap.xml", sitemapHeaders),

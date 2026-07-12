@@ -3,13 +3,13 @@ import Header from "@/components/shared/header";
 import { JsonLd } from "@/components/shared/json-ld";
 import SubHeader from "@/components/shared/sub-header";
 import {
-  DESCRIPTIONS,
-  KEYWORDS,
-  OG_LOCALES,
-  ROBOTS_CONFIG,
-  SEO_CONFIG,
-  SOCIAL_LINKS,
-  TITLES,
+    DESCRIPTIONS,
+    KEYWORDS,
+    OG_LOCALES,
+    ROBOTS_CONFIG,
+    SEO_CONFIG,
+    SOCIAL_LINKS,
+    TITLES,
 } from "@/config/seo-config";
 import { routing } from "@/i18n/routing";
 import type { PageProps } from "@/types";
@@ -88,6 +88,7 @@ export async function generateMetadata({
         en: `${SEO_CONFIG.BASE_URL}/en`,
         pl: `${SEO_CONFIG.BASE_URL}/pl`,
         uk: `${SEO_CONFIG.BASE_URL}/ua`,
+        "x-default": `${SEO_CONFIG.BASE_URL}/pl`,
       },
     },
     robots: ROBOTS_CONFIG,
@@ -148,6 +149,8 @@ export default async function RootLayout({ children, params }: Props) {
             "@type": "AutoRepair",
             name: "MERN Serwis",
             url: SEO_CONFIG.BASE_URL,
+            telephone: "+48 509 159 158",
+            priceRange: "$$",
             logo: `${SEO_CONFIG.BASE_URL}${SEO_CONFIG.OG_IMAGE_PATH}`,
             image: `${SEO_CONFIG.BASE_URL}${SEO_CONFIG.OG_IMAGE_PATH}`,
             address: {

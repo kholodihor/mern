@@ -220,6 +220,7 @@ export const createPageMetadata = (
         en: `${SEO_CONFIG.BASE_URL}/en${path ? `/${path}` : ""}`,
         pl: `${SEO_CONFIG.BASE_URL}/pl${path ? `/${path}` : ""}`,
         uk: `${SEO_CONFIG.BASE_URL}/ua${path ? `/${path}` : ""}`,
+        "x-default": `${SEO_CONFIG.BASE_URL}/pl${path ? `/${path}` : ""}`,
       },
     },
     openGraph: {

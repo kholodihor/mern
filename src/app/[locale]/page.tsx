@@ -1,16 +1,16 @@
-import type { Metadata } from "next";
 import Hero from "@/components/home/hero/hero";
 import Location from "@/components/home/location/location";
 import Reviews from "@/components/home/reviews/reviews";
 import Services from "@/components/home/services/services";
 import {
-  DESCRIPTIONS,
-  OG_LOCALES,
-  ROBOTS_CONFIG,
-  SEO_CONFIG,
-  TITLES,
+    DESCRIPTIONS,
+    OG_LOCALES,
+    ROBOTS_CONFIG,
+    SEO_CONFIG,
+    TITLES,
 } from "@/config/seo-config";
 import type { Locale } from "@/i18n/routing";
+import type { Metadata } from "next";
 
 export async function generateMetadata({
   params,
@@ -32,6 +32,7 @@ export async function generateMetadata({
         en: `${SEO_CONFIG.BASE_URL}/en`,
         pl: `${SEO_CONFIG.BASE_URL}/pl`,
         uk: `${SEO_CONFIG.BASE_URL}/ua`,
+        "x-default": `${SEO_CONFIG.BASE_URL}/pl`,
       },
     },
     openGraph: {

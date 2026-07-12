@@ -20,7 +20,7 @@ const toIsoString = (date: Date | Timestamp | string | undefined): string => {
 
 interface SitemapEntry {
   url: string;
-  lastModified: string;
+  lastModified?: string;
   changeFreq?:
     | "always"
     | "hourly"
@@ -92,11 +92,10 @@ async function fetchDynamicRoutes(): Promise<SitemapEntry[]> {
       });
     });
 
-    // Add service detail pages
+    // Add service detail pages (no lastmod — static content, avoid fake freshness signals)
     services.forEach((service: { title: string }) => {
       routes.push({
         url: `/services/${service.title}`,
-        lastModified: toIsoString(new Date()),
         priority: 0.6,
         changeFreq: "monthly",
       });
@@ -112,11 +111,10 @@ async function generateSitemap(locale: string): Promise<SitemapEntry[]> {
   const dynamicRoutes = await fetchDynamicRoutes();
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || SEO_CONFIG.BASE_URL;
 
-  // Generate static routes with locale
+  // Generate static routes with locale (no lastmod — avoid fake freshness signals)
   const staticRoutesWithLocale: SitemapEntry[] =
     SITEMAP_CONFIG.STATIC_ROUTES.map((route) => ({
       url: `${baseUrl}/${locale}${route.path ? `/${route.path}` : ""}`,
-      lastModified: toIsoString(new Date()),
       changeFreq: route.changeFreq,
       priority: route.priority,
     }));
