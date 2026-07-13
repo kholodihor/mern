@@ -1,13 +1,19 @@
 import "client-only";
 
 export function getLocalStorage<T>(key: string, defaultValue: T): T {
-  const stickyValue = localStorage.getItem(key);
-
-  return stickyValue !== null && stickyValue !== "undefined"
-    ? (JSON.parse(stickyValue) as T)
-    : defaultValue;
+  try {
+    const stickyValue = localStorage.getItem(key);
+    if (stickyValue === null || stickyValue === "undefined") return defaultValue;
+    return JSON.parse(stickyValue) as T;
+  } catch {
+    return defaultValue;
+  }
 }
 
 export function setLocalStorage<T>(key: string, value: T): void {
-  localStorage.setItem(key, JSON.stringify(value));
+  try {
+    localStorage.setItem(key, JSON.stringify(value));
+  } catch {
+    // Silently fail — storage may be full or disabled (private mode)
+  }
 }

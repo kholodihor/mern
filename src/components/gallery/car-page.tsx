@@ -11,7 +11,7 @@ import LoadingError from "@/components/shared/loading-error";
 import SectionTitle from "@/components/shared/section-title";
 import Slider from "@/components/shared/slider/slider";
 import { CATEGORIES } from "@/constants/categories";
-import { formatDate } from "@/helpers/formatDate";
+import { formatDate, type Locale } from "@/helpers/formatDate";
 import { useCar } from "@/hooks/useCar";
 import { Link } from "@/i18n/navigation";
 
@@ -92,7 +92,7 @@ const CarPage = ({
   initialData?: any;
 }) => {
   const t = useTranslations();
-  const locale = useLocale();
+  const locale = useLocale() as Locale;
   // No need for pathname variable
   const { carItem, isLoading, isError } = useCar(slug, initialData);
 
@@ -198,7 +198,7 @@ const CarPage = ({
           )}
 
           <div className="text-sm text-gray-400">
-            {formatDate(carItem.created_at)}
+            {formatDate(carItem.created_at, locale)}
           </div>
         </div>
       </div>

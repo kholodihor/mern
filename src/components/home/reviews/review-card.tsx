@@ -1,7 +1,8 @@
-import { formatReviewDate } from "@/helpers/formatDate";
+import { formatReviewDate, type Locale } from "@/helpers/formatDate";
 import type { Review } from "@/types/reviews";
 import { Rating } from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
+import { useLocale } from "next-intl";
 
 const SimpleAvatar = ({ name, size = 48 }: { name: string; size?: number }) => {
   const initials = name
@@ -21,6 +22,7 @@ const SimpleAvatar = ({ name, size = 48 }: { name: string; size?: number }) => {
 };
 
 const ReviewCard = ({ data: card }: { data: Review }) => {
+  const locale = useLocale() as Locale;
   return (
     <article
       id={card.name}
@@ -32,7 +34,7 @@ const ReviewCard = ({ data: card }: { data: Review }) => {
         <div className="min-w-0 flex-1">
           <h3 className="truncate text-lg font-semibold">{card.name}</h3>
           <time className="text-sm text-gray-300">
-            {formatReviewDate(card.created_at)}
+            {formatReviewDate(card.created_at, locale)}
           </time>
         </div>
       </header>

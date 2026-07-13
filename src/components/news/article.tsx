@@ -5,7 +5,7 @@ import Loader from "@/components/shared/loader";
 import LoadingError from "@/components/shared/loading-error";
 import SectionTitle from "@/components/shared/section-title";
 import Slider from "@/components/shared/slider/slider";
-import { formatDate } from "@/helpers/formatDate";
+import { formatDate, type Locale } from "@/helpers/formatDate";
 import { useNews } from "@/hooks/useNews";
 import { Link, useRouter } from "@/i18n/navigation";
 import parse from "html-react-parser";
@@ -64,7 +64,7 @@ const Article = ({
   slug: string;
   initialData?: any;
 }) => {
-  const locale = useLocale();
+  const locale = useLocale() as Locale;
   const router = useRouter();
   const { getArticleBySlug, isLoading, isError } = useNews(initialData);
 
@@ -169,7 +169,7 @@ const Article = ({
           )}
 
           <div className="text-sm text-gray-400">
-            {formatDate(newsItem.created_at)}
+            {formatDate(newsItem.created_at, locale)}
           </div>
         </div>
       </div>

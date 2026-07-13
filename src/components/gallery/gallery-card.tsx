@@ -1,7 +1,7 @@
 "use client";
 
 import { CATEGORIES } from "@/constants/categories";
-import { formatDate } from "@/helpers/formatDate";
+import { formatDate, type Locale } from "@/helpers/formatDate";
 import { Link } from "@/i18n/navigation";
 import type { IGalleryItem } from "@/types";
 import { useLocale, useTranslations } from "next-intl";
@@ -15,7 +15,7 @@ type GalleryCardProps = {
 
 const GalleryCard = ({ data, priority = false }: GalleryCardProps) => {
   const t = useTranslations();
-  const locale = useLocale();
+  const locale = useLocale() as Locale;
   const [imageLoaded, setImageLoaded] = useState(false);
   const [imageError, setImageError] = useState(false);
 
@@ -63,7 +63,7 @@ const GalleryCard = ({ data, priority = false }: GalleryCardProps) => {
             {data.car}
           </h4>
           <span className="text-sm text-gray-400">
-            {formatDate(data?.created_at)}
+            {formatDate(data?.created_at, locale)}
           </span>
         </div>
 

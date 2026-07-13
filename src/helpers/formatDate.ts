@@ -1,66 +1,56 @@
-export function formatDate(timestamp: {
-  seconds: number;
-  nanoseconds: number;
-}): string {
-  // Convert the seconds to milliseconds (ignoring nanoseconds for simplicity)
-  const date = new Date(timestamp.seconds * 1000);
+export type Locale = "pl" | "en" | "ua";
 
-  // Extract the day, month, and year
-  const day: string = String(date.getDate()).padStart(2, "0");
-  const month: string = String(date.getMonth() + 1).padStart(2, "0"); // Months are zero-based
-  const year: number = date.getFullYear();
-
-  // Return the formatted date
-  return `${day}.${month}.${year}`;
-}
-
-export const formatReviewDate = (isoDate: string): string => {
-  const date = new Date(isoDate);
-  const day = date.getDate().toString().padStart(2, "0");
-  const month = (date.getMonth() + 1).toString().padStart(2, "0");
-  const year = date.getFullYear();
-  return `${day}.${month}.${year}`;
+const INTL_LOCALE_MAP: Record<Locale, string> = {
+  pl: "pl-PL",
+  en: "en-GB",
+  ua: "uk-UA",
 };
 
-/**
- * Formats a date string to DD/MM/YYYY format with leading zeros
- * @param dateString - The date string to format (can be in various formats)
- * @returns A formatted date string in DD/MM/YYYY format with leading zeros
- */
-export const formatDateWithSlashes = (dateString: string | { seconds: number } | Date): string => {
-  let date: Date;
+const getIntlLocale = (locale?: Locale): string =>
+  INTL_LOCALE_MAP[locale ?? "pl"] ?? "pl-PL";
 
-  // Handle different date formats
-  if (typeof dateString === "string" && dateString.includes("/")) {
-    // Handle MM/DD/YYYY format from database (e.g., "05/14/2025")
-    const parts = dateString.split("/");
+const toDate = (input: string | { seconds: number; nanoseconds?: number } | Date): Date => {
+  if (input instanceof Date) return input;
+  if (input && typeof input === "object" && "seconds" in input) {
+    return new Date(input.seconds * 1000);
+  }
+  if (typeof input === "string" && input.includes("/")) {
+    const parts = input.split("/");
     if (parts.length === 3) {
       const [month, day, year] = parts;
-      date = new Date(parseInt(year, 10), parseInt(month, 10) - 1, parseInt(day, 10));
-    } else {
-      date = new Date(dateString as string);
+      return new Date(parseInt(year, 10), parseInt(month, 10) - 1, parseInt(day, 10));
     }
-  } else if (
-    dateString &&
-    typeof dateString === "object" &&
-    "seconds" in dateString
-  ) {
-    // Handle Firebase timestamp objects
-    date = new Date(dateString.seconds * 1000);
-  } else {
-    // Default date parsing for other formats
-    date = new Date(dateString as Date | string);
   }
+  return new Date(input);
+};
 
-  // Make sure the date is valid
+export function formatDate(
+  timestamp: { seconds: number; nanoseconds: number },
+  locale?: Locale,
+): string {
+  const date = toDate(timestamp);
+  if (Number.isNaN(date.getTime())) return "";
+  return new Intl.DateTimeFormat(getIntlLocale(locale), {
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+  }).format(date);
+}
+
+export const formatReviewDate = (isoDate: string, locale?: Locale): string =>
+  formatDate({ seconds: new Date(isoDate).getTime() / 1000, nanoseconds: 0 }, locale);
+
+export const formatDateWithSlashes = (
+  dateString: string | { seconds: number } | Date,
+  locale?: Locale,
+): string => {
+  const date = toDate(dateString);
   if (Number.isNaN(date.getTime())) {
     return typeof dateString === "string" ? dateString : "Некоректна дата";
   }
-
-  // Format with leading zeros - always display as DD/MM/YYYY
-  const day = date.getDate().toString().padStart(2, "0");
-  const month = (date.getMonth() + 1).toString().padStart(2, "0");
-  const year = date.getFullYear();
-
-  return `${day}/${month}/${year}`;
+  return new Intl.DateTimeFormat(getIntlLocale(locale), {
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+  }).format(date);
 };

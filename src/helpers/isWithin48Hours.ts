@@ -1,4 +1,4 @@
-export function isWithin48Hours(dateString: string): boolean {
+export function getHoursSince(dateString: string): number {
   let date: Date;
   const currentDate = new Date();
 
@@ -7,13 +7,11 @@ export function isWithin48Hours(dateString: string): boolean {
     const parts = dateString.split("/");
     if (parts.length === 3) {
       const [month, day, year] = parts;
-      // Note: month is 0-indexed in JavaScript Date
       date = new Date(parseInt(year, 10), parseInt(month, 10) - 1, parseInt(day, 10));
     } else {
       date = new Date(dateString);
     }
   } else {
-    // Try the default Date constructor for other formats
     date = new Date(dateString);
   }
 
@@ -22,8 +20,10 @@ export function isWithin48Hours(dateString: string): boolean {
   }
 
   const diffInMilliseconds = currentDate.getTime() - date.getTime();
+  return diffInMilliseconds / (1000 * 60 * 60);
+}
 
-  const diffInHours = diffInMilliseconds / (1000 * 60 * 60);
-
-  return diffInHours <= 48;
+export function isWithin48Hours(dateString: string): boolean {
+  const hours = getHoursSince(dateString);
+  return hours >= 0 && hours <= 48;
 }
