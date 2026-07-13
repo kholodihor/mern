@@ -11,7 +11,7 @@ import {
     getDocs,
 } from "firebase/firestore";
 import { useMemo } from "react";
-import useSWR from "swr";
+import useSWR, { mutate as globalMutate } from "swr";
 
 const fetchGalleryItems = async () => {
   const applicationsRef = collection(getDb(), "gallery");
@@ -24,10 +24,13 @@ const fetchGalleryItems = async () => {
   });
 
   return galleryDataList.sort((a, b) => {
-    return (
-      new Date(b.created_at.seconds).getTime() -
-      new Date(a.created_at.seconds).getTime()
-    );
+    const aTime = a.created_at?.seconds
+      ? new Date(a.created_at.seconds * 1000).getTime()
+      : 0;
+    const bTime = b.created_at?.seconds
+      ? new Date(b.created_at.seconds * 1000).getTime()
+      : 0;
+    return bTime - aTime;
   });
 };
 
@@ -67,6 +70,7 @@ export const useGallery = () => {
         // First get the item to access its images
         const itemRef = doc(getDb(), "gallery", id);
         const itemSnap = await getDoc(itemRef);
+        if (!itemSnap.exists()) return;
         const item = itemSnap.data() as IGalleryItem;
 
         // Handle image deletion based on URL pattern
@@ -101,11 +105,9 @@ export const useGallery = () => {
 
 // Export prefetch function for critical data
 export const prefetchGallery = () => {
-  // Simple prefetch - just trigger the fetch
   fetchGalleryItems()
     .then((data) => {
-      // Store in SWR cache via a component
-      console.log("Gallery data prefetched:", data.length);
+      globalMutate("gallery", data, false);
     })
     .catch((err) => {
       console.warn("Failed to prefetch gallery:", err);

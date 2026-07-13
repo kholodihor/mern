@@ -20,10 +20,13 @@ const fetchArticles = async () => {
   });
 
   return newsDataList.sort((a, b) => {
-    return (
-      new Date(b.created_at.seconds * 1000).getTime() -
-      new Date(a.created_at.seconds * 1000).getTime()
-    );
+    const aTime = a.created_at?.seconds
+      ? new Date(a.created_at.seconds * 1000).getTime()
+      : 0;
+    const bTime = b.created_at?.seconds
+      ? new Date(b.created_at.seconds * 1000).getTime()
+      : 0;
+    return bTime - aTime;
   });
 };
 
@@ -52,6 +55,7 @@ export const useNews = (initialData: INewsArticle | null = null) => {
         // First get the article to access its images
         const articleRef = doc(getDb(), "news", id);
         const articleSnap = await getDoc(articleRef);
+        if (!articleSnap.exists()) return;
         const article = articleSnap.data() as INewsArticle;
 
         // Handle image deletion based on URL pattern

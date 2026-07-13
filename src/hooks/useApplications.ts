@@ -8,8 +8,9 @@ export const useApplications = () => {
 
   const fetchApplications = () => {
     const applicationsRef = collection(getDb(), "applications");
-    const unsubscribe = onSnapshot(applicationsRef, (snapshot) => {
-      if (!snapshot.empty) {
+    const unsubscribe = onSnapshot(
+      applicationsRef,
+      (snapshot) => {
         const applicationsData: IApplicationResponse[] = [];
         snapshot.forEach((doc) => {
           applicationsData.push({
@@ -58,8 +59,11 @@ export const useApplications = () => {
         });
 
         setApplications(sortedApplications);
-      }
-    });
+      },
+      (error) => {
+        console.error("Applications listener error:", error);
+      },
+    );
 
     return unsubscribe;
   };
@@ -70,7 +74,6 @@ export const useApplications = () => {
         const itemRef = doc(getDb(), "applications", id);
         await deleteDoc(itemRef);
         alert("Заявку успішно видалено!");
-        // Remove from local state immediately for better UX
         setApplications((prev) => prev.filter((app) => app.id !== id));
       } catch (error) {
         console.error("Error deleting application:", error);
