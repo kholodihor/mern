@@ -19,10 +19,13 @@ export async function fetchGalleryItems() {
   });
 
   const sortedData = galleryDataList.sort((a, b) => {
-    return (
-      new Date(b.created_at.seconds * 1000).getTime() -
-      new Date(a.created_at.seconds * 1000).getTime()
-    );
+    const aTime = a.created_at?.seconds
+      ? new Date(a.created_at.seconds * 1000).getTime()
+      : 0;
+    const bTime = b.created_at?.seconds
+      ? new Date(b.created_at.seconds * 1000).getTime()
+      : 0;
+    return bTime - aTime;
   });
 
   // Serialize the data to ensure it's safe to pass to client components
@@ -39,10 +42,13 @@ export async function fetchNewsArticles() {
   });
 
   const sortedData = newsDataList.sort((a, b) => {
-    return (
-      new Date(b.created_at.seconds * 1000).getTime() -
-      new Date(a.created_at.seconds * 1000).getTime()
-    );
+    const aTime = a.created_at?.seconds
+      ? new Date(a.created_at.seconds * 1000).getTime()
+      : 0;
+    const bTime = b.created_at?.seconds
+      ? new Date(b.created_at.seconds * 1000).getTime()
+      : 0;
+    return bTime - aTime;
   });
 
   // Serialize the data to ensure it's safe to pass to client components

@@ -10,7 +10,16 @@ export const translateText = async (
   text: string,
   targetLanguage: string
 ): Promise<string> => {
-  const apiKey = process.env.NEXT_PUBLIC_GOOGLE_API_KEY; // Ensure your API key is stored securely
+  const apiKey = process.env.NEXT_PUBLIC_GOOGLE_API_KEY;
+
+  if (!apiKey) {
+    throw new Error("Google API key is not configured.");
+  }
+
+  if (!text || text.length > 5000) {
+    throw new Error("Text must be between 1 and 5000 characters.");
+  }
+
   const url = `https://translation.googleapis.com/language/translate/v2?key=${apiKey}`;
 
   const body = {

@@ -14,26 +14,29 @@ export const deleteItemWithImages = async ({
   id,
   successMessage,
   errorMessage,
-}: DeleteItemWithImagesParams) => {
+}: DeleteItemWithImagesParams): Promise<{
+  success: boolean;
+  message: string;
+}> => {
   try {
-    // First get the item to access its images
     const itemRef = doc(getDb(), collection, id);
     const itemSnap = await getDoc(itemRef);
+
+    if (!itemSnap.exists()) {
+      return { success: false, message: "Item not found" };
+    }
+
     const item = itemSnap.data();
 
-    // Handle image deletion based on URL pattern
     if (item?.images && item.images.length > 0) {
       const images = Array.isArray(item.images) ? item.images : [item.images];
-      // Delete all images from Firebase Storage
       await deleteFilesFromStorage(images);
     }
 
-    // Then delete the document from Firebase
     await deleteDoc(itemRef);
-    alert(successMessage);
-    return true;
+    return { success: true, message: successMessage };
   } catch (error) {
     console.error(errorMessage, error);
-    return false;
+    return { success: false, message: errorMessage };
   }
 };

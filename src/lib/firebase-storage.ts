@@ -1,10 +1,10 @@
 import {
-    deleteObject,
-    type FirebaseStorage,
-    getDownloadURL,
-    getStorage,
-    ref,
-    uploadBytesResumable,
+  deleteObject,
+  type FirebaseStorage,
+  getDownloadURL,
+  getStorage,
+  ref,
+  uploadBytesResumable,
 } from "firebase/storage";
 import { getFirebaseApp } from "./firebase";
 
@@ -132,7 +132,8 @@ export const deleteFilesFromStorage = async (urls: string[]): Promise<void> => {
 export function generateFilePath(file: File, folder: string): string {
   const timestamp = Date.now();
   const randomString = Math.random().toString(36).substring(2, 8);
-  const fileExtension = file.name.split(".").pop() || "";
+  const lastDotIndex = file.name.lastIndexOf(".");
+  const fileExtension = lastDotIndex > 0 && lastDotIndex < file.name.length - 1 ? file.name.slice(lastDotIndex + 1) : "bin";
 
   return `${folder}/${timestamp}-${randomString}.${fileExtension}`;
 }
