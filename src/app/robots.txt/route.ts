@@ -12,9 +12,9 @@ Allow: /
 Sitemap: ${baseUrl}/sitemap.xml
 
 # Disallow admin and API routes
-Disallow: /admin/
 Disallow: /api/
-Disallow: /login/
+Disallow: /*/admin
+Disallow: /*/login
 Allow: /favicon.ico
 Disallow: /*?utm_*
 Disallow: /*?fbclid=*
