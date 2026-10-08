@@ -172,8 +172,8 @@ export default async function RootLayout({ children, params }: Props) {
             },
             geo: {
               "@type": "GeoCoordinates",
-              latitude: 52.3545,
-              longitude: 21.1685,
+              latitude: 52.3764,
+              longitude: 21.0381,
             },
             openingHoursSpecification: [
               {
