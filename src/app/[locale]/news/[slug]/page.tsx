@@ -6,6 +6,7 @@ import { getDb } from "@/lib/firebase-db";
 import type { INewsArticle, PageMetadata } from "@/types";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import type { Metadata } from "next";
+import { setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 
 // ISR: revalidate every 60 seconds for fresh content without full redeploy
@@ -175,6 +176,7 @@ async function NewsArticlePage({
   // Resolve the params Promise
   const resolvedParams = await params;
   const { locale, slug } = resolvedParams;
+  setRequestLocale(locale);
 
   // Clean up slug for canonical URL - ensure it doesn't end with a dash
   const cleanSlug = slug.endsWith("-") ? slug.slice(0, -1) : slug;

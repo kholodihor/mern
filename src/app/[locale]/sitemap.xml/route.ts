@@ -8,6 +8,13 @@ import {
   type Timestamp,
 } from "firebase/firestore";
 
+// Prerender one sitemap per locale and refresh it daily (SITEMAP_CONFIG.REVALIDATE_TIME)
+export const revalidate = 86400;
+
+export function generateStaticParams() {
+  return SITEMAP_CONFIG.LOCALES.map((locale) => ({ locale }));
+}
+
 // Helper function to convert Firestore Timestamp to ISO string
 // Returns undefined when the date is unknown, so no fake <lastmod> is emitted
 const toIsoString = (

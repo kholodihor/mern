@@ -16,6 +16,7 @@ import type { PageProps } from "@/types";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata } from "next";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
+import { setRequestLocale } from "next-intl/server";
 import dynamic from "next/dynamic";
 import { Open_Sans } from "next/font/google";
 import { notFound } from "next/navigation";
@@ -124,6 +125,10 @@ export async function generateMetadata({
   };
 }
 
+export function generateStaticParams() {
+  return routing.locales.map((locale) => ({ locale }));
+}
+
 type Props = {
   children: React.ReactNode;
   params: Promise<{ locale: string }>;
@@ -134,6 +139,9 @@ export default async function RootLayout({ children, params }: Props) {
   if (!hasLocale(routing.locales, locale)) {
     notFound();
   }
+  // Lets next-intl read the locale from params instead of request headers,
+  // which keeps the routes statically renderable
+  setRequestLocale(locale);
   return (
     // "ua" is a country code; the language code for Ukrainian is "uk"
     <html lang={locale === "ua" ? "uk" : locale} className={fontSans.variable}>

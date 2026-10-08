@@ -2,6 +2,7 @@ import ServicesPage from "@/components/services/services";
 import { createPageMetadata } from "@/config/seo-config";
 import type { Locale } from "@/i18n/routing";
 import type { Metadata } from "next";
+import { setRequestLocale } from "next-intl/server";
 
 export async function generateMetadata({
   params,
@@ -16,7 +17,13 @@ export async function generateStaticParams() {
   return [{ locale: "en" }, { locale: "pl" }, { locale: "ua" }];
 }
 
-const Services = () => {
+const Services = async ({
+  params,
+}: {
+  params: Promise<{ locale: Locale }>;
+}) => {
+  const { locale } = await params;
+  setRequestLocale(locale);
   return <ServicesPage />;
 };
 

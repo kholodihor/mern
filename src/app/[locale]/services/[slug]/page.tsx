@@ -1,5 +1,6 @@
 import { SEO_CONFIG } from "@/config/seo-config";
 import { services } from "@/data/services";
+import { setRequestLocale } from "next-intl/server";
 import ServiceDetailContent from "./service-detail-content";
 
 export async function generateStaticParams() {
@@ -189,4 +190,12 @@ export async function generateMetadata({
   };
 }
 
-export default ServiceDetailContent;
+export default async function ServiceDetailPage({
+  params,
+}: {
+  params: Promise<{ locale: string; slug: string }>;
+}) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  return <ServiceDetailContent />;
+}

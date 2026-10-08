@@ -3,14 +3,15 @@ import Location from "@/components/home/location/location";
 import Reviews from "@/components/home/reviews/reviews";
 import Services from "@/components/home/services/services";
 import {
-    DESCRIPTIONS,
-    OG_LOCALES,
-    ROBOTS_CONFIG,
-    SEO_CONFIG,
-    TITLES,
+  DESCRIPTIONS,
+  OG_LOCALES,
+  ROBOTS_CONFIG,
+  SEO_CONFIG,
+  TITLES,
 } from "@/config/seo-config";
 import type { Locale } from "@/i18n/routing";
 import type { Metadata } from "next";
+import { setRequestLocale } from "next-intl/server";
 
 export async function generateMetadata({
   params,
@@ -65,7 +66,13 @@ export async function generateStaticParams() {
   return [{ locale: "en" }, { locale: "pl" }, { locale: "ua" }];
 }
 
-export default function Home() {
+export default async function Home({
+  params,
+}: {
+  params: Promise<{ locale: Locale }>;
+}) {
+  const { locale } = await params;
+  setRequestLocale(locale);
   return (
     <>
       <Hero />

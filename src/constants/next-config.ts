@@ -108,8 +108,8 @@ export const sitemapHeaders = [
 
 export const getHeaders = () => [
   // Apply these headers to all routes
+  // Cache-Control for pages is left to Next.js (static / ISR s-maxage)
   createHeaderRule("/:path*", [
-    createHeader("Cache-Control", "public, max-age=0, must-revalidate"),
     createHeader("X-Content-Type-Options", "nosniff"),
   ]),
   // Prevent indexing of admin and login pages

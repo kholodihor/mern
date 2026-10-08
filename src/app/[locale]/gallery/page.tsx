@@ -4,6 +4,7 @@ import type { Locale } from "@/i18n/routing";
 import { fetchGalleryItems } from "@/lib/server-data-fetchers";
 import type { PageMetadata } from "@/types";
 import type { Metadata } from "next";
+import { setRequestLocale } from "next-intl/server";
 
 // ISR: revalidate every 60 seconds for fresh content without full redeploy
 export const revalidate = 60;
@@ -88,7 +89,13 @@ export async function generateStaticParams() {
   return [{ locale: "en" }, { locale: "pl" }, { locale: "ua" }];
 }
 
-const GalleryPage = async () => {
+const GalleryPage = async ({
+  params,
+}: {
+  params: Promise<{ locale: Locale }>;
+}) => {
+  const { locale } = await params;
+  setRequestLocale(locale);
   // Server-side fetch: cards (with links and images) are part of the initial HTML
   let galleryItems: Awaited<ReturnType<typeof fetchGalleryItems>> = [];
   try {
