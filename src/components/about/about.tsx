@@ -35,11 +35,12 @@ const About = () => {
           <div className="flex w-full items-center justify-center md:w-1/2">
             <div className="relative aspect-square w-full max-w-[600px] lg:mr-8">
               <Image
-                src="/about/about.png"
+                src="/about/about.webp"
                 alt={t("image_alt")}
                 fill
                 className="rounded-lg object-cover"
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                // Measured: full width up to 600px below md, ~29% of the row from md
+                sizes="(max-width: 639px) 100vw, (max-width: 767px) 600px, 30vw"
               />
             </div>
           </div>
