@@ -11,7 +11,11 @@ const Location = () => {
       className="my-[10vh] flex w-full flex-col p-2"
       aria-labelledby="contacts-title"
     >
-      <SectionTitle id="services-title" title={t("title")} titleWithLocation={t("title_with_location")} />
+      <SectionTitle
+        id="contacts-title"
+        title={t("title")}
+        titleWithLocation={t("title_with_location")}
+      />
       <div className="mt-[10vh] flex w-full flex-col items-center justify-center lg:flex-row">
         <Contacts />
         <MyMap />

@@ -16,10 +16,6 @@ Disallow: /api/
 Disallow: /*/admin
 Disallow: /*/login
 Allow: /favicon.ico
-Disallow: /*?utm_*
-Disallow: /*?fbclid=*
-Disallow: /*?gclid=*
-Disallow: /*?ref=*
 
 # Set crawl delay if needed
 # Crawl-delay: 10

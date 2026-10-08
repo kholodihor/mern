@@ -2,11 +2,11 @@ import { getDb } from "@/lib/firebase-db";
 import { deleteFilesFromStorage } from "@/lib/firebase-storage";
 import type { INewsArticle } from "@/types";
 import {
-    collection,
-    deleteDoc,
-    doc,
-    getDoc,
-    getDocs,
+  collection,
+  deleteDoc,
+  doc,
+  getDoc,
+  getDocs,
 } from "firebase/firestore";
 import useSWR from "swr";
 
@@ -30,7 +30,15 @@ const fetchArticles = async () => {
   });
 };
 
-export const useNews = (initialData: INewsArticle | null = null) => {
+export const useNews = (
+  initialData: INewsArticle | INewsArticle[] | null = null,
+) => {
+  const fallbackData = Array.isArray(initialData)
+    ? initialData
+    : initialData
+      ? [initialData]
+      : undefined;
+
   const {
     data: newsList,
     error,
@@ -38,7 +46,7 @@ export const useNews = (initialData: INewsArticle | null = null) => {
   } = useSWR<INewsArticle[]>("news", fetchArticles, {
     // refreshInterval: 5000, // Refresh every 5 seconds
     // revalidateOnFocus: true,
-    fallbackData: initialData ? [initialData] : undefined, // Use initialData as fallback for server-side rendering
+    fallbackData, // Use initialData as fallback for server-side rendering
   });
 
   const getArticleBySlug = (slug: string) => {

@@ -4,12 +4,13 @@ import Loader from "@/components/shared/loader";
 import LoadingError from "@/components/shared/loading-error";
 import SectionTitle from "@/components/shared/section-title";
 import { useNews } from "@/hooks/useNews";
+import type { INewsArticle } from "@/types";
 import { useTranslations } from "next-intl";
 import NewsItem from "./news-item";
 
-const NewsPage = () => {
+const NewsPage = ({ initialData }: { initialData?: INewsArticle[] }) => {
   const t = useTranslations("News");
-  const { newsList, isLoading, isError } = useNews();
+  const { newsList, isLoading, isError } = useNews(initialData);
 
   if (isError) {
     return <LoadingError />;
@@ -22,7 +23,12 @@ const NewsPage = () => {
       aria-labelledby="news-title"
     >
       <div className="mx-auto max-w-[90vw]">
-        <SectionTitle id="news-title" title={t("title")} titleWithLocation={t("title_with_location")} />
+        <SectionTitle
+          id="news-title"
+          as="h1"
+          title={t("title")}
+          titleWithLocation={t("title_with_location")}
+        />
         <div className="mt-8 space-y-12 sm:mt-12 sm:space-y-16 lg:mt-16">
           {isLoading ? (
             <Loader />

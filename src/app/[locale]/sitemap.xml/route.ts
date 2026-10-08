@@ -2,15 +2,18 @@ import { SEO_CONFIG, SITEMAP_CONFIG } from "@/config/seo-config";
 import { services } from "@/data/services";
 import { getDb } from "@/lib/firebase-db";
 import {
-    collection,
-    type DocumentData,
-    getDocs,
-    type Timestamp,
+  collection,
+  type DocumentData,
+  getDocs,
+  type Timestamp,
 } from "firebase/firestore";
 
 // Helper function to convert Firestore Timestamp to ISO string
-const toIsoString = (date: Date | Timestamp | string | undefined): string => {
-  if (!date) return new Date().toISOString();
+// Returns undefined when the date is unknown, so no fake <lastmod> is emitted
+const toIsoString = (
+  date: Date | Timestamp | string | undefined,
+): string | undefined => {
+  if (!date) return undefined;
   if (date instanceof Date) return date.toISOString();
   if (date && typeof date === "object" && "toDate" in date) {
     return (date as unknown as { toDate: () => Date }).toDate().toISOString();

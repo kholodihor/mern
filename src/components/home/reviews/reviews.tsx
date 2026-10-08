@@ -56,7 +56,7 @@ const Reviews = () => {
   if (isLoading) {
     return (
       <section className="px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
-        <SectionTitle id="services-title" title={t("title")} />
+        <SectionTitle id="reviews-title" title={t("title")} />
         <div className="flex min-h-[200px] items-center justify-center">
           <div className="h-12 w-12 animate-spin rounded-full border-b-2 border-t-2 border-gray-900"></div>
         </div>
@@ -67,7 +67,7 @@ const Reviews = () => {
   if (error) {
     return (
       <section className="px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
-        <SectionTitle id="services-title" title={t("title")} />
+        <SectionTitle id="reviews-title" title={t("title")} />
         <div className="text-center text-red-500">{error}</div>
       </section>
     );
@@ -75,7 +75,8 @@ const Reviews = () => {
 
   return (
     <section className="px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
-      <SectionTitle id="services-title" title={t("title")} />
+      <SectionTitle id="reviews-title" title={t("title")} />
+
       <div className="mb-10 space-y-6 sm:space-y-8">
         <Rating
           style={{ maxWidth: 150 }}
@@ -93,6 +94,7 @@ const Reviews = () => {
           alt="Google logo"
           width={159}
           height={54}
+          unoptimized
           className="mx-auto"
         />
       </div>

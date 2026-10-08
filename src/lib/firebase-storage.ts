@@ -32,7 +32,10 @@ export async function uploadFileToStorage(
     const storageRef = ref(getStorageInstance(), path);
 
     // Upload the file
-    const snapshot = await uploadBytesResumable(storageRef, file);
+    // Paths are unique per upload, so files can be cached indefinitely
+    const snapshot = await uploadBytesResumable(storageRef, file, {
+      cacheControl: "public, max-age=31536000, immutable",
+    });
     console.log("Файл успішно завантажено");
 
     // Get the download URL
@@ -133,7 +136,10 @@ export function generateFilePath(file: File, folder: string): string {
   const timestamp = Date.now();
   const randomString = Math.random().toString(36).substring(2, 8);
   const lastDotIndex = file.name.lastIndexOf(".");
-  const fileExtension = lastDotIndex > 0 && lastDotIndex < file.name.length - 1 ? file.name.slice(lastDotIndex + 1) : "bin";
+  const fileExtension =
+    lastDotIndex > 0 && lastDotIndex < file.name.length - 1
+      ? file.name.slice(lastDotIndex + 1)
+      : "bin";
 
   return `${folder}/${timestamp}-${randomString}.${fileExtension}`;
 }

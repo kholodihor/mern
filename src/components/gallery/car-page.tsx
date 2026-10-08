@@ -15,23 +15,6 @@ import { formatDate, type Locale } from "@/helpers/formatDate";
 import { useCar } from "@/hooks/useCar";
 import { Link } from "@/i18n/navigation";
 
-// Component to preload critical car images
-function PreloadCarImages({ images }: { images: string[] }) {
-  return (
-    <>
-      {images.slice(0, 6).map((src) => (
-        <link
-          key={src}
-          rel="preload"
-          href={src}
-          as="image"
-          type="image/webp,image/jpeg,image/png"
-        />
-      ))}
-    </>
-  );
-}
-
 const CarImage = ({
   data,
   index,
@@ -41,19 +24,11 @@ const CarImage = ({
   index?: number;
   carName?: string;
 }) => {
-  const [imageLoaded, setImageLoaded] = useState(false);
   const [imageError, setImageError] = useState(false);
-  const isPriority = index !== undefined && index < 3; // Prioritize first 3 images
+  const isPriority = index === 0; // Only the first image is above the fold
 
   return (
     <div className="relative aspect-[4/3] overflow-hidden rounded-xl bg-gray-800/50">
-      {/* Loading placeholder */}
-      {!imageLoaded && !imageError && (
-        <div className="relative h-52 w-full animate-pulse overflow-hidden bg-gradient-to-r from-gray-700 to-gray-500">
-          <div className="shimmer absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent"></div>
-        </div>
-      )}
-
       {/* Error state */}
       {imageError && (
         <div className="absolute inset-0 flex items-center justify-center bg-gray-800/50 text-white">
@@ -65,20 +40,16 @@ const CarImage = ({
         src={data}
         alt={carName ? `${carName} - photo ${(index ?? 0) + 1}` : "Car image"}
         fill
-        className={`object-cover transition-all duration-300 hover:scale-105 ${
-          imageLoaded ? "opacity-100" : "opacity-0"
-        }`}
-        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-        priority={isPriority}
-        quality={isPriority ? 90 : 75}
+        className="object-cover transition-all duration-300 hover:scale-105"
+        sizes="(max-width: 640px) 90vw, (max-width: 1024px) 50vw, 400px"
+        preload={isPriority}
+        quality={75}
         placeholder="blur"
         blurDataURL="data:image/webp;base64,UklGRlIAAABXRUJQVlA4WAoAAAAQAAAACQAAAgAAQUxQSBIAAAABF0AQbQEz/wMz0P8AAFZQOCA+AAAAMAEAnQEqCgADAAJAOCWkAANwAP77+AAA"
         loading={isPriority ? "eager" : "lazy"}
         fetchPriority={isPriority ? "high" : "auto"}
         decoding="async"
-        onLoad={() => setImageLoaded(true)}
         onError={() => setImageError(true)}
-        style={{ transform: "translate3d(0, 0, 0)" }} // Force GPU acceleration
       />
     </div>
   );
@@ -139,9 +110,6 @@ const CarPage = ({
           />
         </div>
         <div className="mt-0 sm:mt-12">
-          {/* Preload the first three images for better performance */}
-          <PreloadCarImages images={carItem.images} />
-
           <Slider
             data={carItem.images}
             Component={CarImageWithName}

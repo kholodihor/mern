@@ -12,7 +12,7 @@ const Contacts = () => {
       aria-labelledby="contacts-title"
     >
       <div className="mx-auto max-w-[90vw]">
-        <SectionTitle id="services-title" title={t("title_2")} />
+        <SectionTitle id="contacts-title" title={t("title_2")} as="h1" />
         <div className="lg:mt-18 mt-8 space-y-12 sm:mt-12 sm:space-y-16">
           <ApplicationForm />
           <ContactsLocation />

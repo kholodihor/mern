@@ -4,11 +4,11 @@ import { deleteFilesFromStorage } from "@/lib/firebase-storage";
 import { useFilters } from "@/stores/useFilters";
 import type { IGalleryItem } from "@/types";
 import {
-    collection,
-    deleteDoc,
-    doc,
-    getDoc,
-    getDocs,
+  collection,
+  deleteDoc,
+  doc,
+  getDoc,
+  getDocs,
 } from "firebase/firestore";
 import { useMemo } from "react";
 import useSWR, { mutate as globalMutate } from "swr";
@@ -34,7 +34,7 @@ const fetchGalleryItems = async () => {
   });
 };
 
-export const useGallery = () => {
+export const useGallery = (initialData?: IGalleryItem[]) => {
   const { filters } = useFilters();
 
   const {
@@ -47,6 +47,7 @@ export const useGallery = () => {
     revalidateOnFocus: false, // Don't revalidate when window gets focus
     revalidateOnReconnect: false, // Don't revalidate on reconnect
     dedupingInterval: 60000, // Dedupe requests within 1 minute
+    fallbackData: initialData, // Server-fetched list, rendered into the initial HTML
   });
 
   // Memoize filtered data calculation to reduce main-thread work

@@ -3,13 +3,13 @@ import Header from "@/components/shared/header";
 import { JsonLd } from "@/components/shared/json-ld";
 import SubHeader from "@/components/shared/sub-header";
 import {
-    DESCRIPTIONS,
-    KEYWORDS,
-    OG_LOCALES,
-    ROBOTS_CONFIG,
-    SEO_CONFIG,
-    SOCIAL_LINKS,
-    TITLES,
+  DESCRIPTIONS,
+  KEYWORDS,
+  OG_LOCALES,
+  ROBOTS_CONFIG,
+  SEO_CONFIG,
+  SOCIAL_LINKS,
+  TITLES,
 } from "@/config/seo-config";
 import { routing } from "@/i18n/routing";
 import type { PageProps } from "@/types";
@@ -45,7 +45,7 @@ const Footer = dynamic(() => import("@/components/shared/footer"));
 // ============================================================================
 
 export const fontSans = Open_Sans({
-  subsets: ["latin", "cyrillic"],
+  subsets: ["latin", "latin-ext", "cyrillic"],
   variable: "--font-open-sans",
   display: "swap",
   preload: true,
@@ -92,9 +92,10 @@ export async function generateMetadata({
       },
     },
     robots: ROBOTS_CONFIG,
+    // Page titles already contain the brand, so no suffix template
     title: {
       default: title,
-      template: `%s | ${TITLES[SEO_CONFIG.DEFAULT_LOCALE]}`,
+      template: "%s",
     },
     description: `${SEO_CONFIG.CONTACT_INFO} | ${description}`,
     openGraph: {
@@ -134,9 +135,9 @@ export default async function RootLayout({ children, params }: Props) {
     notFound();
   }
   return (
-    <html lang={locale} className={fontSans.variable}>
+    // "ua" is a country code; the language code for Ukrainian is "uk"
+    <html lang={locale === "ua" ? "uk" : locale} className={fontSans.variable}>
       <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta
           httpEquiv="Content-Security-Policy"
           content="upgrade-insecure-requests"
@@ -151,7 +152,8 @@ export default async function RootLayout({ children, params }: Props) {
             url: SEO_CONFIG.BASE_URL,
             telephone: "+48 509 159 158",
             priceRange: "$$",
-            logo: `${SEO_CONFIG.BASE_URL}${SEO_CONFIG.OG_IMAGE_PATH}`,
+            "@id": `${SEO_CONFIG.BASE_URL}/#organization`,
+            logo: `${SEO_CONFIG.BASE_URL}/logo.png`,
             image: `${SEO_CONFIG.BASE_URL}${SEO_CONFIG.OG_IMAGE_PATH}`,
             address: {
               "@type": "PostalAddress",

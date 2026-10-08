@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { type ChangeEvent, type DragEvent, useRef, useState } from "react";
+import { compressImage } from "@/helpers/compressImage";
 import { uploadFileToStorage } from "@/lib/firebase-storage";
 
 interface FirebaseUploadProps {
@@ -38,14 +39,17 @@ const FirebaseUpload = ({
 
       // Create an array of upload promises
       for (let i = 0; i < files.length; i++) {
-        const file = files[i];
-        const path = `${folder}/${Date.now()}-${Math.random().toString(36).substring(2, 8)}.${file.name.split(".").pop()}`;
-
-        const uploadPromise = uploadFileToStorage(file, path).then((url) => {
-          completedFiles++;
-          setUploadProgress(Math.round((completedFiles / totalFiles) * 100));
-          return url;
-        });
+        // Resize and re-encode before upload: phone photos are often several MB
+        const uploadPromise = compressImage(files[i])
+          .then((file) => {
+            const path = `${folder}/${Date.now()}-${Math.random().toString(36).substring(2, 8)}.${file.name.split(".").pop()}`;
+            return uploadFileToStorage(file, path);
+          })
+          .then((url) => {
+            completedFiles++;
+            setUploadProgress(Math.round((completedFiles / totalFiles) * 100));
+            return url;
+          });
 
         uploadPromises.push(uploadPromise);
       }

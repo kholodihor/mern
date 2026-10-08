@@ -23,6 +23,7 @@ const MobileMenu = ({ links }: { links: TLink[] }) => {
                   alt={`Language: ${lang}`}
                   width={35}
                   height={10}
+                  unoptimized
                 />
               </button>
             </Link>

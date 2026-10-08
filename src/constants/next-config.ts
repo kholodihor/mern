@@ -13,7 +13,9 @@ export const CACHE = {
   STATIC_ASSETS: 31536000, // 1 year
   SITEMAP: 86400, // 1 day
   SITEMAP_REVALIDATE: 3600, // 1 hour
-  IMAGE_MIN_TTL: 3600, // 1 hour
+  IMAGE_MIN_TTL: 2592000, // 30 days (uploaded images get unique names and never change)
+  PUBLIC_IMAGES: 604800, // 1 week
+  PUBLIC_IMAGES_SWR: 86400, // 1 day
 } as const;
 
 // Allowed image hostnames
@@ -34,7 +36,12 @@ export const createHttpsPattern = (protocol = "https") => ({
   pathname: "**",
 });
 
-export const createRedirect = (source: string, destination: string, has: any[] = [], permanent = true) => ({
+export const createRedirect = (
+  source: string,
+  destination: string,
+  has: any[] = [],
+  permanent = true,
+) => ({
   source,
   destination,
   ...(has.length && { has }),
@@ -51,7 +58,10 @@ export const httpProtoCondition = () => ({
 
 export const createHeader = (key: string, value: string) => ({ key, value });
 
-export const createHeaderRule = (source: string, headers: any[]) => ({ source, headers });
+export const createHeaderRule = (source: string, headers: any[]) => ({
+  source,
+  headers,
+});
 
 // ============================================================================
 // SEO Redirects Configuration
@@ -77,7 +87,7 @@ export const getRedirects = () => {
       // Redirect HTTP to HTTPS
       createRedirect("/:path*", `${HTTPS_URL}/:path*`, [httpProtoCondition()]),
       // Redirect root to default locale (Polish)
-      createRedirect("/", `/${DEFAULT_LOCALE}`, [], true)
+      createRedirect("/", `/${DEFAULT_LOCALE}`, [], true),
     );
   }
 
@@ -92,32 +102,50 @@ export const sitemapHeaders = [
   createHeader("Content-Type", "application/xml"),
   createHeader(
     "Cache-Control",
-    `public, s-maxage=${CACHE.SITEMAP}, stale-while-revalidate=${CACHE.SITEMAP_REVALIDATE}`
+    `public, s-maxage=${CACHE.SITEMAP}, stale-while-revalidate=${CACHE.SITEMAP_REVALIDATE}`,
   ),
 ];
 
 export const getHeaders = () => [
   // Apply these headers to all routes
   createHeaderRule("/:path*", [
-    createHeader("X-Robots-Tag", "index, follow"),
     createHeader("Cache-Control", "public, max-age=0, must-revalidate"),
     createHeader("X-Content-Type-Options", "nosniff"),
   ]),
   // Prevent indexing of admin and login pages
   createHeaderRule("/:locale/admin/:path*", [
     createHeader("X-Robots-Tag", "noindex, nofollow"),
-    createHeader("Cache-Control", "private, no-cache, no-store, must-revalidate"),
+    createHeader(
+      "Cache-Control",
+      "private, no-cache, no-store, must-revalidate",
+    ),
   ]),
   createHeaderRule("/:locale/login", [
     createHeader("X-Robots-Tag", "noindex, nofollow"),
-    createHeader("Cache-Control", "private, no-cache, no-store, must-revalidate"),
+    createHeader(
+      "Cache-Control",
+      "private, no-cache, no-store, must-revalidate",
+    ),
   ]),
   // Sitemap headers
   createHeaderRule("/sitemap.xml", sitemapHeaders),
   createHeaderRule("/:locale/sitemap.xml", sitemapHeaders),
+  // Images from /public (not content-hashed, so no "immutable")
+  ...["/hero/:path*", "/services/:path*", "/about/:path*", "/icons/:path*"].map(
+    (source) =>
+      createHeaderRule(source, [
+        createHeader(
+          "Cache-Control",
+          `public, max-age=${CACHE.PUBLIC_IMAGES}, stale-while-revalidate=${CACHE.PUBLIC_IMAGES_SWR}`,
+        ),
+      ]),
+  ),
   // Static assets cache
   createHeaderRule("/_next/static/:path*", [
-    createHeader("Cache-Control", `public, max-age=${CACHE.STATIC_ASSETS}, immutable`),
+    createHeader(
+      "Cache-Control",
+      `public, max-age=${CACHE.STATIC_ASSETS}, immutable`,
+    ),
   ]),
 ];
 
@@ -125,7 +153,10 @@ export const getHeaders = () => [
 // Webpack Configuration
 // ============================================================================
 
-export const configureWebpack = (config: any, { dev, isServer }: { dev: boolean; isServer: boolean }) => {
+export const configureWebpack = (
+  config: any,
+  { dev, isServer }: { dev: boolean; isServer: boolean },
+) => {
   if (!dev && !isServer) {
     config.optimization.splitChunks = {
       chunks: "all",

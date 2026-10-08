@@ -1,138 +1,117 @@
 "use client";
 
-import Image from "next/image";
-import { memo, useCallback, useEffect, useState } from "react";
-// Import only the specific CSS needed
-import "swiper/css/bundle";
+import { useTranslations } from "next-intl";
+import { getImageProps } from "next/image";
+import { memo } from "react";
+import { preload } from "react-dom";
+import "swiper/css";
+import "swiper/css/effect-fade";
 import { Autoplay, EffectFade } from "swiper/modules";
-// Import modules dynamically to reduce initial JS payload
 import { Swiper, SwiperSlide } from "swiper/react";
 
-// Register only the modules we need
+const MOBILE_MEDIA = "(max-width: 549px)";
+const DESKTOP_MEDIA = "(min-width: 550px)";
+const BLUR_DATA_URL =
+  "data:image/webp;base64,UklGRlIAAABXRUJQVlA4WAoAAAAQAAAACQAAAgAAQUxQSBIAAAABF0AQbQEz/wMz0P8AAFZQOCA+AAAAMAEAnQEqCgADAAJAOCWkAANwAP77+AAA";
 
-const slides = [
-  {
-    id: "hero-1",
-    desktop: "/hero/hero_1.webp",
-    mobile: "/hero/mobile_1.webp",
-    alt: "Hero image showing the main product",
-  },
-  {
-    id: "hero-2",
-    desktop: "/hero/hero_2.webp",
-    mobile: "/hero/mobile_2.webp",
-    alt: "Second hero image featuring our services",
-  },
-  {
-    id: "hero-3",
-    desktop: "/hero/hero_3.webp",
-    mobile: "/hero/mobile_3.webp",
-    alt: "Third hero image showcasing our work",
-  },
-  {
-    id: "hero-4",
-    desktop: "/hero/hero_4.webp",
-    mobile: "/hero/mobile_4.webp",
-    alt: "Fourth hero image highlighting our expertise",
-  },
-  {
-    id: "hero-5",
-    desktop: "/hero/hero_5.webp",
-    mobile: "/hero/mobile_5.webp",
-    alt: "Fifth hero image demonstrating our capabilities",
-  },
-];
+const slides = [1, 2, 3, 4, 5].map((n) => ({
+  id: `hero-${n}`,
+  desktop: `/hero/hero_${n}.webp`,
+  mobile: `/hero/mobile_${n}.webp`,
+}));
 
-// Component to preload critical images
-function PreloadImages() {
+// Art direction via <picture>: the browser picks the mobile or desktop source
+// before hydration, so only one variant is downloaded.
+const HeroPicture = ({
+  desktop,
+  mobile,
+  alt,
+  isFirst,
+}: {
+  desktop: string;
+  mobile: string;
+  alt: string;
+  isFirst: boolean;
+}) => {
+  const common = {
+    alt,
+    fill: true,
+    sizes: "100vw",
+    quality: isFirst ? 85 : 70,
+    placeholder: "blur" as const,
+    blurDataURL: BLUR_DATA_URL,
+    loading: isFirst ? ("eager" as const) : ("lazy" as const),
+    fetchPriority: isFirst ? ("high" as const) : undefined,
+  };
+  const {
+    props: { srcSet: desktopSrcSet, ...rest },
+  } = getImageProps({ ...common, src: desktop });
+  const {
+    props: { srcSet: mobileSrcSet },
+  } = getImageProps({ ...common, src: mobile });
+
+  if (isFirst) {
+    // Only the LCP slide is preloaded, one variant per viewport
+    if (mobileSrcSet) {
+      preload(mobile, {
+        as: "image",
+        imageSrcSet: mobileSrcSet,
+        imageSizes: "100vw",
+        media: MOBILE_MEDIA,
+        fetchPriority: "high",
+      });
+    }
+    if (desktopSrcSet) {
+      preload(desktop, {
+        as: "image",
+        imageSrcSet: desktopSrcSet,
+        imageSizes: "100vw",
+        media: DESKTOP_MEDIA,
+        fetchPriority: "high",
+      });
+    }
+  }
+
   return (
-    <>
-      <link
-        rel="preload"
-        href="/hero/hero_1.webp"
-        as="image"
-        type="image/webp"
-      />
-      <link
-        rel="preload"
-        href="/hero/mobile_1.webp"
-        as="image"
-        type="image/webp"
-        media="(max-width: 550px)"
-      />
-    </>
+    <picture>
+      <source media={MOBILE_MEDIA} srcSet={mobileSrcSet} sizes="100vw" />
+      <source media={DESKTOP_MEDIA} srcSet={desktopSrcSet} sizes="100vw" />
+      {/* biome-ignore lint/a11y/useAltText: alt is passed via rest props */}
+      <img {...rest} className="w-full object-cover grayscale" />
+    </picture>
   );
-}
+};
 
 // Main hero slider component
 const HeroSlider = memo(function HeroSlider() {
-  const [isMobileView, setIsMobileView] = useState(false);
-
-  const handleResize = useCallback(() => {
-    if (typeof window === "undefined") return;
-
-    window.requestAnimationFrame(() => {
-      setIsMobileView(window.innerWidth < 550);
-    });
-  }, []);
-
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      setIsMobileView(window.innerWidth < 550);
-
-      // Handle resize events
-      window.addEventListener("resize", handleResize, { passive: true });
-
-      // Handle bfcache restoration
-      const handleBfCacheRestore = () => {
-        // Re-initialize the component state when restored from bfcache
-        setIsMobileView(window.innerWidth < 550);
-      };
-
-      // Listen for custom bfcache restore event
-      window.addEventListener("bfcache:restore", handleBfCacheRestore);
-
-      return () => {
-        window.removeEventListener("resize", handleResize);
-        window.removeEventListener("bfcache:restore", handleBfCacheRestore);
-      };
-    }
-  }, [handleResize]);
+  const t = useTranslations("Menu");
+  const alt = t("hero_alt");
 
   return (
-    <>
-      <PreloadImages />
-      <section aria-live="polite" aria-label="Intro slides">
-        <Swiper
-          spaceBetween={0}
-          slidesPerView={1}
-          autoplay={{ delay: 3000, disableOnInteraction: false }}
-          modules={[EffectFade, Autoplay]}
-          effect="fade"
-          loop
-          className="z-0 mt-[17vh] h-[450px] sm:h-[60vh] md:h-screen"
-        >
-          {slides.map((slide, index) => (
-            <SwiperSlide key={slide.id} className="relative">
-              <Image
-                src={isMobileView ? slide.mobile : slide.desktop}
-                alt={slide.alt}
-                fill
-                sizes="100vw"
-                priority={index < 2}
-                fetchPriority={index === 0 ? "high" : undefined}
-                className="w-full object-cover grayscale"
-                quality={index === 0 ? 85 : 70}
-                placeholder="blur"
-                blurDataURL="data:image/webp;base64,UklGRlIAAABXRUJQVlA4WAoAAAAQAAAACQAAAgAAQUxQSBIAAAABF0AQbQEz/wMz0P8AAFZQOCA+AAAAMAEAnQEqCgADAAJAOCWkAANwAP77+AAA"
-              />
-              <div className="absolute inset-0 bg-linear-to-b from-transparent via-black/20 to-black"></div>
-              <div className="absolute inset-0 bg-linear-to-t from-transparent via-black/5 to-black md:hidden"></div>
-            </SwiperSlide>
-          ))}
-        </Swiper>
-      </section>
-    </>
+    <section aria-live="polite" aria-label="Intro slides">
+      <Swiper
+        spaceBetween={0}
+        slidesPerView={1}
+        autoplay={{ delay: 3000, disableOnInteraction: false }}
+        modules={[EffectFade, Autoplay]}
+        effect="fade"
+        loop
+        className="z-0 mt-[17vh] h-[450px] sm:h-[60vh] md:h-screen"
+      >
+        {slides.map((slide, index) => (
+          <SwiperSlide key={slide.id} className="relative">
+            <HeroPicture
+              desktop={slide.desktop}
+              mobile={slide.mobile}
+              alt={alt}
+              isFirst={index === 0}
+            />
+            <div className="absolute inset-0 bg-linear-to-b from-transparent via-black/20 to-black"></div>
+            <div className="absolute inset-0 bg-linear-to-t from-transparent via-black/5 to-black md:hidden"></div>
+          </SwiperSlide>
+        ))}
+      </Swiper>
+    </section>
   );
 });
 

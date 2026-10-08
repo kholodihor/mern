@@ -57,11 +57,6 @@ export const ROBOTS_CONFIG = {
   },
 };
 
-export const PRECONNECT_URLS = [
-  { href: "https://fonts.googleapis.com" },
-  { href: "https://fonts.gstatic.com", crossOrigin: "anonymous" as const },
-];
-
 // ============================================================================
 // Sitemap Configuration
 // ============================================================================
@@ -191,7 +186,7 @@ export const PAGE_METADATA = {
 const getLocalizedValue = <T>(
   map: Record<string, T>,
   locale: string,
-  fallback: string = SEO_CONFIG.DEFAULT_LOCALE
+  fallback: string = SEO_CONFIG.DEFAULT_LOCALE,
 ): T => map[locale] || map[fallback];
 
 // ============================================================================
@@ -201,7 +196,7 @@ const getLocalizedValue = <T>(
 export const createPageMetadata = (
   pageKey: keyof typeof PAGE_METADATA,
   locale: string,
-  path?: string
+  path?: string,
 ) => {
   const pageConfig = PAGE_METADATA[pageKey];
   const localeData =

@@ -13,6 +13,7 @@ const About = () => {
       <div className="mx-auto">
         <SectionTitle
           id="about-us-title"
+          as="h1"
           title={t("title")}
           titleWithLocation={t("title_with_location")}
         />
@@ -26,16 +27,16 @@ const About = () => {
                   <p key={paragraph.slice(0, 50)}>{paragraph}</p>
                 ))}
             </div>
-            <h5 className="text-lg font-semibold text-white sm:text-xl lg:text-2xl">
+            <p className="text-lg font-semibold text-white sm:text-xl lg:text-2xl">
               {t("call")}
-            </h5>
+            </p>
           </div>
 
           <div className="flex w-full items-center justify-center md:w-1/2">
             <div className="relative aspect-square w-full max-w-[600px] lg:mr-8">
               <Image
                 src="/about/about.png"
-                alt="Car image"
+                alt={t("image_alt")}
                 fill
                 className="rounded-lg object-cover"
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"

@@ -6,9 +6,13 @@ import { getDb } from "@/lib/firebase-db";
 import type { INewsArticle, PageMetadata } from "@/types";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 
 // ISR: revalidate every 60 seconds for fresh content without full redeploy
 export const revalidate = 60;
+
+const toOgImage = (src: string) =>
+  `${baseUrl}/_next/image?url=${encodeURIComponent(src)}&w=1200&q=75`;
 
 // Server-side data fetching function
 async function getArticleData(slug: string) {
@@ -132,9 +136,7 @@ export async function generateMetadata({
       images: articleData?.images?.length
         ? [
             {
-              url: articleData.images[0],
-              width: 1200,
-              height: 630,
+              url: toOgImage(articleData.images[0]),
               alt:
                 articleData.title[locale as keyof typeof articleData.title] ||
                 "News article",
@@ -142,7 +144,7 @@ export async function generateMetadata({
           ]
         : [
             {
-              url: "/opengraph-image.png",
+              url: `${baseUrl}/opengraph-image.png`,
               width: 1200,
               height: 630,
               alt: "MERN Serwis",
@@ -158,8 +160,8 @@ export async function generateMetadata({
       title: title,
       description: description,
       images: articleData?.images?.length
-        ? [articleData.images[0]]
-        : ["/opengraph-image.png"],
+        ? [toOgImage(articleData.images[0])]
+        : [`${baseUrl}/opengraph-image.png`],
     },
   };
 }
@@ -179,6 +181,11 @@ async function NewsArticlePage({
 
   // Pre-fetch the data on the server for SEO
   const initialData = await getArticleData(cleanSlug);
+
+  // Real 404 instead of an endless loader / client redirect (soft 404)
+  if (!initialData) {
+    notFound();
+  }
 
   // Serialize the data before passing it to the client component
   const serializedData = initialData

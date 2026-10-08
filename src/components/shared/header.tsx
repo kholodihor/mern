@@ -74,8 +74,8 @@ const Header = function Header() {
           width={110}
           height={70}
           sizes="110px"
-          priority={true}
-          quality={90}
+          preload
+          quality={75}
           className="object-contain"
         />
       </Link>

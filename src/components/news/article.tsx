@@ -13,20 +13,20 @@ import { useLocale } from "next-intl";
 import NextImage from "next/image";
 import { useEffect, useMemo, useState } from "react";
 
-const NewsImage = ({ data, index }: { data: string; index?: number }) => {
-  const [imageLoaded, setImageLoaded] = useState(false);
+const NewsImage = ({
+  data,
+  index,
+  alt,
+}: {
+  data: string;
+  index?: number;
+  alt?: string;
+}) => {
   const [imageError, setImageError] = useState(false);
-  const isPriority = index !== undefined && index < 3;
+  const isPriority = index === 0;
 
   return (
-    <div className="relative aspect-4/3 overflow-hidden rounded-xl">
-      {/* Loading placeholder with shimmer effect */}
-      {!imageLoaded && !imageError && (
-        <div className="absolute inset-0 animate-pulse overflow-hidden bg-linear-to-r from-gray-700 to-gray-500">
-          <div className="shimmer absolute inset-0 bg-linear-to-r from-transparent via-white/5 to-transparent"></div>
-        </div>
-      )}
-
+    <div className="relative aspect-4/3 overflow-hidden rounded-xl bg-gray-700">
       {/* Error state */}
       {imageError && (
         <div className="absolute inset-0 flex items-center justify-center bg-gray-800/50 text-white">
@@ -36,22 +36,18 @@ const NewsImage = ({ data, index }: { data: string; index?: number }) => {
 
       <NextImage
         src={data}
-        alt="News image"
+        alt={alt ? `${alt} - ${(index ?? 0) + 1}` : "News image"}
         fill
-        className={`object-cover transition-transform hover:scale-105 ${
-          imageLoaded ? "opacity-100" : "opacity-0"
-        }`}
-        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-        priority={isPriority}
-        quality={isPriority ? 90 : 75}
+        className="object-cover transition-transform hover:scale-105"
+        sizes="(max-width: 640px) 90vw, (max-width: 1024px) 50vw, 400px"
+        preload={isPriority}
+        quality={75}
         placeholder="blur"
         blurDataURL="data:image/webp;base64,UklGRlIAAABXRUJQVlA4WAoAAAAQAAAACQAAAgAAQUxQSBIAAAABF0AQbQEz/wMz0P8AAFZQOCA+AAAAMAEAnQEqCgADAAJAOCWkAANwAP77+AAA"
         loading={isPriority ? "eager" : "lazy"}
         fetchPriority={isPriority ? "high" : "auto"}
         decoding="async"
-        onLoad={() => setImageLoaded(true)}
         onError={() => setImageError(true)}
-        style={{ transform: "translate3d(0, 0, 0)" }}
       />
     </div>
   );
@@ -72,6 +68,8 @@ const Article = ({
   const cleanSlug = slug.endsWith("-") ? slug.slice(0, -1) : slug;
 
   const newsItem = getArticleBySlug(cleanSlug);
+  const articleTitle =
+    newsItem?.title[locale as keyof typeof newsItem.title] || "";
 
   const NewsImageWithIndex = useMemo(
     () =>
@@ -82,9 +80,9 @@ const Article = ({
         data: string;
         index?: number;
       }) {
-        return <NewsImage data={data} index={index} />;
+        return <NewsImage data={data} index={index} alt={articleTitle} />;
       },
-    [],
+    [articleTitle],
   );
 
   useEffect(() => {
@@ -117,7 +115,8 @@ const Article = ({
           </Link>
           <SectionTitle
             id={`${cleanSlug}-title`}
-            title={newsItem.title[locale as keyof typeof newsItem.title] || ""}
+            title={articleTitle}
+            as="h1"
           />
         </div>
 

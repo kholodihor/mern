@@ -1,3 +1,4 @@
+import { Link } from "@/i18n/navigation";
 import type { TServiceCard } from "@/types";
 import { useTranslations } from "next-intl";
 
@@ -10,7 +11,7 @@ const ServicesCard = ({ data: card }: { data: TServiceCard }) => {
       className="group mx-auto flex h-[320px] w-full flex-col rounded-2xl border border-white/20 bg-white/5 p-6 backdrop-blur-sm transition-all hover:border-white/30 hover:bg-white/10 sm:w-[300px]"
     >
       <div className="flex h-full flex-col items-center justify-center gap-6">
-        {card.title === "coding" ? (
+        {card.link.startsWith("http") ? (
           <a
             href={card.link}
             target="_blank"
@@ -22,9 +23,14 @@ const ServicesCard = ({ data: card }: { data: TServiceCard }) => {
             </h3>
           </a>
         ) : (
-          <h3 className="text-center text-2xl font-semibold">
-            {t(`${card.title}`)}
-          </h3>
+          <Link
+            href={card.link}
+            className="transition-transform group-hover:scale-105"
+          >
+            <h3 className="text-center text-2xl font-semibold group-hover:text-white/90">
+              {t(`${card.title}`)}
+            </h3>
+          </Link>
         )}
 
         <p className="max-w-[90%] text-center text-base leading-relaxed text-gray-300">

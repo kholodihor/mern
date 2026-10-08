@@ -91,10 +91,8 @@ export async function generateStaticParams() {
   return [{ locale: "en" }, { locale: "pl" }, { locale: "ua" }];
 }
 
-const Page = async ({ params }: { params: Promise<{ locale: Locale }> }) => {
-  const { locale } = await params;
-
-  // Server-side fetch for SEO: render crawlable links for Googlebot
+const Page = async () => {
+  // Server-side fetch: articles (with links and images) are part of the initial HTML
   let newsItems: Awaited<ReturnType<typeof fetchNewsArticles>> = [];
   try {
     newsItems = await fetchNewsArticles();
@@ -102,23 +100,8 @@ const Page = async ({ params }: { params: Promise<{ locale: Locale }> }) => {
     console.error("Failed to fetch news items for SSR:", error);
   }
 
-  return (
-    <>
-      <News />
-      {/* Server-rendered crawlable links for SEO — hidden visually but discoverable by search engines */}
-      <nav aria-label="News articles" className="sr-only">
-        <ul>
-          {newsItems.map((item) => (
-            <li key={item.id}>
-              <a href={`/${locale}/news/${item.slug}`}>
-                {item.title?.[locale] || item.slug}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </nav>
-    </>
-  );
+  // Empty list (e.g. fetch error) -> let the client fetch on its own
+  return <News initialData={newsItems.length ? newsItems : undefined} />;
 };
 
 export default Page;

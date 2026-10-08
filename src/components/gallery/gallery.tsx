@@ -5,13 +5,14 @@ import SectionTitle from "@/components/shared/section-title";
 import CustomDropdown from "@/components/ui/select";
 import { CATEGORIES } from "@/constants/categories";
 import { useGallery } from "@/hooks/useGallery";
+import type { IGalleryItem } from "@/types";
 import { useTranslations } from "next-intl";
 import GalleryCard from "./gallery-card";
 import GallerySkeleton from "./gallery-skeleton";
 
-const Gallery = () => {
+const Gallery = ({ initialData }: { initialData?: IGalleryItem[] }) => {
   const t = useTranslations("Gallery");
-  const { filteredData, isLoading, isError } = useGallery();
+  const { filteredData, isLoading, isError } = useGallery(initialData);
 
   const options = Object.values(CATEGORIES);
 
@@ -29,6 +30,7 @@ const Gallery = () => {
         <div className="mx-auto max-w-7xl">
           <SectionTitle
             id="gallery-title"
+            as="h1"
             title={t("title")}
             titleWithLocation={t("title_with_location")}
           />

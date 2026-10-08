@@ -8,13 +8,15 @@
     "news": "Aktualności",
     "motto": "IDEALNY SERWIS DLA IDEALNYCH AUT",
     "button": "Zostaw prośbę o obsługę 👉",
-    "independent": "Niezależny serwis BMW, Rolls-Royce i MINI"
+    "independent": "Niezależny serwis BMW, Rolls-Royce i MINI",
+    "hero_alt": "Samochód w warsztacie Mern Serwis – niezależny serwis BMW, Rolls-Royce i MINI"
   },
   "About": {
     "title": "o nas",
     "title_with_location": "o nas - Warsztat samochodowy BMW, Rolls-Royce i MINI Warszawa",
     "content": "Mern Serwis to Niezależny serwis BMW zlokalizowany w Stanisławowie Pierwszym przy ul. Przyszłość 2A. Specjalizujemy się wyłącznie w samochodach BMW, MINI oraz Rolls-Royce, dzięki czemu nasi klienci mogą liczyć na wiedzę, doświadczenie oraz naprawy wykonywane zgodnie z procedurami producenta.\n\nDo naszego serwisu regularnie przyjeżdżają właściciele BMW z Warszawy (Białołęka, Żoliborz, Targówek) Marek, Nieporętu, Legionowa, Wołomina, Ząbek, Zielonki, Kobyłki, Radzymina i innych miejscowości województwa mazowieckiego. Dogodna lokalizacja sprawia, że dojazd zajmuje zaledwie kilkanaście minut z północno-wschodniej części Warszawy.\n\nWykonujemy kompleksowy serwis BMW – od diagnostyki komputerowej ISTA, przez serwis olejowy, wymianę rozrządów, naprawy silników, automatycznych skrzyń biegów i zawieszenia, aż po zabezpieczenia antykorozyjne oraz naprawy powypadkowe.\n\nKażdą wycenę przygotowujemy indywidualnie na podstawie numeru VIN z wykorzystaniem systemu AIR (BMW AOS). Dzięki temu klient otrzymuje dokładny kosztorys z numerami części jeszcze przed rozpoczęciem naprawy. Po wykonaniu serwisu możemy również wykonać wpis do elektronicznej książki serwisowej BMW.\n\nJeżeli szukasz sprawdzonego serwisu BMW w Stanisławowie Pierwszym lub profesjonalnego mechanika BMW niedaleko Warszawy, zapraszamy do Mern Serwis. Stawiamy na jakość, transparentność i dbałość o każdy detal, dlatego nasze usługi wybierają właściciele BMW nie tylko z całego Mazowsza, ale też z innych miast Polski.\n\nZapraszamy serdecznie do kontaktu!",
-    "call": "Zapraszamy serdecznie do kontaktu!"
+    "call": "Zapraszamy serdecznie do kontaktu!",
+    "image_alt": "Warsztat Mern Serwis w Stanisławowie Pierwszym"
   },
   "Gallery": {
     "title": "GALERIA",
