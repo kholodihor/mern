@@ -35,7 +35,7 @@ export default function ServiceDetailContent() {
               className="object-cover"
               preload
               sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-              quality={85}
+              quality={75}
             />
           </div>
 

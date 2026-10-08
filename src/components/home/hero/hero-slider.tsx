@@ -37,7 +37,7 @@ const HeroPicture = ({
     alt,
     fill: true,
     sizes: "100vw",
-    quality: isFirst ? 85 : 70,
+    quality: isFirst ? 75 : 70,
     placeholder: "blur" as const,
     blurDataURL: BLUR_DATA_URL,
     loading: isFirst ? ("eager" as const) : ("lazy" as const),
