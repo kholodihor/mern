@@ -50,12 +50,6 @@ export const createRedirect = (
 
 export const hostCondition = (host: string) => ({ type: "host", value: host });
 
-export const httpProtoCondition = () => ({
-  type: "header",
-  key: "x-forwarded-proto",
-  value: "http",
-});
-
 export const createHeader = (key: string, value: string) => ({ key, value });
 
 export const createHeaderRule = (source: string, headers: any[]) => ({
@@ -76,16 +70,11 @@ export const getRedirects = () => {
       createRedirect(`/`, `${HTTPS_URL}/${DEFAULT_LOCALE}`, [
         hostCondition(WWW_DOMAIN),
       ]),
-      // Redirect www to non-www (covers both HTTP and HTTPS)
+      // Redirect www to non-www. HTTP -> HTTPS is handled by Vercel before
+      // these rules run, so no x-forwarded-proto rules are needed here.
       createRedirect("/:path*", `${HTTPS_URL}/:path*`, [
         hostCondition(WWW_DOMAIN),
       ]),
-      // Redirect HTTP root directly to HTTPS default locale (avoids chain)
-      createRedirect(`/`, `${HTTPS_URL}/${DEFAULT_LOCALE}`, [
-        httpProtoCondition(),
-      ]),
-      // Redirect HTTP to HTTPS
-      createRedirect("/:path*", `${HTTPS_URL}/:path*`, [httpProtoCondition()]),
       // Redirect root to default locale (Polish)
       createRedirect("/", `/${DEFAULT_LOCALE}`, [], true),
     );
