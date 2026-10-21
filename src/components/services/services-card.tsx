@@ -6,7 +6,7 @@ import NextImage from "next/image";
 import { useState } from "react";
 
 const cardClassName =
-  "group relative flex h-[400px] w-full cursor-pointer flex-col overflow-hidden rounded-xl border border-gray-300 bg-black/20 transition-all duration-300 hover:bg-black/30 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 sm:h-[450px]";
+  "lift group relative flex h-[400px] w-full cursor-pointer flex-col overflow-hidden rounded-xl border border-gray-300 bg-black/20 transition-all duration-300 hover:bg-black/30 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 sm:h-[450px]";
 
 const ServicesCard = ({ data: card }: { data: TServiceCard }) => {
   const t = useTranslations("Services");

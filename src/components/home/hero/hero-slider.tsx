@@ -95,8 +95,9 @@ const HeroSlider = memo(function HeroSlider() {
         autoplay={{ delay: 3000, disableOnInteraction: false }}
         modules={[EffectFade, Autoplay]}
         effect="fade"
+        speed={1000}
         loop
-        className="z-0 mt-[17vh] h-[450px] sm:h-[60vh] md:h-screen"
+        className="hero-swiper z-0 mt-[17vh] h-[450px] sm:h-[60vh] md:h-screen"
       >
         {slides.map((slide, index) => (
           <SwiperSlide key={slide.id} className="relative">

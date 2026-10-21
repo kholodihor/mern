@@ -21,7 +21,7 @@ const ServicesPage = () => {
             services.map((item) => (
               <div
                 key={item.title}
-                className={`${services.indexOf(item) === services.length - 1 && services.length % 3 === 1 ? "lg:col-start-2" : ""}`}
+                className={`reveal ${services.indexOf(item) === services.length - 1 && services.length % 3 === 1 ? "lg:col-start-2" : ""}`}
               >
                 <ServicesCard data={item} />
               </div>

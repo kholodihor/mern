@@ -117,7 +117,17 @@ const Header = function Header() {
                 },
               )}
             >
-              <Link href={link.href}>{t(`${link.name}`)}</Link>
+              <Link
+                href={link.href}
+                className={clsx({
+                  "nav-link": !(
+                    link.href !== "/" &&
+                    pathname.split("/").includes(link.href.replace(/\//g, ""))
+                  ),
+                })}
+              >
+                {t(`${link.name}`)}
+              </Link>
             </li>
           ))}
           <ul className="flex gap-3 border-l border-white/20 pl-6">

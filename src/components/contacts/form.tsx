@@ -167,7 +167,7 @@ const Form = () => {
         </div>
 
         <button
-          className={`mx-auto w-full min-w-[325px] rounded-[1rem] border px-4 py-2 transition-all hover:bg-gray-400/50 md:w-[200px]`}
+          className={`mx-auto w-full min-w-[325px] rounded-[1rem] border px-4 py-2 transition-all hover:bg-gray-400/50 motion-safe:active:scale-[0.97] md:w-[200px]`}
           type="submit"
         >
           {isProcessing ? t("processing") : t("send")}

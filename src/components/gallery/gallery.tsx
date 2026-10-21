@@ -51,7 +51,7 @@ const Gallery = ({ initialData }: { initialData?: IGalleryItem[] }) => {
             <div className="grid grid-cols-1 gap-6 sm:gap-6 md:grid-cols-2 lg:gap-8 xl:grid-cols-3 2xl:grid-cols-4">
               {filteredData.length > 0 ? (
                 filteredData.map((item, index) => (
-                  <div key={item.id} className="flex justify-center">
+                  <div key={item.id} className="reveal flex justify-center">
                     <GalleryCard
                       data={item}
                       priority={index < 2} // Only prioritize first 2 images for better LCP

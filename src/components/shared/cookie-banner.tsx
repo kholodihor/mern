@@ -51,14 +51,14 @@ const CookieBanner = memo(function CookieBanner() {
         <button
           type="button"
           onClick={() => setCookieConsent(false)}
-          className="rounded-md border-gray-900 px-5 py-2 text-gray-300"
+          className="rounded-md border-gray-900 px-5 py-2 text-gray-300 transition-transform motion-safe:active:scale-[0.97]"
         >
           Odrzuć
         </button>
         <button
           type="button"
           onClick={() => setCookieConsent(true)}
-          className="rounded-lg bg-gray-900 px-5 py-2 text-white"
+          className="rounded-lg bg-gray-900 px-5 py-2 text-white transition-transform motion-safe:active:scale-[0.97]"
         >
           Zezwalaj
         </button>

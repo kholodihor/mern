@@ -19,7 +19,7 @@ const GalleryCard = ({ data, priority = false }: GalleryCardProps) => {
   const [imageError, setImageError] = useState(false);
 
   return (
-    <article className="flex w-full flex-col overflow-hidden rounded-2xl border border-white/20 bg-white/5 backdrop-blur-sm transition-all hover:border-white/30 sm:w-[400px] debug-reset-2024">
+    <article className="lift flex w-full flex-col overflow-hidden rounded-2xl border border-white/20 bg-white/5 backdrop-blur-sm transition-all hover:border-white/30 sm:w-[400px] debug-reset-2024">
       <div className="relative h-48 w-full overflow-hidden bg-gray-700">
         {/* Error state */}
         {imageError && (

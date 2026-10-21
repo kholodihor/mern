@@ -43,7 +43,7 @@ const Slider: FC<SliderProps> = ({
   };
 
   return (
-    <div className="flex w-full flex-col items-center justify-center">
+    <div className="reveal flex w-full flex-col items-center justify-center">
       <nav
         className="relative mx-auto mb-6 hidden h-fit w-full items-center justify-center py-4 pr-4 text-white sm:flex"
         aria-label="Slider navigation"

@@ -10,7 +10,7 @@ const NewsItem = ({ item }: { item: INewsArticle }) => {
   const [imageError, setImageError] = useState(false);
 
   return (
-    <article className="flex flex-col gap-6 sm:gap-8 md:flex-row lg:gap-12">
+    <article className="reveal flex flex-col gap-6 sm:gap-8 md:flex-row lg:gap-12">
       <div className="w-full md:w-1/3">
         <div className="relative h-48 sm:h-56 md:h-64 overflow-hidden rounded-xl bg-gray-700 shadow-lg">
           {/* Error state */}

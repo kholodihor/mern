@@ -24,16 +24,18 @@ const About = () => {
               {t("content")
                 .split("\n\n")
                 .map((paragraph) => (
-                  <p key={paragraph.slice(0, 50)}>{paragraph}</p>
+                  <p key={paragraph.slice(0, 50)} className="reveal">
+                    {paragraph}
+                  </p>
                 ))}
             </div>
-            <p className="text-lg font-semibold text-white sm:text-xl lg:text-2xl">
+            <p className="reveal text-lg font-semibold text-white sm:text-xl lg:text-2xl">
               {t("call")}
             </p>
           </div>
 
           <div className="flex w-full items-center justify-center md:w-1/2">
-            <div className="relative aspect-square w-full max-w-[600px] lg:mr-8">
+            <div className="reveal relative aspect-square w-full max-w-[600px] lg:mr-8">
               <Image
                 src="/about/about.webp"
                 alt={t("image_alt")}
