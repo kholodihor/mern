@@ -1,3 +1,4 @@
+import path from "node:path";
 import type { NextConfig } from "next";
 import createNextIntlPlugin from "next-intl/plugin";
 import {
@@ -17,6 +18,14 @@ const withNextIntl = createNextIntlPlugin();
 
 const nextConfig: NextConfig = {
   devIndicators: false,
+
+  // Pin the project root. Without it Next.js walks up to the first lockfile it
+  // finds (e.g. a stray ~/package-lock.json) and Turbopack then scans and
+  // watches that whole directory in dev.
+  turbopack: {
+    root: path.join(__dirname),
+  },
+  outputFileTracingRoot: path.join(__dirname),
 
   experimental: {
     optimizePackageImports: ["react-icons", "clsx", "next-intl", "swiper"],
